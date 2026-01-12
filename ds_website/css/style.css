@@ -1,11 +1,38 @@
-/* General Fonts */
-body {
-    font-family: 'Poppins', sans-serif;
-    color: #333;
+/* --- Logo Styling --- */
+.site-logo {
+    width: 80px; /* Adjust this number to make it bigger/smaller */
+    height: auto; /* Keeps the aspect ratio correct */
+    object-fit: contain;
 }
 
+/* Optional: Mobile adjustment */
+@media (max-width: 768px) {
+    .site-logo {
+        width: 60px; /* Smaller on phones */
+    }
+}
+/* General Fonts */
+
+/* --- Global Settings --- */
+body {
+    font-family: 'Montserrat', sans-serif; /* CHANGED */
+    color: #333;
+    background-color: #fff;
+}
+
+/* Optional: If you want the headers to be extra bold like the logo */
 h1, h2, h3, h4, h5 {
-    font-family: 'Playfair Display', serif; /* The fancy header font */
+    font-family: 'Montserrat', sans-serif; /* CHANGED */
+    font-weight: 700; /* Bold */
+}
+
+/* Update the Hero Name specifically if you want it distinct */
+.hero-name {
+    font-family: 'Montserrat', sans-serif; /* CHANGED */
+    font-weight: 800; /* Extra Bold */
+    letter-spacing: -1px; /* Tighten it up slightly for a modern look */
+    color: #222;
+    margin-bottom: 20px;
 }
 
 /* Filter Menu Links */

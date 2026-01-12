@@ -3,37 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chad V | Data Scientist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>Chad Vo | Data Scientist & Analytics Professional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <header class="container mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-8">
-                <h1 class="display-4 fw-bold">Chad V</h1>
-                <p class="lead text-muted">
-                    Hello! Glad to see you here. This is a collection of my personal projects.
-                </p>
-            </div>
-            <div class="col-md-4 text-end">
-                <nav>
-                    <a href="#" class="nav-link d-inline text-dark">Home</a>
-                    <a href="#about" class="nav-link d-inline text-dark">About</a>
-                    <a href="#contact" class="nav-link d-inline text-dark">Contact</a>
-                </nav>
-            </div>
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center">
+            
+            <a href="#">
+                <img src="assets/img/logo.png" alt="Chad V Logo" class="site-logo">
+            </a>
+            
+            <nav class="top-nav">
+                <a href="#about" class="text-decoration-none text-dark ms-4">About</a>
+                <a href="#contact" class="text-decoration-none text-dark ms-4">Contact</a>
+            </nav>
         </div>
-    </header>
+    </div>
 
-    <div class="container mb-4">
-        <div class="d-flex justify-content-center gap-4 filter-menu">
-            <a href="#" class="active">All Categories</a>
-            <a href="#">Data Science</a>
-            <a href="#">Visualization</a>
-            <a href="#">Creative Coding</a>
+    <section class="container text-center mt-4 mb-5">
+        <h1 class="display-3 fw-bold hero-name">Chad V</h1>
+        
+        <div class="decorative-separator"></div>
+
+        <p class="lead text-muted hero-bio mx-auto">
+            Hello! Glad to see you here. This is a collection of my personal projects made during free time.
+        </p>
+    </section>
+
+    <div class="filter-bar-container mb-5">
+        <div class="container">
+            <div class="d-flex justify-content-center gap-5 filter-menu">
+                <a href="#" class="active">All Categories</a>
+                <a href="#">Data Visualization</a>
+                <a href="#">Creative Coding</a>
+                <a href="#">Data Science</a>
+            </div>
         </div>
     </div>
 
@@ -63,19 +71,25 @@
             <a href="#" class="portfolio-item">
                 <img src="https://via.placeholder.com/400x300" alt="Placeholder">
                 <div class="overlay">
-                    <div class="text">
+                     <div class="text">
                         <h5>Future Project</h5>
                         <p>(Coming Soon)</p>
                     </div>
                 </div>
             </a>
-            
-            </div>
+
+        </div>
     </div>
 
-    <footer class="text-center py-4 bg-light">
-        <p class="text-muted small">&copy; 2026 Chad V. All rights reserved.</p>
+    <footer class="text-center py-5 mt-5">
+        <p class="text-muted small">
+            &copy; Copyright <span id="year"></span> All rights reserved | Chad Vo
+        </p>
     </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 
 </body>
 </html>
