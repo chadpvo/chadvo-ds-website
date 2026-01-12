@@ -111,3 +111,48 @@ h1, h2, h3, h4, h5 {
     font-size: 0.9rem;
     margin: 0;
 }
+
+/* --- About Me Section --- */
+.bg-light-grey {
+    background-color: #f8f9fa; /* Soft Grey */
+}
+
+/* Left-aligned red separator for the About section */
+.decorative-separator-left {
+    width: 175px;
+    height: 2px;
+    background-color: #0077b5;
+    margin: 20px 0 30px 0; /* Aligned left (0 margin on left) */
+    position: relative;
+}
+
+.decorative-separator-left::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #0077b5;
+    border-radius: 50%;
+    position: absolute;
+    top: -3.5px;
+    left: 0; /* Dot starts at the far left */
+}
+
+/* --- Work With Me / Contact Section --- */
+.bg-light-blue {
+    background-color: #dbeafe; /* Soft professional light blue */
+}
+
+.social-icons {
+    font-size: 1.8rem;
+    gap: 25px; /* Space between icons */
+}
+
+.social-icons a {
+    color: #333; /* Dark icon color */
+    transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #0077b5; /* LinkedIn Blue on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+}
