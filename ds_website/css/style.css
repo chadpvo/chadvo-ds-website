@@ -1,0 +1,86 @@
+/* General Fonts */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Playfair Display', serif; /* The fancy header font */
+}
+
+/* Filter Menu Links */
+.filter-menu a {
+    text-decoration: none;
+    color: #999;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.filter-menu a:hover, .filter-menu a.active {
+    color: #000;
+    font-weight: 600;
+}
+
+/* The Masonry Grid Layout */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Space between images */
+}
+
+/* Individual Portfolio Card */
+.portfolio-item {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* Hover Zoom Effect */
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+/* The Overlay Text (Hidden by default) */
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .4s ease;
+    background-color: rgba(255, 255, 255, 0.9); /* White fade over image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Show Overlay on Hover */
+.portfolio-item:hover .overlay {
+    opacity: 1;
+}
+
+.overlay .text h5 {
+    color: #000;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.overlay .text p {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+}

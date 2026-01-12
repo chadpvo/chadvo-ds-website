@@ -3,13 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D3 Setup</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Chad V | Data Scientist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>My First D3 Chart</h1>
-    <div id="chart-area"></div>
 
-    <script src="app.js"></script>
+    <header class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="display-4 fw-bold">Chad V</h1>
+                <p class="lead text-muted">
+                    Hello! Glad to see you here. This is a collection of my personal projects.
+                </p>
+            </div>
+            <div class="col-md-4 text-end">
+                <nav>
+                    <a href="#" class="nav-link d-inline text-dark">Home</a>
+                    <a href="#about" class="nav-link d-inline text-dark">About</a>
+                    <a href="#contact" class="nav-link d-inline text-dark">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mb-4">
+        <div class="d-flex justify-content-center gap-4 filter-menu">
+            <a href="#" class="active">All Categories</a>
+            <a href="#">Data Science</a>
+            <a href="#">Visualization</a>
+            <a href="#">Creative Coding</a>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="portfolio-grid">
+            
+            <a href="projects/customer-churn/index.html" class="portfolio-item">
+                <img src="assets/img/churn_thumb.jpg" alt="Churn Project">
+                <div class="overlay">
+                    <div class="text">
+                        <h5>Customer Churn</h5>
+                        <p>(Made in Python, 2024)</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="projects/sales-dashboard/index.html" class="portfolio-item">
+                <img src="assets/img/sales_thumb.jpg" alt="Sales Dashboard">
+                <div class="overlay">
+                    <div class="text">
+                        <h5>Sales Dashboard</h5>
+                        <p>(Made in D3.js, 2024)</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="portfolio-item">
+                <img src="https://via.placeholder.com/400x300" alt="Placeholder">
+                <div class="overlay">
+                    <div class="text">
+                        <h5>Future Project</h5>
+                        <p>(Coming Soon)</p>
+                    </div>
+                </div>
+            </a>
+            
+            </div>
+    </div>
+
+    <footer class="text-center py-4 bg-light">
+        <p class="text-muted small">&copy; 2026 Chad V. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
