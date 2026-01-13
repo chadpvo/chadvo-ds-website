@@ -156,3 +156,15 @@ h1, h2, h3, h4, h5 {
     color: #0077b5; /* LinkedIn Blue on hover */
     transform: translateY(-3px); /* Slight lift effect */
 }
+
+/* --- Project Action Icons (GitHub, Demo, etc.) --- */
+.project-actions a {
+    color: #333;
+    font-size: 2rem;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.project-actions a:hover {
+    color: #000;
+    transform: translateY(-3px);
+}
