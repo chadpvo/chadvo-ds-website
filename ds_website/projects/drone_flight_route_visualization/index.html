@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Delay Predictions | Chad Vo</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+    <!-- HEADER (identical to homepage) -->
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="../../index.html">
+                <img src="../../assets/img/logo.png" alt="Chad V Logo" class="site-logo">
+            </a>        
+            <nav class="top-nav">
+                <a href="../../index.html#about" class="text-decoration-none text-dark ms-4">About</a>
+                <a href="../../index.html#contact" class="text-decoration-none text-dark ms-4">Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- HERO (project-specific, styled like homepage hero) -->
+    <section class="container text-center mt-4 mb-5">
+        <h1 class="display-4 fw-bold hero-name">Flight Delay Predictions</h1>
+        <div class="decorative-separator"></div>
+        <p class="lead text-muted hero-bio mx-auto">
+            Predicting airline delays using historical flight and weather data.
+        </p>
+
+        <!-- ACTION ICONS -->
+        <div class="d-flex justify-content-center gap-4 mt-4 project-actions">
+            <a href="https://github.com/aestew/flight_delay_predictions/tree/main"
+            target="_blank"
+            rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+
+    </section>
+
+    <!-- PROJECT CONTENT -->
+    <section class="container mb-5" style="max-width: 900px;">
+
+        <h3 class="fw-bold mb-3">Overview</h3>
+        <p class="text-muted">
+            This project builds machine learning models to predict whether a flight will be delayed,
+            leveraging airline metadata, temporal features, and weather conditions.
+        </p>
+
+        <h3 class="fw-bold mt-5 mb-3">Tech Stack</h3>
+        <ul class="text-muted">
+            <li>Python</li>
+            <li>Pandas / NumPy</li>
+            <li>Scikit-learn</li>
+            <li>XGBoost</li>
+            <li>Databricks</li>
+        </ul>
+
+        <h3 class="fw-bold mt-5 mb-3">Key Takeaways</h3>
+        <ul class="text-muted">
+            <li>Weather and departure time are the strongest predictors of delay</li>
+            <li>Tree-based models significantly outperform linear baselines</li>
+            <li>Feature engineering had a larger impact than model choice</li>
+        </ul>
+
+    </section>
+
+    <!-- FOOTER (identical to homepage) -->
+    <section class="bg-light-blue py-5 text-center" id="contact">
+        <div class="container">
+            <h4 class="fw-bold mb-4">Let's Work Together!</h4>
+            
+            <div class="d-flex justify-content-center social-icons mb-5">
+                <a href="https://linkedin.com/in/chadvo" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/chadpvo" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:chadpvo@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="text-muted small mb-0">
+                &copy; Copyright <span id="year"></span> All rights reserved | Developed by Chad Vo
+            </p>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
