@@ -1,41 +1,74 @@
-/* --- Logo Styling --- */
+/* ===============================
+   Design Tokens (Single Source of Truth)
+   =============================== */
+
+:root {
+    --font-primary: 'Montserrat', sans-serif;
+
+    --color-text-primary: #333;
+    --color-text-secondary: #666;
+    --color-text-muted: #6c757d;
+    --color-text-strong: #222;
+
+    --color-accent: #0077b5;
+    --color-bg-white: #ffffff;
+    --color-bg-light-grey: #f8f9fa;
+    --color-bg-light-blue: #dbeafe;
+
+    --color-border-muted: #ccc;
+}
+
+/* ===============================
+   Global Base Styles
+   =============================== */
+
+body {
+    font-family: var(--font-primary);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-white);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--color-text-strong);
+}
+
+p, li {
+    color: var(--color-text-secondary);
+}
+
+/* ===============================
+   Logo
+   =============================== */
+
 .site-logo {
-    width: 80px; /* Adjust this number to make it bigger/smaller */
-    height: auto; /* Keeps the aspect ratio correct */
+    width: 80px;
+    height: auto;
     object-fit: contain;
 }
 
-/* Optional: Mobile adjustment */
 @media (max-width: 768px) {
     .site-logo {
-        width: 60px; /* Smaller on phones */
+        width: 60px;
     }
 }
-/* General Fonts */
 
-/* --- Global Settings --- */
-body {
-    font-family: 'Montserrat', sans-serif; /* CHANGED */
-    color: #333;
-    background-color: #fff;
-}
+/* ===============================
+   Hero
+   =============================== */
 
-/* Optional: If you want the headers to be extra bold like the logo */
-h1, h2, h3, h4, h5 {
-    font-family: 'Montserrat', sans-serif; /* CHANGED */
-    font-weight: 700; /* Bold */
-}
-
-/* Update the Hero Name specifically if you want it distinct */
 .hero-name {
-    font-family: 'Montserrat', sans-serif; /* CHANGED */
-    font-weight: 800; /* Extra Bold */
-    letter-spacing: -1px; /* Tighten it up slightly for a modern look */
-    color: #222;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--color-text-strong);
     margin-bottom: 20px;
 }
 
-/* Filter Menu Links */
+/* ===============================
+   Filter Menu
+   =============================== */
+
 .filter-menu a {
     text-decoration: none;
     color: #999;
@@ -45,130 +78,23 @@ h1, h2, h3, h4, h5 {
     transition: color 0.3s;
 }
 
-.filter-menu a:hover, .filter-menu a.active {
-    color: #000;
+.filter-menu a:hover,
+.filter-menu a.active {
+    color: var(--color-text-strong);
     font-weight: 600;
 }
 
-/* The Masonry Grid Layout */
+/* ===============================
+   Portfolio Grid (250px Squares)
+   =============================== */
+
 .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
-    gap: 20px; /* Space between images */
-}
-
-/* Individual Portfolio Card */
-.portfolio-item {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    border-radius: 4px;
-}
-
-.portfolio-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s ease;
-}
-
-/* Hover Zoom Effect */
-.portfolio-item:hover img {
-    transform: scale(1.05);
-}
-
-/* The Overlay Text (Hidden by default) */
-.overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .4s ease;
-    background-color: rgba(255, 255, 255, 0.9); /* White fade over image */
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
     justify-content: center;
-    text-align: center;
 }
 
-/* Show Overlay on Hover */
-.portfolio-item:hover .overlay {
-    opacity: 1;
-}
-
-.overlay .text h5 {
-    color: #000;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-}
-
-.overlay .text p {
-    color: #666;
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-/* --- About Me Section --- */
-.bg-light-grey {
-    background-color: #f8f9fa; /* Soft Grey */
-}
-
-/* Left-aligned red separator for the About section */
-.decorative-separator-left {
-    width: 175px;
-    height: 2px;
-    background-color: #0077b5;
-    margin: 20px 0 30px 0; /* Aligned left (0 margin on left) */
-    position: relative;
-}
-
-.decorative-separator-left::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    background-color: #0077b5;
-    border-radius: 50%;
-    position: absolute;
-    top: -3.5px;
-    left: 0; /* Dot starts at the far left */
-}
-
-/* --- Work With Me / Contact Section --- */
-.bg-light-blue {
-    background-color: #dbeafe; /* Soft professional light blue */
-}
-
-.social-icons {
-    font-size: 1.8rem;
-    gap: 25px; /* Space between icons */
-}
-
-.social-icons a {
-    color: #333; /* Dark icon color */
-    transition: transform 0.3s, color 0.3s;
-}
-
-.social-icons a:hover {
-    color: #0077b5; /* LinkedIn Blue on hover */
-    transform: translateY(-3px); /* Slight lift effect */
-}
-
-/* --- Project Action Icons (GitHub, Demo, etc.) --- */
-.project-actions a {
-    color: #333;
-    font-size: 2rem;
-    transition: transform 0.3s, color 0.3s;
-}
-
-.project-actions a:hover {
-    color: #000;
-    transform: translateY(-3px);
-}
-/* --- Fixed 250px Square Portfolio Thumbnails --- */
 .portfolio-item {
     width: 250px;
     height: 250px;
@@ -180,23 +106,296 @@ h1, h2, h3, h4, h5 {
 .portfolio-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Fill the square without distortion */
+    object-fit: cover;
     display: block;
     transition: transform 0.5s ease;
 }
 
-/* Hover Zoom Effect */
 .portfolio-item:hover img {
     transform: scale(1.05);
 }
 
-/* Center the grid and allow wrapping */
-.portfolio-grid {
+/* ===============================
+   Portfolio Overlay
+   =============================== */
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: 0.4s ease;
+    background-color: rgba(255, 255, 255, 0.9);
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Space between thumbnails */
+    align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
+.portfolio-item:hover .overlay {
+    opacity: 1;
+}
 
+.overlay .text h5 {
+    color: var(--color-text-strong);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
 
+.overlay .text p {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ===============================
+   Section Backgrounds
+   =============================== */
+
+.bg-light-grey {
+    background-color: var(--color-bg-light-grey);
+}
+
+.bg-light-blue {
+    background-color: var(--color-bg-light-blue);
+}
+
+/* ===============================
+   Decorative Separator
+   =============================== */
+
+.decorative-separator-left {
+    width: 175px;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin: 20px 0 30px 0;
+    position: relative;
+}
+
+.decorative-separator-left::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    position: absolute;
+    top: -3.5px;
+    left: 0;
+}
+
+/* ===============================
+   Social Icons
+   =============================== */
+
+.social-icons {
+    font-size: 1.8rem;
+    gap: 25px;
+}
+
+.social-icons a {
+    color: var(--color-text-primary);
+    transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--color-accent);
+    transform: translateY(-3px);
+}
+
+/* ===============================
+   Project Action Icons
+   =============================== */
+
+.project-actions a {
+    color: var(--color-text-primary);
+    font-size: 2rem;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.project-actions a:hover {
+    color: var(--color-text-strong);
+    transform: translateY(-3px);
+}
+
+/* ===============================
+   Long-Form Article Layout
+   =============================== */
+
+.project-article {
+    max-width: 1200px;
+}
+
+.article-header {
+    max-width: 740px;
+    margin: 0 auto 3rem auto;
+}
+
+.article-dek {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+}
+
+.article-body {
+    max-width: 740px;
+    margin: 0 auto;
+}
+
+.article-body p {
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+}
+
+.article-body h2 {
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.article-body h3 {
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-body ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.article-body li {
+    margin-bottom: 0.75rem;
+}
+
+.article-visual {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border: 1px dashed var(--color-border-muted);
+    text-align: center;
+    color: var(--color-text-muted);
+    border-radius: 6px;
+}
+
+.article-note {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 3rem;
+}
+/* ===============================
+   Article Readability Adjustments
+   =============================== */
+
+.article-body h2 {
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.article-body h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.875rem;
+}
+
+.article-body ol,
+.article-body ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.article-body li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* ===============================
+   Image Zoom Modal (Article Pages)
+   =============================== */
+
+.article-visual img {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.article-visual img:hover {
+    transform: scale(1.02);
+}
+
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.80);
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.image-modal.active {
+    display: flex;
+}
+
+.image-modal-content {
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    margin: auto;
+    position: relative;
+    animation: zoomIn 0.3s;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.image-modal-close {
+    position: fixed;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    transition: color 0.3s;
+}
+
+.image-modal-close:hover,
+.image-modal-close:focus {
+    color: #ff0000;
+}
+
+/* ===============================
+   Simple Decorative Separator (for article pages)
+   =============================== */
+
+.decorative-separator {
+    width: 50%;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin: 20px auto 30px auto;
+}
+
+/* ===============================
+   Table Winner Highlight
+   =============================== */
+
+.table tbody tr[style*="background-color: #d4edda"] {
+    background-color: #d4edda !important;
+}
+
+.table tbody tr[style*="background-color: #d4edda"] td {
+    background-color: #d4edda !important;
+}

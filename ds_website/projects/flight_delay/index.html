@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Delay Predictions | Chad Vo</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,7 +11,6 @@
 </head>
 <body>
 
-    <!-- HEADER (identical to homepage) -->
     <div class="container py-4">
         <div class="d-flex justify-content-between align-items-center">
             <a href="../../index.html">
@@ -25,57 +23,440 @@
         </div>
     </div>
 
-    <!-- HERO (project-specific, styled like homepage hero) -->
     <section class="container text-center mt-4 mb-5">
         <h1 class="display-4 fw-bold hero-name">Flight Delay Predictions</h1>
-        <div class="decorative-separator"></div>
-        <p class="lead text-muted hero-bio mx-auto">
-            Predicting airline delays using historical flight and weather data.
+        <p class="text-muted mb-2" style="font-size: 0.95rem;">
+            Amy Steward, Chad Vo, Kristen Lin, Priscilla Siow, Uma Rao Krishnan
         </p>
-
-        <!-- ACTION ICONS -->
-        <div class="d-flex justify-content-center gap-4 mt-4 project-actions">
-            <a href="https://github.com/aestew/flight_delay_predictions/tree/main"
-            target="_blank"
-            rel="noopener noreferrer">
+        <p class="text-muted mb-3" style="font-size: 0.85rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <strong>Tech Stack:</strong> Apache Spark 3.x • Databricks • PySpark MLlib • XGBoost • PyTorch (FT-Transformer) • NetworkX • NVIDIA T4 GPU
+        </p>
+        <div class="d-flex justify-content-center gap-4 mb-4 project-actions">
+            <a href="https://github.com/aestew/flight_delay_predictions/tree/main" target="_blank" rel="noopener noreferrer" title="Project Repository">
                 <i class="fab fa-github"></i>
             </a>
+            <a href="path/to/report.ipynb" download title="Download Jupyter Notebook">
+                <i class="fas fa-file-code"></i>
+            </a>
         </div>
-
-    </section>
-
-    <!-- PROJECT CONTENT -->
-    <section class="container mb-5" style="max-width: 900px;">
-
-        <h3 class="fw-bold mb-3">Overview</h3>
-        <p class="text-muted">
-            This project builds machine learning models to predict whether a flight will be delayed,
-            leveraging airline metadata, temporal features, and weather conditions.
+        <div class="decorative-separator mx-auto"></div>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">
+            <strong>Project Scope:</strong> How we engineered a distributed ML pipeline to predict flight delays at scale—from 1.7M to 30M rows using weather data, operational features, and graph-based network analysis.
         </p>
-
-        <h3 class="fw-bold mt-5 mb-3">Tech Stack</h3>
-        <ul class="text-muted">
-            <li>Python</li>
-            <li>Pandas / NumPy</li>
-            <li>Scikit-learn</li>
-            <li>XGBoost</li>
-            <li>Databricks</li>
-        </ul>
-
-        <h3 class="fw-bold mt-5 mb-3">Key Takeaways</h3>
-        <ul class="text-muted">
-            <li>Weather and departure time are the strongest predictors of delay</li>
-            <li>Tree-based models significantly outperform linear baselines</li>
-            <li>Feature engineering had a larger impact than model choice</li>
-        </ul>
-
     </section>
 
-    <!-- FOOTER (identical to homepage) -->
+    <section class="project-article container mb-5">
+        <article class="article-body">
+
+            <p class="lead">
+                <strong>TL;DR:</strong> We built a machine learning pipeline to predict flight delays using 30 million flight records and 132 million weather observations. The core challenge wasn't picking the right model—it was engineering a distributed data pipeline that could join massive spatiotemporal datasets without exploding. Our custom join strategy achieved 99.99% match rates while reducing missing values by 10x. The Feature Tokenizer Transformer won with the best generalization (Recall: 0.59, F2: 0.53), but the real victory was proving that data engineering matters more than hyperparameter tuning.
+            </p>
+
+            <div class="article-visual">
+                <img src="assets/flight_delay_cover.jpg" alt="Flight Delay Prediction System" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
+                <p class="mt-3"><em>Predicting delays across 30M+ flights in the US aviation network</em></p>
+            </div>
+
+            <h2>The Problem: $33 Billion in Annual Delays</h2>
+
+            <p>
+                Flight delays cost the US economy billions annually. Airlines need to predict delays before they happen—ideally one hour before scheduled departure—to optimize operations, reduce compensation costs, and improve passenger satisfaction.
+            </p>
+
+            <p>
+                The challenge? Building a prediction system that works at the scale of the entire US aviation network.
+            </p>
+
+            <h2>The Data Challenge</h2>
+
+            <p>
+                We started with two massive, incompatible datasets spanning 2015-2019:
+            </p>
+
+            <ul>
+                <li><strong>74M flight records</strong> from the US DOT (schedules, delays, cancellations)</li>
+                <li><strong>132M hourly weather observations</strong> from NOAA (temperature, precipitation, wind, visibility)</li>
+            </ul>
+
+            <p>
+                The problem? These datasets don't naturally join. Flight times are in local timezones. Weather data is in UTC. Airports aren't always co-located with weather stations. A naive Cartesian join would create trillions of comparisons.
+            </p>
+
+            <p>
+                <strong>This is a Big Data problem.</strong>
+            </p>
+
+            <h2>Engineering Strategy: Custom Spatiotemporal Joins</h2>
+
+            <p>
+                We couldn't just merge these tables—we had to engineer a custom join strategy that respects both space and time.
+            </p>
+
+            <h3>1. Geographic Matching: Finding the Right Weather Station</h3>
+
+            <p>
+                First challenge: match each airport to its nearest weather station. We used station metadata containing distance calculations to identify the closest station for each airport, prioritizing stations within airport boundaries (distance = 0 miles).
+            </p>
+
+            <h3>2. Temporal Alignment: The 6-Hour Window</h3>
+
+            <p>
+                Second challenge: match weather readings to flights. We needed weather conditions from exactly 1 hour before scheduled departure, but weather stations report at irregular intervals.
+            </p>
+
+            <p>Our solution:</p>
+
+            <ul>
+                <li>Convert all flight times from local to UTC (handling daylight savings)</li>
+                <li>Create a 6-hour validity window around each flight departure</li>
+                <li>Use <code>repartitionByRange</code> to co-locate records by station and time</li>
+                <li>Select the weather reading closest to T-1 hour</li>
+            </ul>
+
+            <p>
+                This approach achieved a <strong>99.99% match rate</strong> for short timeframes and 75% for the full 5-year dataset—while dramatically reducing data shuffling across the Spark cluster.
+            </p>
+
+            <h2>The Unexpected Win: Data Quality Repair</h2>
+
+            <p>
+                Our custom join didn't just match records—it <em>fixed</em> the data.
+            </p>
+
+            <p>
+                By selecting optimal weather readings within our time window, we reduced missing values without synthetic imputation:
+            </p>
+
+            <ul>
+                <li>Visibility: 35% → 3.5% missing</li>
+                <li>Sky Conditions: 42.8% → 12.1% missing</li>
+                <li>Relative Humidity: 33% → 3.5% missing</li>
+                <li>Wind Speed: 25.4% → 3.5% missing</li>
+            </ul>
+
+            <p>
+                The right join strategy improved data quality by an order of magnitude.
+            </p>
+
+            <h2>Feature Engineering at Scale</h2>
+
+            <p>
+                Raw weather codes and flight data aren't ready for ML models. We engineered features across four critical dimensions:
+            </p>
+
+            <p>
+                <strong>Weather Decoding:</strong> NOAA data arrives as cryptic codes like <code>"RA:61,TS:95"</code>. We built regex parsers to decode these into binary indicators for rain, snow, freezing conditions, and severe weather.
+            </p>
+
+            <p>
+                <strong>Graph Features:</strong> We modeled the US aviation system as a directed weighted graph (nodes = airports, edges = flight routes) and calculated PageRank, out-degree, and in-degree centrality. This captured network effects—delays at major hubs like ATL, ORD, and DFW cascade downstream more severely than delays at smaller airports.
+            </p>
+
+            <p>
+                <strong>Temporal Lag Features:</strong> The most predictive features came from tracking previous flights by the same aircraft—previous arrival delay, actual vs. scheduled turnaround time, and planned turnaround buffer. Critical constraint: only use data available >1 hour before current departure to prevent leakage. These features alone accounted for <strong>70% of XGBoost's information gain</strong>.
+            </p>
+
+            <p>
+                <strong>Cyclic Time Encodings:</strong> We used sine/cosine transformations for month and day-of-week to capture cyclical patterns—December is close to January, not infinitely far.
+            </p>
+
+            <h2>The Data Leakage Problem</h2>
+
+            <p>
+                Building a time-series prediction model requires extreme care to avoid leakage. We removed 20+ features that would only be known after departure:
+            </p>
+
+            <ul>
+                <li>Actual departure time</li>
+                <li>Taxi-out duration</li>
+                <li>Airborne time</li>
+                <li>All delay reason codes (weather delay, NAS delay, etc.)</li>
+            </ul>
+
+            <p>
+                We also implemented <strong>time-aware cross-validation</strong> using rolling windows—training always on past data, validating on strictly future data. No temporal leakage allowed.
+            </p>
+
+            <h2>Handling Class Imbalance: The Downsampling Pivot</h2>
+
+            <p>
+                Only ~18-22% of flights are delayed. This creates a severe class imbalance problem.
+            </p>
+
+            <p>
+                We initially tried SMOTE and upsampling, but both were computationally infeasible at scale. Instead, we downsampled the majority class to achieve 50:50 balance, accepting information loss in exchange for computational feasibility and faster training.
+            </p>
+
+            <p>
+                <strong>Key insight:</strong> At 30M rows, sometimes the pragmatic solution beats the theoretical ideal.
+            </p>
+
+            <h2>The Pipeline: 7-Stage Checkpointing Strategy</h2>
+
+            <p>
+                Spark's lazy evaluation is powerful but dangerous. If a job fails after 2 hours, you might recompute everything.
+            </p>
+
+            <p>
+                We implemented a rigorous checkpointing strategy, saving intermediate results at seven critical stages:
+            </p>
+
+            <ol>
+                <li>Raw data joins (FASW dataset creation)</li>
+                <li>Null handling and feature engineering</li>
+                <li>Train/test split (2015-2018 train, 2019 test)</li>
+                <li>Rolling window creation for cross-validation</li>
+                <li>Feature scaling and vectorization per window</li>
+                <li>Processed final train/test sets</li>
+                <li>Model training results via MLflow</li>
+            </ol>
+
+            <div class="article-visual">
+                <img src="assets/updated_pipeline.jpeg" alt="ML Pipeline Architecture" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
+                <p class="mt-3"><em>7-stage checkpoint strategy decouples data engineering from model training</em></p>
+            </div>
+
+            <p>
+                This decoupled data engineering from model training. We could iterate rapidly on models without re-triggering expensive joins.
+            </p>
+
+            <h2>Managing Computational Costs: The Downsampling Strategy</h2>
+
+            <p>
+                Flight delays suffer from severe class imbalance—only 18-22% of flights are delayed. This creates both a modeling challenge and a <strong>computational cost problem</strong>.
+            </p>
+
+            <p>
+                We initially tried SMOTE (Synthetic Minority Over-sampling Technique) and standard upsampling to balance classes. Both approaches failed spectacularly:
+            </p>
+
+            <ul>
+                <li><strong>SMOTE:</strong> Generating synthetic samples for millions of minority class records caused memory explosions across Spark executors</li>
+                <li><strong>Upsampling:</strong> Duplicating minority samples ballooned dataset size, multiplying processing time and cloud compute costs</li>
+                <li><strong>Runtime impact:</strong> Both methods would have extended training from hours to days, making experimentation impossible</li>
+            </ul>
+
+            <p>
+                <strong>The Pragmatic Solution: Downsampling the Majority Class</strong>
+            </p>
+
+            <p>
+                Instead of adding data, we removed it. We randomly downsampled on-time flights (majority class) to achieve a 50:50 balance with delayed flights. This approach:
+            </p>
+
+            <ul>
+                <li>Reduced overall dataset size by ~40%, dramatically cutting compute time and costs</li>
+                <li>Retained at least 60% of original training data's information</li>
+                <li>Enabled rapid experimentation—training iterations that would have taken 6+ hours completed in under 2 hours</li>
+                <li>Made GPU training feasible for neural networks (memory constraints loosened)</li>
+            </ul>
+
+            <p>
+                <strong>The Trade-off:</strong> We accepted some information loss from the majority class in exchange for computational feasibility. At 30 million rows, this was the right call—we needed a pipeline that could iterate within reasonable time and budget constraints.
+            </p>
+
+            <p>
+                This decision exemplifies a core principle in production ML: <strong>pragmatic solutions that work at scale beat theoretically optimal solutions that never finish running</strong>.
+            </p>
+
+            <div class="article-visual">
+                <img src="assets/windows_strategy.png" alt="Time-Series Cross-Validation Windows" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
+                <p class="mt-3"><em>Rolling window validation ensures temporal integrity—training always on past, validating on future</em></p>
+            </div>
+
+            <h2>Model Comparison: Data Engineering Beats Hyperparameter Tuning</h2>
+
+            <p>
+                We evaluated six model architectures, prioritizing <strong>Recall</strong> (catching actual delays) over Precision (avoiding false alarms). The surprise? Performance differences came from feature engineering, not model architecture.
+            </p>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Test Recall</th>
+                        <th>Test Precision</th>
+                        <th>Test F2</th>
+                        <th>Test PR-AUC</th>
+                        <th>Key Insight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Logistic Regression</td>
+                        <td>0.53</td>
+                        <td>0.88</td>
+                        <td>0.58</td>
+                        <td>0.29</td>
+                        <td>Fast baseline, struggled with non-linear patterns</td>
+                    </tr>
+                    <tr>
+                        <td>Decision Tree</td>
+                        <td>0.11</td>
+                        <td>0.73</td>
+                        <td>0.13</td>
+                        <td>0.41</td>
+                        <td>Severe overfitting—collapsed on test set</td>
+                    </tr>
+                    <tr>
+                        <td>Random Forest</td>
+                        <td>0.67</td>
+                        <td>0.31</td>
+                        <td>0.55</td>
+                        <td>0.37</td>
+                        <td>Strong recall, excellent feature importance</td>
+                    </tr>
+                    <tr>
+                        <td>XGBoost</td>
+                        <td>0.68</td>
+                        <td>0.30</td>
+                        <td>0.55</td>
+                        <td>0.44</td>
+                        <td>70% of gain from 2 features: turnaround time</td>
+                    </tr>
+                    <tr>
+                        <td>MLP (Neural Net)</td>
+                        <td>0.56</td>
+                        <td>0.33</td>
+                        <td>0.49</td>
+                        <td>0.35</td>
+                        <td>Similar to XGBoost but 10x slower training</td>
+                    </tr>
+                    <tr style="background-color: #d4edda;">
+                        <td><strong>FT-Transformer 🏆</strong></td>
+                        <td><strong>0.59</strong></td>
+                        <td><strong>0.36</strong></td>
+                        <td><strong>0.53</strong></td>
+                        <td><strong>0.45</strong></td>
+                        <td><strong>Best generalization, Focal Loss for imbalance</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                <strong>The Winner: Feature Tokenizer Transformer</strong>
+            </p>
+
+            <p>
+                The FT-Transformer won not through superior raw metrics, but through <strong>temporal stability</strong>. While other models showed train-validation gaps indicating overfitting, the FT-Transformer maintained consistent performance across all splits—proof it learned true patterns rather than memorizing noise.
+            </p>
+
+            <p>
+                Key technical advantages:
+            </p>
+
+            <ul>
+                <li><strong>Feature tokenization:</strong> Each feature becomes its own embedded token, enabling cross-feature attention (time × weather × airline interactions)</li>
+                <li><strong>Custom Focal Loss:</strong> Handles class imbalance natively (γ=1, α≈0.8) instead of requiring downsampling</li>
+                <li><strong>Multi-head self-attention:</strong> Captures complex feature interactions that tree models miss</li>
+                <li><strong>GPU requirement:</strong> 4 hours on NVIDIA T4 vs. 15+ hours on CPU</li>
+            </ul>
+
+            <h2>Scaling Performance: Linear Growth</h2>
+
+            <p>
+                Our pipeline scaled nearly linearly with data volume:
+            </p>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Timeframe</th>
+                        <th>Rows</th>
+                        <th>Size</th>
+                        <th>Processing Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3 months</td>
+                        <td>1.7M</td>
+                        <td>0.25 GB</td>
+                        <td>3m 39s</td>
+                    </tr>
+                    <tr>
+                        <td>1 year</td>
+                        <td>7.1M</td>
+                        <td>1.43 GB</td>
+                        <td>10m 57s</td>
+                    </tr>
+                    <tr>
+                        <td>5 years</td>
+                        <td>30.1M</td>
+                        <td>6.29 GB</td>
+                        <td>1h 49m</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                <strong>This is what "ML at scale" means:</strong> algorithms that remain efficient as data grows by orders of magnitude.
+            </p>
+
+            <h2>Key Lessons: What Actually Mattered</h2>
+
+            <h3>1. Data Engineering > Hyperparameter Tuning</h3>
+
+            <p>
+                The biggest performance gains came from thoughtful feature engineering rather than exhaustive hyperparameter searches. Our aircraft turnaround time features alone accounted for 70% of XGBoost's information gain, while tweaking tree depths and learning rates provided only marginal improvements. The lesson: invest engineering time in understanding domain patterns and creating features that capture real operational dynamics before diving into model optimization.
+            </p>
+
+            <h3>2. Temporal Validation is Non-Negotiable</h3>
+
+            <p>
+                Standard k-fold cross-validation would have given catastrophically optimistic results by allowing future information to leak into training. Our time-series rolling windows—where training always occurred on strictly past data and validation on future periods—revealed the true generalization performance. The Decision Tree's dramatic test set collapse (from 0.64 validation recall to 0.11 test recall) proved why temporal integrity matters in production forecasting systems.
+            </p>
+
+            <h3>3. The Right Join Strategy Fixes Data Quality</h3>
+
+            <p>
+                Our spatiotemporal window join didn't just match records—it fundamentally improved data quality without synthetic imputation. By selecting optimal weather readings within a 6-hour validity window and matching to the nearest station, we reduced missing values by 10x (visibility: 35% → 3.5%, humidity: 33% → 3.5%). Sometimes the best solution to bad data isn't sophisticated imputation algorithms—it's better data engineering from the start.
+            </p>
+
+            <h3>4. Pragmatism Over Purity at Scale</h3>
+
+            <p>
+                Downsampling sacrificed theoretical optimality for computational feasibility, but at 30 million rows, this was the right engineering decision. SMOTE and upsampling would have extended training from hours to days while exploding memory usage across our Spark cluster. By accepting a 40% dataset reduction, we enabled rapid experimentation and made GPU training viable for neural networks. "Good enough and fast" beats "perfect but impossible" when operating under real-world constraints.
+            </p>
+
+            <h3>5. GPU Requirements for Deep Learning at Scale</h3>
+
+            <p>
+                The FT-Transformer's 4-hour GPU training time versus 15+ hours on CPU illustrated that hardware choices have first-order impacts on iteration speed and project feasibility. For production ML systems handling millions of records, GPU acceleration isn't a luxury—it's a practical requirement that determines whether experimentation cycles take hours or days. The upfront infrastructure cost pays for itself in engineering velocity.
+            </p>
+
+            <h2>Conclusion: The Model is Only as Good as the Pipeline</h2>
+
+            <p>
+                Predicting flight delays isn't a modeling problem—it's a <strong>data engineering problem</strong>.
+            </p>
+
+            <p>
+                The FT-Transformer achieved the best results not because of superior architecture, but because we built a pipeline that could feed it clean, properly joined, temporally valid data at scale.
+            </p>
+
+            <p>
+                In production ML systems, distributed joins, checkpointing strategies, and feature engineering pipelines matter more than model selection. Master the infrastructure, and the models will follow.
+            </p>
+
+            <p class="article-note mt-5 text-center">
+                <strong>Full code and technical details</strong>
+            </p>
+            <div class="d-flex justify-content-center gap-4 mt-3 project-actions">
+                <a href="https://github.com/aestew/flight_delay_predictions" target="_blank" rel="noopener noreferrer" title="Project Repository">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="path/to/report.ipynb" download title="Download Jupyter Notebook">
+                    <i class="fas fa-file-code"></i>
+                </a>
+            </div>
+
+        </article>
+    </section>
+
     <section class="bg-light-blue py-5 text-center" id="contact">
         <div class="container">
             <h4 class="fw-bold mb-4">Let's Work Together!</h4>
-            
             <div class="d-flex justify-content-center social-icons mb-5">
                 <a href="https://linkedin.com/in/chadvo" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://github.com/chadpvo" target="_blank"><i class="fab fa-github"></i></a>
@@ -87,8 +468,54 @@
         </div>
     </section>
 
+    <!-- Image Zoom Modal -->
+    <div id="imageModal" class="image-modal">
+        <span class="image-modal-close">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
+
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Image zoom functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.image-modal-close');
+        const zoomableImages = document.querySelectorAll('.zoomable-image');
+
+        // Add click event to all zoomable images
+        zoomableImages.forEach(img => {
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.classList.add('active');
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+        });
+
+        // Function to close modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal when clicking X
+        closeBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking on the dark background
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
     </script>
 
 </body>
