@@ -526,3 +526,99 @@ body.dark-mode .overlay {
 .table tbody tr[style*="background-color: #d4edda"] td {
     background-color: #d4edda !important;
 }
+
+/* ===============================
+   Sticky Floating Header
+   =============================== */
+
+.sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sticky-header.floating {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.4s ease-out;
+}
+
+body.dark-mode .sticky-header.floating {
+    background-color: rgba(18, 18, 18, 0.95);
+    box-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===============================
+   About Section Dark Mode
+   =============================== */
+
+body.dark-mode .about-section {
+    background-color: #1a1a1a !important;
+}
+
+body.dark-mode .about-title {
+    color: #f5f5f5;
+}
+
+body.dark-mode .about-text {
+    color: #ccc !important;
+}
+
+/* ===============================
+   Footer Dark Mode Support
+   =============================== */
+
+body.dark-mode .footer-section {
+    background-color: #1a1a1a !important;
+}
+
+body.dark-mode .footer-section h4 {
+    color: #f5f5f5;
+}
+
+body.dark-mode .footer-text {
+    color: #ccc !important;
+}
+
+body.dark-mode .social-icons a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .social-icons a:hover {
+    color: #ffeb3b;
+}
+
+/* ===============================
+   Portfolio Filter Animation
+   =============================== */
+
+.portfolio-item {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.filter-btn {
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    color: var(--color-text-strong) !important;
+    font-weight: 600;
+}
