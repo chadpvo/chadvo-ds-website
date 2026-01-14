@@ -14,8 +14,13 @@
     <div class="container py-4">
         <div class="d-flex justify-content-between align-items-center">
             <a href="../../index.html">
-                <img src="../../assets/img/logo.png" alt="Chad V Logo" class="site-logo">
-            </a>        
+                <img src="../../assets/img/logo.png" alt="Chad Vo Data Scientist Logo" class="site-logo">
+            </a>   
+
+            <button id="themeToggle" class="theme-toggle ms-2" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+
             <nav class="top-nav">
                 <a href="../../index.html#about" class="text-decoration-none text-dark ms-4">About</a>
                 <a href="../../index.html#contact" class="text-decoration-none text-dark ms-4">Contact</a>
@@ -28,6 +33,12 @@
         <p class="text-muted mb-2" style="font-size: 0.95rem;">
             Amy Steward, Chad Vo, Kristen Lin, Priscilla Siow, Uma Rao Krishnan
         </p>
+        <p class="article-meta text-muted mb-3"
+            data-published="2024-11-15">
+            <span id="publishDate"></span> •
+            <span id="readingTime"></span>
+        </p>
+
         <p class="text-muted mb-3" style="font-size: 0.85rem; max-width: 800px; margin-left: auto; margin-right: auto;">
             <strong>Tech Stack:</strong> Apache Spark 3.x • Databricks • PySpark MLlib • XGBoost • PyTorch (FT-Transformer) • NetworkX • NVIDIA T4 GPU
         </p>
@@ -48,9 +59,11 @@
     <section class="project-article container mb-5">
         <article class="article-body">
 
-            <p class="lead">
-                <strong>TL;DR:</strong> We built a machine learning pipeline to predict flight delays using 30 million flight records and 132 million weather observations. The core challenge wasn't picking the right model—it was engineering a distributed data pipeline that could join massive spatiotemporal datasets without exploding. Our custom join strategy achieved 99.99% match rates while reducing missing values by 10x. The Feature Tokenizer Transformer won with the best generalization (Recall: 0.59, F2: 0.53), but the real victory was proving that data engineering matters more than hyperparameter tuning.
-            </p>
+            <header>
+                <p class="lead">
+                    <strong>TL;DR:</strong> We built a machine learning pipeline to predict flight delays using 30 million flight records and 132 million weather observations. The core challenge wasn't picking the right model—it was engineering a distributed data pipeline that could join massive spatiotemporal datasets without exploding. Our custom join strategy achieved 99.99% match rates while reducing missing values by 10x. The Feature Tokenizer Transformer won with the best generalization (Recall: 0.59, F2: 0.53), but the real victory was proving that data engineering matters more than hyperparameter tuning.
+                </p>
+            </header>
 
             <div class="article-visual">
                 <img src="assets/flight_delay_cover.jpg" alt="Flight Delay Prediction System" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
@@ -474,6 +487,10 @@
         <img class="image-modal-content" id="modalImage">
     </div>
 
+    <button id="scrollToTop" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -516,7 +533,65 @@
                 closeModal();
             }
         });
+
+        /* ============================= */
+        /* SCROLL TO TOP */
+        /* ============================= */
+        const scrollBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* ============================= */
+        /* DARK / LIGHT MODE */
+        /* ============================= */
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        function setTheme(mode) {
+            document.body.classList.toggle('dark-mode', mode === 'dark');
+            themeIcon.className = mode === 'dark'
+                ? 'fas fa-sun'
+                : 'fas fa-moon';
+            localStorage.setItem('theme', mode);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.body.classList.contains('dark-mode')
+                ? 'light'
+                : 'dark';
+            setTheme(newTheme);
+        });
+
+        /* ============================= */
+        /* PUBLISH DATE + READING TIME */
+        /* ============================= */
+        const meta = document.querySelector('.article-meta');
+        const published = new Date(meta.dataset.published);
+
+        document.getElementById('publishDate').textContent =
+            published.toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+        const articleText = document.querySelector('.article-body').innerText;
+        const words = articleText.trim().split(/\s+/).length;
+        const minutes = Math.ceil(words / 225);
+
+        document.getElementById('readingTime').textContent =
+            `${minutes} min read`;
     </script>
+
 
 </body>
 </html>
