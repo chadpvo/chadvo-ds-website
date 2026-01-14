@@ -1,0 +1,624 @@
+/* ===============================
+   Design Tokens (Single Source of Truth)
+   =============================== */
+
+:root {
+    --font-primary: 'Montserrat', sans-serif;
+
+    --color-text-primary: #333;
+    --color-text-secondary: #666;
+    --color-text-muted: #6c757d;
+    --color-text-strong: #222;
+
+    --color-accent: #0077b5;
+    --color-bg-white: #ffffff;
+    --color-bg-light-grey: #f8f9fa;
+    --color-bg-light-blue: #dbeafe;
+
+    --color-border-muted: #ccc;
+}
+
+/* ===============================
+   Dark Mode Token Overrides
+   =============================== */
+
+/* =============================
+   DARK MODE STYLING
+   ============================= */
+body.dark-mode {
+    background-color: #121212;
+    color: #f5f5f5;
+}
+
+/* Navigation links */
+body.dark-mode .top-nav a {
+    color: #f5f5f5 !important; /* light text */
+}
+
+body.dark-mode .top-nav a:hover {
+    color: #ffeb3b !important; /* optional hover color */
+}
+
+/* Headings */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #f5f5f5;
+}
+
+/* Paragraphs and lead text */
+body.dark-mode p,
+body.dark-mode li,
+body.dark-mode .lead {
+    color: #ccc;
+}
+
+/* Muted / small text */
+body.dark-mode .text-muted,
+body.dark-mode .small,
+body.dark-mode .article-meta,
+body.dark-mode .article-note {
+    color: #ccc !important;
+}
+
+/* Strong / bold text in dark mode */
+body.dark-mode strong {
+    color: #ccc;
+}
+
+/* Table text */
+body.dark-mode table,
+body.dark-mode th,
+body.dark-mode td {
+    border-color: #f5f5f5;
+    color: #555;
+}
+
+/* Links inside articles */
+body.dark-mode a {
+    color: #ffeb3b;
+    text-decoration: underline;
+}
+
+/* Project actions icons */
+body.dark-mode .project-actions a i {
+    color: #f5f5f5;
+}
+
+/* Decorative text (captions, em, etc.) */
+body.dark-mode .article-visual p em {
+    color: #ccc;
+}
+
+/* Footer small text */
+body.dark-mode .text-muted.small {
+    color: #ccc !important;
+}
+
+/* Decorative separators */
+body.dark-mode .decorative-separator,
+body.dark-mode .decorative-separator-left {
+    background-color: #0077b5; /* keep accent */
+}
+
+body.dark-mode .theme-toggle i {
+    color: #ffeb3b; /* bright yellow moon/sun icon in dark mode */
+}
+
+/* ===============================
+   Global Base Styles
+   =============================== */
+
+body {
+    font-family: var(--font-primary);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-white);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--color-text-strong);
+}
+
+p, li {
+    color: var(--color-text-secondary);
+}
+
+/* ===============================
+   Logo
+   =============================== */
+
+.site-logo {
+    width: 80px;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .site-logo {
+        width: 60px;
+    }
+}
+
+/* ===============================
+   Hero
+   =============================== */
+
+.hero-name {
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--color-text-strong);
+    margin-bottom: 20px;
+}
+
+/* ===============================
+   Filter Menu
+   =============================== */
+
+.filter-menu a {
+    text-decoration: none;
+    color: #999;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.filter-menu a:hover,
+.filter-menu a.active {
+    color: var(--color-text-strong);
+    font-weight: 600;
+}
+
+/* ===============================
+   Portfolio Grid (250px Squares)
+   =============================== */
+
+.portfolio-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.portfolio-item {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+/* ===============================
+   Portfolio Overlay
+   =============================== */
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: 0.4s ease;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+body.dark-mode .overlay {
+    background-color: rgba(15, 17, 21, 0.9);
+}
+
+.portfolio-item:hover .overlay {
+    opacity: 1;
+}
+
+.overlay .text h5 {
+    color: var(--color-text-strong);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.overlay .text p {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ===============================
+   Section Backgrounds
+   =============================== */
+
+.bg-light-grey {
+    background-color: var(--color-bg-light-grey);
+}
+
+.bg-light-blue {
+    background-color: var(--color-bg-light-blue);
+}
+
+/* ===============================
+   Decorative Separator
+   =============================== */
+
+.decorative-separator-left {
+    width: 175px;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin: 20px 0 30px 0;
+    position: relative;
+}
+
+.decorative-separator-left::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    position: absolute;
+    top: -3.5px;
+    left: 0;
+}
+
+/* ===============================
+   Social Icons
+   =============================== */
+
+.social-icons {
+    font-size: 1.8rem;
+    gap: 25px;
+}
+
+.social-icons a {
+    color: var(--color-text-primary);
+    transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--color-accent);
+    transform: translateY(-3px);
+}
+
+/* ===============================
+   Project Action Icons
+   =============================== */
+
+.project-actions a {
+    color: var(--color-text-primary);
+    font-size: 2rem;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.project-actions a:hover {
+    color: var(--color-text-strong);
+    transform: translateY(-3px);
+}
+
+/* ===============================
+   Article Metadata (Date + Reading Time)
+   =============================== */
+
+.article-meta {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+/* ===============================
+   Long-Form Article Layout
+   =============================== */
+
+.project-article {
+    max-width: 1200px;
+}
+
+.article-header {
+    max-width: 740px;
+    margin: 0 auto 3rem auto;
+}
+
+.article-dek {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+}
+
+.article-body {
+    max-width: 740px;
+    margin: 0 auto;
+}
+
+.article-body p {
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+}
+
+.article-body h2 {
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.article-body h3 {
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-body ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.article-body li {
+    margin-bottom: 0.75rem;
+}
+
+.article-visual {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border: 1px dashed var(--color-border-muted);
+    text-align: center;
+    color: var(--color-text-muted);
+    border-radius: 6px;
+}
+
+.article-note {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 3rem;
+}
+
+/* ===============================
+   Article Readability Adjustments
+   =============================== */
+
+.article-body h2 {
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.article-body h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.875rem;
+}
+
+.article-body ol,
+.article-body ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.article-body li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* ===============================
+   Image Zoom Modal (Article Pages)
+   =============================== */
+
+.article-visual img {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.article-visual img:hover {
+    transform: scale(1.02);
+}
+
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.80);
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.image-modal.active {
+    display: flex;
+}
+
+.image-modal-content {
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    margin: auto;
+    animation: zoomIn 0.3s;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.image-modal-close {
+    position: fixed;
+    top: 20px;
+    right: 35px;
+    font-size: 50px;
+    cursor: pointer;
+    color: #f1f1f1;
+}
+
+/* ===============================
+   Simple Decorative Separator
+   =============================== */
+
+.decorative-separator {
+    width: 50%;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin: 20px auto 30px auto;
+}
+
+/* ===============================
+   Scroll-to-Top Button
+   =============================== */
+
+.scroll-top-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color-accent);
+    color: #ffffff;
+    cursor: pointer;
+    display: none;
+    z-index: 999;
+}
+
+/* ===============================
+   Theme Toggle Button
+   =============================== */
+
+.theme-toggle {
+    font-size: 1.5rem; /* make it bigger */
+    margin-left: 15px; /* spacing from logo */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    transition: color 0.3s, transform 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.2);
+}
+
+/* ===============================
+   Table Winner Highlight
+   =============================== */
+
+.table tbody tr[style*="background-color: #d4edda"],
+.table tbody tr[style*="background-color: #d4edda"] td {
+    background-color: #d4edda !important;
+}
+
+/* ===============================
+   Sticky Floating Header
+   =============================== */
+
+.sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sticky-header.floating {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.4s ease-out;
+}
+
+body.dark-mode .sticky-header.floating {
+    background-color: rgba(18, 18, 18, 0.95);
+    box-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===============================
+   About Section Dark Mode
+   =============================== */
+
+body.dark-mode .about-section {
+    background-color: #1a1a1a !important;
+}
+
+body.dark-mode .about-title {
+    color: #f5f5f5;
+}
+
+body.dark-mode .about-text {
+    color: #ccc !important;
+}
+
+/* ===============================
+   Footer Dark Mode Support
+   =============================== */
+
+body.dark-mode .footer-section {
+    background-color: #1a1a1a !important;
+}
+
+body.dark-mode .footer-section h4 {
+    color: #f5f5f5;
+}
+
+body.dark-mode .footer-text {
+    color: #ccc !important;
+}
+
+body.dark-mode .social-icons a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .social-icons a:hover {
+    color: #ffeb3b;
+}
+
+/* ===============================
+   Portfolio Filter Animation
+   =============================== */
+
+.portfolio-item {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.filter-btn {
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    color: var(--color-text-strong) !important;
+    font-weight: 600;
+}
