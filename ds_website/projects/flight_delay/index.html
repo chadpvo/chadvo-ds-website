@@ -3,30 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Delay Predictions | Chad Vo</title>
+    <!-- Title and SEO meta tags will be injected by seo-injector.js -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../css/style.css">
 </head>
-<body>
+<body data-page="flight_delay">
 
-    <div class="container py-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <a href="../../index.html">
-                <img src="../../assets/img/logo.png" alt="Chad Vo Data Scientist Logo" class="site-logo">
-            </a>   
+    <!-- Sticky Header -->
+    <header id="stickyHeader" class="sticky-header">
+        <div class="container py-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="../../index.html">
+                    <img src="../../assets/img/logo.png" alt="Chad Vo Data Scientist Logo" class="site-logo">
+                </a>   
 
-            <button id="themeToggle" class="theme-toggle ms-2" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-            </button>
+                <button id="themeToggle" class="theme-toggle ms-2" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
 
-            <nav class="top-nav">
-                <a href="../../index.html#about" class="text-decoration-none text-dark ms-4">About</a>
-                <a href="../../index.html#contact" class="text-decoration-none text-dark ms-4">Contact</a>
-            </nav>
+                <nav class="top-nav">
+                    <a href="../../index.html#about" class="text-decoration-none text-dark ms-4">About</a>
+                    <a href="../../index.html#contact" class="text-decoration-none text-dark ms-4">Contact</a>
+                </nav>
+            </div>
         </div>
-    </div>
+    </header>
 
     <section class="container text-center mt-4 mb-5">
         <h1 class="display-4 fw-bold hero-name">Flight Delay Predictions</h1>
@@ -467,7 +471,7 @@
         </article>
     </section>
 
-    <section class="bg-light-blue py-5 text-center" id="contact">
+    <section class="bg-light-blue py-5 text-center footer-section" id="contact">
         <div class="container">
             <h4 class="fw-bold mb-4">Let's Work Together!</h4>
             <div class="d-flex justify-content-center social-icons mb-5">
@@ -475,7 +479,7 @@
                 <a href="https://github.com/chadpvo" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="mailto:chadpvo@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p class="text-muted small mb-0">
+            <p class="footer-text small mb-0">
                 &copy; Copyright <span id="year"></span> All rights reserved | Developed by Chad Vo
             </p>
         </div>
@@ -491,8 +495,26 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- SEO Injection Scripts -->
+    <script src="../../js/page-config.js"></script>
+    <script src="../../js/seo-injector.js"></script>
+
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Sticky Header on Scroll - Only float when header leaves viewport
+        const stickyHeader = document.getElementById('stickyHeader');
+        const headerHeight = stickyHeader.offsetHeight;
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > headerHeight) {
+                stickyHeader.classList.add('floating');
+            } else {
+                stickyHeader.classList.remove('floating');
+            }
+        });
 
         // Image zoom functionality
         const modal = document.getElementById('imageModal');
@@ -500,43 +522,36 @@
         const closeBtn = document.querySelector('.image-modal-close');
         const zoomableImages = document.querySelectorAll('.zoomable-image');
 
-        // Add click event to all zoomable images
         zoomableImages.forEach(img => {
             img.addEventListener('click', function(e) {
                 e.preventDefault();
                 modal.classList.add('active');
                 modalImg.src = this.src;
                 modalImg.alt = this.alt;
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                document.body.style.overflow = 'hidden';
             });
         });
 
-        // Function to close modal
         function closeModal() {
             modal.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Restore scrolling
+            document.body.style.overflow = 'auto';
         }
 
-        // Close modal when clicking X
         closeBtn.addEventListener('click', closeModal);
 
-        // Close modal when clicking on the dark background
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 closeModal();
             }
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 closeModal();
             }
         });
 
-        /* ============================= */
-        /* SCROLL TO TOP */
-        /* ============================= */
+        /* Scroll to Top */
         const scrollBtn = document.getElementById('scrollToTop');
 
         window.addEventListener('scroll', () => {
@@ -547,17 +562,13 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        /* ============================= */
-        /* DARK / LIGHT MODE */
-        /* ============================= */
+        /* Dark/Light Mode */
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
 
         function setTheme(mode) {
             document.body.classList.toggle('dark-mode', mode === 'dark');
-            themeIcon.className = mode === 'dark'
-                ? 'fas fa-sun'
-                : 'fas fa-moon';
+            themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             localStorage.setItem('theme', mode);
         }
 
@@ -565,15 +576,11 @@
         setTheme(savedTheme);
 
         themeToggle.addEventListener('click', () => {
-            const newTheme = document.body.classList.contains('dark-mode')
-                ? 'light'
-                : 'dark';
+            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
             setTheme(newTheme);
         });
 
-        /* ============================= */
-        /* PUBLISH DATE + READING TIME */
-        /* ============================= */
+        /* Publish Date + Reading Time */
         const meta = document.querySelector('.article-meta');
         const published = new Date(meta.dataset.published);
 
@@ -588,10 +595,8 @@
         const words = articleText.trim().split(/\s+/).length;
         const minutes = Math.ceil(words / 225);
 
-        document.getElementById('readingTime').textContent =
-            `${minutes} min read`;
+        document.getElementById('readingTime').textContent = `${minutes} min read`;
     </script>
-
 
 </body>
 </html>

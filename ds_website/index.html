@@ -3,30 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chad Vo | Data Scientist & Analytics Professional</title>
+    <!-- Title and SEO meta tags will be injected by seo-injector.js -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="home">
 
-    <div class="container py-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <a href="#">
-                <img src="assets/img/logo.png" alt="Chad V Logo" class="site-logo">
-            </a>        
-            <nav class="top-nav">
-                <a href="#about" class="text-decoration-none text-dark ms-4">About</a>
-                <a href="#contact" class="text-decoration-none text-dark ms-4">Contact</a>
-            </nav>
+    <!-- Sticky Header -->
+    <header id="stickyHeader" class="sticky-header">
+        <div class="container py-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="#">
+                    <img src="assets/img/logo.png" alt="Chad Vo Data Scientist Logo" class="site-logo">
+                </a>   
+
+                <button id="themeToggle" class="theme-toggle ms-2" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <nav class="top-nav">
+                    <a href="#about" class="text-decoration-none text-dark ms-4">About</a>
+                    <a href="#contact" class="text-decoration-none text-dark ms-4">Contact</a>
+                </nav>
+            </div>
         </div>
-    </div>
+    </header>
 
     <section class="container text-center mt-4 mb-5">
-        <h1 class="display-3 fw-bold hero-name">Chad Vo</h1>
-        <div class="decorative-separator"></div>
-        <p class="lead text-muted hero-bio mx-auto">
+        <h1 class="display-4 fw-bold hero-name">Chad Vo</h1>
+        <div class="decorative-separator mx-auto"></div>
+        <p class="lead text-muted hero-bio mx-auto" style="max-width: 700px;">
             Hello! Glad to see you here. This is a collection of my personal projects made during free time.
         </p>
     </section>
@@ -34,44 +43,40 @@
     <div class="filter-bar-container mb-5">
         <div class="container">
             <div class="d-flex justify-content-center gap-5 filter-menu">
-                <a href="#" class="active">All Categories</a>
-                <a href="#">Data Visualization</a>
-                <a href="#">Data Science</a>
+                <a href="#" class="filter-btn active" data-filter="all">All Categories</a>
+                <a href="#" class="filter-btn" data-filter="visualization">Data Visualization</a>
+                <a href="#" class="filter-btn" data-filter="data-science">Data Science</a>
             </div>
         </div>
     </div>
 
-    <div class="container mb-5">
+    <section class="container mb-5">
         <div class="portfolio-grid">
-            
-            <a href="projects/flight_delay/index.html"
-                class="portfolio-item"
-                rel="noopener noreferrer">
-                    <img src="assets/img/flight_delay_thumb.jpg" alt="Flight Delay Predictions">
-                    <div class="overlay">
-                        <div class="text">
-                            <h5>Flight Delay Predictions</h5>
-                            <p>(Python • Machine Learning • Databricks • 2025)</p>
-                        </div>
+            <!-- Data Science Project -->
+            <a href="projects/flight_delay/index.html" class="portfolio-item" data-category="data-science" rel="noopener noreferrer">
+                <img src="assets/img/flight_delay_thumb.jpg" alt="Flight Delay Predictions">
+                <div class="overlay">
+                    <div class="text">
+                        <h5>Flight Delay Predictions</h5>
+                        <p>(Python • Machine Learning • Databricks • 2025)</p>
                     </div>
+                </div>
             </a>
 
-            <a href="projects/flight_route_visualization/index.html"
-                class="portfolio-item"
-                rel="noopener noreferrer">
-                    <img src="assets/img/drone_flight_thumbnail.png" alt="Drone Route Visualization">
-                    <div class="overlay">
-                        <div class="text">
-                            <h5>Drone Route Visualization</h5>
-                            <p>(Python • Geospatial Data • Folium • 2024)</p>
-                        </div>
+            <!-- Data Visualization Project -->
+            <a href="projects/flight_route_visualization/index.html" class="portfolio-item" data-category="visualization" rel="noopener noreferrer">
+                <img src="assets/img/drone_flight_thumbnail.png" alt="Drone Route Visualization">
+                <div class="overlay">
+                    <div class="text">
+                        <h5>Drone Route Visualization</h5>
+                        <p>(Python • Geospatial Data • Folium • 2024)</p>
                     </div>
+                </div>
             </a>
-
         </div>
-    </div>
+    </section>
 
-    <section class="bg-light-grey py-5" id="about">
+    <section class="bg-light-grey py-5 about-section" id="about">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-4 mb-4 mb-md-0">
@@ -79,12 +84,12 @@
                 </div>
                 
                 <div class="col-md-7 ps-md-3">
-                    <h2 class="fw-bold">About Me</h2>
+                    <h2 class="fw-bold about-title">About Me</h2>
                     <div class="decorative-separator-left"></div>
-                    <p class="text-muted lead">
+                    <p class="text-muted lead about-text">
                         I am a data scientist and generative artist. Previously I worked at [Your Company] and studied at [Your University].
                     </p>
-                    <p class="text-muted">
+                    <p class="text-muted about-text">
                         Besides data science and data storytelling, I also like contemporary art and traveling. 
                         Having lived in [City 1] and [City 2], I understand English and [Other Language].
                     </p>
@@ -93,7 +98,7 @@
         </div>
     </section>
 
-    <section class="bg-light-blue py-5 text-center" id="contact">
+    <section class="bg-light-blue py-5 text-center footer-section" id="contact">
         <div class="container">
             <h4 class="fw-bold mb-4">Let's Work Together!</h4>
             
@@ -102,14 +107,134 @@
                 <a href="https://github.com/chadpvo" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="mailto:chadpvo@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p class="text-muted small mb-0">
+            <p class="footer-text small mb-0">
                 &copy; Copyright <span id="year"></span> All rights reserved | Developed by Chad Vo
             </p>
         </div>
     </section>
 
+    <!-- Image Zoom Modal -->
+    <div id="imageModal" class="image-modal">
+        <span class="image-modal-close">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
+
+    <button id="scrollToTop" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- SEO Injection Scripts -->
+    <script src="js/page-config.js"></script>
+    <script src="js/seo-injector.js"></script>
+
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Image zoom functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.image-modal-close');
+        const zoomableImages = document.querySelectorAll('.zoomable-image');
+
+        zoomableImages.forEach(img => {
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.classList.add('active');
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+
+        // Scroll to Top
+        const scrollBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Dark / Light Mode
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        function setTheme(mode) {
+            document.body.classList.toggle('dark-mode', mode === 'dark');
+            themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', mode);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // Sticky Header on Scroll - Only float when header leaves viewport
+        const stickyHeader = document.getElementById('stickyHeader');
+        const headerHeight = stickyHeader.offsetHeight;
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Only add floating class when user has scrolled past the header height
+            if (scrollTop > headerHeight) {
+                stickyHeader.classList.add('floating');
+            } else {
+                stickyHeader.classList.remove('floating');
+            }
+        });
+
+        // Portfolio Filter System
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Update active state
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    
+                    if (filter === 'all' || category === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
     </script>
 
 </body>
