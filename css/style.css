@@ -310,6 +310,11 @@ body.dark-mode .sticky-header.floating {
     object-fit: cover;
     display: block;
     transition: transform 0.5s ease;
+    border: 1.25px dashed rgba(0, 0, 0, 0.2);
+}
+/* Dark Mode support for Portfolio-Item */
+body.dark-mode .portfolio-item img {
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .portfolio-item:hover img {
@@ -627,4 +632,102 @@ body.dark-mode .social-icons a:hover {
 
 .scroll-top-btn:hover {
     transform: translateY(-3px);
+}
+
+/* Filter Bar - Hannah Style */
+.filter-container {
+    width: 100%;
+    padding: 3rem 0;
+    margin: 3rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.filter-bar {
+    background-color: #4A90E2;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 1.5rem 14rem;
+    border-radius: 2px;
+    position: relative;
+}
+
+.filter-bar::before {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 66.67%; /* 2/3 of the bar width */
+    height: 100%;
+    background-color: rgba(74, 144, 226, 0.4);
+    border-radius: 0px;
+    z-index: -1;
+}
+
+.filter-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 450;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.filter-btn:hover {
+    opacity: 0.75;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    color: #fff;
+}
+
+.filter-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #fff;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+        left: 50%;
+    }
+    to {
+        width: 100%;
+        left: 0;
+    }
+}
+
+/* Dark mode support */
+body.dark-mode .filter-bar {
+    background-color: #2c3e50;
+    box-shadow: 0 6px 12px rgba(44, 62, 80, 0.5), 
+                0 12px 24px rgba(44, 62, 80, 0.4), 
+                0 20px 40px rgba(44, 62, 80, 0.3);
+}
+
+@media (max-width: 768px) {
+    .filter-bar {
+        gap: 1.5rem;
+        padding: 1.25rem 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+        font-size: 0.85rem;
+    }
 }
