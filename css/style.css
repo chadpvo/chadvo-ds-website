@@ -530,7 +530,7 @@ body.dark-mode .social-icons a:hover {
 .article-visual {
     max-width: 1000px;
     margin: 3rem auto;
-    padding: 2rem;
+    padding: 1rem 1rem 0rem 1rem;
     border: 1px dashed var(--color-border-muted);
     text-align: center;
     color: var(--color-text-muted);
@@ -543,7 +543,7 @@ body.dark-mode .social-icons a:hover {
 }
 
 .article-visual img:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 /* ===============================
@@ -731,3 +731,111 @@ body.dark-mode .filter-bar {
         font-size: 0.85rem;
     }
 }
+
+/* Tech Stack Carousel */
+.tech-stack-section {
+    width: 100%;
+    overflow: hidden;
+    padding: 3rem 0 2rem 0;
+    position: relative;
+}
+
+.tech-stack-section::before,
+.tech-stack-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.tech-stack-section::before {
+    left: 0;
+    background: linear-gradient(to right, #f8f9fa, transparent);
+}
+
+.tech-stack-section::after {
+    right: 0;
+    background: linear-gradient(to left, #f8f9fa, transparent);
+}
+
+/* Dark mode gradients */
+body.dark-mode .tech-stack-section::before {
+    background: linear-gradient(to right, #1a1a1a, transparent);
+}
+
+body.dark-mode .tech-stack-section::after {
+    background: linear-gradient(to left, #1a1a1a, transparent);
+}
+
+.tech-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.carousel-row {
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 4rem;
+    animation: scroll-left 30s linear infinite;
+}
+
+.carousel-row.reverse .carousel-track {
+    animation: scroll-right 30s linear infinite;
+}
+
+.carousel-track img {
+    height: 3rem;
+    width: auto;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    filter: grayscale(100%);
+}
+
+.carousel-track img:hover {
+    opacity: 1;
+}
+
+/* Dark mode */
+body.dark-mode .carousel-track img {
+    filter: grayscale(100%) invert(1);
+}
+
+/* Animations */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scroll-right {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .carousel-track img {
+        height: 2.5rem;
+    }
+    
+    .carousel-track {
+        gap: 3rem;
+    }
+}
+
