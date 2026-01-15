@@ -6,6 +6,7 @@
     <!-- Title and SEO meta tags will be injected by seo-injector.js -->
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Favicon -->
@@ -13,6 +14,257 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/chadvo-ds-website/assets/img/favicon.png">
 
     <link rel="stylesheet" href="../../css/style.css">
+
+    <style>
+        /* Class Imbalance Chart Styles */
+        .imbalance-chart-wrapper {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            max-width: 100%;
+        }
+        .chart-header { margin-bottom: 10px; }
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        .chart-subtitle {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+        }
+        .chart-legend {
+            display: flex;
+            gap: 24px;
+            margin: 30px 0;
+            font-size: 13px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+        .chart-inner {
+            position: relative;
+            padding-left: 60px;
+            padding-top: 40px;
+            padding-bottom: 60px;
+        }
+        .y-axis-container {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            bottom: 60px;
+            width: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .y-axis-line {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #ddd;
+        }
+        .y-axis-label {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+            font-size: 12px;
+            color: #666;
+            white-space: nowrap;
+        }
+        .y-ticks {
+            position: absolute;
+            right: 5px;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+        }
+        .y-ticks span {
+            position: absolute;
+            right: 0;
+            font-size: 11px;
+            color: #666;
+            text-align: right;
+        }
+        .chart-area {
+            position: relative;
+            height: 400px;
+        }
+        .grid-lines {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        .grid-lines div {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e8e8e8;
+        }
+        .x-axis-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            background: #ddd;
+        }
+        .bars-container {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            display: flex;
+            gap: 60px;
+        }
+        .bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100%;
+        }
+        .bars {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            height: 100%;
+        }
+        .bar {
+            width: 45%;
+            position: absolute;
+            bottom: 0;
+        }
+        .bar:first-child { left: 0; }
+        .bar:last-child { right: 0; }
+        .bar-class0 .bar-fill { background: #4a7ba7; }
+        .bar-class1 .bar-fill { background: #8fb3d1; }
+        .bar-fill {
+            width: 100%;
+            height: 100%;
+            transform-origin: bottom;
+            transform: scaleY(0);
+            transition: transform 1.5s ease-out;
+        }
+        .bar-label {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a1a1a;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        .dataset-label {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            color: #1a1a1a;
+            text-align: center;
+            white-space: nowrap;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(1) .bar:nth-child(1) .bar-fill {
+            transform: scaleY(1);
+            transition-delay: 0s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(1) .bar:nth-child(2) .bar-fill {
+            transform: scaleY(1);
+            transition-delay: 0.1s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(2) .bar:nth-child(1) .bar-fill {
+            transform: scaleY(1);
+            transition-delay: 0.2s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(2) .bar:nth-child(2) .bar-fill {
+            transform: scaleY(1);
+            transition-delay: 0.3s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(3) .bar:nth-child(1) .bar-fill {
+            transform: scaleY(1);
+            transition-delay: 0.4s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(3) .bar:nth-child(2) .bar-fill {
+            transform: scaleY(1);
+            transition-delay: 0.5s;
+        }
+
+        /* Animate labels with delays matching bars */
+        #classImbalanceChart.animate .bar-group:nth-child(1) .bar:nth-child(1) .bar-label {
+            opacity: 1;
+            transition-delay: 0.9s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(1) .bar:nth-child(2) .bar-label {
+            opacity: 1;
+            transition-delay: 1.1s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(2) .bar:nth-child(1) .bar-label {
+            opacity: 1;
+            transition-delay: 1.3s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(2) .bar:nth-child(2) .bar-label {
+            opacity: 1;
+            transition-delay: 1.5s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(3) .bar:nth-child(1) .bar-label {
+            opacity: 1;
+            transition-delay: 1.7s;
+        }
+        #classImbalanceChart.animate .bar-group:nth-child(3) .bar:nth-child(2) .bar-label {
+            opacity: 1;
+            transition-delay: 1.9s;
+        }
+        #classImbalanceChart.animate .bar-label { opacity: 1; }
+        .dark-mode .imbalance-chart-wrapper { background: #1a1a1a; }
+        .dark-mode .chart-title,
+        .dark-mode .bar-label,
+        .dark-mode .dataset-label { color: #e8e8e8; }
+        .dark-mode .chart-subtitle,
+        .dark-mode .y-axis-label,
+        .dark-mode .y-ticks span { color: #999; }
+        
+        .chart-inner {
+            position: relative;
+            padding-left: 0px;  /* Changed from 80px */
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .y-axis-container {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            bottom: 60px;
+            width: 20px;  /* Changed from 80px */
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
 <body data-page="flight_delay">
 
@@ -42,7 +294,7 @@
             Amy Steward, Chad Vo, Kristen Lin, Priscilla Siow, Uma Rao Krishnan
         </p>
         <p class="article-meta text-muted mb-3"
-            data-published="2024-11-15">
+            data-published="2026-1-12">
             <span id="publishDate"></span> •
             <span id="readingTime"></span>
         </p>
@@ -51,16 +303,16 @@
             <strong>Tech Stack:</strong> Apache Spark 3.x • Databricks • PySpark MLlib • XGBoost • PyTorch (FT-Transformer) • NetworkX • NVIDIA T4 GPU
         </p>
         <div class="d-flex justify-content-center gap-4 mb-4 project-actions">
-            <a href="https://github.com/aestew/flight_delay_predictions/tree/main" target="_blank" rel="noopener noreferrer" title="Project Repository">
+            <a href="https://github.com/chadpvo/ML-flight-delay-prediction" target="_blank" rel="noopener noreferrer" title="Project Repository">
                 <i class="fab fa-github"></i>
             </a>
-            <a href="path/to/report.ipynb" download title="Download Jupyter Notebook">
+            <a href="assets/final_report.ipynb" download title="Download Jupyter Notebook">
                 <i class="fas fa-file-code"></i>
             </a>
         </div>
         <div class="decorative-separator mx-auto"></div>
         <p class="lead text-muted mx-auto" style="max-width: 700px;">
-            <strong>Project Scope:</strong> How we engineered a distributed ML pipeline to predict flight delays at scale—from 1.7M to 30M rows using weather data, operational features, and graph-based network analysis.
+            <strong>Summary:</strong> How we engineered a distributed ML pipeline to predict flight delays at scale—from 1.7M to 30M rows using weather data, operational features, and graph-based network analysis.
         </p>
     </section>
 
@@ -69,7 +321,7 @@
 
             <header>
                 <p class="lead">
-                    <strong>TL;DR:</strong> We built a machine learning pipeline to predict flight delays using 30 million flight records and 132 million weather observations. The core challenge wasn't picking the right model—it was engineering a distributed data pipeline that could join massive spatiotemporal datasets without exploding. Our custom join strategy achieved 99.99% match rates while reducing missing values by 10x. The Feature Tokenizer Transformer won with the best generalization (Recall: 0.59, F2: 0.53), but the real victory was proving that data engineering matters more than hyperparameter tuning.
+                    <strong>TL;DR:</strong> We built a machine learning pipeline to predict flight delays using 30 million flight records and 132 million weather observations. The core challenge wasn't picking the right model—it was engineering a distributed data pipeline that could join massive spatiotemporal datasets without exploding. Our custom join strategy achieved 99.99% match rates while reducing missing values by 10x. The Feature Tokenizer Transformer won with the best generalization (Recall: 0.59, F2: 0.53), but the real victory was proving that data engineering matters as much as hyperparameter tuning.
                 </p>
             </header>
 
@@ -78,39 +330,130 @@
                 <p class="mt-3"><em>Predicting delays across 30M+ flights in the US aviation network</em></p>
             </div>
 
-            <h2>The Problem: $33 Billion in Annual Delays</h2>
+            <h2>The "$33 Billion Delays" Problem</h2>
 
             <p>
-                Flight delays cost the US economy billions annually. Airlines need to predict delays before they happen—ideally one hour before scheduled departure—to optimize operations, reduce compensation costs, and improve passenger satisfaction.
+                Flight delays cost the US economy billions annually. Airlines need to predict delays before they happen—ideally two hour before scheduled departure—to optimize operations, reduce compensation costs, and improve passenger satisfaction.
             </p>
 
             <p>
-                The challenge? Building a prediction system that works at the scale of the entire US aviation network.
+                The challenge? Building a prediction system that works at the scale of the entire US aviation network. But easier said than done right?
             </p>
 
-            <h2>The Data Challenge</h2>
+            <h2>Big Data Challenge</h2>
 
             <p>
-                We started with two massive, incompatible datasets spanning 2015-2019:
+                We started with two massive, incompatible datasets spanning 2015-2019 (we chose pre-pandemic data to avoid COVID-19 disruptions).
             </p>
-
-            <ul>
-                <li><strong>74M flight records</strong> from the US DOT (schedules, delays, cancellations)</li>
-                <li><strong>132M hourly weather observations</strong> from NOAA (temperature, precipitation, wind, visibility)</li>
-            </ul>
-
             <p>
                 The problem? These datasets don't naturally join. Flight times are in local timezones. Weather data is in UTC. Airports aren't always co-located with weather stations. A naive Cartesian join would create trillions of comparisons.
+            <br><br>
+                Below is a summary of our data sources, sizes, and quality issues.
             </p>
 
-            <p>
-                <strong>This is a Big Data problem.</strong>
-            </p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Source</th>
+                        <th style="width: 25%;">Dimensions & Size</th>
+                        <th style="width: 25%;">Brief Description</th>
+                        <th style="width: 30%;">Data Quality & Analysis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Flight Info</strong><br>
+                            <span class="text-muted">Source: <a href="https://www.transtats.bts.gov/homepage.asp" target="_blank">US DOT</a></span>
+                        </td>
+                        <td>
+                            <strong>Rows x Cols:</strong><br>
+                            2.8M x 109 (3M)<br>
+                            5.7M x 109 (6M)<br>
+                            14.8M x 109 (1Y)<br>
+                            74.1M x 109 (2015-2021)<br>
+                            <br>
+                            <strong>Size:</strong><br>
+                            0.01 GB - 2.80 GB
+                        </td>
+                        <td>Primary Dataset for Analysis. Includes scheduled/actual flight times, delay reasons, airlines, and origin/destination airports.</td>
+                        <td>
+                            <strong>Missing:</strong> Significant blank data for diversions, Delay/Cancelled Codes, and Ground times.<br>
+                            <strong>Duplicates:</strong> All rows duplicated and removed.<br>
+                            <strong>Note:</strong> Diversion/Cancellation columns were dropped as they are irrelevant to our scope.
+                        </td>
+                    </tr>
 
-            <h2>Engineering Strategy: Custom Spatiotemporal Joins</h2>
+                    <tr>
+                        <td>
+                            <strong>Weather</strong><br>
+                            <span class="text-muted">Source: <a href="https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00679" target="_blank">NOAA</a></span>
+                        </td>
+                        <td>
+                            <strong>Rows x Cols:</strong><br>
+                            30.5M x 124 (3M)<br>
+                            61.2M x 124 (6M)<br>
+                            74.1M x 124 (1Y)<br>
+                            131.9M x 124 (2015-2021)<br>
+                            <br>
+                            <strong>Size:</strong><br>
+                            1.11 GB - 4.84 GB
+                        </td>
+                        <td>Hourly weather conditions, including temperature, precipitation, wind speed, etc.</td>
+                        <td>
+                            <strong>Missing:</strong> >99% nulls for Monthly/Daily accumulation & backup columns.<br>
+                            <strong>Duplicates:</strong> None.<br>
+                            <strong>Note:</strong> Columns for accumulations and backups were removed due to lack of usable data.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong>Stations Data</strong><br>
+                            <span class="text-muted">Source: US DOT</span>
+                        </td>
+                        <td>
+                            <strong>Rows x Cols:</strong><br>
+                            2,004,169 x 12<br>
+                            <br>
+                            <strong>Size:</strong><br>
+                            52.08 MB
+                        </td>
+                        <td>Reference table containing metadata for weather stations, including location and distance to airports.</td>
+                        <td>
+                            <strong>Missing:</strong> 0% nulls.<br>
+                            <strong>Duplicates:</strong> None.<br>
+                            <strong>Note:</strong> Complete metadata table.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong>Airport Codes</strong><br>
+                            <span class="text-muted">Source: <a href="https://datahub.io/core/airport-codes" target="_blank">Datahub.io</a></span>
+                        </td>
+                        <td>
+                            <strong>Rows x Cols:</strong><br>
+                            82,780 x 13<br>
+                            <br>
+                            <strong>Size:</strong><br>
+                            8.18 MB
+                        </td>
+                        <td>Reference table containing standardized IATA/ICAO codes and airport metadata (coordinates, etc.).</td>
+                        <td>
+                            <strong>Missing:</strong> icao_code (90%), iata_code (89%).<br>
+                            <strong>Duplicates:</strong> None.<br>
+                            <strong>Note:</strong> 100% of target flights map successfully. Missing codes are mostly helipads/small ports.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <h2>Data Engineering Strategy: Custom Spatiotemporal Joins</h2>
 
             <p>
-                We couldn't just merge these tables—we had to engineer a custom join strategy that respects both space and time.
+                Since we couldn't just merge these tables, we had to creatively engineer a custom join strategy that respects both space and time.
             </p>
 
             <h3>1. Geographic Matching: Finding the Right Weather Station</h3>
@@ -125,7 +468,7 @@
                 Second challenge: match weather readings to flights. We needed weather conditions from exactly 1 hour before scheduled departure, but weather stations report at irregular intervals.
             </p>
 
-            <p>Our solution:</p>
+            <p><strong>Our solution:</strong></p>
 
             <ul>
                 <li>Convert all flight times from local to UTC (handling daylight savings)</li>
@@ -135,13 +478,13 @@
             </ul>
 
             <p>
-                This approach achieved a <strong>99.99% match rate</strong> for short timeframes and 75% for the full 5-year dataset—while dramatically reducing data shuffling across the Spark cluster.
+                This approach led us to a <strong>99.99% match rate</strong> for short timeframes and 75% for the full 5-year dataset while dramatically reducing data shuffling across the Spark cluster.
             </p>
 
-            <h2>The Unexpected Win: Data Quality Repair</h2>
+            <h3>The Unexpected Win: Data Quality Repair</h3>
 
             <p>
-                Our custom join didn't just match records—it <em>fixed</em> the data.
+                Our custom join didn't just match records—it <em>fixed</em> the data (at least most of them). The right join strategy improved data quality by an order of magnitude.
             </p>
 
             <p>
@@ -155,14 +498,10 @@
                 <li>Wind Speed: 25.4% → 3.5% missing</li>
             </ul>
 
-            <p>
-                The right join strategy improved data quality by an order of magnitude.
-            </p>
-
             <h2>Feature Engineering at Scale</h2>
 
             <p>
-                Raw weather codes and flight data aren't ready for ML models. We engineered features across four critical dimensions:
+                Looking at the raw weather data table initially, we concluded that raw weather codes and flight data aren't ready for ML models. Therefore, we engineered features across four critical dimensions:
             </p>
 
             <p>
@@ -181,28 +520,31 @@
                 <strong>Cyclic Time Encodings:</strong> We used sine/cosine transformations for month and day-of-week to capture cyclical patterns—December is close to January, not infinitely far.
             </p>
 
-            <h2>The Data Leakage Problem</h2>
+            <h2>Addressing The Data Leakage Problem</h2>
 
             <p>
-                Building a time-series prediction model requires extreme care to avoid leakage. We removed 20+ features that would only be known after departure:
+                Building a time-series prediction model requires extreme care to avoid leakage. After performing extensive exploratory analysis, we removed 20+ features that would only be known after departure (e.g., actual taxi-out time, airborne time, delay reason codes).
             </p>
-
-            <ul>
-                <li>Actual departure time</li>
-                <li>Taxi-out duration</li>
-                <li>Airborne time</li>
-                <li>All delay reason codes (weather delay, NAS delay, etc.)</li>
-            </ul>
 
             <p>
                 We also implemented <strong>time-aware cross-validation</strong> using rolling windows—training always on past data, validating on strictly future data. No temporal leakage allowed.
             </p>
 
-            <h2>Handling Class Imbalance: The Downsampling Pivot</h2>
+            <div class="article-visual">
+                <img src="assets/windows_strategy.png" alt="Time-Series Cross-Validation Windows" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
+                <p class="mt-3"><em>Rolling window validation ensures temporal integrity—training always on past, validating on future</em></p>
+            </div>
+
+            <h2>Handling Class Imbalance At Scale: The Downsampling Dilemma</h2>
 
             <p>
-                Only ~18-22% of flights are delayed. This creates a severe class imbalance problem.
+                The distribution of delayed vs. non-delayed flights remained remarkably consistent across all timeframes, with delays hovering around 18-22% regardless of dataset size.
             </p>
+
+            <div class="article-visual">
+                <div id="classImbalanceChart" class="chart-container"></div>
+                <p class="mt-3"><em>Class distribution remains stable across 3-month, 1-year, and 5-year datasets</em></p>
+            </div>
 
             <p>
                 We initially tried SMOTE and upsampling, but both were computationally infeasible at scale. Instead, we downsampled the majority class to achieve 50:50 balance, accepting information loss in exchange for computational feasibility and faster training.
@@ -211,7 +553,7 @@
             <p>
                 <strong>Key insight:</strong> At 30M rows, sometimes the pragmatic solution beats the theoretical ideal.
             </p>
-
+            
             <h2>The Pipeline: 7-Stage Checkpointing Strategy</h2>
 
             <p>
@@ -279,11 +621,6 @@
             <p>
                 This decision exemplifies a core principle in production ML: <strong>pragmatic solutions that work at scale beat theoretically optimal solutions that never finish running</strong>.
             </p>
-
-            <div class="article-visual">
-                <img src="assets/windows_strategy.png" alt="Time-Series Cross-Validation Windows" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
-                <p class="mt-3"><em>Rolling window validation ensures temporal integrity—training always on past, validating on future</em></p>
-            </div>
 
             <h2>Model Comparison: Data Engineering Beats Hyperparameter Tuning</h2>
 
@@ -464,10 +801,10 @@
                 <strong>Full code and technical details</strong>
             </p>
             <div class="d-flex justify-content-center gap-4 mt-3 project-actions">
-                <a href="https://github.com/aestew/flight_delay_predictions" target="_blank" rel="noopener noreferrer" title="Project Repository">
+                <a href="https://github.com/chadpvo/ML-flight-delay-prediction" target="_blank" rel="noopener noreferrer" title="Project Repository">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="path/to/report.ipynb" download title="Download Jupyter Notebook">
+                <a href="assets/final_report.ipynb" download title="Download Jupyter Notebook">
                     <i class="fas fa-file-code"></i>
                 </a>
             </div>
@@ -606,6 +943,88 @@
         const minutes = Math.ceil(words / 225);
 
         document.getElementById('readingTime').textContent = `${minutes} min read`;
+
+        // Class Imbalance Chart with Scroll Animation
+        function createClassImbalanceChart() {
+            const chartHTML = `
+                <div class="imbalance-chart-wrapper">
+                    <div class="chart-header">
+                        <div class="chart-title">Class Imbalance Distribution Across Datasets</div>
+                        <p class="chart-subtitle">Class labels calculated using ARR_DEL15</p>
+                    </div>
+
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #4a7ba7;"></div>
+                            <span>Class 0 (Non-Delayed)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #8fb3d1;"></div>
+                            <span>Class 1 (Delayed)</span>
+                        </div>
+                    </div>
+
+                    <div class="chart-inner">
+                        <div class="chart-area">
+                            <div class="grid-lines">
+                                <div style="top: 0;"></div>
+                                <div style="top: 25%;"></div>
+                                <div style="top: 50%;"></div>
+                                <div style="top: 75%;"></div>
+                            </div>
+                            <div class="x-axis-line"></div>
+                            
+                            <div id="chartBars" class="bars-container">
+                                ${createBarGroup('78.9', '21.1', '3-Month')}
+                                ${createBarGroup('80.9', '19.1', '1-Year')}
+                                ${createBarGroup('81.4', '18.6', '5-Year (2015-2019)')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('classImbalanceChart').innerHTML = chartHTML;
+            initScrollAnimation();
+        }
+
+        function createBarGroup(class0Pct, class1Pct, label) {
+            return `
+                <div class="bar-group">
+                    <div class="bars">
+                        <div class="bar bar-class0" style="height: ${class0Pct}%;">
+                            <div class="bar-fill"></div>
+                            <div class="bar-label">${class0Pct}%</div>
+                        </div>
+                        <div class="bar bar-class1" style="height: ${class1Pct}%;">
+                            <div class="bar-fill"></div>
+                            <div class="bar-label">${class1Pct}%</div>
+                        </div>
+                    </div>
+                    <div class="dataset-label">${label}</div>
+                </div>
+            `;
+        }
+
+        function initScrollAnimation() {
+            const chart = document.getElementById('classImbalanceChart');
+            if (!chart) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        chart.classList.add('animate');
+                    } else {
+                        chart.classList.remove('animate');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(chart);
+        }
+
+        // Initialize chart when page loads
+        window.addEventListener('DOMContentLoaded', createClassImbalanceChart);
     </script>
 
 </body>
