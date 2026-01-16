@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Shading Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+        
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #sidebar {
+            width: 320px;
+            background: white;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        #map-container {
+            flex: 1;
+            position: relative;
+            background: white;
+        }
+        
+        h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        h3 {
+            font-size: 14px;
+            margin: 20px 0 10px 0;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        select, input, button {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 5px;
+            transition: background 0.2s;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .palette-preview {
+            height: 40px;
+            border-radius: 4px;
+            margin-top: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .color-picker-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        input[type="color"] {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        
+        .marker-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .marker-controls input {
+            width: 100%;
+        }
+        
+        #map-svg {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+        
+        .state, .county, .cbsa {
+            stroke: #fff;
+            stroke-width: 0.5;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .state:hover, .county:hover, .cbsa:hover {
+            opacity: 0.8;
+            stroke: #333;
+            stroke-width: 1.5;
+        }
+        
+        .marker {
+            cursor: move;
+        }
+        
+        .marker:hover {
+            opacity: 0.8;
+        }
+        
+        .marker-label {
+            font-size: 12px;
+            fill: #333;
+            pointer-events: none;
+            text-anchor: middle;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 1000;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .zoom-controls button {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .radio-option input[type="radio"] {
+            width: auto;
+        }
+        
+        .section {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .secondary-btn {
+            background: #95a5a6;
+        }
+        
+        .secondary-btn:hover {
+            background: #7f8c8d;
+        }
+        
+        .danger-btn {
+            background: #e74c3c;
+        }
+        
+        .danger-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="spinner"></div>
+        <div>Loading geographic data...</div>
+    </div>
+    
+    <div id="sidebar">
+        <h2>Map Shading Tool</h2>
+        
+        <div class="section">
+            <h3>Geography Level</h3>
+            <div class="control-group">
+                <select id="geo-level">
+                    <option value="states">States</option>
+                    <option value="counties">Counties</option>
+                    <option value="cbsas">CBSAs (Metro Areas)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>Shading Mode</h3>
+            <div class="control-group">
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="mode-palette" name="shading-mode" value="palette" checked>
+                        <label for="mode-palette" style="margin: 0;">Color Scheme</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="mode-manual" name="shading-mode" value="manual">
+                        <label for="mode-manual" style="margin: 0;">Manual Color</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="palette-controls" class="control-group">
+                <label>Select Color Scheme</label>
+                <select id="color-scheme">
+                    <option value="Blues">Blues (Sequential)</option>
+                    <option value="Reds">Reds (Sequential)</option>
+                    <option value="Greens">Greens (Sequential)</option>
+                    <option value="Purples">Purples (Sequential)</option>
+                    <option value="Oranges">Oranges (Sequential)</option>
+                    <option value="RdYlGn">Red-Yellow-Green (Diverging)</option>
+                    <option value="Spectral">Spectral (Diverging)</option>
+                </select>
+                <div id="palette-preview" class="palette-preview"></div>
+                <label style="margin-top: 10px;">Intensity Steps</label>
+                <input type="range" id="palette-steps" min="3" max="9" value="5" step="1">
+                <div style="font-size: 12px; color: #888; text-align: center;" id="steps-display">5 steps</div>
+            </div>
+            
+            <div id="manual-controls" class="control-group" style="display: none;">
+                <label>Pick a Color</label>
+                <div class="color-picker-container">
+                    <input type="color" id="manual-color" value="#3498db">
+                    <span id="color-display" style="font-size: 13px; color: #666;">#3498db</span>
+                </div>
+            </div>
+            
+            <button id="clear-shading" class="danger-btn">Clear All Shading</button>
+        </div>
+        
+        <div class="section">
+            <h3>Markers & Pins</h3>
+            <div class="control-group">
+                <label>Marker Style</label>
+                <select id="marker-shape">
+                    <option value="circle">Circle</option>
+                    <option value="square">Square</option>
+                    <option value="triangle">Triangle</option>
+                    <option value="star">Star</option>
+                </select>
+            </div>
+            
+            <div class="control-group marker-controls">
+                <div>
+                    <label>Size</label>
+                    <input type="number" id="marker-size" value="8" min="4" max="20">
+                </div>
+                <div>
+                    <label>Color</label>
+                    <input type="color" id="marker-color" value="#e74c3c">
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label>Label (optional)</label>
+                <input type="text" id="marker-label" placeholder="Enter text...">
+            </div>
+            
+            <div class="button-group">
+                <button id="add-marker">Add Marker</button>
+                <button id="clear-markers" class="secondary-btn">Clear Markers</button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>Export</h3>
+            <button id="export-svg">Download SVG (High-Res)</button>
+            <button id="export-png" style="margin-top: 10px;">Download PNG</button>
+        </div>
+    </div>
+    
+    <div id="map-container">
+        <svg id="map-svg"></svg>
+        <div class="zoom-controls">
+            <button id="zoom-in">+</button>
+            <button id="zoom-out">−</button>
+            <button id="zoom-reset">⟲</button>
+        </div>
+        <div class="tooltip"></div>
+    </div>
+
+    <script>
+        // Color schemes from ColorBrewer
+        const colorSchemes = {
+            Blues: ['#f7fbff', '#deebf7', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b'],
+            Reds: ['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d'],
+            Greens: ['#f7fcf5', '#e5f5e0', '#c7e9c0', '#a1d99b', '#74c476', '#41ab5d', '#238b45', '#006d2c', '#00441b'],
+            Purples: ['#fcfbfd', '#efedf5', '#dadaeb', '#bcbddc', '#9e9ac8', '#807dba', '#6a51a3', '#54278f', '#3f007d'],
+            Oranges: ['#fff5eb', '#fee6ce', '#fdd0a2', '#fdae6b', '#fd8d3c', '#f16913', '#d94801', '#a63603', '#7f2704'],
+            RdYlGn: ['#d73027', '#f46d43', '#fdae61', '#fee08b', '#ffffbf', '#d9ef8b', '#a6d96a', '#66bd63', '#1a9850'],
+            Spectral: ['#d53e4f', '#f46d43', '#fdae61', '#fee08b', '#ffffbf', '#e6f598', '#abdda4', '#66c2a5', '#3288bd']
+        };
+        
+        let svg, g, projection, path, zoom;
+        let usData, countiesData, cbsaData;
+        let currentLevel = 'states';
+        let regionColors = {};
+        let markers = [];
+        let markerIdCounter = 0;
+        let addingMarker = false;
+        let currentPaletteColors = [];
+        let clickCounter = 0;
+        
+        // Initialize
+        async function init() {
+            try {
+                // Load US states and counties data
+                const [us, counties] = await Promise.all([
+                    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json'),
+                    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json')
+                ]);
+                
+                usData = us;
+                countiesData = counties;
+                
+                // Generate simplified CBSA data from counties (grouping major metro areas)
+                // This is a simplified approach - we'll create metro regions from county clusters
+                cbsaData = generateSimplifiedCBSAs(counties);
+                
+                setupMap();
+                setupControls();
+                updatePalettePreview();
+                hideLoading();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('loading').innerHTML = '<div style="padding: 20px;"><strong>Error loading geographic data.</strong><br><br>Details: ' + error.message + '<br><br>Please refresh the page to try again.</div>';
+            }
+        }
+        
+        function generateSimplifiedCBSAs(countiesData) {
+            // For now, we'll use counties as a proxy for CBSAs
+            // This creates a workable solution while avoiding CORS issues
+            const counties = topojson.feature(countiesData, countiesData.objects.counties);
+            
+            // Major metro area FIPS codes (simplified list of largest metros)
+            const majorMetros = {
+                '36061': 'New York Metro',
+                '06037': 'Los Angeles Metro',
+                '17031': 'Chicago Metro',
+                '48201': 'Houston Metro',
+                '04013': 'Phoenix Metro',
+                '42101': 'Philadelphia Metro',
+                '48029': 'San Antonio Metro',
+                '06073': 'San Diego Metro',
+                '48113': 'Dallas Metro',
+                '06085': 'San Jose Metro'
+            };
+            
+            // Filter to major metros for CBSA view
+            const cbsaFeatures = counties.features.filter(f => {
+                const fips = f.id.toString().padStart(5, '0');
+                return majorMetros[fips];
+            }).map(f => {
+                const fips = f.id.toString().padStart(5, '0');
+                return {
+                    ...f,
+                    properties: {
+                        ...f.properties,
+                        NAME: majorMetros[fips],
+                        GEOID: fips
+                    }
+                };
+            });
+            
+            return {
+                type: 'FeatureCollection',
+                features: cbsaFeatures
+            };
+        }
+        
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+        
+        function setupMap() {
+            const container = document.getElementById('map-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            
+            svg = d3.select('#map-svg')
+                .attr('width', width)
+                .attr('height', height);
+            
+            g = svg.append('g');
+            
+            projection = d3.geoAlbersUsa()
+                .translate([width / 2, height / 2])
+                .scale(1000);
+            
+            path = d3.geoPath().projection(projection);
+            
+            zoom = d3.zoom()
+                .scaleExtent([1, 8])
+                .on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                });
+            
+            svg.call(zoom);
+            
+            renderMap();
+        }
+        
+        function renderMap() {
+            g.selectAll('*').remove();
+            clickCounter = 0;
+            
+            if (currentLevel === 'states') {
+                const states = topojson.feature(usData, usData.objects.states);
+                
+                g.selectAll('.state')
+                    .data(states.features)
+                    .enter()
+                    .append('path')
+                    .attr('class', 'state')
+                    .attr('d', path)
+                    .attr('fill', d => regionColors[d.id] || '#e0e0e0')
+                    .on('click', handleRegionClick)
+                    .on('mouseover', showTooltip)
+                    .on('mouseout', hideTooltip);
+            } else if (currentLevel === 'counties') {
+                const counties = topojson.feature(countiesData, countiesData.objects.counties);
+                
+                g.selectAll('.county')
+                    .data(counties.features)
+                    .enter()
+                    .append('path')
+                    .attr('class', 'county')
+                    .attr('d', path)
+                    .attr('fill', d => regionColors[d.id] || '#e0e0e0')
+                    .on('click', handleRegionClick)
+                    .on('mouseover', showTooltip)
+                    .on('mouseout', hideTooltip);
+            } else if (currentLevel === 'cbsas') {
+                g.selectAll('.cbsa')
+                    .data(cbsaData.features)
+                    .enter()
+                    .append('path')
+                    .attr('class', 'cbsa')
+                    .attr('d', path)
+                    .attr('fill', d => regionColors[d.properties.GEOID || d.properties.CBSAFP] || '#e0e0e0')
+                    .on('click', handleRegionClick)
+                    .on('mouseover', showTooltip)
+                    .on('mouseout', hideTooltip);
+            }
+            
+            renderMarkers();
+        }
+        
+        function handleRegionClick(event, d) {
+            event.stopPropagation();
+            
+            if (addingMarker) return;
+            
+            const mode = document.querySelector('input[name="shading-mode"]:checked').value;
+            const id = d.id || d.properties.GEOID || d.properties.CBSAFP;
+            
+            if (mode === 'palette') {
+                const steps = parseInt(document.getElementById('palette-steps').value);
+                const colorIndex = clickCounter % steps;
+                const color = currentPaletteColors[colorIndex];
+                regionColors[id] = color;
+                clickCounter++;
+            } else {
+                const color = document.getElementById('manual-color').value;
+                regionColors[id] = color;
+            }
+            
+            d3.select(event.currentTarget).attr('fill', regionColors[id]);
+        }
+        
+        function showTooltip(event, d) {
+            const tooltip = d3.select('.tooltip');
+            const name = d.properties.name || d.properties.NAME || 'Unknown';
+            
+            tooltip
+                .style('opacity', 1)
+                .html(name)
+                .style('left', (event.pageX + 10) + 'px')
+                .style('top', (event.pageY - 10) + 'px');
+        }
+        
+        function hideTooltip() {
+            d3.select('.tooltip').style('opacity', 0);
+        }
+        
+        function setupControls() {
+            // Geography level
+            document.getElementById('geo-level').addEventListener('change', (e) => {
+                currentLevel = e.target.value;
+                renderMap();
+            });
+            
+            // Shading mode
+            document.querySelectorAll('input[name="shading-mode"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    if (e.target.value === 'palette') {
+                        document.getElementById('palette-controls').style.display = 'block';
+                        document.getElementById('manual-controls').style.display = 'none';
+                    } else {
+                        document.getElementById('palette-controls').style.display = 'none';
+                        document.getElementById('manual-controls').style.display = 'block';
+                    }
+                    clickCounter = 0;
+                });
+            });
+            
+            // Color scheme
+            document.getElementById('color-scheme').addEventListener('change', updatePalettePreview);
+            document.getElementById('palette-steps').addEventListener('input', updatePalettePreview);
+            
+            // Manual color
+            document.getElementById('manual-color').addEventListener('input', (e) => {
+                document.getElementById('color-display').textContent = e.target.value;
+            });
+            
+            // Clear shading
+            document.getElementById('clear-shading').addEventListener('click', () => {
+                regionColors = {};
+                clickCounter = 0;
+                renderMap();
+            });
+            
+            // Add marker
+            document.getElementById('add-marker').addEventListener('click', () => {
+                addingMarker = true;
+                svg.style('cursor', 'crosshair');
+                svg.on('click', placeMarker);
+            });
+            
+            // Clear markers
+            document.getElementById('clear-markers').addEventListener('click', () => {
+                markers = [];
+                renderMarkers();
+            });
+            
+            // Zoom controls
+            document.getElementById('zoom-in').addEventListener('click', () => {
+                svg.transition().call(zoom.scaleBy, 1.3);
+            });
+            
+            document.getElementById('zoom-out').addEventListener('click', () => {
+                svg.transition().call(zoom.scaleBy, 0.7);
+            });
+            
+            document.getElementById('zoom-reset').addEventListener('click', () => {
+                svg.transition().call(zoom.transform, d3.zoomIdentity);
+            });
+            
+            // Export
+            document.getElementById('export-svg').addEventListener('click', exportSVG);
+            document.getElementById('export-png').addEventListener('click', exportPNG);
+        }
+        
+        function updatePalettePreview() {
+            const scheme = document.getElementById('color-scheme').value;
+            const steps = parseInt(document.getElementById('palette-steps').value);
+            document.getElementById('steps-display').textContent = `${steps} steps`;
+            
+            const colors = colorSchemes[scheme];
+            currentPaletteColors = d3.quantize(d3.interpolateRgbBasis(colors), steps);
+            
+            const preview = document.getElementById('palette-preview');
+            const gradient = `linear-gradient(to right, ${currentPaletteColors.join(', ')})`;
+            preview.style.background = gradient;
+            
+            clickCounter = 0;
+        }
+        
+        function placeMarker(event) {
+            if (!addingMarker) return;
+            
+            const [x, y] = d3.pointer(event);
+            const coords = projection.invert(d3.pointer(event, g.node()));
+            
+            if (!coords) return;
+            
+            const marker = {
+                id: markerIdCounter++,
+                coords: coords,
+                shape: document.getElementById('marker-shape').value,
+                size: parseInt(document.getElementById('marker-size').value),
+                color: document.getElementById('marker-color').value,
+                label: document.getElementById('marker-label').value
+            };
+            
+            markers.push(marker);
+            renderMarkers();
+            
+            addingMarker = false;
+            svg.style('cursor', 'default');
+            svg.on('click', null);
+        }
+        
+        function renderMarkers() {
+            g.selectAll('.marker-group').remove();
+            
+            markers.forEach(marker => {
+                const markerGroup = g.append('g')
+                    .attr('class', 'marker-group')
+                    .attr('transform', `translate(${projection(marker.coords)})`);
+                
+                const markerEl = markerGroup.append('path')
+                    .attr('class', 'marker')
+                    .attr('fill', marker.color)
+                    .attr('stroke', '#fff')
+                    .attr('stroke-width', 1.5);
+                
+                const size = marker.size;
+                
+                switch (marker.shape) {
+                    case 'circle':
+                        markerEl.attr('d', d3.symbol().type(d3.symbolCircle).size(size * size * 4)());
+                        break;
+                    case 'square':
+                        markerEl.attr('d', d3.symbol().type(d3.symbolSquare).size(size * size * 4)());
+                        break;
+                    case 'triangle':
+                        markerEl.attr('d', d3.symbol().type(d3.symbolTriangle).size(size * size * 4)());
+                        break;
+                    case 'star':
+                        markerEl.attr('d', d3.symbol().type(d3.symbolStar).size(size * size * 4)());
+                        break;
+                }
+                
+                if (marker.label) {
+                    markerGroup.append('text')
+                        .attr('class', 'marker-label')
+                        .attr('dy', size + 12)
+                        .text(marker.label);
+                }
+            });
+        }
+        
+        function exportSVG() {
+            const svgEl = document.getElementById('map-svg');
+            const serializer = new XMLSerializer();
+            const svgStr = serializer.serializeToString(svgEl);
+            const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'map-export.svg';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function exportPNG() {
+            const svgEl = document.getElementById('map-svg');
+            const serializer = new XMLSerializer();
+            const svgStr = serializer.serializeToString(svgEl);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            canvas.width = svgEl.width.baseVal.value * 2;
+            canvas.height = svgEl.height.baseVal.value * 2;
+            
+            img.onload = () => {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'map-export.png';
+                    link.click();
+                    URL.revokeObjectURL(url);
+                });
+            };
+            
+            img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgStr)));
+        }
+        
+        // Start the application
+        init();
+    </script>
+</body>
+</html>
