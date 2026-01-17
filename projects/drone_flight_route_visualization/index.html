@@ -3,92 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Delay Predictions | Chad Vo</title>
-
+    <!-- Title and SEO meta tags will be injected by seo-injector.js -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/chadvo-ds-website/assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/chadvo-ds-website/assets/img/favicon.png">
+
     <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- Article Style Specific-->
 </head>
-<body>
+<body data-page="'drone_flight_route_visualizer'">
 
-    <!-- HEADER (identical to homepage) -->
-    <div class="container py-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <a href="../../index.html">
-                <img src="../../assets/img/logo.png" alt="Chad V Logo" class="site-logo">
-            </a>        
-            <nav class="top-nav">
-                <a href="../../index.html#about" class="text-decoration-none text-dark ms-4">About</a>
-                <a href="../../index.html#contact" class="text-decoration-none text-dark ms-4">Contact</a>
-            </nav>
+    <!-- Sticky Header -->
+    <header id="stickyHeader" class="sticky-header">
+        <div class="container py-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="../../index.html">
+                    <img src="../../assets/img/logo.png" alt="Chad Vo Data Scientist Logo" class="site-logo">
+                </a>   
+
+                <button id="themeToggle" class="theme-toggle ms-2" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <nav class="top-nav">
+                    <a href="../../index.html#about" class="text-decoration-none text-dark ms-4">About</a>
+                    <a href="../../index.html#contact" class="text-decoration-none text-dark ms-4">Contact</a>
+                </nav>
+            </div>
         </div>
-    </div>
+    </header>
 
-    <!-- HERO (project-specific, styled like homepage hero) -->
     <section class="container text-center mt-4 mb-5">
-        <h1 class="display-4 fw-bold hero-name">Flight Delay Predictions</h1>
-        <div class="decorative-separator"></div>
-        <p class="lead text-muted hero-bio mx-auto">
-            Predicting airline delays using historical flight and weather data.
+        <h1 class="display-4 fw-bold hero-name">Drone Flight Route Visualizer</h1>
+        <p class="text-muted mb-2" style="font-size: 0.95rem;">
+            Chad Vo, Mannan Mishra, Courtney Chen, Samantha Townsend, Samuel Dominguez
+        </p>
+        <p class="article-meta text-muted mb-3"
+            data-published="2026-1-17">
+            <span id="publishDate"></span> •
+            <span id="readingTime"></span>
         </p>
 
-        <!-- ACTION ICONS -->
-        <div class="d-flex justify-content-center gap-4 mt-4 project-actions">
-            <a href="https://github.com/aestew/flight_delay_predictions/tree/main"
-            target="_blank"
-            rel="noopener noreferrer">
+        <p class="text-muted mb-3" style="font-size: 0.85rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <strong>Tech Stack:</strong> HTML, D3.js, Plotly, JavaScript, Mapbox, GeoJSON, Python,Flask, Docker</p>
+        <div class="d-flex justify-content-center gap-4 mb-4 project-actions">
+            <a href="https://github.com/chadpvo/drone-flight-visualization" target="_blank" rel="noopener noreferrer" title="Project Repository">
                 <i class="fab fa-github"></i>
             </a>
         </div>
-
-    </section>
-
-    <!-- PROJECT CONTENT -->
-    <section class="container mb-5" style="max-width: 900px;">
-
-        <h3 class="fw-bold mb-3">Overview</h3>
-        <p class="text-muted">
-            This project builds machine learning models to predict whether a flight will be delayed,
-            leveraging airline metadata, temporal features, and weather conditions.
+        <div class="decorative-separator mx-auto"></div>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">
+            <strong>Summary:</strong> An interactive web app using D3.js to map and analyze drone flight paths with elevation profiles and geospatial data overlays.
         </p>
-
-        <h3 class="fw-bold mt-5 mb-3">Tech Stack</h3>
-        <ul class="text-muted">
-            <li>Python</li>
-            <li>Pandas / NumPy</li>
-            <li>Scikit-learn</li>
-            <li>XGBoost</li>
-            <li>Databricks</li>
-        </ul>
-
-        <h3 class="fw-bold mt-5 mb-3">Key Takeaways</h3>
-        <ul class="text-muted">
-            <li>Weather and departure time are the strongest predictors of delay</li>
-            <li>Tree-based models significantly outperform linear baselines</li>
-            <li>Feature engineering had a larger impact than model choice</li>
-        </ul>
-
     </section>
 
-    <!-- FOOTER (identical to homepage) -->
-    <section class="bg-light-blue py-5 text-center" id="contact">
+    <section class="project-article container mb-5">
+        <article class="article-body">
+            <header>
+                <p class="lead">
+                    <strong>TL;DR:</strong> We built an interactive drone flight route visualizer, intended for drone operators and drone enthusiasts used to detect drone activity and models. 
+                </p>
+            </header>
+
+            <div class="article-visual">
+                <img src="assets/flight_delay_cover.jpg" alt="Flight Delay Prediction System" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
+                <p class="mt-3"><em>Snapshot of Our Interactive Tool</em></p>
+            </div>
+
+            <h2>The "$33 Billion Delays" Problem</h2>
+
+            <p>
+                Flight delays cost the US economy billions annually. Airlines need to predict delays before they happen—ideally two hour before scheduled departure—to optimize operations, reduce compensation costs, and improve passenger satisfaction.
+            </p>
+
+            <h2>Conclusion: Feedback Loops For the Win</h2>
+
+            <p>Besides learning the new tech stack, the biggest takeaway from this project was the importance of feedback loops through several usability case studies in machine learning systems. By continuously monitoring model performance and incorporating user feedback, we can ensure that our UIs remain accurate and relevant over time. This iterative approach not only enhances model reliability but also builds trust with end-users, ultimately leading to better decision-making and improved operational efficiency.</p>
+            <p><strong>Note:</strong> This project was completed as part of our Data Visualization's Summer 2025 course. The project was initially hosted on Digital Ocean but due to limited credit, the hosting ended in late 2025. For full technical details, please check our Github Repository</p>
+
+            <p class="article-note mt-5 text-center">
+                <strong>Full code and technical details</strong>
+            </p>
+            <div class="d-flex justify-content-center gap-4 mt-3 project-actions">
+                <a href="https://github.com/chadpvo/drone-flight-visualization" target="_blank" rel="noopener noreferrer" title="Project Repository">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+        </article>
+    </section>
+
+    <section class="bg-light-blue py-5 text-center footer-section" id="contact">
         <div class="container">
             <h4 class="fw-bold mb-4">Let's Work Together!</h4>
-            
             <div class="d-flex justify-content-center social-icons mb-5">
                 <a href="https://linkedin.com/in/chadvo" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://github.com/chadpvo" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="mailto:chadpvo@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p class="text-muted small mb-0">
+            <p class="footer-text small mb-0">
                 &copy; Copyright <span id="year"></span> All rights reserved | Developed by Chad Vo
             </p>
         </div>
     </section>
 
+    <!-- Image Zoom Modal -->
+    <div id="imageModal" class="image-modal">
+        <span class="image-modal-close">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
+
+    <button id="scrollToTop" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- SEO Injection Scripts -->
+    <script src="../../js/page-config.js"></script>
+    <script src="../../js/seo-injector.js"></script>
+
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Sticky Header on Scroll - Only float when header leaves viewport
+        window.addEventListener('DOMContentLoaded', () => {
+            const stickyHeader = document.getElementById('stickyHeader');
+            const headerHeight = stickyHeader.offsetHeight;
+            
+            // Add padding to body to prevent header overlap
+            document.body.style.paddingTop = headerHeight + 'px';
+            
+            // Scroll listener for floating effect
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > headerHeight) {
+                    stickyHeader.classList.add('floating');
+                } else {
+                    stickyHeader.classList.remove('floating');
+                }
+            });
+        });
+
+        // Image zoom functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.image-modal-close');
+        const zoomableImages = document.querySelectorAll('.zoomable-image');
+
+        zoomableImages.forEach(img => {
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.classList.add('active');
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        /* Scroll to Top */
+        const scrollBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* Dark/Light Mode */
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        function setTheme(mode) {
+            document.body.classList.toggle('dark-mode', mode === 'dark');
+            themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', mode);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        /* Publish Date + Reading Time */
+        const meta = document.querySelector('.article-meta');
+        const published = new Date(meta.dataset.published);
+
+        document.getElementById('publishDate').textContent =
+            published.toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+        const articleText = document.querySelector('.article-body').innerText;
+        const words = articleText.trim().split(/\s+/).length;
+        const minutes = Math.ceil(words / 225);
+
+        document.getElementById('readingTime').textContent = `${minutes} min read`;
     </script>
 
 </body>

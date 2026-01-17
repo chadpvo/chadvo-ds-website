@@ -3,7 +3,7 @@
 // ============================================
 
 const SITE_CONFIG = {
-  domain: 'https://yourdomain.com', // UPDATE THIS WITH YOUR ACTUAL DOMAIN
+  domain: 'https://chadpvo.github.io/chadvo-ds-website/index.html#', // UPDATE THIS WITH YOUR ACTUAL DOMAIN
   author: {
     name: 'Chad Vo',
     jobTitle: 'Data Scientist',
@@ -36,7 +36,7 @@ const PAGE_METADATA = {
     image: '/projects/flight_delay/assets/flight_delay_cover.jpg',
     type: 'article',
     path: '/projects/flight_delay/index.html',
-    datePublished: '2024-11-15',
+    datePublished: '2026-1-12',
     articleSection: 'Data Science Projects',
     about: [
       'Machine Learning',
@@ -47,6 +47,25 @@ const PAGE_METADATA = {
     ]
   },
 
+  // Drone Flight Route Visualizer Project
+  'drone_flight_route_visualizer': {
+    title: 'Drone Flight Route Visualizer | Chad Vo - Data Scientist',
+    description: 'Drone Flight Route Visualizer: An interactive web app using D3.js to map and analyze drone flight paths with elevation profiles and geospatial data overlays.',
+    keywords: 'visualization, D3.js, drone flight paths, geospatial data, elevation profiles, interactive web app',
+    image: '/projects/drone_flight_route_visualizer/assets/drone_flight_route_visualizer_cover.jpg',
+    type: 'article',
+    path: 'projects/drone_flight_route_visualization/index.html',
+    datePublished: '2026-1-17',
+    articleSection: 'Data Visualization Projects',
+    about: [
+      'Data Visualization',
+      'D3.js',
+      'Geospatial Analysis',
+      'Web Development',
+      'Interactive Applications',
+      'Data Visualization'
+    ]
+  },
   // Template for adding new projects
   'project_template': {
     title: 'Project Name | Chad Vo - Data Scientist',
