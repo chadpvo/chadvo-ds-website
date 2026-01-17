@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="../../css/style.css">
 
+    <!-- Article Style Specific-->
     <style>
         /* Class Imbalance Chart Styles */
         .imbalance-chart-wrapper {
@@ -541,53 +542,6 @@
                 The distribution of delayed vs. non-delayed flights remained remarkably consistent across all timeframes, with delays hovering around 18-22% regardless of dataset size.
             </p>
 
-            <div class="article-visual">
-                <div id="classImbalanceChart" class="chart-container"></div>
-                <p class="mt-3"><em>Class distribution remains stable across 3-month, 1-year, and 5-year datasets</em></p>
-            </div>
-
-            <p>
-                We initially tried SMOTE and upsampling, but both were computationally infeasible at scale. Instead, we downsampled the majority class to achieve 50:50 balance, accepting information loss in exchange for computational feasibility and faster training.
-            </p>
-
-            <p>
-                <strong>Key insight:</strong> At 30M rows, sometimes the pragmatic solution beats the theoretical ideal.
-            </p>
-            
-            <h2>The Pipeline: 7-Stage Checkpointing Strategy</h2>
-
-            <p>
-                Spark's lazy evaluation is powerful but dangerous. If a job fails after 2 hours, you might recompute everything.
-            </p>
-
-            <p>
-                We implemented a rigorous checkpointing strategy, saving intermediate results at seven critical stages:
-            </p>
-
-            <ol>
-                <li>Raw data joins (FASW dataset creation)</li>
-                <li>Null handling and feature engineering</li>
-                <li>Train/test split (2015-2018 train, 2019 test)</li>
-                <li>Rolling window creation for cross-validation</li>
-                <li>Feature scaling and vectorization per window</li>
-                <li>Processed final train/test sets</li>
-                <li>Model training results via MLflow</li>
-            </ol>
-
-            <div class="article-visual">
-                <img src="assets/updated_pipeline.jpeg" alt="ML Pipeline Architecture" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
-                <p class="mt-3"><em>7-stage checkpoint strategy decouples data engineering from model training</em></p>
-            </div>
-
-            <p>
-                This decoupled data engineering from model training. We could iterate rapidly on models without re-triggering expensive joins.
-            </p>
-
-            <h2>Managing Computational Costs: The Downsampling Strategy</h2>
-
-            <p>
-                Flight delays suffer from severe class imbalance—only 18-22% of flights are delayed. This creates both a modeling challenge and a <strong>computational cost problem</strong>.
-            </p>
 
             <p>
                 We initially tried SMOTE (Synthetic Minority Over-sampling Technique) and standard upsampling to balance classes. Both approaches failed spectacularly:
@@ -600,11 +554,21 @@
             </ul>
 
             <p>
+                Instead, we downsampled the majority class to achieve 50:50 balance, accepting information loss in exchange for computational feasibility and faster training.
+            </p>
+
+            <div class="article-visual">
+                <div id="classImbalanceChart" class="chart-container"></div>
+                <p class="mt-3"><em>Class distribution remains stable across 3-month, 1-year, and 5-year datasets</em></p>
+            </div>
+
+            <p>
                 <strong>The Pragmatic Solution: Downsampling the Majority Class</strong>
             </p>
 
             <p>
-                Instead of adding data, we removed it. We randomly downsampled on-time flights (majority class) to achieve a 50:50 balance with delayed flights. This approach:
+                Flight delays suffer from severe class imbalance—only 18-22% of flights are delayed. This creates both a modeling challenge and a <strong>computational cost problem</strong>.
+                So instead of adding data, we removed it. We randomly downsampled on-time flights (majority class) to achieve a 50:50 balance with delayed flights. This approach worked for us because:
             </p>
 
             <ul>
@@ -622,10 +586,38 @@
                 This decision exemplifies a core principle in production ML: <strong>pragmatic solutions that work at scale beat theoretically optimal solutions that never finish running</strong>.
             </p>
 
+            <p>
+                <strong>Key insight:</strong> At 30M rows, sometimes the pragmatic solution beats the theoretical ideal.
+            </p>
+            
+            <h2>The Pipeline: 7-Stage Checkpointing Strategy</h2>
+
+            <p>
+                Utilizing the technology of Spark was definitely a double-edged sword because its "lazy" evaluation is powerful but dangerous. If a job fails after 2 hours, you might recompute everything.
+                Therefore, in order to combat that, we implemented a rigorous checkpointing strategy, saving intermediate results at seven critical stages broken down as follows:
+            </p>
+
+            <ol>
+                <li>Raw data joins (FASW dataset creation)</li>
+                <li>Null handling and feature engineering</li>
+                <li>Train/test split (2015-2018 train, 2019 test)</li>
+                <li>Rolling window creation for cross-validation</li>
+                <li>Feature scaling and vectorization per window</li>
+                <li>Processed final train/test sets</li>
+                <li>Model training results via MLflow</li>
+            </ol>
+            <p>
+                This decoupled data engineering from model training. We could iterate rapidly on models without re-triggering expensive joins.
+            </p>
+            <div class="article-visual">
+                <img src="assets/updated_pipeline.jpeg" alt="ML Pipeline Architecture" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
+                <p class="mt-3"><em>7-stage checkpoint strategy decouples data engineering from model training</em></p>
+            </div>
+
             <h2>Model Comparison: Data Engineering Beats Hyperparameter Tuning</h2>
 
             <p>
-                We evaluated six model architectures, prioritizing <strong>Recall</strong> (catching actual delays) over Precision (avoiding false alarms). The surprise? Performance differences came from feature engineering, not model architecture.
+                As we evaluated six model architectures, prioritizing <strong>Recall</strong> (catching actual delays) over Precision (avoiding false alarms). The surprise? Performance differences came from feature engineering, not model architecture.
             </p>
 
             <table class="table table-bordered">
@@ -681,7 +673,7 @@
                         <td>Similar to XGBoost but 10x slower training</td>
                     </tr>
                     <tr style="background-color: #d4edda;">
-                        <td><strong>FT-Transformer 🏆</strong></td>
+                        <td><strong>FT-Transformer</strong></td>
                         <td><strong>0.59</strong></td>
                         <td><strong>0.36</strong></td>
                         <td><strong>0.53</strong></td>
@@ -692,7 +684,7 @@
             </table>
 
             <p>
-                <strong>The Winner: Feature Tokenizer Transformer</strong>
+                <strong>The Winner: Feature Tokenizer Transformer. </strong>(Shoutout to my teammate Amy Steward for leading this model training)
             </p>
 
             <p>
@@ -700,7 +692,7 @@
             </p>
 
             <p>
-                Key technical advantages:
+                <strong>Key technical advantages:</strong>
             </p>
 
             <ul>
@@ -710,10 +702,12 @@
                 <li><strong>GPU requirement:</strong> 4 hours on NVIDIA T4 vs. 15+ hours on CPU</li>
             </ul>
 
-            <h2>Scaling Performance: Linear Growth</h2>
+            <p> For more details on how our Transformer works, check out Amy's <a href="https://medium.com/@aestew/feature-tokenizer-transformer-model-performance-in-predicting-flight-delays-96126989e133">detailed write-up</a>.</p>
+
+            <h2>Machine Learning at Scale: Linear Growth</h2>
 
             <p>
-                Our pipeline scaled nearly linearly with data volume:
+                Due to the sheer volume of data, our pipeline scaled nearly linearly with data volume as we broke down our milestones from 3 months to 1 year to 5 years:
             </p>
 
             <table class="table table-bordered">
@@ -753,7 +747,9 @@
 
             <h2>Key Lessons: What Actually Mattered</h2>
 
-            <h3>1. Data Engineering > Hyperparameter Tuning</h3>
+            <p>After weeks of experimentation and iteration, there were tons of lessons to learn, insights to share, and lots of milestones to celebrate.  Here's a summary of the most important ones:</p>
+
+            <h3>1. Data Engineering is As Equally important As Hyperparameter Tuning</h3>
 
             <p>
                 The biggest performance gains came from thoughtful feature engineering rather than exhaustive hyperparameter searches. Our aircraft turnaround time features alone accounted for 70% of XGBoost's information gain, while tweaking tree depths and learning rates provided only marginal improvements. The lesson: invest engineering time in understanding domain patterns and creating features that capture real operational dynamics before diving into model optimization.
@@ -786,15 +782,15 @@
             <h2>Conclusion: The Model is Only as Good as the Pipeline</h2>
 
             <p>
-                Predicting flight delays isn't a modeling problem—it's a <strong>data engineering problem</strong>.
+                Predicting flight delays isn't just a modeling problem, but it's also a <strong>data engineering problem</strong>.
             </p>
 
             <p>
-                The FT-Transformer achieved the best results not because of superior architecture, but because we built a pipeline that could feed it clean, properly joined, temporally valid data at scale.
+                The FT-Transformer achieved the best results not because of superior architecture and onpoint feature engineering, but we truly believe that it's because we built a pipeline that could feed it clean, properly joined, temporally valid data at scale.
             </p>
 
             <p>
-                In production ML systems, distributed joins, checkpointing strategies, and feature engineering pipelines matter more than model selection. Master the infrastructure, and the models will follow.
+                In real life, production ML systems, distributed joins, checkpointing strategies, and feature engineering pipelines matter just as much as model selection. As we master the infrastructure, and the models will follow.
             </p>
 
             <p class="article-note mt-5 text-center">

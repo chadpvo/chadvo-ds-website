@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Shading Tool</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    
+    <!-- Master CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <style>
+        /* Prevent header overlap */
+        body {
+            padding-top: 80px;
+        }
+        
+        /* Map-specific styles only */
+        .main-content {
+            height: calc(100vh - 80px);
+        }
+        
+        .container-fluid {
+            height: 100%;
+            padding: 0;
+        }
+        
+        .row {
+            height: 100%;
+            margin: 0;
+        }
+        
+        .sidebar {
+            background: white;
+            border-right: 1px solid #dee2e6;
+            padding: 30px 25px;
+            overflow-y: auto;
+            height: 100%;
+        }
+        
+        .sidebar h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 25px 0 15px 0;
+        }
+        
+        .form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        
+        .form-select, .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+        
+        .form-select:focus, .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+        
+        .btn {
+            font-weight: 500;
+            border-radius: 6px;
+            padding: 10px 16px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #0d6efd;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #0b5ed7;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            border: none;
+        }
+        
+        .btn-secondary:hover {
+            background: #5c636a;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            border: none;
+        }
+        
+        .btn-danger:hover {
+            background: #bb2d3b;
+        }
+        
+        .map-container {
+            position: relative;
+            height: 100%;
+            padding: 0;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .zoom-btn:hover {
+            background: #f8f9fa;
+            border-color: #0d6efd;
+            color: #0d6efd;
+        }
+        
+        .zoom-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Loading indicator */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            font-size: 18px;
+            color: #495057;
+        }
+        
+        .loading-overlay.hidden {
+            display: none;
+        }
+        
+        /* Dark mode overrides for map-specific elements */
+        body.dark-mode .sidebar {
+            background: #2d2d2d;
+            border-right-color: #404040;
+        }
+        
+        body.dark-mode .sidebar h2 {
+            color: #e8e8e8;
+        }
+        
+        body.dark-mode .section-title {
+            color: #999;
+        }
+        
+        body.dark-mode .form-label {
+            color: #ccc;
+        }
+        
+        body.dark-mode .form-select,
+        body.dark-mode .form-control {
+            background: #1a1a1a;
+            border-color: #404040;
+            color: #e8e8e8;
+        }
+        
+        body.dark-mode .zoom-btn {
+            background: #2d2d2d;
+            border-color: #404040;
+            color: #e8e8e8;
+        }
+        
+        body.dark-mode .zoom-btn:hover {
+            background: #3d3d3d;
+            border-color: #0d6efd;
+        }
+        
+        body.dark-mode .loading-overlay {
+            background: rgba(26, 26, 26, 0.9);
+            color: #e8e8e8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header -->
+    <header id="stickyHeader" class="sticky-header">
+        <div class="container py-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="../../index.html">
+                    <img src="../../assets/img/logo.png" alt="Chad Vo Data Scientist Logo" class="site-logo">
+                </a>   
+
+                <div class="d-flex align-items-center">
+                    <button id="themeToggle" class="theme-toggle me-3" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <nav class="top-nav">
+                        <a href="../../index.html#about" class="text-decoration-none text-dark ms-4">About</a>
+                        <a href="../../index.html#contact" class="text-decoration-none text-dark ms-4">Contact</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-3 col-lg-2 sidebar">
+                    <h2>Map Shading Tool</h2>
+                    
+                    <div class="section-title">GEOGRAPHY LEVEL</div>
+                    <div class="mb-3">
+                        <select id="geo-level" class="form-select">
+                            <option value="states">States</option>
+                            <option value="counties">Counties</option>
+                            <option value="cbsas">CBSAs (Metro Areas)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="section-title">SHADING MODE</div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary w-100 mb-2">Color Scheme</button>
+                        <button class="btn btn-secondary w-100">Manual Color</button>
+                    </div>
+                    
+                    <div class="section-title">MARKERS & PINS</div>
+                    <div class="mb-3">
+                        <label class="form-label">Marker Style</label>
+                        <select class="form-select">
+                            <option>Circle</option>
+                            <option>Square</option>
+                            <option>Triangle</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <button class="btn btn-primary w-100">Add Marker</button>
+                    </div>
+                    
+                    <div class="section-title">EXPORT</div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary w-100 mb-2">Download SVG</button>
+                        <button class="btn btn-primary w-100">Download PNG</button>
+                    </div>
+                </div>
+                
+                <!-- Map Container -->
+                <div class="col-md-9 col-lg-10 map-container">
+                    <div class="loading-overlay" id="loadingOverlay">
+                        <div>
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <div class="mt-3">Loading geographic data...</div>
+                        </div>
+                    </div>
+                    <div id="map"></div>
+                    <div class="zoom-controls">
+                        <button class="zoom-btn" id="zoom-in">+</button>
+                        <button class="zoom-btn" id="zoom-out">−</button>
+                        <button class="zoom-btn" id="zoom-reset">⟲</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <section class="bg-light-blue py-5 text-center footer-section" id="contact">
+        <div class="container">
+            <h4 class="fw-bold mb-4">Let's Work Together!</h4>
+            <div class="d-flex justify-content-center social-icons mb-5">
+                <a href="https://linkedin.com/in/chadvo" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/chadpvo" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:chadpvo@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="footer-text small mb-0">
+                &copy; Copyright <span id="year"></span> All rights reserved | Developed by Chad Vo
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Set current year in footer
+        document.getElementById("year").textContent = new Date().getFullYear();
+        
+        // Sticky Header scroll effect
+        window.addEventListener('scroll', () => {
+            const stickyHeader = document.getElementById('stickyHeader');
+            if (window.scrollY > 50) {
+                stickyHeader.classList.add('floating');
+            } else {
+                stickyHeader.classList.remove('floating');
+            }
+        });
+        
+        // Global data storage
+        let usData, countiesData, cbsaData;
+        let currentLevel = 'states';
+        
+        // Mapbox setup
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhZHZvIiwiYSI6ImNtZWdhcjUwMDEycm8ybm9lOTRqeHZqdjAifQ.ol7GJKQKjRAQZ33trNvWWA';
+        
+        // US bounds
+        const usBounds = [
+            [-125.0, 24.0],
+            [-66.0, 49.5]
+        ];
+        
+        // Initialize map
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v11',
+            center: [-98.5795, 39.8283],
+            zoom: 3.5,
+            minZoom: 2.5,
+            maxZoom: 10,
+            renderWorldCopies: false,
+            projection: 'mercator'
+        });
+        
+        // Enable interactions
+        map.scrollZoom.enable();
+        map.dragPan.enable();
+        map.doubleClickZoom.enable();
+        map.touchZoomRotate.enable();
+        
+        // Load geographic data
+        async function loadGeoData() {
+            try {
+                const [us, counties, cbsas] = await Promise.all([
+                    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json'),
+                    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
+                    fetch('https://raw.githubusercontent.com/chadpvo/chadvo-ds-website/refs/heads/lab/projects/map_viz/assets/us-cbsa.json').then(r => r.json())
+                ]);
+                
+                usData = us;
+                countiesData = counties;
+                
+                // Handle CBSA data format
+                if (cbsas.type === 'Topology') {
+                    const objectKey = Object.keys(cbsas.objects)[0];
+                    cbsaData = topojson.feature(cbsas, cbsas.objects[objectKey]);
+                } else {
+                    cbsaData = cbsas;
+                }
+                
+                console.log('Geographic data loaded successfully');
+                addBoundariesToMap();
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            } catch (error) {
+                console.error('Error loading geographic data:', error);
+                document.getElementById('loadingOverlay').innerHTML = '<div class="text-danger">Error loading data. Please refresh.</div>';
+            }
+        }
+        
+        // Add boundaries as Mapbox layers
+        function addBoundariesToMap() {
+            // Add state boundaries
+            map.addSource('states', {
+                type: 'geojson',
+                data: topojson.feature(usData, usData.objects.states)
+            });
+            
+            map.addLayer({
+                id: 'states-layer',
+                type: 'line',
+                source: 'states',
+                paint: {
+                    'line-color': '#627BC1',
+                    'line-width': 2
+                }
+            });
+            
+            // Add county boundaries
+            map.addSource('counties', {
+                type: 'geojson',
+                data: topojson.feature(countiesData, countiesData.objects.counties)
+            });
+            
+            map.addLayer({
+                id: 'counties-layer',
+                type: 'line',
+                source: 'counties',
+                paint: {
+                    'line-color': '#999',
+                    'line-width': 0.5,
+                    'line-opacity': 0
+                }
+            });
+            
+            // Add CBSA boundaries
+            map.addSource('cbsas', {
+                type: 'geojson',
+                data: cbsaData
+            });
+            
+            map.addLayer({
+                id: 'cbsas-layer',
+                type: 'line',
+                source: 'cbsas',
+                paint: {
+                    'line-color': '#E74C3C',
+                    'line-width': 1.5,
+                    'line-opacity': 0
+                }
+            });
+        }
+        
+        // Geography level selector
+        document.getElementById('geo-level').addEventListener('change', (e) => {
+            currentLevel = e.target.value;
+            
+            // Hide all layers first
+            map.setPaintProperty('states-layer', 'line-opacity', 0);
+            map.setPaintProperty('counties-layer', 'line-opacity', 0);
+            map.setPaintProperty('cbsas-layer', 'line-opacity', 0);
+            
+            // Show selected layer
+            if (currentLevel === 'states') {
+                map.setPaintProperty('states-layer', 'line-opacity', 1);
+            } else if (currentLevel === 'counties') {
+                map.setPaintProperty('counties-layer', 'line-opacity', 1);
+            } else if (currentLevel === 'cbsas') {
+                map.setPaintProperty('cbsas-layer', 'line-opacity', 1);
+            }
+        });
+        
+        // Map load event
+        map.on('load', () => {
+            map.fitBounds(usBounds, { padding: 20 });
+            loadGeoData();
+        });
+        
+        // Zoom controls
+        document.getElementById('zoom-in').addEventListener('click', () => {
+            map.zoomIn();
+        });
+        
+        document.getElementById('zoom-out').addEventListener('click', () => {
+            map.zoomOut();
+        });
+        
+        document.getElementById('zoom-reset').addEventListener('click', () => {
+            map.fitBounds(usBounds, { 
+                padding: 20,
+                duration: 1000
+            });
+        });
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        function setTheme(mode) {
+            document.body.classList.toggle('dark-mode', mode === 'dark');
+            themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', mode);
+            
+            // Update map style and preserve projection
+            map.setStyle(mode === 'dark' 
+                ? 'mapbox://styles/mapbox/dark-v11' 
+                : 'mapbox://styles/mapbox/light-v11'
+            );
+            
+            // Re-apply layers after style loads
+            map.once('style.load', () => {
+                map.setProjection('mercator');
+                if (usData && countiesData && cbsaData) {
+                    addBoundariesToMap();
+                    // Restore current layer visibility
+                    setTimeout(() => {
+                        document.getElementById('geo-level').dispatchEvent(new Event('change'));
+                    }, 100);
+                }
+            });
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    </script>
+</body>
+</html>
