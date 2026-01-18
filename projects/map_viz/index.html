@@ -13,29 +13,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
     
-    <!-- Master CSS -->
     <link rel="stylesheet" href="../../css/style.css">
     
     <style>
-        /* Prevent header overlap */
-        body {
-            padding-top: 80px;
-        }
-        
-        /* Map-specific styles only */
-        .main-content {
-            height: calc(100vh - 80px);
-        }
-        
-        .container-fluid {
-            height: 100%;
-            padding: 0;
-        }
-        
-        .row {
-            height: 100%;
-            margin: 0;
-        }
+        body { padding-top: 80px; }
+        .main-content { height: calc(100vh - 80px); }
+        .container-fluid { height: 100%; padding: 0; }
+        .row { height: 100%; margin: 0; }
         
         .sidebar {
             background: white;
@@ -73,47 +57,6 @@
             border-radius: 6px;
             padding: 10px 12px;
             font-size: 14px;
-        }
-        
-        .form-select:focus, .form-control:focus {
-            border-color: #0d6efd;
-            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-        }
-        
-        .btn {
-            font-weight: 500;
-            border-radius: 6px;
-            padding: 10px 16px;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        
-        .btn-primary {
-            background: #0d6efd;
-            border: none;
-        }
-        
-        .btn-primary:hover {
-            background: #0b5ed7;
-            transform: translateY(-1px);
-        }
-        
-        .btn-secondary {
-            background: #6c757d;
-            border: none;
-        }
-        
-        .btn-secondary:hover {
-            background: #5c636a;
-        }
-        
-        .btn-danger {
-            background: #dc3545;
-            border: none;
-        }
-        
-        .btn-danger:hover {
-            background: #bb2d3b;
         }
         
         .map-container {
@@ -160,11 +103,6 @@
             color: #0d6efd;
         }
         
-        .zoom-btn:active {
-            transform: scale(0.95);
-        }
-        
-        /* Loading indicator */
         .loading-overlay {
             position: absolute;
             top: 0;
@@ -176,15 +114,85 @@
             align-items: center;
             justify-content: center;
             z-index: 2000;
-            font-size: 18px;
-            color: #495057;
         }
         
         .loading-overlay.hidden {
             display: none;
         }
         
-        /* Dark mode overrides for map-specific elements */
+        .region-checkboxes {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 8px;
+            background: white;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 6px 4px;
+            font-size: 13px;
+        }
+        
+        .checkbox-item.hidden {
+            display: none;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .color-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .form-control-color {
+            width: 50px;
+            height: 38px;
+            padding: 3px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .color-input-group .form-control {
+            flex: 1;
+            text-transform: uppercase;
+        }
+        
+        .form-check-label {
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .map-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+            white-space: nowrap;
+        }
+        
+        .map-tooltip.show {
+            display: block;
+        }
+        
         body.dark-mode .sidebar {
             background: #2d2d2d;
             border-right-color: #404040;
@@ -215,17 +223,42 @@
             color: #e8e8e8;
         }
         
-        body.dark-mode .zoom-btn:hover {
-            background: #3d3d3d;
-            border-color: #0d6efd;
+        body.dark-mode .region-checkboxes {
+            background: #1a1a1a;
+            border-color: #404040;
         }
         
-        body.dark-mode .loading-overlay {
-            background: rgba(26, 26, 26, 0.9);
-            color: #e8e8e8;
+        body.dark-mode .checkbox-item label {
+            color: #ccc;
+        }
+        
+        body.dark-mode .map-tooltip {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a1a;
+        }
+
+        .sticky-header {
+            z-index: 3000; /* Ensure header stays above everything */
+        }
+
+        .site-logo {
+            max-height: 40px;
+            width: auto;
+        }
+
+        .main-content {
+            margin-top: 0; /* Remove any extra margin */
+            height: calc(100vh - 80px);
+        }
+
+        /* Ensure sidebar doesn't overlap header */
+        .sidebar {
+            margin-top: 0;
+            padding-top: 30px;
         }
     </style>
 </head>
+
 <body>
     <!-- Sticky Header -->
     <header id="stickyHeader" class="sticky-header">
@@ -254,7 +287,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Sidebar -->
-                <div class="col-md-3 col-lg-2 sidebar">
+                <div class="col-md-4 col-lg-3 sidebar">
                     <h2>Map Shading Tool</h2>
                     
                     <div class="section-title">GEOGRAPHY LEVEL</div>
@@ -266,35 +299,54 @@
                         </select>
                     </div>
                     
-                    <div class="section-title">SHADING MODE</div>
+                    <div class="section-title">SELECT REGIONS</div>
                     <div class="mb-3">
-                        <button class="btn btn-primary w-100 mb-2">Color Scheme</button>
-                        <button class="btn btn-secondary w-100">Manual Color</button>
+                        <input type="text" id="search-input" class="form-control mb-2" placeholder="Search regions...">
+                        <div id="region-checkboxes" class="region-checkboxes">
+                            <!-- Checkboxes will be populated here -->
+                        </div>
                     </div>
                     
-                    <div class="section-title">MARKERS & PINS</div>
+                    <div class="section-title">COLOR SETTINGS</div>
                     <div class="mb-3">
-                        <label class="form-label">Marker Style</label>
-                        <select class="form-select">
-                            <option>Circle</option>
-                            <option>Square</option>
-                            <option>Triangle</option>
-                        </select>
+                        <label class="form-label">Border Color</label>
+                        <div class="color-input-group">
+                            <input type="color" id="border-color" class="form-control-color" value="#999999">
+                            <input type="text" id="border-color-hex" class="form-control form-control-sm" value="#999999">
+                        </div>
                     </div>
                     
                     <div class="mb-3">
-                        <button class="btn btn-primary w-100">Add Marker</button>
+                        <label class="form-label">Selected Area Color</label>
+                        <div class="color-input-group">
+                            <input type="color" id="selected-color" class="form-control-color" value="#627BC1">
+                            <input type="text" id="selected-color-hex" class="form-control form-control-sm" value="#627BC1">
+                        </div>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="selected-no-shade">
+                            <label class="form-check-label" for="selected-no-shade">
+                                No shading
+                            </label>
+                        </div>
                     </div>
                     
-                    <div class="section-title">EXPORT</div>
                     <div class="mb-3">
-                        <button class="btn btn-primary w-100 mb-2">Download SVG</button>
-                        <button class="btn btn-primary w-100">Download PNG</button>
+                        <label class="form-label">Non-Selected Area Color</label>
+                        <div class="color-input-group">
+                            <input type="color" id="dimmed-color" class="form-control-color" value="#CCCCCC">
+                            <input type="text" id="dimmed-color-hex" class="form-control form-control-sm" value="#CCCCCC">
+                        </div>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="dimmed-no-shade">
+                            <label class="form-check-label" for="dimmed-no-shade">
+                                No shading
+                            </label>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Map Container -->
-                <div class="col-md-9 col-lg-10 map-container">
+                <div class="col-md-8 col-lg-9 map-container">
                     <div class="loading-overlay" id="loadingOverlay">
                         <div>
                             <div class="spinner-border text-primary" role="status">
@@ -304,6 +356,7 @@
                         </div>
                     </div>
                     <div id="map"></div>
+                    <div class="map-tooltip" id="mapTooltip"></div>
                     <div class="zoom-controls">
                         <button class="zoom-btn" id="zoom-in">+</button>
                         <button class="zoom-btn" id="zoom-out">−</button>
@@ -332,7 +385,7 @@
     <script>
         // Set current year in footer
         document.getElementById("year").textContent = new Date().getFullYear();
-        
+
         // Sticky Header scroll effect
         window.addEventListener('scroll', () => {
             const stickyHeader = document.getElementById('stickyHeader');
@@ -342,21 +395,27 @@
                 stickyHeader.classList.remove('floating');
             }
         });
-        
+
         // Global data storage
         let usData, countiesData, cbsaData;
         let currentLevel = 'states';
-        
+        let allRegions = [];
+        let highlightedRegions = new Set();
+
+        // Color settings
+        let colorSettings = {
+            border: '#999999',
+            selected: '#627BC1',
+            dimmed: '#CCCCCC',
+            selectedNoShade: false,
+            dimmedNoShade: false
+        };
+
         // Mapbox setup
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhZHZvIiwiYSI6ImNtZWdhcjUwMDEycm8ybm9lOTRqeHZqdjAifQ.ol7GJKQKjRAQZ33trNvWWA';
-        
-        // US bounds
-        const usBounds = [
-            [-125.0, 24.0],
-            [-66.0, 49.5]
-        ];
-        
-        // Initialize map
+
+        const usBounds = [[-125.0, 24.0], [-66.0, 49.5]];
+
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v11',
@@ -367,45 +426,51 @@
             renderWorldCopies: false,
             projection: 'mercator'
         });
-        
-        // Enable interactions
+
         map.scrollZoom.enable();
         map.dragPan.enable();
         map.doubleClickZoom.enable();
         map.touchZoomRotate.enable();
-        
+
         // Load geographic data
         async function loadGeoData() {
             try {
-                const [us, counties, cbsas] = await Promise.all([
+                const [us, counties] = await Promise.all([
                     d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json'),
-                    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json'),
-                    fetch('https://raw.githubusercontent.com/chadpvo/chadvo-ds-website/refs/heads/lab/projects/map_viz/assets/us-cbsa.json').then(r => r.json())
+                    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json')
                 ]);
                 
                 usData = us;
                 countiesData = counties;
                 
-                // Handle CBSA data format
-                if (cbsas.type === 'Topology') {
-                    const objectKey = Object.keys(cbsas.objects)[0];
-                    cbsaData = topojson.feature(cbsas, cbsas.objects[objectKey]);
-                } else {
-                    cbsaData = cbsas;
+                try {
+                    const cbsaResponse = await fetch('https://raw.githubusercontent.com/chadpvo/chadvo-ds-website/refs/heads/lab/projects/map_viz/assets/us-cbsa.json');
+                    if (cbsaResponse.ok) {
+                        const data = await cbsaResponse.json();
+                        if (data.type === 'Topology') {
+                            const objectKey = Object.keys(data.objects)[0];
+                            cbsaData = topojson.feature(data, data.objects[objectKey]);
+                        } else {
+                            cbsaData = data;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('CBSA loading error:', e);
                 }
                 
-                console.log('Geographic data loaded successfully');
                 addBoundariesToMap();
+                populateRegionList();
+                setupColorControls();
+                setupHoverTooltip();
                 document.getElementById('loadingOverlay').classList.add('hidden');
             } catch (error) {
-                console.error('Error loading geographic data:', error);
-                document.getElementById('loadingOverlay').innerHTML = '<div class="text-danger">Error loading data. Please refresh.</div>';
+                console.error('Error:', error);
+                document.getElementById('loadingOverlay').innerHTML = '<div class="text-danger">Error loading data.</div>';
             }
         }
-        
+
         // Add boundaries as Mapbox layers
         function addBoundariesToMap() {
-            // Add state boundaries
             map.addSource('states', {
                 type: 'geojson',
                 data: topojson.feature(usData, usData.objects.states)
@@ -416,12 +481,31 @@
                 type: 'line',
                 source: 'states',
                 paint: {
-                    'line-color': '#627BC1',
-                    'line-width': 2
+                    'line-color': colorSettings.border,
+                    'line-width': 0.3
                 }
             });
             
-            // Add county boundaries
+            map.addLayer({
+                id: 'states-fill',
+                type: 'fill',
+                source: 'states',
+                paint: {
+                    'fill-color': ['case',
+                        ['boolean', ['feature-state', 'highlighted'], false],
+                        colorSettings.selected,
+                        colorSettings.dimmed
+                    ],
+                    'fill-opacity': ['case',
+                        ['boolean', ['feature-state', 'highlighted'], false],
+                        colorSettings.selectedNoShade ? 0 : 0.6,
+                        ['boolean', ['feature-state', 'dimmed'], false],
+                        colorSettings.dimmedNoShade ? 0 : 0.15,
+                        0
+                    ]
+                }
+            }, 'states-layer');
+            
             map.addSource('counties', {
                 type: 'geojson',
                 data: topojson.feature(countiesData, countiesData.objects.counties)
@@ -432,102 +516,417 @@
                 type: 'line',
                 source: 'counties',
                 paint: {
-                    'line-color': '#999',
-                    'line-width': 0.5,
+                    'line-color': colorSettings.border,
+                    'line-width': 0.3,
                     'line-opacity': 0
                 }
-            });
-            
-            // Add CBSA boundaries
-            map.addSource('cbsas', {
-                type: 'geojson',
-                data: cbsaData
             });
             
             map.addLayer({
-                id: 'cbsas-layer',
-                type: 'line',
-                source: 'cbsas',
+                id: 'counties-fill',
+                type: 'fill',
+                source: 'counties',
                 paint: {
-                    'line-color': '#E74C3C',
-                    'line-width': 1.5,
-                    'line-opacity': 0
+                    'fill-color': ['case',
+                        ['boolean', ['feature-state', 'highlighted'], false],
+                        colorSettings.selected,
+                        colorSettings.dimmed
+                    ],
+                    'fill-opacity': ['case',
+                        ['boolean', ['feature-state', 'highlighted'], false],
+                        colorSettings.selectedNoShade ? 0 : 0.6,
+                        ['boolean', ['feature-state', 'dimmed'], false],
+                        colorSettings.dimmedNoShade ? 0 : 0.15,
+                        0
+                    ]
                 }
+            }, 'counties-layer');
+            
+            if (cbsaData) {
+                map.addSource('cbsas', {
+                    type: 'geojson',
+                    data: cbsaData,
+                    promoteId: 'GEOID'
+                });
+                
+                map.addLayer({
+                    id: 'cbsas-layer',
+                    type: 'line',
+                    source: 'cbsas',
+                    paint: {
+                        'line-color': colorSettings.border,
+                        'line-width': 0.4,
+                        'line-opacity': 0
+                    }
+                });
+                
+                map.addLayer({
+                    id: 'cbsas-fill',
+                    type: 'fill',
+                    source: 'cbsas',
+                    paint: {
+                        'fill-color': ['case',
+                            ['boolean', ['feature-state', 'highlighted'], false],
+                            colorSettings.selected,
+                            colorSettings.dimmed
+                        ],
+                        'fill-opacity': ['case',
+                            ['boolean', ['feature-state', 'highlighted'], false],
+                            colorSettings.selectedNoShade ? 0 : 0.6,
+                            ['boolean', ['feature-state', 'dimmed'], false],
+                            colorSettings.dimmedNoShade ? 0 : 0.15,
+                            0
+                        ]
+                    }
+                }, 'cbsas-layer');
+            }
+        }
+
+        // Populate region list
+        function populateRegionList() {
+            const container = document.getElementById('region-checkboxes');
+            container.innerHTML = '';
+            
+            let features = [];
+            if (currentLevel === 'states') {
+                features = topojson.feature(usData, usData.objects.states).features;
+            } else if (currentLevel === 'counties') {
+                features = topojson.feature(countiesData, countiesData.objects.counties).features;
+            } else if (currentLevel === 'cbsas') {
+                features = cbsaData.features;
+            }
+            
+            allRegions = features.map(f => {
+                let id, name;
+                if (currentLevel === 'states') {
+                    id = f.id;
+                    name = f.properties.name;
+                } else if (currentLevel === 'counties') {
+                    id = f.id;
+                    name = f.properties.name;
+                    const stateFips = Math.floor(id / 1000); // Get state FIPS from county FIPS
+                    const stateFeature = topojson.feature(usData, usData.objects.states).features.find(s => s.id === stateFips);
+                    if (stateFeature) {
+                        const stateName = stateFeature.properties.name;
+                        name = `${name}, ${stateName}`;
+                    }
+                } else if (currentLevel === 'cbsas') {
+                    id = f.properties.GEOID || f.properties.CBSAFP || f.properties.AFFGEOID;
+                    name = f.properties.NAME || f.properties.name || 'Unknown';
+                }
+                return { id, name, feature: f };
+            }).filter(r => r.id && r.name).sort((a, b) => a.name.localeCompare(b.name));
+            
+            allRegions.forEach(region => {
+                const div = document.createElement('div');
+                div.className = 'checkbox-item';
+                div.dataset.regionName = region.name.toLowerCase();
+                div.innerHTML = `
+                    <input type="checkbox" id="region-${region.id}" data-region-id="${region.id}">
+                    <label for="region-${region.id}">${region.name}</label>
+                `;
+                container.appendChild(div);
+            });
+            
+            container.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', handleRegionCheckbox);
             });
         }
-        
+
+        // Handle checkbox changes
+        function handleRegionCheckbox(e) {
+            const regionId = e.target.dataset.regionId;
+            if (e.target.checked) {
+                highlightedRegions.add(regionId);
+            } else {
+                highlightedRegions.delete(regionId);
+            }
+            updateHighlights();
+        }
+
+        // Update map highlights
+        function updateHighlights() {
+            const sourceId = currentLevel === 'states' ? 'states' : 
+                        currentLevel === 'counties' ? 'counties' : 'cbsas';
+            
+            allRegions.forEach(region => {
+                map.setFeatureState(
+                    { source: sourceId, id: region.id },
+                    { highlighted: false, dimmed: false }
+                );
+            });
+            
+            if (highlightedRegions.size > 0) {
+                allRegions.forEach(region => {
+                    map.setFeatureState(
+                        { source: sourceId, id: region.id },
+                        { dimmed: true }
+                    );
+                });
+                
+                highlightedRegions.forEach(regionId => {
+                    map.setFeatureState(
+                        { source: sourceId, id: regionId },
+                        { highlighted: true, dimmed: false }
+                    );
+                });
+                
+                const bounds = new mapboxgl.LngLatBounds();
+                highlightedRegions.forEach(regionId => {
+                    const region = allRegions.find(r => r.id == regionId);
+                    if (region && region.feature.geometry) {
+                        const coords = getFeatureCoordinates(region.feature);
+                        coords.forEach(coord => bounds.extend(coord));
+                    }
+                });
+                map.fitBounds(bounds, { padding: 50, duration: 1000 });
+            }
+        }
+
+        // Get feature coordinates
+        function getFeatureCoordinates(feature) {
+            const coords = [];
+            const geometry = feature.geometry;
+            
+            if (geometry.type === 'Polygon') {
+                geometry.coordinates[0].forEach(coord => coords.push(coord));
+            } else if (geometry.type === 'MultiPolygon') {
+                geometry.coordinates.forEach(polygon => {
+                    polygon[0].forEach(coord => coords.push(coord));
+                });
+            }
+            return coords;
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            document.querySelectorAll('.checkbox-item').forEach(item => {
+                const regionName = item.dataset.regionName;
+                if (query === '' || regionName.includes(query)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+
         // Geography level selector
         document.getElementById('geo-level').addEventListener('change', (e) => {
             currentLevel = e.target.value;
+            highlightedRegions.clear();
             
-            // Hide all layers first
             map.setPaintProperty('states-layer', 'line-opacity', 0);
+            map.setPaintProperty('states-fill', 'fill-opacity', 0);
             map.setPaintProperty('counties-layer', 'line-opacity', 0);
-            map.setPaintProperty('cbsas-layer', 'line-opacity', 0);
+            map.setPaintProperty('counties-fill', 'fill-opacity', 0);
+            if (map.getLayer('cbsas-layer')) {
+                map.setPaintProperty('cbsas-layer', 'line-opacity', 0);
+                map.setPaintProperty('cbsas-fill', 'fill-opacity', 0);
+            }
             
-            // Show selected layer
             if (currentLevel === 'states') {
                 map.setPaintProperty('states-layer', 'line-opacity', 1);
+                map.setPaintProperty('states-fill', 'fill-opacity', ['case',
+                    ['boolean', ['feature-state', 'highlighted'], false], 
+                    colorSettings.selectedNoShade ? 0 : 0.6,
+                    ['boolean', ['feature-state', 'dimmed'], false], 
+                    colorSettings.dimmedNoShade ? 0 : 0.15, 0]);
             } else if (currentLevel === 'counties') {
                 map.setPaintProperty('counties-layer', 'line-opacity', 1);
-            } else if (currentLevel === 'cbsas') {
+                map.setPaintProperty('counties-fill', 'fill-opacity', ['case',
+                    ['boolean', ['feature-state', 'highlighted'], false], 
+                    colorSettings.selectedNoShade ? 0 : 0.6,
+                    ['boolean', ['feature-state', 'dimmed'], false], 
+                    colorSettings.dimmedNoShade ? 0 : 0.15, 0]);
+            } else if (currentLevel === 'cbsas' && map.getLayer('cbsas-layer')) {
                 map.setPaintProperty('cbsas-layer', 'line-opacity', 1);
+                map.setPaintProperty('cbsas-fill', 'fill-opacity', ['case',
+                    ['boolean', ['feature-state', 'highlighted'], false], 
+                    colorSettings.selectedNoShade ? 0 : 0.6,
+                    ['boolean', ['feature-state', 'dimmed'], false], 
+                    colorSettings.dimmedNoShade ? 0 : 0.15, 0]);
             }
+            
+            populateRegionList();
         });
-        
+
         // Map load event
         map.on('load', () => {
             map.fitBounds(usBounds, { padding: 20 });
             loadGeoData();
         });
-        
+
         // Zoom controls
-        document.getElementById('zoom-in').addEventListener('click', () => {
-            map.zoomIn();
-        });
-        
-        document.getElementById('zoom-out').addEventListener('click', () => {
-            map.zoomOut();
-        });
-        
+        document.getElementById('zoom-in').addEventListener('click', () => map.zoomIn());
+        document.getElementById('zoom-out').addEventListener('click', () => map.zoomOut());
         document.getElementById('zoom-reset').addEventListener('click', () => {
-            map.fitBounds(usBounds, { 
-                padding: 20,
-                duration: 1000
-            });
+            map.fitBounds(usBounds, { padding: 20, duration: 1000 });
         });
-        
+
+        // Setup color controls
+        function setupColorControls() {
+            const borderColor = document.getElementById('border-color');
+            const borderColorHex = document.getElementById('border-color-hex');
+            
+            if (borderColor && borderColorHex) {
+                borderColor.addEventListener('input', (e) => {
+                    colorSettings.border = e.target.value;
+                    borderColorHex.value = e.target.value.toUpperCase();
+                    updateMapColors();
+                });
+                
+                borderColorHex.addEventListener('input', (e) => {
+                    const hex = e.target.value;
+                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                        colorSettings.border = hex;
+                        borderColor.value = hex;
+                        updateMapColors();
+                    }
+                });
+            }
+            
+            const selectedColor = document.getElementById('selected-color');
+            const selectedColorHex = document.getElementById('selected-color-hex');
+            const selectedNoShade = document.getElementById('selected-no-shade');
+            
+            if (selectedColor && selectedColorHex && selectedNoShade) {
+                selectedColor.addEventListener('input', (e) => {
+                    colorSettings.selected = e.target.value;
+                    selectedColorHex.value = e.target.value.toUpperCase();
+                    updateMapColors();
+                });
+                
+                selectedColorHex.addEventListener('input', (e) => {
+                    const hex = e.target.value;
+                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                        colorSettings.selected = hex;
+                        selectedColor.value = hex;
+                        updateMapColors();
+                    }
+                });
+                
+                selectedNoShade.addEventListener('change', (e) => {
+                    colorSettings.selectedNoShade = e.target.checked;
+                    updateMapColors();
+                });
+            }
+            
+            const dimmedColor = document.getElementById('dimmed-color');
+            const dimmedColorHex = document.getElementById('dimmed-color-hex');
+            const dimmedNoShade = document.getElementById('dimmed-no-shade');
+            
+            if (dimmedColor && dimmedColorHex && dimmedNoShade) {
+                dimmedColor.addEventListener('input', (e) => {
+                    colorSettings.dimmed = e.target.value;
+                    dimmedColorHex.value = e.target.value.toUpperCase();
+                    updateMapColors();
+                });
+                
+                dimmedColorHex.addEventListener('input', (e) => {
+                    const hex = e.target.value;
+                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                        colorSettings.dimmed = hex;
+                        dimmedColor.value = hex;
+                        updateMapColors();
+                    }
+                });
+                
+                dimmedNoShade.addEventListener('change', (e) => {
+                    colorSettings.dimmedNoShade = e.target.checked;
+                    updateMapColors();
+                });
+            }
+        }
+
+        // Update map colors
+        function updateMapColors() {
+            if (!map || !map.getLayer('states-layer')) return;
+            
+            const layers = ['states', 'counties', 'cbsas'];
+            
+            layers.forEach(layer => {
+                try {
+                    if (map.getLayer(`${layer}-layer`)) {
+                        map.setPaintProperty(`${layer}-layer`, 'line-color', colorSettings.border);
+                    }
+                    
+                    if (map.getLayer(`${layer}-fill`)) {
+                        map.setPaintProperty(`${layer}-fill`, 'fill-color', ['case',
+                            ['boolean', ['feature-state', 'highlighted'], false],
+                            colorSettings.selected,
+                            colorSettings.dimmed
+                        ]);
+                        
+                        map.setPaintProperty(`${layer}-fill`, 'fill-opacity', ['case',
+                            ['boolean', ['feature-state', 'highlighted'], false],
+                            colorSettings.selectedNoShade ? 0 : 0.6,
+                            ['boolean', ['feature-state', 'dimmed'], false],
+                            colorSettings.dimmedNoShade ? 0 : 0.15,
+                            0
+                        ]);
+                    }
+                } catch (e) {
+                    console.warn(`Could not update ${layer} colors`);
+                }
+            });
+        }
+
+        // Setup hover tooltip
+        function setupHoverTooltip() {
+            const tooltip = document.getElementById('mapTooltip');
+            const layers = ['states-fill', 'counties-fill', 'cbsas-fill'];
+            
+            layers.forEach(layer => {
+                if (!map.getLayer(layer)) return;
+                
+                map.on('mousemove', layer, (e) => {
+                    if (e.features.length > 0) {
+                        const name = e.features[0].properties.name || e.features[0].properties.NAME || 'Unknown';
+                        tooltip.textContent = name;
+                        tooltip.style.left = e.point.x + 10 + 'px';
+                        tooltip.style.top = e.point.y + 10 + 'px';
+                        tooltip.classList.add('show');
+                        map.getCanvas().style.cursor = 'pointer';
+                    }
+                });
+                
+                map.on('mouseleave', layer, () => {
+                    tooltip.classList.remove('show');
+                    map.getCanvas().style.cursor = '';
+                });
+            });
+        }
+
         // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
-        
+
         function setTheme(mode) {
             document.body.classList.toggle('dark-mode', mode === 'dark');
             themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             localStorage.setItem('theme', mode);
             
-            // Update map style and preserve projection
             map.setStyle(mode === 'dark' 
                 ? 'mapbox://styles/mapbox/dark-v11' 
                 : 'mapbox://styles/mapbox/light-v11'
             );
             
-            // Re-apply layers after style loads
             map.once('style.load', () => {
                 map.setProjection('mercator');
-                if (usData && countiesData && cbsaData) {
+                if (usData && countiesData) {
                     addBoundariesToMap();
-                    // Restore current layer visibility
                     setTimeout(() => {
                         document.getElementById('geo-level').dispatchEvent(new Event('change'));
                     }, 100);
                 }
             });
         }
-        
+
         const savedTheme = localStorage.getItem('theme') || 'light';
         setTheme(savedTheme);
-        
+
         themeToggle.addEventListener('click', () => {
             const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
             setTheme(newTheme);
