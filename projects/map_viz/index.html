@@ -410,7 +410,15 @@
             selectedNoShade: false,
             dimmedNoShade: false
         };
-
+        // State FIPS to abbreviation mapping
+        const stateFipsToAbbr = {
+            1: 'AL', 2: 'AK', 4: 'AZ', 5: 'AR', 6: 'CA', 8: 'CO', 9: 'CT', 10: 'DE', 11: 'DC', 12: 'FL',
+            13: 'GA', 15: 'HI', 16: 'ID', 17: 'IL', 18: 'IN', 19: 'IA', 20: 'KS', 21: 'KY', 22: 'LA', 23: 'ME',
+            24: 'MD', 25: 'MA', 26: 'MI', 27: 'MN', 28: 'MS', 29: 'MO', 30: 'MT', 31: 'NE', 32: 'NV', 33: 'NH',
+            34: 'NJ', 35: 'NM', 36: 'NY', 37: 'NC', 38: 'ND', 39: 'OH', 40: 'OK', 41: 'OR', 42: 'PA', 44: 'RI',
+            45: 'SC', 46: 'SD', 47: 'TN', 48: 'TX', 49: 'UT', 50: 'VT', 51: 'VA', 53: 'WA', 54: 'WV', 55: 'WI',
+            56: 'WY', 60: 'AS', 66: 'GU', 69: 'MP', 72: 'PR', 78: 'VI'
+        };
         // Mapbox setup
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhZHZvIiwiYSI6ImNtZWdhcjUwMDEycm8ybm9lOTRqeHZqdjAifQ.ol7GJKQKjRAQZ33trNvWWA';
 
@@ -604,11 +612,19 @@
                 } else if (currentLevel === 'counties') {
                     id = f.id;
                     name = f.properties.name;
-                    const stateFips = Math.floor(id / 1000); // Get state FIPS from county FIPS
-                    const stateFeature = topojson.feature(usData, usData.objects.states).features.find(s => s.id === stateFips);
-                    if (stateFeature) {
-                        const stateName = stateFeature.properties.name;
-                        name = `${name}, ${stateName}`;
+                    
+                    // Extract state FIPS code (first 2 digits of 5-digit county FIPS)
+                    const countyFipsStr = id.toString().padStart(5, '0');
+                    const stateFips = parseInt(countyFipsStr.substring(0, 2));
+                    
+                    // Find the state name - try both number and string comparison
+                    const stateFeature = topojson.feature(usData, usData.objects.states).features.find(s => {
+                        return s.id === stateFips || s.id === stateFips.toString() || parseInt(s.id) === stateFips;
+                    });
+                    
+                    const stateAbbr = stateFipsToAbbr[stateFips];
+                    if (stateAbbr) {
+                        name = `${name}, ${stateAbbr}`;
                     }
                 } else if (currentLevel === 'cbsas') {
                     id = f.properties.GEOID || f.properties.CBSAFP || f.properties.AFFGEOID;
