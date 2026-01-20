@@ -229,6 +229,11 @@
                 </p>
             </header>
 
+            <div class="article-visual">
+                <img src="assets/hotel_cancellation_cover.jpg" alt="Hotel Booking Cancellation Prediction" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
+                <p class="mt-3"><em>Predicting hotel booking cancellations using machine learning models</em></p>
+            </div>
+
             <h2 class="mt-5">1. Introduction: The Cost of Uncertainty</h2>
             <p>
                 Hotel booking cancellations are a major challenge in the hospitality industry, leading to direct revenue loss and difficulties in resource allocation. While some cancellations are driven by impulse, others follow predictable patterns based on booking lead times, deposit types, and market segments.
@@ -404,9 +409,26 @@
                     <i class="fab fa-github"></i>
                 </a>
             </div>
-
         </article>
     </section>
+
+    <section class="eda-gallery">
+        <div class="eda-gallery-header">
+            <h3>Miscellaneous EDA</h3>
+            <div class="eda-gallery-arrows">
+            <button onclick="scrollEDA('left')" aria-label="Scroll left"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="scrollEDA('right')" aria-label="Scroll right"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="eda-gallery-scroll" id="edaScroll">
+            <div class="eda-card">
+                <div class="eda-card-img"><img src="assets/hotel_cancellation_cover.jpg" alt="Title"></div>
+                <p>Features Correlation Chart</p>
+            </div>
+            <!-- Add more cards -->
+        </div>
+    </section>
+
 
     <section class="bg-light-blue py-5 text-center footer-section" id="contact">
         <div class="container">
@@ -634,6 +656,12 @@
 
         // Initialize chart on load
         window.addEventListener('DOMContentLoaded', createCancellationChart);
+        
+        // Scrolling EDA Section (if needed)
+        function scrollEDA(dir) {
+            const el = document.getElementById('edaScroll');
+            el.scrollBy({ left: dir === 'left' ? -220 : 220, behavior: 'smooth' });
+            }
     </script>
 
 </body>

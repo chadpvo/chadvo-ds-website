@@ -839,3 +839,17 @@ body.dark-mode .carousel-track img {
     }
 }
 
+.eda-gallery { padding: 1.5rem 0; background: var(--section-alt-bg, #f8f9fa); }
+.eda-gallery-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; max-width: 900px; margin-inline: auto; padding: 0 1rem; }
+.eda-gallery-header h3 { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted, #6c757d); margin: 0; }
+.eda-gallery-arrows { display: flex; gap: 0.25rem; }
+.eda-gallery-arrows button { width: 2rem; height: 2rem; border-radius: 50%; border: 1px solid var(--border-color, #dee2e6); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.eda-gallery-arrows button:hover { background: var(--accent-bg, #e9ecef); }
+.eda-gallery-scroll { display: flex; gap: 0.75rem; overflow-x: auto; padding: 0 1rem 0.5rem; max-width: 900px; margin: 0 auto; scrollbar-width: none; -ms-overflow-style: none; }
+.eda-gallery-scroll::-webkit-scrollbar { display: none; }
+.eda-card { flex-shrink: 0; width: 13rem; cursor: pointer; }
+.eda-card-img { height: 8rem; overflow: hidden; border-radius: 0.5rem; border: 1px solid var(--border-color, #dee2e6); }
+.eda-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.eda-card:hover .eda-card-img img { transform: scale(1.1); }
+.eda-card p { margin: 0.5rem 0 0; font-size: 0.75rem; color: var(--text-muted, #6c757d); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.2s; }
+.eda-card:hover p { color: var(--text-color, #212529); }

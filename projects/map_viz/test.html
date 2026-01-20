@@ -256,6 +256,46 @@
             margin-top: 0;
             padding-top: 30px;
         }
+
+        .form-range {
+            width: 100%;
+            height: 6px;
+            background: #dee2e6;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .form-range::-webkit-slider-thumb {
+            width: 18px;
+            height: 18px;
+            background: #0d6efd;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .form-range::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #0d6efd;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .form-range {
+            background: #404040;
+        }
+
+        body.dark-mode .form-range::-webkit-slider-thumb {
+            background: #4a9eff;
+        }
+
+        body.dark-mode .form-range::-moz-range-thumb {
+            background: #4a9eff;
+        }
     </style>
 </head>
 
@@ -319,7 +359,46 @@
                             <option value="employmentRate">Employment Rate (%)</option>
                         </select>
                     </div>
-                    
+
+                    <!-- Choropleth Color Settings (shown only when metric is selected) -->
+                    <div id="choropleth-settings" style="display: none;">
+                        <div class="section-title">CHOROPLETH COLORS</div>
+                        <div class="mb-3">
+                            <label class="form-label">Low Value Color</label>
+                            <div class="color-input-group">
+                                <input type="color" id="choro-low-color" class="form-control-color" value="#eff3ff">
+                                <input type="text" id="choro-low-hex" class="form-control form-control-sm" value="#EFF3FF">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">High Value Color</label>
+                            <div class="color-input-group">
+                                <input type="color" id="choro-high-color" class="form-control-color" value="#08519c">
+                                <input type="text" id="choro-high-hex" class="form-control form-control-sm" value="#08519C">
+                            </div>
+                        </div>
+                        
+                        <!-- Opacity Control -->
+                        <div class="mb-3">
+                            <label class="form-label">Shading Opacity: <span id="opacity-value">100</span>%</label>
+                            <input type="range" class="form-range" id="choro-opacity" min="0" max="100" value="100" step="5">
+                        </div>
+                        
+                        <!-- Label Visibility Control -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="enhance-labels" checked>
+                                <label class="form-check-label" for="enhance-labels">
+                                    Enhanced Label Visibility
+                                </label>
+                            </div>
+                            <small class="text-muted" style="font-size: 11px; display: block; margin-top: 4px;">
+                                Adds white outline to map labels for better readability
+                            </small>
+                        </div>
+                    </div>
+
                     <div class="section-title">COLOR SETTINGS</div>
                     <div class="mb-3">
                         <label class="form-label">Border Color</label>
@@ -434,7 +513,9 @@
             selectedNoShade: false,
             dimmedNoShade: false,
             choroLow: '#eff3ff',
-            choroHigh: '#08519c'
+            choroHigh: '#08519c',
+            choroOpacity: 1.0,        // NEW
+            enhanceLabels: true       // NEW
         };
 
 
@@ -457,6 +538,29 @@
             
             return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
         }
+
+
+        // Enhance label visibility
+        function enhanceLabels() {
+            if (!map || !map.getStyle()) return;
+            
+            const layers = map.getStyle().layers;
+            
+            layers.forEach(layer => {
+                if (layer.type === 'symbol' && layer.layout && layer.layout['text-field']) {
+                    if (colorSettings.enhanceLabels) {
+                        // Add white halo for better visibility
+                        map.setPaintProperty(layer.id, 'text-halo-color', '#ffffff');
+                        map.setPaintProperty(layer.id, 'text-halo-width', 2);
+                        map.setPaintProperty(layer.id, 'text-halo-blur', 1);
+                    } else {
+                        // Remove halo
+                        map.setPaintProperty(layer.id, 'text-halo-width', 0);
+                    }
+                }
+            });
+        }
+
         // State FIPS to abbreviation mapping
         const stateFipsToAbbr = {
             1: 'AL', 2: 'AK', 4: 'AZ', 5: 'AR', 6: 'CA', 8: 'CO', 9: 'CT', 10: 'DE', 11: 'DC', 12: 'FL',
@@ -468,15 +572,31 @@
         };
 
         // Economic data storage
-        let economicData = {};
+        let economicData = {
+            states: {},
+            counties: {},
+            cbsas: {}
+        };        
         let currentMetric = 'none'; // Default metric
 
         // Load economic data
         async function loadEconomicData() {
             try {
-                const response = await fetch('/projects/map_viz/data/states_economic_data.json');
-                economicData = await response.json();
-                console.log('✓ Economic data loaded:', Object.keys(economicData).length, 'states');
+                const [statesData, countiesData, cbsasData] = await Promise.all([
+                    fetch('/projects/map_viz/data/states_economic_data.json').then(r => r.json()),
+                    fetch('/projects/map_viz/data/counties_economic_data.json').then(r => r.json()),
+                    fetch('/projects/map_viz/data/cbsas_economic_data.json').then(r => r.json())
+                ]);
+                
+                economicData.states = statesData;
+                economicData.counties = countiesData;
+                economicData.cbsas = cbsasData;
+                
+                console.log('✓ Economic data loaded:', {
+                    states: Object.keys(economicData.states).length,
+                    counties: Object.keys(economicData.counties).length,
+                    cbsas: Object.keys(economicData.cbsas).length
+                });
             } catch (error) {
                 console.error('Error loading economic data:', error);
             }
@@ -545,21 +665,22 @@
 
         // Add boundaries as Mapbox layers
         function addBoundariesToMap() {
+            // Find the first label layer in the current style
+            const layers = map.getStyle().layers;
+            let firstLabelLayerId;
+            for (const layer of layers) {
+                if (layer.type === 'symbol' && layer.layout['text-field']) {
+                    firstLabelLayerId = layer.id;
+                    break;
+                }
+            }
+            
             map.addSource('states', {
                 type: 'geojson',
                 data: topojson.feature(usData, usData.objects.states)
             });
             
-            map.addLayer({
-                id: 'states-layer',
-                type: 'line',
-                source: 'states',
-                paint: {
-                    'line-color': colorSettings.border,
-                    'line-width': 0.3
-                }
-            });
-            
+            // Add fill layer first, before labels
             map.addLayer({
                 id: 'states-fill',
                 type: 'fill',
@@ -578,22 +699,22 @@
                         0
                     ]
                 }
-            }, 'states-layer');
+            }, firstLabelLayerId); // Insert before labels
+            
+            // Add border layer on top of fill but still before labels
+            map.addLayer({
+                id: 'states-layer',
+                type: 'line',
+                source: 'states',
+                paint: {
+                    'line-color': colorSettings.border,
+                    'line-width': 0.3
+                }
+            }, firstLabelLayerId); // Insert before labels
             
             map.addSource('counties', {
                 type: 'geojson',
                 data: topojson.feature(countiesData, countiesData.objects.counties)
-            });
-            
-            map.addLayer({
-                id: 'counties-layer',
-                type: 'line',
-                source: 'counties',
-                paint: {
-                    'line-color': colorSettings.border,
-                    'line-width': 0.3,
-                    'line-opacity': 0
-                }
             });
             
             map.addLayer({
@@ -614,24 +735,24 @@
                         0
                     ]
                 }
-            }, 'counties-layer');
+            }, firstLabelLayerId); // Insert before labels
+            
+            map.addLayer({
+                id: 'counties-layer',
+                type: 'line',
+                source: 'counties',
+                paint: {
+                    'line-color': colorSettings.border,
+                    'line-width': 0.3,
+                    'line-opacity': 0
+                }
+            }, firstLabelLayerId); // Insert before labels
             
             if (cbsaData) {
                 map.addSource('cbsas', {
                     type: 'geojson',
                     data: cbsaData,
                     promoteId: 'GEOID'
-                });
-                
-                map.addLayer({
-                    id: 'cbsas-layer',
-                    type: 'line',
-                    source: 'cbsas',
-                    paint: {
-                        'line-color': colorSettings.border,
-                        'line-width': 0.4,
-                        'line-opacity': 0
-                    }
                 });
                 
                 map.addLayer({
@@ -652,7 +773,18 @@
                             0
                         ]
                     }
-                }, 'cbsas-layer');
+                }, firstLabelLayerId); // Insert before labels
+                
+                map.addLayer({
+                    id: 'cbsas-layer',
+                    type: 'line',
+                    source: 'cbsas',
+                    paint: {
+                        'line-color': colorSettings.border,
+                        'line-width': 0.4,
+                        'line-opacity': 0
+                    }
+                }, firstLabelLayerId); // Insert before labels
             }
         }
 
@@ -781,33 +913,27 @@
         }
 
         // Color scale for choropleth - Linear gradient from min to max
-        function getColorForValue(value, metric) {
+        function getColorForValue(value, metric, allValues) {
             if (value === null || value === undefined) return colorSettings.dimmed;
+            if (allValues.length === 0) return colorSettings.dimmed;
             
-            // Get all values for the current metric to determine scale
-            const values = Object.values(economicData)
-                .map(d => d[metric])
-                .filter(v => v !== null && v !== undefined);
-            
-            if (values.length === 0) return colorSettings.dimmed;
-            
-            // Find min and max
-            const sortedValues = [...values].sort((a, b) => a - b);
+            const sortedValues = [...allValues].sort((a, b) => a - b);
             const min = sortedValues[0];
             const max = sortedValues[sortedValues.length - 1];
             
-            // Handle edge case where all values are the same
             if (max === min) return interpolateColor(colorSettings.choroLow, colorSettings.choroHigh, 0.5);
             
-            // Normalize value between 0 and 1
             const normalized = (value - min) / (max - min);
-            
-            // Interpolate between low and high colors
             return interpolateColor(colorSettings.choroLow, colorSettings.choroHigh, normalized);
         }
 
         // Apply choropleth shading
         function applyChoropleth() {
+            const choroplethSettings = document.getElementById('choropleth-settings');
+            if (choroplethSettings) {
+                choroplethSettings.style.display = currentMetric !== 'none' ? 'block' : 'none';
+            }
+
             if (currentMetric === 'none') {
                 // Reset to normal manual selection mode
                 allRegions.forEach(region => {
@@ -839,6 +965,23 @@
                 });
                 return;
             }
+
+            // Determine which dataset and layer to use
+            let dataset, layerId, idField;
+            
+            if (currentLevel === 'states') {
+                dataset = economicData.states;
+                layerId = 'states-fill';
+                idField = 'id'; // Numeric state FIPS
+            } else if (currentLevel === 'counties') {
+                dataset = economicData.counties;
+                layerId = 'counties-fill';
+                idField = 'id'; // Numeric 5-digit county FIPS
+            } else if (currentLevel === 'cbsas') {
+                dataset = economicData.cbsas;
+                layerId = 'cbsas-fill';
+                idField = 'properties.GEOID'; // String CBSA code
+            }
             
             // Clear manual selections
             highlightedRegions.clear();
@@ -847,21 +990,40 @@
             });
             
             // Build color expression based on FIPS codes
-            const colorExpression = ['match', ['id']]; // Use numeric ID, not string
-            const allValues = Object.values(economicData)
+            let colorExpression;
+            if (currentLevel === 'cbsas') {
+                colorExpression = ['match', ['get', 'GEOID']]; // CBSAs use GEOID property
+            } else {
+                colorExpression = ['match', ['id']]; // States/counties use numeric ID
+            }
+            const allValues = Object.values(dataset)
                 .map(d => d[currentMetric])
                 .filter(v => v !== null && v !== undefined);
+            // const colorExpression = ['match', ['id']]; // Use numeric ID, not string
+            // const allValues = Object.values(economicData)
+            //     .map(d => d[currentMetric])
+            //     .filter(v => v !== null && v !== undefined);
 
             console.log('All values for', currentMetric, ':', allValues); // DEBUG
             // Add each state's color based on its data
-            Object.keys(economicData).forEach(fips => {
-                const stateData = economicData[fips];
-                const value = stateData ? stateData[currentMetric] : null;
-                const color = getColorForValue(value, currentMetric);
+            // Object.keys(economicData).forEach(fips => {
+            //     const stateData = economicData[fips];
+            //     const value = stateData ? stateData[currentMetric] : null;
+            //     const color = getColorForValue(value, currentMetric);
                 
-                // Convert FIPS to number for matching (removes leading zeros)
-                const numericFips = parseInt(fips, 10);
-                colorExpression.push(numericFips, color);
+            //     // Convert FIPS to number for matching (removes leading zeros)
+            //     const numericFips = parseInt(fips, 10);
+            //     colorExpression.push(numericFips, color);
+            // });
+
+            Object.keys(dataset).forEach(key => {
+                const data = dataset[key];
+                const value = data ? data[currentMetric] : null;
+                const color = getColorForValue(value, currentMetric, allValues);
+                
+                // For counties/states: convert to number, for CBSAs: keep as string
+                const matchKey = (currentLevel === 'cbsas') ? key : parseInt(key, 10);
+                colorExpression.push(matchKey, color);
             });
 
             // Default color for any unmatched states
@@ -869,11 +1031,10 @@
             console.log('Color expression:', colorExpression); // DEBUG
 
             // Apply the color expression to the map
-            map.setPaintProperty('states-fill', 'fill-color', colorExpression);
-            map.setPaintProperty('states-fill', 'fill-opacity', 1);
+            map.setPaintProperty(layerId, 'fill-color', colorExpression);
+            map.setPaintProperty(layerId, 'fill-opacity', colorSettings.choroOpacity);
 
-            updateLegend(); // ADD THIS LINE
-
+            updateLegend(); 
         }
 
         // Update legend visibility and colors
@@ -884,7 +1045,7 @@
             
             if (!legend || !legendTitle || !legendGradient) return;
             
-            if (currentMetric !== 'none' && currentLevel === 'states') {
+            if (currentMetric !== 'none') {
                 // Show legend
                 legend.style.display = 'block';
                 
@@ -956,7 +1117,7 @@
             
             populateRegionList();
             setupHoverTooltip(); // Re-setup tooltip for new geography level
-            if (currentMetric !== 'none' && currentLevel === 'states') {
+            if (currentMetric !== 'none') {
                 applyChoropleth();
             }
         });
@@ -965,21 +1126,29 @@
         document.getElementById('metric-selector').addEventListener('change', (e) => {
             currentMetric = e.target.value;
             
-            if (currentLevel !== 'states') {
-                alert('Data visualization is only available for States view. Switching to States...');
-                document.getElementById('geo-level').value = 'states';
-                document.getElementById('geo-level').dispatchEvent(new Event('change'));
+            // Toggle choropleth settings visibility
+            const choroplethSettings = document.getElementById('choropleth-settings');
+            if (choroplethSettings) {
+                choroplethSettings.style.display = currentMetric !== 'none' ? 'block' : 'none';
             }
+            
+            // if (currentLevel !== 'states') {
+            //     alert('Data visualization is only available for States view. Switching to States...');
+            //     document.getElementById('geo-level').value = 'states';
+            //     document.getElementById('geo-level').dispatchEvent(new Event('change'));
+            // }
             
             applyChoropleth();
             updateLegend(); 
         });
+
         // Map load event
         map.on('load', async () => {
             map.fitBounds(usBounds, { padding: 20 });
             await loadGeoData();
             await loadEconomicData();
-            
+            // Apply initial label enhancement
+            enhanceLabels();
             // Setup hover tooltip AFTER everything is loaded
             setTimeout(() => {
                 setupHoverTooltip();
@@ -1067,6 +1236,80 @@
                     updateMapColors();
                 });
             }
+            
+            // Choropleth color controls
+            const choroLowColor = document.getElementById('choro-low-color');
+            const choroLowHex = document.getElementById('choro-low-hex');
+            
+            if (choroLowColor && choroLowHex) {
+                choroLowColor.addEventListener('input', (e) => {
+                    colorSettings.choroLow = e.target.value;
+                    choroLowHex.value = e.target.value.toUpperCase();
+                    if (currentMetric !== 'none') {
+                        applyChoropleth();
+                    }
+                });
+                
+                choroLowHex.addEventListener('input', (e) => {
+                    const hex = e.target.value;
+                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                        colorSettings.choroLow = hex;
+                        choroLowColor.value = hex;
+                        if (currentMetric !== 'none') {
+                            applyChoropleth();
+                        }
+                    }
+                });
+            }
+            
+            const choroHighColor = document.getElementById('choro-high-color');
+            const choroHighHex = document.getElementById('choro-high-hex');
+            
+            if (choroHighColor && choroHighHex) {
+                choroHighColor.addEventListener('input', (e) => {
+                    colorSettings.choroHigh = e.target.value;
+                    choroHighHex.value = e.target.value.toUpperCase();
+                    if (currentMetric !== 'none') {
+                        applyChoropleth();
+                    }
+                });
+                
+                choroHighHex.addEventListener('input', (e) => {
+                    const hex = e.target.value;
+                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                        colorSettings.choroHigh = hex;
+                        choroHighColor.value = hex;
+                        if (currentMetric !== 'none') {
+                            applyChoropleth();
+                        }
+                    }
+                });
+            }
+
+            // Opacity slider
+            const opacitySlider = document.getElementById('choro-opacity');
+            const opacityValue = document.getElementById('opacity-value');
+            
+            if (opacitySlider && opacityValue) {
+                opacitySlider.addEventListener('input', (e) => {
+                    const value = parseInt(e.target.value);
+                    opacityValue.textContent = value;
+                    colorSettings.choroOpacity = value / 100;
+                    if (currentMetric !== 'none') {
+                        applyChoropleth();
+                    }
+                });
+            }
+            
+            // Label enhancement toggle
+            const enhanceLabelsCheckbox = document.getElementById('enhance-labels');
+            
+            if (enhanceLabelsCheckbox) {
+                enhanceLabelsCheckbox.addEventListener('change', (e) => {
+                    colorSettings.enhanceLabels = e.target.checked;
+                    enhanceLabels();
+                });
+            }
         }
 
         // Update map colors
@@ -1122,7 +1365,6 @@
             return 'Unknown';
         }
 
-        // Setup hover tooltip - FIXED to query only current geo level
         function setupHoverTooltip() {
             const tooltip = document.getElementById('mapTooltip');
             if (!tooltip) return;
@@ -1149,18 +1391,25 @@
                     
                     let tooltipText = name;
                     
-                    // Always show ALL metrics for states (if data is available)
+                    // Get data based on current level
+                    let regionData;
                     if (currentLevel === 'states') {
                         const featureId = String(feature.id).padStart(2, '0');
-                        const stateData = economicData[featureId];
-                        
-                        if (stateData) {
-                            if (stateData.medianIncome) {
-                                tooltipText += `<br>Median Income: $${stateData.medianIncome.toLocaleString()}`;
-                            }
-                            if (stateData.employmentRate) {
-                                tooltipText += `<br>Employment Rate: ${stateData.employmentRate}%`;
-                            }
+                        regionData = economicData.states[featureId];
+                    } else if (currentLevel === 'counties') {
+                        const featureId = String(feature.id).padStart(5, '0');
+                        regionData = economicData.counties[featureId];
+                    } else if (currentLevel === 'cbsas') {
+                        const featureId = feature.properties.GEOID;
+                        regionData = economicData.cbsas[featureId];
+                    }
+
+                    if (regionData) {
+                        if (regionData.medianIncome) {
+                            tooltipText += `<br>Median Income: $${regionData.medianIncome.toLocaleString()}`;
+                        }
+                        if (regionData.employmentRate) {
+                            tooltipText += `<br>Employment Rate: ${regionData.employmentRate}%`;
                         }
                     }
                     
@@ -1202,6 +1451,7 @@
                 map.setProjection('mercator');
                 if (usData && countiesData) {
                     addBoundariesToMap();
+                    enhanceLabels();
                     setTimeout(() => {
                         document.getElementById('geo-level').dispatchEvent(new Event('change'));
                     }, 100);
