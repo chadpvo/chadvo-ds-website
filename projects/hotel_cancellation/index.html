@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/chadvo-ds-website/assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/chadvo-ds-website/assets/img/favicon.png">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <style>
+        /* Interactive Chart Styles */
+        .chart-wrapper {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            max-width: 100%;
+            margin-bottom: 3rem;
+        }
+        .chart-header { margin-bottom: 25px; text-align: center; }
+        .chart-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        .chart-subtitle {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+        }
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+        .bg-orange { background: #E19776; } 
+        .bg-blue { background: #7293CB; }   
+
+        .chart-inner {
+            position: relative;
+            padding-left: 0px;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+        .chart-area {
+            position: relative;
+            height: 400px;
+        }
+        .grid-lines {
+            position: absolute;
+            left: 0; right: 0; top: 0; bottom: 0;
+            pointer-events: none;
+        }
+        .grid-lines div {
+            position: absolute;
+            left: 0; right: 0;
+            height: 1px;
+            background: #e8e8e8;
+        }
+        .x-axis-line {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 1px;
+            background: #ddd;
+        }
+        .bars-container {
+            position: absolute;
+            left: 0; right: 0; bottom: 0; top: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        .bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100%;
+            margin: 0 4px; 
+        }
+        
+        /* Stacked Bar Styling */
+        .bars {
+            position: absolute;
+            left: 10%; right: 10%; 
+            bottom: 0;
+            top: 0;
+        }
+        
+        .bar-segment {
+            position: absolute;
+            width: 100%;
+            /* Animation properties */
+            transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.5s ease-out;
+            transform: scaleY(0); /* Start hidden */
+            will-change: transform;
+        }
+
+        /* Bottom segment (Orange/Cancelled) - Grows UP */
+        .bar-segment.bottom {
+            bottom: 0;
+            z-index: 2;
+            transform-origin: bottom; /* Key: Grows from bottom up */
+        }
+        
+        /* Top segment (Blue/Not Cancelled) - Grows DOWN */
+        .bar-segment.top {
+            z-index: 1;
+            transform-origin: top;    /* Key: Grows from top down */
+        }
+        
+        .segment-label {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            color: white;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0; 
+            transition: opacity 0.5s ease-out 1s; 
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .dataset-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Animation Trigger */
+        #cancellationChart.animate .bar-segment {
+            transform: scaleY(1);
+        }
+        #cancellationChart.animate .segment-label {
+            opacity: 1;
+        }
+
+        /* Dark Mode Overrides */
+        .dark-mode .chart-wrapper { background: #1a1a1a; }
+        .dark-mode .chart-title, .dark-mode .dataset-label { color: #e8e8e8; }
+        .dark-mode .chart-subtitle { color: #999; }
+        
+        /* Winner Highlight */
+        .winner-row {
+            background-color: #d1e7dd !important; 
+            border-left: 4px solid #198754;
+        }
+        .dark-mode .winner-row {
+            background-color: #0f5132 !important;
+            color: #fff;
+        }
+    </style>
+</head>
+<body data-page="hotel_cancellation_prediction">
+
+    <header id="stickyHeader" class="sticky-header">
+        <div class="container py-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="../../index.html">
+                    <img src="../../assets/img/logo.png" alt="Chad Vo Data Scientist Logo" class="site-logo">
+                </a>   
+
+                <button id="themeToggle" class="theme-toggle ms-2" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <nav class="top-nav">
+                    <a href="../../index.html#about" class="text-decoration-none text-dark ms-4">About</a>
+                    <a href="../../index.html#contact" class="text-decoration-none text-dark ms-4">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="container text-center mt-4 mb-5">
+        <h1 class="display-4 fw-bold hero-name">Predicting Hotel Booking Cancellations with Machine Learning</h1>
+        <p class="text-muted mb-2" style="font-size: 0.95rem;">
+            Chad Vo, Kristen Lin, Emily Zhao, Karan Patel
+        </p>
+        <p class="article-meta text-muted mb-3"
+            data-published="2026-1-19">
+            <span id="publishDate"></span> •
+            <span id="readingTime"></span>
+        </p>
+
+        <p class="text-muted mb-3" style="font-size: 0.85rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <strong>Tech Stack:</strong> Python, TensorFlow, Scikit-learn, Neural Networks, XGBoost, Random Forest
+        </p>
+        <div class="d-flex justify-content-center gap-4 mb-4 project-actions">
+            <a href="https://github.com/chadpvo/ML-hotel-cancellation-prediction/tree/project" target="_blank" rel="noopener noreferrer" title="Project Repository">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <div class="decorative-separator mx-auto"></div>    
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">
+            <strong>Summary:</strong> This project explores how machine learning can be used to predict hotel reservation cancellations by modeling customer booking behavior, timing, and reservation characteristics using tree-based models and neural networks.
+        </p>
+    </section>
+
+    <section class="project-article container mb-5">
+        <article class="article-body">
+            <header>
+                <p class="lead">
+                    <strong>TL;DR:</strong> Hotel cancellations create revenue loss and operational inefficiency. By leveraging XGBoost on booking data, we achieved a model with <strong>86% precision</strong> and an <strong>ROC AUC of 0.93</strong>, outperforming Logistic Regression and Neural Networks in identifying high-risk reservations.
+                </p>
+            </header>
+
+            <h2 class="mt-5">1. Introduction: The Cost of Uncertainty</h2>
+            <p>
+                Hotel booking cancellations are a major challenge in the hospitality industry, leading to direct revenue loss and difficulties in resource allocation. While some cancellations are driven by impulse, others follow predictable patterns based on booking lead times, deposit types, and market segments.
+            </p>
+            <p>
+                The goal of this project was to move from reactive cancellation management to proactive decision-making. [cite_start]By developing machine learning models capable of analyzing large-scale reservation data, we aimed to identify high-risk bookings before they cancel, allowing hotels to implement dynamic pricing or personalized retention strategies[cite: 17, 19, 21].
+            </p>
+
+            <h2 class="mt-5">2. The Dataset & Engineering</h2>
+            <p>
+                [cite_start]We utilized the <a href="https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand" target="_blank">Hotel Booking Demand dataset</a> from Kaggle, containing 119,390 reservations from a Portuguese hotel chain (2015–2017)[cite: 36]. [cite_start]The dataset included 32 features covering booking timing, demographics, and special requests[cite: 37].
+            </p>
+            
+            <h3 class="h5 mt-4">Exploratory Data Analysis (EDA)</h3>
+            <p>
+                Before modeling, we performed extensive EDA to understand the underlying patterns of cancellations. [cite_start]We observed stable cancellation rates throughout the year, fluctuating between 30% and 40%, with slight dips during the start and end of the year[cite: 83].
+            </p>
+
+            <div id="cancellationChart" class="chart-container mt-5"></div>
+
+            <p class="mt-4">
+                We also analyzed feature correlations to identify which factors most strongly influenced cancellation likelihood. [cite_start]The heatmap data revealed distinct drivers for cancellations versus kept bookings[cite: 85].
+            </p>
+
+            <table class="table table-hover mt-3 mb-4 border">
+                <thead class="table-light">
+                    <tr>
+                        <th>Feature</th>
+                        <th>Correlation</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-danger">
+                        <td><strong>Deposit Type: Non-Refundable</strong></td>
+                        <td>0.481</td>
+                        [cite_start]<td>Increases Risk (High) [cite: 98]</td>
+                    </tr>
+                    <tr>
+                        <td>Lead Time</td>
+                        <td>0.290</td>
+                        [cite_start]<td>Increases Risk [cite: 98]</td>
+                    </tr>
+                    <tr>
+                        <td>Is Reserved Room Type</td>
+                        <td>0.250</td>
+                        [cite_start]<td>Increases Risk [cite: 98]</td>
+                    </tr>
+                    <tr>
+                        <td>Market Segment: Groups</td>
+                        <td>0.222</td>
+                        [cite_start]<td>Increases Risk [cite: 98]</td>
+                    </tr>
+                    <tr>
+                        <td>Distribution Channel: TA/TO</td>
+                        <td>0.176</td>
+                        [cite_start]<td>Increases Risk [cite: 98]</td>
+                    </tr>
+                    <tr class="table-success">
+                        <td><strong>Deposit Type: No Deposit</strong></td>
+                        <td>-0.478</td>
+                        [cite_start]<td>Decreases Risk (High) [cite: 95]</td>
+                    </tr>
+                    <tr>
+                        <td>Total Special Requests</td>
+                        <td>-0.230</td>
+                        [cite_start]<td>Decreases Risk [cite: 95]</td>
+                    </tr>
+                    <tr>
+                        <td>Required Car Parking Spaces</td>
+                        <td>-0.200</td>
+                        [cite_start]<td>Decreases Risk [cite: 95]</td>
+                    </tr>
+                    <tr>
+                        <td>Market Segment: Direct</td>
+                        <td>-0.154</td>
+                        [cite_start]<td>Decreases Risk [cite: 95]</td>
+                    </tr>
+                    <tr>
+                        <td>Distribution Channel: Direct</td>
+                        <td>-0.152</td>
+                        [cite_start]<td>Decreases Risk [cite: 95]</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-muted small"><em>Table 1: Top 10 Features Correlated with Cancellation. "Positive" correlation indicates higher likelihood of cancelling.</em></p>
+
+            <h2 class="mt-5">3. Methodology & Models</h2>
+            <p>
+                [cite_start]We approached this as a binary classification problem, comparing four distinct algorithms to balance precision and recall[cite: 23].
+            </p>
+            <p>
+                <strong>The Models:</strong>
+            </p>
+            <ul>
+                [cite_start]<li><strong>Logistic Regression (Baseline):</strong> Provided a baseline accuracy of ~81% but struggled with non-linear relationships, resulting in low recall (60%)[cite: 122, 123].</li>
+                [cite_start]<li><strong>Random Forest:</strong> An ensemble method that improved performance by capturing non-linear interactions through majority voting, reducing the risk of overfitting[cite: 127, 129].</li>
+                <li><strong>XGBoost:</strong> A gradient boosting framework that builds trees sequentially to correct previous errors. [cite_start]We tuned it with 200 trees and a max depth of 15, handling the dataset's complexity and class imbalance effectively[cite: 134, 138, 140].</li>
+                <li><strong>Neural Network:</strong> A multi-layer perceptron with ReLU activation and dropout regularization. [cite_start]While powerful, it was computationally intensive and slightly less robust than the tree-based models for this specific structured data[cite: 145, 146, 149].</li>
+            </ul>
+
+            <h2 class="mt-5">4. Results & Discussion</h2>
+            <p>
+                [cite_start]We evaluated models based on <strong>Precision</strong> (to avoid annoying loyal guests with false alarms) and <strong>ROC AUC</strong> (overall separability)[cite: 157, 163, 166].
+            </p>
+            
+            <table class="table table-hover mt-4 mb-4 border">
+                <thead class="table-light">
+                    <tr>
+                        <th>Model</th>
+                        <th>Precision</th>
+                        <th>PR AUC</th>
+                        <th>F1-Score</th>
+                        <th>ROC AUC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Logistic Regression</td>
+                        <td>0.82</td>
+                        <td>0.84</td>
+                        <td>0.71</td>
+                        <td>0.77</td>
+                    </tr>
+                    <tr>
+                        <td>Random Forest</td>
+                        <td>0.87</td>
+                        <td>0.90</td>
+                        <td>0.79</td>
+                        <td>0.92</td>
+                    </tr>
+                    <tr class="winner-row">
+                        <td><strong>XGBoost (Best)</strong></td>
+                        <td><strong>0.86</strong></td>
+                        <td><strong>0.91</strong></td>
+                        <td><strong>0.80</strong></td>
+                        <td><strong>0.93</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Neural Network</td>
+                        <td>0.84</td>
+                        <td>0.87</td>
+                        <td>0.75</td>
+                        <td>0.91</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-muted small"><em>Table 2: Performance metrics on the Test Set. [cite_start]XGBoost performed best across F1-score and ROC AUC[cite: 187].</em></p>
+
+            <p>
+                <strong>Key Findings:</strong>
+                <ul>
+                    [cite_start]<li><strong>XGBoost was the superior model:</strong> It achieved the highest F1-score (0.80) and ROC AUC (0.93), successfully capturing complex patterns that the baseline missed[cite: 192].</li>
+                    <li><strong>Feature Importance:</strong> As shown in Table 1, the "Deposit Type" (specifically non-refundable) and "Lead Time" were the strongest predictors of cancellation. [cite_start]Guests who made special requests were significantly less likely to cancel[cite: 112].</li>
+                </ul>
+            </p>
+
+            <div class="article-visual">
+                <img src="assets/hotel_cancellation_dashboard.png" alt="Hotel Cancellation Prediction" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
+                <p class="mt-3"><em>Snapshot of the interactive cancellation risk dashboard</em></p>
+            </div>
+
+            <h2 class="mt-5">5. Conclusion</h2>
+            <p>
+                This study demonstrated that machine learning can effectively distinguish between reliable bookings and likely cancellations. [cite_start]While Logistic Regression provided interpretability, ensemble methods like XGBoost offered the necessary complexity to maximize precision[cite: 190, 192].
+            </p>
+            
+            <p class="article-note mt-5 text-center">
+                <strong>Full code, experiments, and model evaluations</strong>
+            </p>
+            <div class="d-flex justify-content-center gap-4 mt-3 project-actions">
+                <a href="https://github.com/chadpvo/ML-hotel-cancellation-prediction/tree/project" target="_blank" rel="noopener noreferrer" title="Project Repository">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+        </article>
+    </section>
+
+    <section class="bg-light-blue py-5 text-center footer-section" id="contact">
+        <div class="container">
+            <h4 class="fw-bold mb-4">Let's Work Together!</h4>
+            <div class="d-flex justify-content-center social-icons mb-5">
+                <a href="https://linkedin.com/in/chadvo" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/chadpvo" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:chadpvo@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="footer-text small mb-0">
+                &copy; Copyright <span id="year"></span> All rights reserved | Developed by Chad Vo
+            </p>
+        </div>
+    </section>
+
+    <div id="imageModal" class="image-modal">
+        <span class="image-modal-close">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
+
+    <button id="scrollToTop" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="../../js/page-config.js"></script>
+    <script src="../../js/seo-injector.js"></script>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Sticky Header Logic
+        window.addEventListener('DOMContentLoaded', () => {
+            const stickyHeader = document.getElementById('stickyHeader');
+            const headerHeight = stickyHeader.offsetHeight;
+            document.body.style.paddingTop = headerHeight + 'px';
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > headerHeight) {
+                    stickyHeader.classList.add('floating');
+                } else {
+                    stickyHeader.classList.remove('floating');
+                }
+            });
+        });
+
+        // Image Zoom Logic
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.image-modal-close');
+        const zoomableImages = document.querySelectorAll('.zoomable-image');
+
+        zoomableImages.forEach(img => {
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.classList.add('active');
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Scroll to Top Logic
+        const scrollBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        function setTheme(mode) {
+            document.body.classList.toggle('dark-mode', mode === 'dark');
+            themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', mode);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // Meta Data Logic
+        const meta = document.querySelector('.article-meta');
+        const published = new Date(meta.dataset.published);
+        document.getElementById('publishDate').textContent =
+            published.toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+        const articleText = document.querySelector('.article-body').innerText;
+        const words = articleText.trim().split(/\s+/).length;
+        const minutes = Math.ceil(words / 225);
+        document.getElementById('readingTime').textContent = `${minutes} min read`;
+
+        // ==========================================
+        //  Dynamic Chart Logic (Cancellation by Month)
+        // ==========================================
+        function createCancellationChart() {
+            // Data extracted from your provided graphic
+            const data = [
+                { month: 1,  cancel: 30.5, ok: 69.5 },
+                { month: 2,  cancel: 33.4, ok: 66.6 },
+                { month: 3,  cancel: 32.1, ok: 67.9 },
+                { month: 4,  cancel: 40.8, ok: 59.2 },
+                { month: 5,  cancel: 39.8, ok: 60.3 },
+                { month: 6,  cancel: 41.5, ok: 58.5 },
+                { month: 7,  cancel: 37.5, ok: 62.5 },
+                { month: 8,  cancel: 37.8, ok: 62.2 },
+                { month: 9,  cancel: 39.2, ok: 60.8 },
+                { month: 10, cancel: 38.0, ok: 62.0 },
+                { month: 11, cancel: 31.2, ok: 68.8 },
+                { month: 12, cancel: 35.0, ok: 65.0 }
+            ];
+
+            // Generate bars
+            let barsHTML = '';
+            data.forEach((d, index) => {
+                // Stagger delay based on index so they don't all rise at once
+                const baseDelay = index * 0.1; 
+                
+                barsHTML += `
+                    <div class="bar-group">
+                        <div class="bars">
+                            <div class="bar-segment bottom bg-orange" 
+                                 style="height: ${d.cancel}%; transition-delay: ${baseDelay}s;">
+                                <span class="segment-label">${d.cancel}%</span>
+                            </div>
+                            
+                            <div class="bar-segment top bg-blue" 
+                                 style="height: ${d.ok}%; bottom: ${d.cancel}%; transition-delay: ${baseDelay}s;">
+                                <span class="segment-label" style="top:50%">${d.ok}%</span>
+                            </div>
+                        </div>
+                        <div class="dataset-label">${d.month}</div>
+                    </div>
+                `;
+            });
+
+            const chartHTML = `
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <div class="chart-title">Percentage of Cancellations by Month</div>
+                        <p class="chart-subtitle">Stacked distribution: Cancelled vs. Not Cancelled</p>
+                    </div>
+
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color bg-blue"></div>
+                            <span>Not Cancelled (0)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color bg-orange"></div>
+                            <span>Cancelled (1)</span>
+                        </div>
+                    </div>
+
+                    <div class="chart-inner">
+                        <div class="chart-area">
+                            <div class="grid-lines">
+                                <div style="top: 0;"></div>
+                                <div style="top: 25%;"></div>
+                                <div style="top: 50%;"></div>
+                                <div style="top: 75%;"></div>
+                            </div>
+                            <div class="x-axis-line"></div>
+                            
+                            <div id="chartBars" class="bars-container">
+                                ${barsHTML}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4 text-muted small">Month of Year</div>
+                </div>
+            `;
+            
+            document.getElementById('cancellationChart').innerHTML = chartHTML;
+            initScrollAnimation();
+        }
+
+        function initScrollAnimation() {
+            const chart = document.getElementById('cancellationChart');
+            if (!chart) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        chart.classList.add('animate');
+                    } else {
+                        chart.classList.remove('animate');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(chart);
+        }
+
+        // Initialize chart on load
+        window.addEventListener('DOMContentLoaded', createCancellationChart);
+    </script>
+
+</body>
+</html>
