@@ -572,15 +572,31 @@
         };
 
         // Economic data storage
-        let economicData = {};
+        let economicData = {
+            states: {},
+            counties: {},
+            cbsas: {}
+        };        
         let currentMetric = 'none'; // Default metric
 
         // Load economic data
         async function loadEconomicData() {
             try {
-                const response = await fetch('/projects/map_viz/data/states_economic_data.json');
-                economicData = await response.json();
-                console.log('✓ Economic data loaded:', Object.keys(economicData).length, 'states');
+                const [statesData, countiesData, cbsasData] = await Promise.all([
+                    fetch('/projects/map_viz/data/states_economic_data.json').then(r => r.json()),
+                    fetch('/projects/map_viz/data/counties_economic_data.json').then(r => r.json()),
+                    fetch('/projects/map_viz/data/cbsas_economic_data.json').then(r => r.json())
+                ]);
+                
+                economicData.states = statesData;
+                economicData.counties = countiesData;
+                economicData.cbsas = cbsasData;
+                
+                console.log('✓ Economic data loaded:', {
+                    states: Object.keys(economicData.states).length,
+                    counties: Object.keys(economicData.counties).length,
+                    cbsas: Object.keys(economicData.cbsas).length
+                });
             } catch (error) {
                 console.error('Error loading economic data:', error);
             }
@@ -897,28 +913,17 @@
         }
 
         // Color scale for choropleth - Linear gradient from min to max
-        function getColorForValue(value, metric) {
+        function getColorForValue(value, metric, allValues) {
             if (value === null || value === undefined) return colorSettings.dimmed;
+            if (allValues.length === 0) return colorSettings.dimmed;
             
-            // Get all values for the current metric to determine scale
-            const values = Object.values(economicData)
-                .map(d => d[metric])
-                .filter(v => v !== null && v !== undefined);
-            
-            if (values.length === 0) return colorSettings.dimmed;
-            
-            // Find min and max
-            const sortedValues = [...values].sort((a, b) => a - b);
+            const sortedValues = [...allValues].sort((a, b) => a - b);
             const min = sortedValues[0];
             const max = sortedValues[sortedValues.length - 1];
             
-            // Handle edge case where all values are the same
             if (max === min) return interpolateColor(colorSettings.choroLow, colorSettings.choroHigh, 0.5);
             
-            // Normalize value between 0 and 1
             const normalized = (value - min) / (max - min);
-            
-            // Interpolate between low and high colors
             return interpolateColor(colorSettings.choroLow, colorSettings.choroHigh, normalized);
         }
 
@@ -960,6 +965,23 @@
                 });
                 return;
             }
+
+            // Determine which dataset and layer to use
+            let dataset, layerId, idField;
+            
+            if (currentLevel === 'states') {
+                dataset = economicData.states;
+                layerId = 'states-fill';
+                idField = 'id'; // Numeric state FIPS
+            } else if (currentLevel === 'counties') {
+                dataset = economicData.counties;
+                layerId = 'counties-fill';
+                idField = 'id'; // Numeric 5-digit county FIPS
+            } else if (currentLevel === 'cbsas') {
+                dataset = economicData.cbsas;
+                layerId = 'cbsas-fill';
+                idField = 'properties.GEOID'; // String CBSA code
+            }
             
             // Clear manual selections
             highlightedRegions.clear();
@@ -968,21 +990,40 @@
             });
             
             // Build color expression based on FIPS codes
-            const colorExpression = ['match', ['id']]; // Use numeric ID, not string
-            const allValues = Object.values(economicData)
+            let colorExpression;
+            if (currentLevel === 'cbsas') {
+                colorExpression = ['match', ['get', 'GEOID']]; // CBSAs use GEOID property
+            } else {
+                colorExpression = ['match', ['id']]; // States/counties use numeric ID
+            }
+            const allValues = Object.values(dataset)
                 .map(d => d[currentMetric])
                 .filter(v => v !== null && v !== undefined);
+            // const colorExpression = ['match', ['id']]; // Use numeric ID, not string
+            // const allValues = Object.values(economicData)
+            //     .map(d => d[currentMetric])
+            //     .filter(v => v !== null && v !== undefined);
 
             console.log('All values for', currentMetric, ':', allValues); // DEBUG
             // Add each state's color based on its data
-            Object.keys(economicData).forEach(fips => {
-                const stateData = economicData[fips];
-                const value = stateData ? stateData[currentMetric] : null;
-                const color = getColorForValue(value, currentMetric);
+            // Object.keys(economicData).forEach(fips => {
+            //     const stateData = economicData[fips];
+            //     const value = stateData ? stateData[currentMetric] : null;
+            //     const color = getColorForValue(value, currentMetric);
                 
-                // Convert FIPS to number for matching (removes leading zeros)
-                const numericFips = parseInt(fips, 10);
-                colorExpression.push(numericFips, color);
+            //     // Convert FIPS to number for matching (removes leading zeros)
+            //     const numericFips = parseInt(fips, 10);
+            //     colorExpression.push(numericFips, color);
+            // });
+
+            Object.keys(dataset).forEach(key => {
+                const data = dataset[key];
+                const value = data ? data[currentMetric] : null;
+                const color = getColorForValue(value, currentMetric, allValues);
+                
+                // For counties/states: convert to number, for CBSAs: keep as string
+                const matchKey = (currentLevel === 'cbsas') ? key : parseInt(key, 10);
+                colorExpression.push(matchKey, color);
             });
 
             // Default color for any unmatched states
@@ -990,11 +1031,10 @@
             console.log('Color expression:', colorExpression); // DEBUG
 
             // Apply the color expression to the map
-            map.setPaintProperty('states-fill', 'fill-color', colorExpression);
-            map.setPaintProperty('states-fill', 'fill-opacity', colorSettings.choroOpacity);
+            map.setPaintProperty(layerId, 'fill-color', colorExpression);
+            map.setPaintProperty(layerId, 'fill-opacity', colorSettings.choroOpacity);
 
             updateLegend(); 
-
         }
 
         // Update legend visibility and colors
@@ -1005,7 +1045,7 @@
             
             if (!legend || !legendTitle || !legendGradient) return;
             
-            if (currentMetric !== 'none' && currentLevel === 'states') {
+            if (currentMetric !== 'none') {
                 // Show legend
                 legend.style.display = 'block';
                 
@@ -1077,7 +1117,7 @@
             
             populateRegionList();
             setupHoverTooltip(); // Re-setup tooltip for new geography level
-            if (currentMetric !== 'none' && currentLevel === 'states') {
+            if (currentMetric !== 'none') {
                 applyChoropleth();
             }
         });
@@ -1092,11 +1132,11 @@
                 choroplethSettings.style.display = currentMetric !== 'none' ? 'block' : 'none';
             }
             
-            if (currentLevel !== 'states') {
-                alert('Data visualization is only available for States view. Switching to States...');
-                document.getElementById('geo-level').value = 'states';
-                document.getElementById('geo-level').dispatchEvent(new Event('change'));
-            }
+            // if (currentLevel !== 'states') {
+            //     alert('Data visualization is only available for States view. Switching to States...');
+            //     document.getElementById('geo-level').value = 'states';
+            //     document.getElementById('geo-level').dispatchEvent(new Event('change'));
+            // }
             
             applyChoropleth();
             updateLegend(); 
@@ -1325,7 +1365,6 @@
             return 'Unknown';
         }
 
-        // Setup hover tooltip - FIXED to query only current geo level
         function setupHoverTooltip() {
             const tooltip = document.getElementById('mapTooltip');
             if (!tooltip) return;
@@ -1352,18 +1391,25 @@
                     
                     let tooltipText = name;
                     
-                    // Always show ALL metrics for states (if data is available)
+                    // Get data based on current level
+                    let regionData;
                     if (currentLevel === 'states') {
                         const featureId = String(feature.id).padStart(2, '0');
-                        const stateData = economicData[featureId];
-                        
-                        if (stateData) {
-                            if (stateData.medianIncome) {
-                                tooltipText += `<br>Median Income: $${stateData.medianIncome.toLocaleString()}`;
-                            }
-                            if (stateData.employmentRate) {
-                                tooltipText += `<br>Employment Rate: ${stateData.employmentRate}%`;
-                            }
+                        regionData = economicData.states[featureId];
+                    } else if (currentLevel === 'counties') {
+                        const featureId = String(feature.id).padStart(5, '0');
+                        regionData = economicData.counties[featureId];
+                    } else if (currentLevel === 'cbsas') {
+                        const featureId = feature.properties.GEOID;
+                        regionData = economicData.cbsas[featureId];
+                    }
+
+                    if (regionData) {
+                        if (regionData.medianIncome) {
+                            tooltipText += `<br>Median Income: $${regionData.medianIncome.toLocaleString()}`;
+                        }
+                        if (regionData.employmentRate) {
+                            tooltipText += `<br>Employment Rate: ${regionData.employmentRate}%`;
                         }
                     }
                     
