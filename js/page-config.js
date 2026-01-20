@@ -66,6 +66,25 @@ const PAGE_METADATA = {
       'Data Visualization'
     ]
   },
+    // Hotel Cancellation Prediction Project
+  'hotel_cancellation_prediction': {
+    title: 'Hotel Cancellation Prediction | Chad Vo - Data Scientist',
+    description: 'Hotel Cancellation Prediction: A machine learning project predicting hotel booking cancellations using various algorithms and data preprocessing techniques.',
+    keywords: 'machine learning, hotel cancellation, prediction, data preprocessing, algorithms',
+    image: '/projects/hotel_cancellation/assets/hotel_cancellation_cover.jpg',
+    type: 'article',
+    path: 'projects/hotel_cancellation/index.html',
+    datePublished: '2026-1-19',
+    articleSection: 'Data Science Projects',
+    about: [
+      'Machine Learning',
+      'Data Engineering',
+      'Distributed Computing',
+      'Time Series Analysis',
+      'Feature Engineering',
+      'TensorFlow'
+    ]
+  },
   // Template for adding new projects
   'project_template': {
     title: 'Project Name | Chad Vo - Data Scientist',
