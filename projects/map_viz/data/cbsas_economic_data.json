@@ -1,0 +1,6575 @@
+{
+  "10100": {
+    "cbsaCode": "10100",
+    "name": "Aberdeen, SD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70693,
+    "employmentRate": 67.4
+  },
+  "10140": {
+    "cbsaCode": "10140",
+    "name": "Aberdeen, WA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59105,
+    "employmentRate": 47.1
+  },
+  "10180": {
+    "cbsaCode": "10180",
+    "name": "Abilene, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61924,
+    "employmentRate": 56.4
+  },
+  "10220": {
+    "cbsaCode": "10220",
+    "name": "Ada, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59457,
+    "employmentRate": 57.4
+  },
+  "10300": {
+    "cbsaCode": "10300",
+    "name": "Adrian, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65484,
+    "employmentRate": 54.2
+  },
+  "10380": {
+    "cbsaCode": "10380",
+    "name": "Aguadilla-Isabela, PR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 19455,
+    "employmentRate": 34.0
+  },
+  "10420": {
+    "cbsaCode": "10420",
+    "name": "Akron, OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68647,
+    "employmentRate": 61.3
+  },
+  "10460": {
+    "cbsaCode": "10460",
+    "name": "Alamogordo, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50833,
+    "employmentRate": 42.3
+  },
+  "10500": {
+    "cbsaCode": "10500",
+    "name": "Albany, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53173,
+    "employmentRate": 52.8
+  },
+  "10540": {
+    "cbsaCode": "10540",
+    "name": "Albany-Lebanon, OR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69523,
+    "employmentRate": 56.1
+  },
+  "10580": {
+    "cbsaCode": "10580",
+    "name": "Albany-Schenectady-Troy, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 83360,
+    "employmentRate": 60.9
+  },
+  "10620": {
+    "cbsaCode": "10620",
+    "name": "Albemarle, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60634,
+    "employmentRate": 56.6
+  },
+  "10660": {
+    "cbsaCode": "10660",
+    "name": "Albert Lea, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65679,
+    "employmentRate": 59.3
+  },
+  "10700": {
+    "cbsaCode": "10700",
+    "name": "Albertville, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58272,
+    "employmentRate": 54.6
+  },
+  "10740": {
+    "cbsaCode": "10740",
+    "name": "Albuquerque, NM",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 63971,
+    "employmentRate": 57.0
+  },
+  "10760": {
+    "cbsaCode": "10760",
+    "name": "Alexander City, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53054,
+    "employmentRate": 45.6
+  },
+  "10780": {
+    "cbsaCode": "10780",
+    "name": "Alexandria, LA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55650,
+    "employmentRate": 53.0
+  },
+  "10820": {
+    "cbsaCode": "10820",
+    "name": "Alexandria, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 72472,
+    "employmentRate": 62.3
+  },
+  "10860": {
+    "cbsaCode": "10860",
+    "name": "Alice, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46922,
+    "employmentRate": 50.1
+  },
+  "10900": {
+    "cbsaCode": "10900",
+    "name": "Allentown-Bethlehem-Easton, PA-NJ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 78597,
+    "employmentRate": 60.4
+  },
+  "10940": {
+    "cbsaCode": "10940",
+    "name": "Alma, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57934,
+    "employmentRate": 49.5
+  },
+  "10980": {
+    "cbsaCode": "10980",
+    "name": "Alpena, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49133,
+    "employmentRate": 50.3
+  },
+  "11020": {
+    "cbsaCode": "11020",
+    "name": "Altoona, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59386,
+    "employmentRate": 56.9
+  },
+  "11060": {
+    "cbsaCode": "11060",
+    "name": "Altus, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60954,
+    "employmentRate": 56.2
+  },
+  "11100": {
+    "cbsaCode": "11100",
+    "name": "Amarillo, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64147,
+    "employmentRate": 61.1
+  },
+  "11140": {
+    "cbsaCode": "11140",
+    "name": "Americus, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 39867,
+    "employmentRate": 52.2
+  },
+  "11180": {
+    "cbsaCode": "11180",
+    "name": "Ames, IA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68107,
+    "employmentRate": 63.3
+  },
+  "11220": {
+    "cbsaCode": "11220",
+    "name": "Amsterdam, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58033,
+    "employmentRate": 56.1
+  },
+  "11260": {
+    "cbsaCode": "11260",
+    "name": "Anchorage, AK",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 93016,
+    "employmentRate": 60.3
+  },
+  "11380": {
+    "cbsaCode": "11380",
+    "name": "Andrews, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 86458,
+    "employmentRate": 69.3
+  },
+  "11420": {
+    "cbsaCode": "11420",
+    "name": "Angola, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68837,
+    "employmentRate": 58.5
+  },
+  "11460": {
+    "cbsaCode": "11460",
+    "name": "Ann Arbor, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 84245,
+    "employmentRate": 60.7
+  },
+  "11500": {
+    "cbsaCode": "11500",
+    "name": "Anniston-Oxford, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54339,
+    "employmentRate": 52.3
+  },
+  "11540": {
+    "cbsaCode": "11540",
+    "name": "Appleton, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 79958,
+    "employmentRate": 67.8
+  },
+  "11580": {
+    "cbsaCode": "11580",
+    "name": "Arcadia, FL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 45000,
+    "employmentRate": 43.0
+  },
+  "11620": {
+    "cbsaCode": "11620",
+    "name": "Ardmore, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56968,
+    "employmentRate": 56.8
+  },
+  "11640": {
+    "cbsaCode": "11640",
+    "name": "Arecibo, PR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 22368,
+    "employmentRate": 36.9
+  },
+  "11660": {
+    "cbsaCode": "11660",
+    "name": "Arkadelphia, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48071,
+    "employmentRate": 55.5
+  },
+  "11700": {
+    "cbsaCode": "11700",
+    "name": "Asheville, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64538,
+    "employmentRate": 56.8
+  },
+  "11740": {
+    "cbsaCode": "11740",
+    "name": "Ashland, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62254,
+    "employmentRate": 58.4
+  },
+  "11780": {
+    "cbsaCode": "11780",
+    "name": "Ashtabula, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53663,
+    "employmentRate": 53.5
+  },
+  "11820": {
+    "cbsaCode": "11820",
+    "name": "Astoria, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68025,
+    "employmentRate": 54.0
+  },
+  "11860": {
+    "cbsaCode": "11860",
+    "name": "Atchison, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55281,
+    "employmentRate": 60.2
+  },
+  "11900": {
+    "cbsaCode": "11900",
+    "name": "Athens, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48750,
+    "employmentRate": 52.9
+  },
+  "11940": {
+    "cbsaCode": "11940",
+    "name": "Athens, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57982,
+    "employmentRate": 52.0
+  },
+  "11980": {
+    "cbsaCode": "11980",
+    "name": "Athens, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59778,
+    "employmentRate": 50.2
+  },
+  "12020": {
+    "cbsaCode": "12020",
+    "name": "Athens-Clarke County, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59130,
+    "employmentRate": 58.7
+  },
+  "12060": {
+    "cbsaCode": "12060",
+    "name": "Atlanta-Sandy Springs-Alpharetta, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 82625,
+    "employmentRate": 63.8
+  },
+  "12100": {
+    "cbsaCode": "12100",
+    "name": "Atlantic City-Hammonton, NJ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73113,
+    "employmentRate": 57.9
+  },
+  "12120": {
+    "cbsaCode": "12120",
+    "name": "Atmore, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 41153,
+    "employmentRate": 44.2
+  },
+  "12140": {
+    "cbsaCode": "12140",
+    "name": "Auburn, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68110,
+    "employmentRate": 62.7
+  },
+  "12180": {
+    "cbsaCode": "12180",
+    "name": "Auburn, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63227,
+    "employmentRate": 55.1
+  },
+  "12220": {
+    "cbsaCode": "12220",
+    "name": "Auburn-Opelika, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59288,
+    "employmentRate": 56.9
+  },
+  "12260": {
+    "cbsaCode": "12260",
+    "name": "Augusta-Richmond County, GA-SC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62941,
+    "employmentRate": 54.9
+  },
+  "12300": {
+    "cbsaCode": "12300",
+    "name": "Augusta-Waterville, ME",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62118,
+    "employmentRate": 58.4
+  },
+  "12380": {
+    "cbsaCode": "12380",
+    "name": "Austin, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66972,
+    "employmentRate": 62.7
+  },
+  "12420": {
+    "cbsaCode": "12420",
+    "name": "Austin-Round Rock-Georgetown, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 92939,
+    "employmentRate": 68.0
+  },
+  "12460": {
+    "cbsaCode": "12460",
+    "name": "Bainbridge, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47383,
+    "employmentRate": 48.9
+  },
+  "12540": {
+    "cbsaCode": "12540",
+    "name": "Bakersfield, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 63883,
+    "employmentRate": 53.2
+  },
+  "12580": {
+    "cbsaCode": "12580",
+    "name": "Baltimore-Columbia-Towson, MD",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 94167,
+    "employmentRate": 62.6
+  },
+  "12620": {
+    "cbsaCode": "12620",
+    "name": "Bangor, ME",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59438,
+    "employmentRate": 57.2
+  },
+  "12660": {
+    "cbsaCode": "12660",
+    "name": "Baraboo, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 72930,
+    "employmentRate": 65.0
+  },
+  "12680": {
+    "cbsaCode": "12680",
+    "name": "Bardstown, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66212,
+    "employmentRate": 60.5
+  },
+  "12700": {
+    "cbsaCode": "12700",
+    "name": "Barnstable Town, MA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 90447,
+    "employmentRate": 56.8
+  },
+  "12740": {
+    "cbsaCode": "12740",
+    "name": "Barre, VT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 77278,
+    "employmentRate": 62.5
+  },
+  "12780": {
+    "cbsaCode": "12780",
+    "name": "Bartlesville, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59426,
+    "employmentRate": 55.5
+  },
+  "12860": {
+    "cbsaCode": "12860",
+    "name": "Batavia, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68178,
+    "employmentRate": 60.7
+  },
+  "12900": {
+    "cbsaCode": "12900",
+    "name": "Batesville, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48875,
+    "employmentRate": 50.5
+  },
+  "12940": {
+    "cbsaCode": "12940",
+    "name": "Baton Rouge, LA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67979,
+    "employmentRate": 58.3
+  },
+  "12980": {
+    "cbsaCode": "12980",
+    "name": "Battle Creek, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58191,
+    "employmentRate": 55.5
+  },
+  "13020": {
+    "cbsaCode": "13020",
+    "name": "Bay City, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 57887,
+    "employmentRate": 56.2
+  },
+  "13060": {
+    "cbsaCode": "13060",
+    "name": "Bay City, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56412,
+    "employmentRate": 53.1
+  },
+  "13100": {
+    "cbsaCode": "13100",
+    "name": "Beatrice, NE",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60035,
+    "employmentRate": 62.0
+  },
+  "13140": {
+    "cbsaCode": "13140",
+    "name": "Beaumont-Port Arthur, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62427,
+    "employmentRate": 53.9
+  },
+  "13180": {
+    "cbsaCode": "13180",
+    "name": "Beaver Dam, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 71747,
+    "employmentRate": 63.8
+  },
+  "13220": {
+    "cbsaCode": "13220",
+    "name": "Beckley, WV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 48859,
+    "employmentRate": 43.8
+  },
+  "13260": {
+    "cbsaCode": "13260",
+    "name": "Bedford, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64210,
+    "employmentRate": 58.1
+  },
+  "13300": {
+    "cbsaCode": "13300",
+    "name": "Beeville, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50283,
+    "employmentRate": 40.7
+  },
+  "13340": {
+    "cbsaCode": "13340",
+    "name": "Bellefontaine, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 69125,
+    "employmentRate": 58.6
+  },
+  "13380": {
+    "cbsaCode": "13380",
+    "name": "Bellingham, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 77581,
+    "employmentRate": 59.2
+  },
+  "13420": {
+    "cbsaCode": "13420",
+    "name": "Bemidji, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62173,
+    "employmentRate": 59.5
+  },
+  "13460": {
+    "cbsaCode": "13460",
+    "name": "Bend, OR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 82042,
+    "employmentRate": 59.8
+  },
+  "13500": {
+    "cbsaCode": "13500",
+    "name": "Bennettsville, SC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 34275,
+    "employmentRate": 40.5
+  },
+  "13540": {
+    "cbsaCode": "13540",
+    "name": "Bennington, VT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68558,
+    "employmentRate": 56.7
+  },
+  "13620": {
+    "cbsaCode": "13620",
+    "name": "Berlin, NH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55247,
+    "employmentRate": 53.1
+  },
+  "13660": {
+    "cbsaCode": "13660",
+    "name": "Big Rapids, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54132,
+    "employmentRate": 50.6
+  },
+  "13700": {
+    "cbsaCode": "13700",
+    "name": "Big Spring, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67243,
+    "employmentRate": 51.4
+  },
+  "13720": {
+    "cbsaCode": "13720",
+    "name": "Big Stone Gap, VA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46680,
+    "employmentRate": 42.6
+  },
+  "13740": {
+    "cbsaCode": "13740",
+    "name": "Billings, MT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72377,
+    "employmentRate": 63.2
+  },
+  "13780": {
+    "cbsaCode": "13780",
+    "name": "Binghamton, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61271,
+    "employmentRate": 53.7
+  },
+  "13820": {
+    "cbsaCode": "13820",
+    "name": "Birmingham-Hoover, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68329,
+    "employmentRate": 58.2
+  },
+  "13900": {
+    "cbsaCode": "13900",
+    "name": "Bismarck, ND",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 81846,
+    "employmentRate": 66.1
+  },
+  "13940": {
+    "cbsaCode": "13940",
+    "name": "Blackfoot, ID",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 69433,
+    "employmentRate": 60.6
+  },
+  "13980": {
+    "cbsaCode": "13980",
+    "name": "Blacksburg-Christiansburg, VA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62017,
+    "employmentRate": 53.8
+  },
+  "14010": {
+    "cbsaCode": "14010",
+    "name": "Bloomington, IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 75356,
+    "employmentRate": 61.8
+  },
+  "14020": {
+    "cbsaCode": "14020",
+    "name": "Bloomington, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59998,
+    "employmentRate": 58.4
+  },
+  "14100": {
+    "cbsaCode": "14100",
+    "name": "Bloomsburg-Berwick, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61559,
+    "employmentRate": 55.7
+  },
+  "14140": {
+    "cbsaCode": "14140",
+    "name": "Bluefield, WV-VA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47294,
+    "employmentRate": 45.5
+  },
+  "14160": {
+    "cbsaCode": "14160",
+    "name": "Bluffton, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68074,
+    "employmentRate": 64.8
+  },
+  "14180": {
+    "cbsaCode": "14180",
+    "name": "Blytheville, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50012,
+    "employmentRate": 54.4
+  },
+  "14220": {
+    "cbsaCode": "14220",
+    "name": "Bogalusa, LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 41803,
+    "employmentRate": 46.2
+  },
+  "14260": {
+    "cbsaCode": "14260",
+    "name": "Boise City, ID",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 78138,
+    "employmentRate": 62.7
+  },
+  "14300": {
+    "cbsaCode": "14300",
+    "name": "Bonham, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65835,
+    "employmentRate": 51.4
+  },
+  "14380": {
+    "cbsaCode": "14380",
+    "name": "Boone, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50034,
+    "employmentRate": 54.1
+  },
+  "14420": {
+    "cbsaCode": "14420",
+    "name": "Borger, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62211,
+    "employmentRate": 57.7
+  },
+  "14460": {
+    "cbsaCode": "14460",
+    "name": "Boston-Cambridge-Newton, MA-NH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 107117,
+    "employmentRate": 65.4
+  },
+  "14500": {
+    "cbsaCode": "14500",
+    "name": "Boulder, CO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 99770,
+    "employmentRate": 64.4
+  },
+  "14540": {
+    "cbsaCode": "14540",
+    "name": "Bowling Green, KY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60914,
+    "employmentRate": 60.2
+  },
+  "14580": {
+    "cbsaCode": "14580",
+    "name": "Bozeman, MT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 83434,
+    "employmentRate": 69.5
+  },
+  "14620": {
+    "cbsaCode": "14620",
+    "name": "Bradford, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57861,
+    "employmentRate": 52.4
+  },
+  "14660": {
+    "cbsaCode": "14660",
+    "name": "Brainerd, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64975,
+    "employmentRate": 55.5
+  },
+  "14700": {
+    "cbsaCode": "14700",
+    "name": "Branson, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54467,
+    "employmentRate": 55.2
+  },
+  "14720": {
+    "cbsaCode": "14720",
+    "name": "Breckenridge, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 100611,
+    "employmentRate": 73.1
+  },
+  "14740": {
+    "cbsaCode": "14740",
+    "name": "Bremerton-Silverdale-Port Orchard, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 93675,
+    "employmentRate": 52.9
+  },
+  "14780": {
+    "cbsaCode": "14780",
+    "name": "Brenham, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70043,
+    "employmentRate": 56.9
+  },
+  "14820": {
+    "cbsaCode": "14820",
+    "name": "Brevard, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62056,
+    "employmentRate": 49.8
+  },
+  "14860": {
+    "cbsaCode": "14860",
+    "name": "Bridgeport-Stamford-Norwalk, CT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 107351,
+    "employmentRate": 63.1
+  },
+  "15020": {
+    "cbsaCode": "15020",
+    "name": "Brookhaven, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47069,
+    "employmentRate": 49.3
+  },
+  "15060": {
+    "cbsaCode": "15060",
+    "name": "Brookings, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64300,
+    "employmentRate": 43.2
+  },
+  "15100": {
+    "cbsaCode": "15100",
+    "name": "Brookings, SD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64438,
+    "employmentRate": 67.4
+  },
+  "15140": {
+    "cbsaCode": "15140",
+    "name": "Brownsville, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 44890,
+    "employmentRate": 50.5
+  },
+  "15180": {
+    "cbsaCode": "15180",
+    "name": "Brownsville-Harlingen, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 47435,
+    "employmentRate": 53.9
+  },
+  "15220": {
+    "cbsaCode": "15220",
+    "name": "Brownwood, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53792,
+    "employmentRate": 55.4
+  },
+  "15260": {
+    "cbsaCode": "15260",
+    "name": "Brunswick, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60777,
+    "employmentRate": 53.2
+  },
+  "15340": {
+    "cbsaCode": "15340",
+    "name": "Bucyrus-Galion, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52486,
+    "employmentRate": 56.9
+  },
+  "15380": {
+    "cbsaCode": "15380",
+    "name": "Buffalo-Cheektowaga, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67638,
+    "employmentRate": 59.1
+  },
+  "15420": {
+    "cbsaCode": "15420",
+    "name": "Burley, ID",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63555,
+    "employmentRate": 63.0
+  },
+  "15460": {
+    "cbsaCode": "15460",
+    "name": "Burlington, IA-IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58890,
+    "employmentRate": 58.7
+  },
+  "15500": {
+    "cbsaCode": "15500",
+    "name": "Burlington, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60866,
+    "employmentRate": 59.5
+  },
+  "15540": {
+    "cbsaCode": "15540",
+    "name": "Burlington-South Burlington, VT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 86183,
+    "employmentRate": 65.7
+  },
+  "15580": {
+    "cbsaCode": "15580",
+    "name": "Butte-Silver Bow, MT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56297,
+    "employmentRate": 57.1
+  },
+  "15620": {
+    "cbsaCode": "15620",
+    "name": "Cadillac, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58374,
+    "employmentRate": 52.9
+  },
+  "15660": {
+    "cbsaCode": "15660",
+    "name": "Calhoun, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57555,
+    "employmentRate": 58.1
+  },
+  "15680": {
+    "cbsaCode": "15680",
+    "name": "California-Lexington Park, MD",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 113668,
+    "employmentRate": 63.7
+  },
+  "15700": {
+    "cbsaCode": "15700",
+    "name": "Cambridge, MD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57490,
+    "employmentRate": 56.2
+  },
+  "15740": {
+    "cbsaCode": "15740",
+    "name": "Cambridge, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53901,
+    "employmentRate": 54.0
+  },
+  "15780": {
+    "cbsaCode": "15780",
+    "name": "Camden, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50152,
+    "employmentRate": 45.8
+  },
+  "15820": {
+    "cbsaCode": "15820",
+    "name": "Campbellsville, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56136,
+    "employmentRate": 54.4
+  },
+  "15860": {
+    "cbsaCode": "15860",
+    "name": "Cañon City, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56165,
+    "employmentRate": 40.0
+  },
+  "15940": {
+    "cbsaCode": "15940",
+    "name": "Canton-Massillon, OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62859,
+    "employmentRate": 58.9
+  },
+  "15980": {
+    "cbsaCode": "15980",
+    "name": "Cape Coral-Fort Myers, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69368,
+    "employmentRate": 50.7
+  },
+  "16020": {
+    "cbsaCode": "16020",
+    "name": "Cape Girardeau, MO-IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62671,
+    "employmentRate": 60.6
+  },
+  "16060": {
+    "cbsaCode": "16060",
+    "name": "Carbondale-Marion, IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53747,
+    "employmentRate": 53.1
+  },
+  "16100": {
+    "cbsaCode": "16100",
+    "name": "Carlsbad-Artesia, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 77458,
+    "employmentRate": 58.3
+  },
+  "16140": {
+    "cbsaCode": "16140",
+    "name": "Carroll, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68041,
+    "employmentRate": 65.3
+  },
+  "16180": {
+    "cbsaCode": "16180",
+    "name": "Carson City, NV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67465,
+    "employmentRate": 57.0
+  },
+  "16220": {
+    "cbsaCode": "16220",
+    "name": "Casper, WY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69104,
+    "employmentRate": 64.9
+  },
+  "16260": {
+    "cbsaCode": "16260",
+    "name": "Cedar City, UT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63005,
+    "employmentRate": 62.2
+  },
+  "16300": {
+    "cbsaCode": "16300",
+    "name": "Cedar Rapids, IA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 75477,
+    "employmentRate": 65.4
+  },
+  "16340": {
+    "cbsaCode": "16340",
+    "name": "Cedartown, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51956,
+    "employmentRate": 54.8
+  },
+  "16380": {
+    "cbsaCode": "16380",
+    "name": "Celina, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 73278,
+    "employmentRate": 66.9
+  },
+  "16420": {
+    "cbsaCode": "16420",
+    "name": "Central City, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50935,
+    "employmentRate": 49.9
+  },
+  "16460": {
+    "cbsaCode": "16460",
+    "name": "Centralia, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59099,
+    "employmentRate": 55.3
+  },
+  "16500": {
+    "cbsaCode": "16500",
+    "name": "Centralia, WA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67247,
+    "employmentRate": 51.4
+  },
+  "16540": {
+    "cbsaCode": "16540",
+    "name": "Chambersburg-Waynesboro, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71808,
+    "employmentRate": 60.3
+  },
+  "16580": {
+    "cbsaCode": "16580",
+    "name": "Champaign-Urbana, IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62281,
+    "employmentRate": 59.0
+  },
+  "16620": {
+    "cbsaCode": "16620",
+    "name": "Charleston, WV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54473,
+    "employmentRate": 48.8
+  },
+  "16660": {
+    "cbsaCode": "16660",
+    "name": "Charleston-Mattoon, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56476,
+    "employmentRate": 60.3
+  },
+  "16700": {
+    "cbsaCode": "16700",
+    "name": "Charleston-North Charleston, SC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 77460,
+    "employmentRate": 61.2
+  },
+  "16740": {
+    "cbsaCode": "16740",
+    "name": "Charlotte-Concord-Gastonia, NC-SC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 76177,
+    "employmentRate": 64.0
+  },
+  "16820": {
+    "cbsaCode": "16820",
+    "name": "Charlottesville, VA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 86188,
+    "employmentRate": 59.4
+  },
+  "16860": {
+    "cbsaCode": "16860",
+    "name": "Chattanooga, TN-GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 65387,
+    "employmentRate": 59.1
+  },
+  "16940": {
+    "cbsaCode": "16940",
+    "name": "Cheyenne, WY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 76282,
+    "employmentRate": 61.1
+  },
+  "16980": {
+    "cbsaCode": "16980",
+    "name": "Chicago-Naperville-Elgin, IL-IN-WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 85087,
+    "employmentRate": 62.5
+  },
+  "17020": {
+    "cbsaCode": "17020",
+    "name": "Chico, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66085,
+    "employmentRate": 54.3
+  },
+  "17060": {
+    "cbsaCode": "17060",
+    "name": "Chillicothe, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58048,
+    "employmentRate": 50.7
+  },
+  "17140": {
+    "cbsaCode": "17140",
+    "name": "Cincinnati, OH-KY-IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 76247,
+    "employmentRate": 62.7
+  },
+  "17220": {
+    "cbsaCode": "17220",
+    "name": "Clarksburg, WV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55838,
+    "employmentRate": 52.1
+  },
+  "17260": {
+    "cbsaCode": "17260",
+    "name": "Clarksdale, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 36075,
+    "employmentRate": 46.7
+  },
+  "17300": {
+    "cbsaCode": "17300",
+    "name": "Clarksville, TN-KY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62188,
+    "employmentRate": 52.9
+  },
+  "17340": {
+    "cbsaCode": "17340",
+    "name": "Clearlake, CA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56259,
+    "employmentRate": 46.2
+  },
+  "17380": {
+    "cbsaCode": "17380",
+    "name": "Cleveland, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 37845,
+    "employmentRate": 45.9
+  },
+  "17420": {
+    "cbsaCode": "17420",
+    "name": "Cleveland, TN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60001,
+    "employmentRate": 56.9
+  },
+  "17460": {
+    "cbsaCode": "17460",
+    "name": "Cleveland-Elyria, OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66481,
+    "employmentRate": 59.8
+  },
+  "17500": {
+    "cbsaCode": "17500",
+    "name": "Clewiston, FL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49259,
+    "employmentRate": 58.8
+  },
+  "17540": {
+    "cbsaCode": "17540",
+    "name": "Clinton, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61080,
+    "employmentRate": 57.9
+  },
+  "17580": {
+    "cbsaCode": "17580",
+    "name": "Clovis, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55427,
+    "employmentRate": 49.9
+  },
+  "17620": {
+    "cbsaCode": "17620",
+    "name": "Coamo, PR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 20569,
+    "employmentRate": 37.4
+  },
+  "17640": {
+    "cbsaCode": "17640",
+    "name": "Coco, PR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 20123,
+    "employmentRate": 36.2
+  },
+  "17660": {
+    "cbsaCode": "17660",
+    "name": "Coeur d'Alene, ID",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71949,
+    "employmentRate": 58.8
+  },
+  "17700": {
+    "cbsaCode": "17700",
+    "name": "Coffeyville, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51513,
+    "employmentRate": 54.8
+  },
+  "17740": {
+    "cbsaCode": "17740",
+    "name": "Coldwater, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60600,
+    "employmentRate": 54.0
+  },
+  "17780": {
+    "cbsaCode": "17780",
+    "name": "College Station-Bryan, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58659,
+    "employmentRate": 58.4
+  },
+  "17820": {
+    "cbsaCode": "17820",
+    "name": "Colorado Springs, CO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 82334,
+    "employmentRate": 59.1
+  },
+  "17860": {
+    "cbsaCode": "17860",
+    "name": "Columbia, MO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 65863,
+    "employmentRate": 62.6
+  },
+  "17900": {
+    "cbsaCode": "17900",
+    "name": "Columbia, SC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 63471,
+    "employmentRate": 58.6
+  },
+  "17980": {
+    "cbsaCode": "17980",
+    "name": "Columbus, GA-AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55720,
+    "employmentRate": 50.5
+  },
+  "18020": {
+    "cbsaCode": "18020",
+    "name": "Columbus, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 76912,
+    "employmentRate": 62.6
+  },
+  "18060": {
+    "cbsaCode": "18060",
+    "name": "Columbus, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53687,
+    "employmentRate": 51.5
+  },
+  "18100": {
+    "cbsaCode": "18100",
+    "name": "Columbus, NE",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 69943,
+    "employmentRate": 67.9
+  },
+  "18140": {
+    "cbsaCode": "18140",
+    "name": "Columbus, OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 76541,
+    "employmentRate": 64.8
+  },
+  "18180": {
+    "cbsaCode": "18180",
+    "name": "Concord, NH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 88806,
+    "employmentRate": 62.3
+  },
+  "18220": {
+    "cbsaCode": "18220",
+    "name": "Connersville, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52219,
+    "employmentRate": 54.4
+  },
+  "18260": {
+    "cbsaCode": "18260",
+    "name": "Cookeville, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52638,
+    "employmentRate": 56.4
+  },
+  "18300": {
+    "cbsaCode": "18300",
+    "name": "Coos Bay, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57563,
+    "employmentRate": 47.6
+  },
+  "18380": {
+    "cbsaCode": "18380",
+    "name": "Cordele, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47463,
+    "employmentRate": 53.7
+  },
+  "18420": {
+    "cbsaCode": "18420",
+    "name": "Corinth, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47716,
+    "employmentRate": 51.5
+  },
+  "18460": {
+    "cbsaCode": "18460",
+    "name": "Cornelia, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61292,
+    "employmentRate": 56.2
+  },
+  "18500": {
+    "cbsaCode": "18500",
+    "name": "Corning, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62506,
+    "employmentRate": 55.6
+  },
+  "18580": {
+    "cbsaCode": "18580",
+    "name": "Corpus Christi, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64005,
+    "employmentRate": 57.2
+  },
+  "18620": {
+    "cbsaCode": "18620",
+    "name": "Corsicana, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56261,
+    "employmentRate": 55.9
+  },
+  "18660": {
+    "cbsaCode": "18660",
+    "name": "Cortland, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65029,
+    "employmentRate": 59.4
+  },
+  "18700": {
+    "cbsaCode": "18700",
+    "name": "Corvallis, OR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72882,
+    "employmentRate": 56.4
+  },
+  "18740": {
+    "cbsaCode": "18740",
+    "name": "Coshocton, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52048,
+    "employmentRate": 53.6
+  },
+  "18780": {
+    "cbsaCode": "18780",
+    "name": "Craig, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63983,
+    "employmentRate": 59.7
+  },
+  "18820": {
+    "cbsaCode": "18820",
+    "name": "Crawfordsville, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62937,
+    "employmentRate": 61.3
+  },
+  "18860": {
+    "cbsaCode": "18860",
+    "name": "Crescent City, CA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61149,
+    "employmentRate": 44.6
+  },
+  "18880": {
+    "cbsaCode": "18880",
+    "name": "Crestview-Fort Walton Beach-Destin, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 74279,
+    "employmentRate": 55.4
+  },
+  "18900": {
+    "cbsaCode": "18900",
+    "name": "Crossville, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56002,
+    "employmentRate": 43.2
+  },
+  "18980": {
+    "cbsaCode": "18980",
+    "name": "Cullman, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58119,
+    "employmentRate": 55.6
+  },
+  "19000": {
+    "cbsaCode": "19000",
+    "name": "Cullowhee, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51758,
+    "employmentRate": 52.3
+  },
+  "19060": {
+    "cbsaCode": "19060",
+    "name": "Cumberland, MD-WV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 57539,
+    "employmentRate": 47.9
+  },
+  "19100": {
+    "cbsaCode": "19100",
+    "name": "Dallas-Fort Worth-Arlington, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 83398,
+    "employmentRate": 65.9
+  },
+  "19140": {
+    "cbsaCode": "19140",
+    "name": "Dalton, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60017,
+    "employmentRate": 58.6
+  },
+  "19180": {
+    "cbsaCode": "19180",
+    "name": "Danville, IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 52787,
+    "employmentRate": 51.8
+  },
+  "19220": {
+    "cbsaCode": "19220",
+    "name": "Danville, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53228,
+    "employmentRate": 50.9
+  },
+  "19260": {
+    "cbsaCode": "19260",
+    "name": "Danville, VA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46853,
+    "employmentRate": 49.8
+  },
+  "19300": {
+    "cbsaCode": "19300",
+    "name": "Daphne-Fairhope-Foley, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71039,
+    "employmentRate": 56.6
+  },
+  "19340": {
+    "cbsaCode": "19340",
+    "name": "Davenport-Moline-Rock Island, IA-IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68395,
+    "employmentRate": 60.4
+  },
+  "19420": {
+    "cbsaCode": "19420",
+    "name": "Dayton, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55568,
+    "employmentRate": 48.6
+  },
+  "19430": {
+    "cbsaCode": "19430",
+    "name": "Dayton-Kettering, OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67088,
+    "employmentRate": 59.0
+  },
+  "19460": {
+    "cbsaCode": "19460",
+    "name": "Decatur, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60036,
+    "employmentRate": 55.1
+  },
+  "19500": {
+    "cbsaCode": "19500",
+    "name": "Decatur, IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59622,
+    "employmentRate": 54.2
+  },
+  "19540": {
+    "cbsaCode": "19540",
+    "name": "Decatur, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61731,
+    "employmentRate": 59.9
+  },
+  "19580": {
+    "cbsaCode": "19580",
+    "name": "Defiance, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 69302,
+    "employmentRate": 61.4
+  },
+  "19620": {
+    "cbsaCode": "19620",
+    "name": "Del Rio, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57250,
+    "employmentRate": 55.1
+  },
+  "19660": {
+    "cbsaCode": "19660",
+    "name": "Deltona-Daytona Beach-Ormond Beach, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64197,
+    "employmentRate": 51.1
+  },
+  "19700": {
+    "cbsaCode": "19700",
+    "name": "Deming, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 38241,
+    "employmentRate": 42.9
+  },
+  "19740": {
+    "cbsaCode": "19740",
+    "name": "Denver-Aurora-Lakewood, CO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 96920,
+    "employmentRate": 68.4
+  },
+  "19760": {
+    "cbsaCode": "19760",
+    "name": "DeRidder, LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68525,
+    "employmentRate": 51.2
+  },
+  "19780": {
+    "cbsaCode": "19780",
+    "name": "Des Moines-West Des Moines, IA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 81103,
+    "employmentRate": 67.8
+  },
+  "19820": {
+    "cbsaCode": "19820",
+    "name": "Detroit-Warren-Dearborn, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72456,
+    "employmentRate": 58.5
+  },
+  "19860": {
+    "cbsaCode": "19860",
+    "name": "Dickinson, ND",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 78608,
+    "employmentRate": 66.8
+  },
+  "19940": {
+    "cbsaCode": "19940",
+    "name": "Dixon, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64588,
+    "employmentRate": 54.1
+  },
+  "19980": {
+    "cbsaCode": "19980",
+    "name": "Dodge City, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67997,
+    "employmentRate": 68.0
+  },
+  "20020": {
+    "cbsaCode": "20020",
+    "name": "Dothan, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54171,
+    "employmentRate": 52.9
+  },
+  "20060": {
+    "cbsaCode": "20060",
+    "name": "Douglas, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46936,
+    "employmentRate": 53.2
+  },
+  "20100": {
+    "cbsaCode": "20100",
+    "name": "Dover, DE",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69278,
+    "employmentRate": 56.2
+  },
+  "20140": {
+    "cbsaCode": "20140",
+    "name": "Dublin, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46411,
+    "employmentRate": 48.4
+  },
+  "20180": {
+    "cbsaCode": "20180",
+    "name": "DuBois, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56982,
+    "employmentRate": 52.0
+  },
+  "20220": {
+    "cbsaCode": "20220",
+    "name": "Dubuque, IA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73495,
+    "employmentRate": 64.6
+  },
+  "20260": {
+    "cbsaCode": "20260",
+    "name": "Duluth, MN-WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67612,
+    "employmentRate": 57.9
+  },
+  "20300": {
+    "cbsaCode": "20300",
+    "name": "Dumas, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59041,
+    "employmentRate": 63.6
+  },
+  "20340": {
+    "cbsaCode": "20340",
+    "name": "Duncan, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57065,
+    "employmentRate": 51.1
+  },
+  "20420": {
+    "cbsaCode": "20420",
+    "name": "Durango, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 81936,
+    "employmentRate": 62.4
+  },
+  "20460": {
+    "cbsaCode": "20460",
+    "name": "Durant, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54289,
+    "employmentRate": 55.5
+  },
+  "20500": {
+    "cbsaCode": "20500",
+    "name": "Durham-Chapel Hill, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 76040,
+    "employmentRate": 60.8
+  },
+  "20540": {
+    "cbsaCode": "20540",
+    "name": "Dyersburg, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53150,
+    "employmentRate": 55.2
+  },
+  "20580": {
+    "cbsaCode": "20580",
+    "name": "Eagle Pass, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48497,
+    "employmentRate": 54.2
+  },
+  "20660": {
+    "cbsaCode": "20660",
+    "name": "Easton, MD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 81667,
+    "employmentRate": 53.9
+  },
+  "20700": {
+    "cbsaCode": "20700",
+    "name": "East Stroudsburg, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 80656,
+    "employmentRate": 56.7
+  },
+  "20740": {
+    "cbsaCode": "20740",
+    "name": "Eau Claire, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70009,
+    "employmentRate": 64.8
+  },
+  "20780": {
+    "cbsaCode": "20780",
+    "name": "Edwards, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 98887,
+    "employmentRate": 70.5
+  },
+  "20820": {
+    "cbsaCode": "20820",
+    "name": "Effingham, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 73181,
+    "employmentRate": 64.7
+  },
+  "20900": {
+    "cbsaCode": "20900",
+    "name": "El Campo, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59712,
+    "employmentRate": 56.3
+  },
+  "20940": {
+    "cbsaCode": "20940",
+    "name": "El Centro, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53847,
+    "employmentRate": 45.2
+  },
+  "20980": {
+    "cbsaCode": "20980",
+    "name": "El Dorado, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49745,
+    "employmentRate": 52.9
+  },
+  "21020": {
+    "cbsaCode": "21020",
+    "name": "Elizabeth City, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60668,
+    "employmentRate": 52.8
+  },
+  "21060": {
+    "cbsaCode": "21060",
+    "name": "Elizabethtown-Fort Knox, KY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64111,
+    "employmentRate": 54.6
+  },
+  "21120": {
+    "cbsaCode": "21120",
+    "name": "Elk City, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51499,
+    "employmentRate": 48.4
+  },
+  "21140": {
+    "cbsaCode": "21140",
+    "name": "Elkhart-Goshen, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 63978,
+    "employmentRate": 63.1
+  },
+  "21180": {
+    "cbsaCode": "21180",
+    "name": "Elkins, WV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51186,
+    "employmentRate": 45.3
+  },
+  "21220": {
+    "cbsaCode": "21220",
+    "name": "Elko, NV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 87631,
+    "employmentRate": 63.3
+  },
+  "21260": {
+    "cbsaCode": "21260",
+    "name": "Ellensburg, WA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66800,
+    "employmentRate": 58.7
+  },
+  "21300": {
+    "cbsaCode": "21300",
+    "name": "Elmira, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61358,
+    "employmentRate": 53.7
+  },
+  "21340": {
+    "cbsaCode": "21340",
+    "name": "El Paso, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55344,
+    "employmentRate": 55.6
+  },
+  "21380": {
+    "cbsaCode": "21380",
+    "name": "Emporia, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56068,
+    "employmentRate": 65.2
+  },
+  "21420": {
+    "cbsaCode": "21420",
+    "name": "Enid, OK",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64165,
+    "employmentRate": 58.4
+  },
+  "21460": {
+    "cbsaCode": "21460",
+    "name": "Enterprise, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62199,
+    "employmentRate": 51.3
+  },
+  "21500": {
+    "cbsaCode": "21500",
+    "name": "Erie, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59396,
+    "employmentRate": 56.4
+  },
+  "21540": {
+    "cbsaCode": "21540",
+    "name": "Escanaba, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53852,
+    "employmentRate": 49.1
+  },
+  "21580": {
+    "cbsaCode": "21580",
+    "name": "Española, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52031,
+    "employmentRate": 48.1
+  },
+  "21640": {
+    "cbsaCode": "21640",
+    "name": "Eufaula, AL-GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 39599,
+    "employmentRate": 40.2
+  },
+  "21660": {
+    "cbsaCode": "21660",
+    "name": "Eugene-Springfield, OR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 65157,
+    "employmentRate": 56.4
+  },
+  "21700": {
+    "cbsaCode": "21700",
+    "name": "Eureka-Arcata, CA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57881,
+    "employmentRate": 53.3
+  },
+  "21740": {
+    "cbsaCode": "21740",
+    "name": "Evanston, WY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 78164,
+    "employmentRate": 61.8
+  },
+  "21780": {
+    "cbsaCode": "21780",
+    "name": "Evansville, IN-KY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64084,
+    "employmentRate": 60.4
+  },
+  "21820": {
+    "cbsaCode": "21820",
+    "name": "Fairbanks, AK",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 81655,
+    "employmentRate": 55.8
+  },
+  "21840": {
+    "cbsaCode": "21840",
+    "name": "Fairfield, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52210,
+    "employmentRate": 56.6
+  },
+  "21860": {
+    "cbsaCode": "21860",
+    "name": "Fairmont, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61674,
+    "employmentRate": 61.8
+  },
+  "21900": {
+    "cbsaCode": "21900",
+    "name": "Fairmont, WV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59974,
+    "employmentRate": 55.0
+  },
+  "21980": {
+    "cbsaCode": "21980",
+    "name": "Fallon, NV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 69922,
+    "employmentRate": 53.1
+  },
+  "22020": {
+    "cbsaCode": "22020",
+    "name": "Fargo, ND-MN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73641,
+    "employmentRate": 72.0
+  },
+  "22060": {
+    "cbsaCode": "22060",
+    "name": "Faribault-Northfield, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 78214,
+    "employmentRate": 60.7
+  },
+  "22100": {
+    "cbsaCode": "22100",
+    "name": "Farmington, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53083,
+    "employmentRate": 49.2
+  },
+  "22140": {
+    "cbsaCode": "22140",
+    "name": "Farmington, NM",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 50734,
+    "employmentRate": 48.3
+  },
+  "22180": {
+    "cbsaCode": "22180",
+    "name": "Fayetteville, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 57488,
+    "employmentRate": 49.2
+  },
+  "22220": {
+    "cbsaCode": "22220",
+    "name": "Fayetteville-Springdale-Rogers, AR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73316,
+    "employmentRate": 63.0
+  },
+  "22260": {
+    "cbsaCode": "22260",
+    "name": "Fergus Falls, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67990,
+    "employmentRate": 58.1
+  },
+  "22280": {
+    "cbsaCode": "22280",
+    "name": "Fernley, NV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70026,
+    "employmentRate": 54.3
+  },
+  "22300": {
+    "cbsaCode": "22300",
+    "name": "Findlay, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67006,
+    "employmentRate": 62.1
+  },
+  "22340": {
+    "cbsaCode": "22340",
+    "name": "Fitzgerald, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 38255,
+    "employmentRate": 52.4
+  },
+  "22380": {
+    "cbsaCode": "22380",
+    "name": "Flagstaff, AZ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67266,
+    "employmentRate": 57.0
+  },
+  "22420": {
+    "cbsaCode": "22420",
+    "name": "Flint, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58594,
+    "employmentRate": 53.2
+  },
+  "22500": {
+    "cbsaCode": "22500",
+    "name": "Florence, SC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 52401,
+    "employmentRate": 54.2
+  },
+  "22520": {
+    "cbsaCode": "22520",
+    "name": "Florence-Muscle Shoals, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 56113,
+    "employmentRate": 55.5
+  },
+  "22540": {
+    "cbsaCode": "22540",
+    "name": "Fond du Lac, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70368,
+    "employmentRate": 63.0
+  },
+  "22580": {
+    "cbsaCode": "22580",
+    "name": "Forest City, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50512,
+    "employmentRate": 50.1
+  },
+  "22620": {
+    "cbsaCode": "22620",
+    "name": "Forrest City, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 39822,
+    "employmentRate": 42.5
+  },
+  "22660": {
+    "cbsaCode": "22660",
+    "name": "Fort Collins, CO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 87199,
+    "employmentRate": 64.0
+  },
+  "22700": {
+    "cbsaCode": "22700",
+    "name": "Fort Dodge, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65335,
+    "employmentRate": 58.5
+  },
+  "22780": {
+    "cbsaCode": "22780",
+    "name": "Fort Leonard Wood, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62541,
+    "employmentRate": 42.9
+  },
+  "22800": {
+    "cbsaCode": "22800",
+    "name": "Fort Madison-Keokuk, IA-IL-MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58590,
+    "employmentRate": 56.0
+  },
+  "22820": {
+    "cbsaCode": "22820",
+    "name": "Fort Morgan, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70471,
+    "employmentRate": 62.1
+  },
+  "22840": {
+    "cbsaCode": "22840",
+    "name": "Fort Payne, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47920,
+    "employmentRate": 54.2
+  },
+  "22860": {
+    "cbsaCode": "22860",
+    "name": "Fort Polk South, LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56547,
+    "employmentRate": 42.6
+  },
+  "22900": {
+    "cbsaCode": "22900",
+    "name": "Fort Smith, AR-OK",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53224,
+    "employmentRate": 53.7
+  },
+  "23060": {
+    "cbsaCode": "23060",
+    "name": "Fort Wayne, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66758,
+    "employmentRate": 63.4
+  },
+  "23140": {
+    "cbsaCode": "23140",
+    "name": "Frankfort, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59515,
+    "employmentRate": 61.7
+  },
+  "23180": {
+    "cbsaCode": "23180",
+    "name": "Frankfort, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64669,
+    "employmentRate": 58.4
+  },
+  "23240": {
+    "cbsaCode": "23240",
+    "name": "Fredericksburg, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70162,
+    "employmentRate": 55.5
+  },
+  "23300": {
+    "cbsaCode": "23300",
+    "name": "Freeport, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57527,
+    "employmentRate": 55.8
+  },
+  "23340": {
+    "cbsaCode": "23340",
+    "name": "Fremont, NE",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66793,
+    "employmentRate": 62.1
+  },
+  "23380": {
+    "cbsaCode": "23380",
+    "name": "Fremont, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60814,
+    "employmentRate": 58.0
+  },
+  "23420": {
+    "cbsaCode": "23420",
+    "name": "Fresno, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67756,
+    "employmentRate": 55.9
+  },
+  "23460": {
+    "cbsaCode": "23460",
+    "name": "Gadsden, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 52177,
+    "employmentRate": 53.3
+  },
+  "23500": {
+    "cbsaCode": "23500",
+    "name": "Gaffney, SC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47011,
+    "employmentRate": 54.0
+  },
+  "23540": {
+    "cbsaCode": "23540",
+    "name": "Gainesville, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 56638,
+    "employmentRate": 55.3
+  },
+  "23580": {
+    "cbsaCode": "23580",
+    "name": "Gainesville, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 74153,
+    "employmentRate": 61.3
+  },
+  "23620": {
+    "cbsaCode": "23620",
+    "name": "Gainesville, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66374,
+    "employmentRate": 60.4
+  },
+  "23660": {
+    "cbsaCode": "23660",
+    "name": "Galesburg, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50263,
+    "employmentRate": 50.7
+  },
+  "23700": {
+    "cbsaCode": "23700",
+    "name": "Gallup, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 44029,
+    "employmentRate": 43.6
+  },
+  "23780": {
+    "cbsaCode": "23780",
+    "name": "Garden City, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68481,
+    "employmentRate": 65.7
+  },
+  "23820": {
+    "cbsaCode": "23820",
+    "name": "Gardnerville Ranchos, NV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 84262,
+    "employmentRate": 50.4
+  },
+  "23860": {
+    "cbsaCode": "23860",
+    "name": "Georgetown, SC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59782,
+    "employmentRate": 48.5
+  },
+  "23900": {
+    "cbsaCode": "23900",
+    "name": "Gettysburg, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 78975,
+    "employmentRate": 60.1
+  },
+  "23940": {
+    "cbsaCode": "23940",
+    "name": "Gillette, WY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 88151,
+    "employmentRate": 65.7
+  },
+  "23980": {
+    "cbsaCode": "23980",
+    "name": "Glasgow, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47855,
+    "employmentRate": 52.8
+  },
+  "24020": {
+    "cbsaCode": "24020",
+    "name": "Glens Falls, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71380,
+    "employmentRate": 56.6
+  },
+  "24060": {
+    "cbsaCode": "24060",
+    "name": "Glenwood Springs, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 86831,
+    "employmentRate": 70.6
+  },
+  "24100": {
+    "cbsaCode": "24100",
+    "name": "Gloversville, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60557,
+    "employmentRate": 55.4
+  },
+  "24140": {
+    "cbsaCode": "24140",
+    "name": "Goldsboro, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54323,
+    "employmentRate": 54.2
+  },
+  "24180": {
+    "cbsaCode": "24180",
+    "name": "Granbury, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 80013,
+    "employmentRate": 52.0
+  },
+  "24220": {
+    "cbsaCode": "24220",
+    "name": "Grand Forks, ND-MN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 65971,
+    "employmentRate": 65.6
+  },
+  "24260": {
+    "cbsaCode": "24260",
+    "name": "Grand Island, NE",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 63314,
+    "employmentRate": 65.5
+  },
+  "24300": {
+    "cbsaCode": "24300",
+    "name": "Grand Junction, CO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68077,
+    "employmentRate": 58.3
+  },
+  "24330": {
+    "cbsaCode": "24330",
+    "name": "Grand Rapids, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63962,
+    "employmentRate": 52.0
+  },
+  "24340": {
+    "cbsaCode": "24340",
+    "name": "Grand Rapids-Kentwood, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 76898,
+    "employmentRate": 64.3
+  },
+  "24380": {
+    "cbsaCode": "24380",
+    "name": "Grants, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49866,
+    "employmentRate": 41.7
+  },
+  "24420": {
+    "cbsaCode": "24420",
+    "name": "Grants Pass, OR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 56068,
+    "employmentRate": 45.7
+  },
+  "24460": {
+    "cbsaCode": "24460",
+    "name": "Great Bend, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54634,
+    "employmentRate": 61.7
+  },
+  "24500": {
+    "cbsaCode": "24500",
+    "name": "Great Falls, MT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61351,
+    "employmentRate": 56.7
+  },
+  "24540": {
+    "cbsaCode": "24540",
+    "name": "Greeley, CO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 89182,
+    "employmentRate": 66.1
+  },
+  "24580": {
+    "cbsaCode": "24580",
+    "name": "Green Bay, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 74208,
+    "employmentRate": 65.4
+  },
+  "24620": {
+    "cbsaCode": "24620",
+    "name": "Greeneville, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51975,
+    "employmentRate": 50.0
+  },
+  "24660": {
+    "cbsaCode": "24660",
+    "name": "Greensboro-High Point, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59567,
+    "employmentRate": 59.1
+  },
+  "24700": {
+    "cbsaCode": "24700",
+    "name": "Greensburg, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 71566,
+    "employmentRate": 64.2
+  },
+  "24740": {
+    "cbsaCode": "24740",
+    "name": "Greenville, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 38394,
+    "employmentRate": 47.7
+  },
+  "24780": {
+    "cbsaCode": "24780",
+    "name": "Greenville, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54915,
+    "employmentRate": 58.1
+  },
+  "24820": {
+    "cbsaCode": "24820",
+    "name": "Greenville, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60237,
+    "employmentRate": 60.0
+  },
+  "24860": {
+    "cbsaCode": "24860",
+    "name": "Greenville-Anderson, SC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66226,
+    "employmentRate": 59.3
+  },
+  "24900": {
+    "cbsaCode": "24900",
+    "name": "Greenwood, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 35452,
+    "employmentRate": 47.4
+  },
+  "24940": {
+    "cbsaCode": "24940",
+    "name": "Greenwood, SC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47553,
+    "employmentRate": 52.9
+  },
+  "24980": {
+    "cbsaCode": "24980",
+    "name": "Grenada, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 45745,
+    "employmentRate": 52.8
+  },
+  "25020": {
+    "cbsaCode": "25020",
+    "name": "Guayama, PR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 19290,
+    "employmentRate": 30.6
+  },
+  "25060": {
+    "cbsaCode": "25060",
+    "name": "Gulfport-Biloxi, MS",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58287,
+    "employmentRate": 53.1
+  },
+  "25100": {
+    "cbsaCode": "25100",
+    "name": "Guymon, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55682,
+    "employmentRate": 64.5
+  },
+  "25180": {
+    "cbsaCode": "25180",
+    "name": "Hagerstown-Martinsburg, MD-WV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72751,
+    "employmentRate": 59.1
+  },
+  "25200": {
+    "cbsaCode": "25200",
+    "name": "Hailey, ID",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 81271,
+    "employmentRate": 68.0
+  },
+  "25220": {
+    "cbsaCode": "25220",
+    "name": "Hammond, LA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55274,
+    "employmentRate": 54.5
+  },
+  "25260": {
+    "cbsaCode": "25260",
+    "name": "Hanford-Corcoran, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68540,
+    "employmentRate": 45.7
+  },
+  "25300": {
+    "cbsaCode": "25300",
+    "name": "Hannibal, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62527,
+    "employmentRate": 57.5
+  },
+  "25420": {
+    "cbsaCode": "25420",
+    "name": "Harrisburg-Carlisle, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 76189,
+    "employmentRate": 61.8
+  },
+  "25460": {
+    "cbsaCode": "25460",
+    "name": "Harrison, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52078,
+    "employmentRate": 53.0
+  },
+  "25500": {
+    "cbsaCode": "25500",
+    "name": "Harrisonburg, VA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66823,
+    "employmentRate": 59.4
+  },
+  "25540": {
+    "cbsaCode": "25540",
+    "name": "Hartford-East Hartford-Middletown, CT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 89371,
+    "employmentRate": 62.5
+  },
+  "25580": {
+    "cbsaCode": "25580",
+    "name": "Hastings, NE",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61502,
+    "employmentRate": 63.9
+  },
+  "25620": {
+    "cbsaCode": "25620",
+    "name": "Hattiesburg, MS",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55078,
+    "employmentRate": 56.5
+  },
+  "25700": {
+    "cbsaCode": "25700",
+    "name": "Hays, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59665,
+    "employmentRate": 71.2
+  },
+  "25720": {
+    "cbsaCode": "25720",
+    "name": "Heber, UT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 114857,
+    "employmentRate": 67.3
+  },
+  "25740": {
+    "cbsaCode": "25740",
+    "name": "Helena, MT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 72168,
+    "employmentRate": 61.4
+  },
+  "25760": {
+    "cbsaCode": "25760",
+    "name": "Helena-West Helena, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 37458,
+    "employmentRate": 45.3
+  },
+  "25780": {
+    "cbsaCode": "25780",
+    "name": "Henderson, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48340,
+    "employmentRate": 53.9
+  },
+  "25820": {
+    "cbsaCode": "25820",
+    "name": "Hereford, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51942,
+    "employmentRate": 62.7
+  },
+  "25840": {
+    "cbsaCode": "25840",
+    "name": "Hermiston-Pendleton, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 69901,
+    "employmentRate": 54.6
+  },
+  "25860": {
+    "cbsaCode": "25860",
+    "name": "Hickory-Lenoir-Morganton, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 57943,
+    "employmentRate": 55.9
+  },
+  "25880": {
+    "cbsaCode": "25880",
+    "name": "Hillsdale, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59425,
+    "employmentRate": 54.3
+  },
+  "25900": {
+    "cbsaCode": "25900",
+    "name": "Hilo, HI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 74238,
+    "employmentRate": 54.7
+  },
+  "25940": {
+    "cbsaCode": "25940",
+    "name": "Hilton Head Island-Bluffton, SC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 77536,
+    "employmentRate": 49.8
+  },
+  "25980": {
+    "cbsaCode": "25980",
+    "name": "Hinesville, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55427,
+    "employmentRate": 49.5
+  },
+  "26020": {
+    "cbsaCode": "26020",
+    "name": "Hobbs, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65855,
+    "employmentRate": 57.6
+  },
+  "26090": {
+    "cbsaCode": "26090",
+    "name": "Holland, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 75543,
+    "employmentRate": 59.9
+  },
+  "26140": {
+    "cbsaCode": "26140",
+    "name": "Homosassa Springs, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 52569,
+    "employmentRate": 36.5
+  },
+  "26220": {
+    "cbsaCode": "26220",
+    "name": "Hood River, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 80254,
+    "employmentRate": 67.0
+  },
+  "26260": {
+    "cbsaCode": "26260",
+    "name": "Hope, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 44423,
+    "employmentRate": 49.2
+  },
+  "26300": {
+    "cbsaCode": "26300",
+    "name": "Hot Springs, AR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54229,
+    "employmentRate": 51.1
+  },
+  "26340": {
+    "cbsaCode": "26340",
+    "name": "Houghton, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52857,
+    "employmentRate": 53.8
+  },
+  "26380": {
+    "cbsaCode": "26380",
+    "name": "Houma-Thibodaux, LA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62443,
+    "employmentRate": 54.8
+  },
+  "26420": {
+    "cbsaCode": "26420",
+    "name": "Houston-The Woodlands-Sugar Land, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 78061,
+    "employmentRate": 62.4
+  },
+  "26460": {
+    "cbsaCode": "26460",
+    "name": "Hudson, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 81741,
+    "employmentRate": 55.9
+  },
+  "26500": {
+    "cbsaCode": "26500",
+    "name": "Huntingdon, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61300,
+    "employmentRate": 49.2
+  },
+  "26540": {
+    "cbsaCode": "26540",
+    "name": "Huntington, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59894,
+    "employmentRate": 60.9
+  },
+  "26580": {
+    "cbsaCode": "26580",
+    "name": "Huntington-Ashland, WV-KY-OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55964,
+    "employmentRate": 49.9
+  },
+  "26620": {
+    "cbsaCode": "26620",
+    "name": "Huntsville, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 78521,
+    "employmentRate": 60.3
+  },
+  "26660": {
+    "cbsaCode": "26660",
+    "name": "Huntsville, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47193,
+    "employmentRate": 43.2
+  },
+  "26700": {
+    "cbsaCode": "26700",
+    "name": "Huron, SD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64167,
+    "employmentRate": 64.9
+  },
+  "26740": {
+    "cbsaCode": "26740",
+    "name": "Hutchinson, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57390,
+    "employmentRate": 59.0
+  },
+  "26780": {
+    "cbsaCode": "26780",
+    "name": "Hutchinson, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 73296,
+    "employmentRate": 64.8
+  },
+  "26820": {
+    "cbsaCode": "26820",
+    "name": "Idaho Falls, ID",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73337,
+    "employmentRate": 62.0
+  },
+  "26860": {
+    "cbsaCode": "26860",
+    "name": "Indiana, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57170,
+    "employmentRate": 51.9
+  },
+  "26900": {
+    "cbsaCode": "26900",
+    "name": "Indianapolis-Carmel-Anderson, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73571,
+    "employmentRate": 64.3
+  },
+  "26940": {
+    "cbsaCode": "26940",
+    "name": "Indianola, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 37403,
+    "employmentRate": 42.0
+  },
+  "26980": {
+    "cbsaCode": "26980",
+    "name": "Iowa City, IA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72680,
+    "employmentRate": 66.8
+  },
+  "27020": {
+    "cbsaCode": "27020",
+    "name": "Iron Mountain, MI-WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59483,
+    "employmentRate": 54.4
+  },
+  "27060": {
+    "cbsaCode": "27060",
+    "name": "Ithaca, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69995,
+    "employmentRate": 55.3
+  },
+  "27100": {
+    "cbsaCode": "27100",
+    "name": "Jackson, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62581,
+    "employmentRate": 53.0
+  },
+  "27140": {
+    "cbsaCode": "27140",
+    "name": "Jackson, MS",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60085,
+    "employmentRate": 56.5
+  },
+  "27160": {
+    "cbsaCode": "27160",
+    "name": "Jackson, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56549,
+    "employmentRate": 53.3
+  },
+  "27180": {
+    "cbsaCode": "27180",
+    "name": "Jackson, TN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55807,
+    "employmentRate": 55.4
+  },
+  "27220": {
+    "cbsaCode": "27220",
+    "name": "Jackson, WY-ID",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 102435,
+    "employmentRate": 75.7
+  },
+  "27260": {
+    "cbsaCode": "27260",
+    "name": "Jacksonville, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73194,
+    "employmentRate": 59.5
+  },
+  "27300": {
+    "cbsaCode": "27300",
+    "name": "Jacksonville, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62004,
+    "employmentRate": 52.8
+  },
+  "27340": {
+    "cbsaCode": "27340",
+    "name": "Jacksonville, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59976,
+    "employmentRate": 42.8
+  },
+  "27380": {
+    "cbsaCode": "27380",
+    "name": "Jacksonville, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56971,
+    "employmentRate": 50.9
+  },
+  "27420": {
+    "cbsaCode": "27420",
+    "name": "Jamestown, ND",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59167,
+    "employmentRate": 60.6
+  },
+  "27460": {
+    "cbsaCode": "27460",
+    "name": "Jamestown-Dunkirk-Fredonia, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54625,
+    "employmentRate": 52.7
+  },
+  "27500": {
+    "cbsaCode": "27500",
+    "name": "Janesville-Beloit, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70630,
+    "employmentRate": 62.8
+  },
+  "27530": {
+    "cbsaCode": "27530",
+    "name": "Jasper, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52987,
+    "employmentRate": 49.3
+  },
+  "27540": {
+    "cbsaCode": "27540",
+    "name": "Jasper, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67610,
+    "employmentRate": 64.1
+  },
+  "27580": {
+    "cbsaCode": "27580",
+    "name": "Jayuya, PR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 18363,
+    "employmentRate": 29.5
+  },
+  "27600": {
+    "cbsaCode": "27600",
+    "name": "Jefferson, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 82056,
+    "employmentRate": 61.6
+  },
+  "27620": {
+    "cbsaCode": "27620",
+    "name": "Jefferson City, MO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70195,
+    "employmentRate": 59.3
+  },
+  "27660": {
+    "cbsaCode": "27660",
+    "name": "Jennings, LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52470,
+    "employmentRate": 52.9
+  },
+  "27700": {
+    "cbsaCode": "27700",
+    "name": "Jesup, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49847,
+    "employmentRate": 47.6
+  },
+  "27740": {
+    "cbsaCode": "27740",
+    "name": "Johnson City, TN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54217,
+    "employmentRate": 54.1
+  },
+  "27780": {
+    "cbsaCode": "27780",
+    "name": "Johnstown, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54221,
+    "employmentRate": 51.9
+  },
+  "27860": {
+    "cbsaCode": "27860",
+    "name": "Jonesboro, AR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 52709,
+    "employmentRate": 58.3
+  },
+  "27900": {
+    "cbsaCode": "27900",
+    "name": "Joplin, MO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 56930,
+    "employmentRate": 59.4
+  },
+  "27940": {
+    "cbsaCode": "27940",
+    "name": "Juneau, AK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 95711,
+    "employmentRate": 62.3
+  },
+  "27980": {
+    "cbsaCode": "27980",
+    "name": "Kahului-Wailuku-Lahaina, HI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 95379,
+    "employmentRate": 61.2
+  },
+  "28020": {
+    "cbsaCode": "28020",
+    "name": "Kalamazoo-Portage, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67905,
+    "employmentRate": 62.2
+  },
+  "28060": {
+    "cbsaCode": "28060",
+    "name": "Kalispell, MT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68025,
+    "employmentRate": 60.5
+  },
+  "28100": {
+    "cbsaCode": "28100",
+    "name": "Kankakee, IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 65489,
+    "employmentRate": 58.2
+  },
+  "28140": {
+    "cbsaCode": "28140",
+    "name": "Kansas City, MO-KS",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 78827,
+    "employmentRate": 64.9
+  },
+  "28180": {
+    "cbsaCode": "28180",
+    "name": "Kapaa, HI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 88869,
+    "employmentRate": 60.3
+  },
+  "28260": {
+    "cbsaCode": "28260",
+    "name": "Kearney, NE",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70727,
+    "employmentRate": 68.7
+  },
+  "28300": {
+    "cbsaCode": "28300",
+    "name": "Keene, NH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 76551,
+    "employmentRate": 60.7
+  },
+  "28340": {
+    "cbsaCode": "28340",
+    "name": "Kendallville, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70286,
+    "employmentRate": 61.6
+  },
+  "28380": {
+    "cbsaCode": "28380",
+    "name": "Kennett, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 44868,
+    "employmentRate": 50.8
+  },
+  "28420": {
+    "cbsaCode": "28420",
+    "name": "Kennewick-Richland, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 82146,
+    "employmentRate": 60.2
+  },
+  "28500": {
+    "cbsaCode": "28500",
+    "name": "Kerrville, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66713,
+    "employmentRate": 53.4
+  },
+  "28540": {
+    "cbsaCode": "28540",
+    "name": "Ketchikan, AK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 82763,
+    "employmentRate": 61.5
+  },
+  "28580": {
+    "cbsaCode": "28580",
+    "name": "Key West, FL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 80111,
+    "employmentRate": 59.6
+  },
+  "28620": {
+    "cbsaCode": "28620",
+    "name": "Kill Devil Hills, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 79742,
+    "employmentRate": 61.2
+  },
+  "28660": {
+    "cbsaCode": "28660",
+    "name": "Killeen-Temple, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 63394,
+    "employmentRate": 51.1
+  },
+  "28700": {
+    "cbsaCode": "28700",
+    "name": "Kingsport-Bristol, TN-VA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53644,
+    "employmentRate": 50.6
+  },
+  "28740": {
+    "cbsaCode": "28740",
+    "name": "Kingston, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 77197,
+    "employmentRate": 55.9
+  },
+  "28780": {
+    "cbsaCode": "28780",
+    "name": "Kingsville, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52407,
+    "employmentRate": 53.7
+  },
+  "28820": {
+    "cbsaCode": "28820",
+    "name": "Kinston, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 43063,
+    "employmentRate": 51.3
+  },
+  "28860": {
+    "cbsaCode": "28860",
+    "name": "Kirksville, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51618,
+    "employmentRate": 48.5
+  },
+  "28900": {
+    "cbsaCode": "28900",
+    "name": "Klamath Falls, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57219,
+    "employmentRate": 47.4
+  },
+  "28940": {
+    "cbsaCode": "28940",
+    "name": "Knoxville, TN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66715,
+    "employmentRate": 57.8
+  },
+  "29020": {
+    "cbsaCode": "29020",
+    "name": "Kokomo, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62014,
+    "employmentRate": 55.7
+  },
+  "29060": {
+    "cbsaCode": "29060",
+    "name": "Laconia, NH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 80719,
+    "employmentRate": 60.8
+  },
+  "29100": {
+    "cbsaCode": "29100",
+    "name": "La Crosse-Onalaska, WI-MN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69043,
+    "employmentRate": 64.3
+  },
+  "29180": {
+    "cbsaCode": "29180",
+    "name": "Lafayette, LA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58150,
+    "employmentRate": 57.3
+  },
+  "29200": {
+    "cbsaCode": "29200",
+    "name": "Lafayette-West Lafayette, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 57188,
+    "employmentRate": 59.7
+  },
+  "29260": {
+    "cbsaCode": "29260",
+    "name": "La Grande, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61946,
+    "employmentRate": 54.3
+  },
+  "29300": {
+    "cbsaCode": "29300",
+    "name": "LaGrange, GA-AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52767,
+    "employmentRate": 56.0
+  },
+  "29340": {
+    "cbsaCode": "29340",
+    "name": "Lake Charles, LA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64764,
+    "employmentRate": 56.4
+  },
+  "29380": {
+    "cbsaCode": "29380",
+    "name": "Lake City, FL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53501,
+    "employmentRate": 48.9
+  },
+  "29420": {
+    "cbsaCode": "29420",
+    "name": "Lake Havasu City-Kingman, AZ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53592,
+    "employmentRate": 41.4
+  },
+  "29460": {
+    "cbsaCode": "29460",
+    "name": "Lakeland-Winter Haven, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60901,
+    "employmentRate": 53.9
+  },
+  "29500": {
+    "cbsaCode": "29500",
+    "name": "Lamesa, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 45268,
+    "employmentRate": 44.6
+  },
+  "29540": {
+    "cbsaCode": "29540",
+    "name": "Lancaster, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 81458,
+    "employmentRate": 63.7
+  },
+  "29620": {
+    "cbsaCode": "29620",
+    "name": "Lansing-East Lansing, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68270,
+    "employmentRate": 60.1
+  },
+  "29660": {
+    "cbsaCode": "29660",
+    "name": "Laramie, WY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55887,
+    "employmentRate": 65.3
+  },
+  "29700": {
+    "cbsaCode": "29700",
+    "name": "Laredo, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59984,
+    "employmentRate": 58.3
+  },
+  "29740": {
+    "cbsaCode": "29740",
+    "name": "Las Cruces, NM",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 51232,
+    "employmentRate": 53.0
+  },
+  "29780": {
+    "cbsaCode": "29780",
+    "name": "Las Vegas, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 42301,
+    "employmentRate": 45.4
+  },
+  "29820": {
+    "cbsaCode": "29820",
+    "name": "Las Vegas-Henderson-Paradise, NV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69911,
+    "employmentRate": 58.4
+  },
+  "29860": {
+    "cbsaCode": "29860",
+    "name": "Laurel, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48389,
+    "employmentRate": 52.5
+  },
+  "29900": {
+    "cbsaCode": "29900",
+    "name": "Laurinburg, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 41948,
+    "employmentRate": 46.7
+  },
+  "29940": {
+    "cbsaCode": "29940",
+    "name": "Lawrence, KS",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66153,
+    "employmentRate": 66.8
+  },
+  "29980": {
+    "cbsaCode": "29980",
+    "name": "Lawrenceburg, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51038,
+    "employmentRate": 53.8
+  },
+  "30020": {
+    "cbsaCode": "30020",
+    "name": "Lawton, OK",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 57196,
+    "employmentRate": 48.0
+  },
+  "30060": {
+    "cbsaCode": "30060",
+    "name": "Lebanon, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49202,
+    "employmentRate": 55.3
+  },
+  "30100": {
+    "cbsaCode": "30100",
+    "name": "Lebanon, NH-VT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 74152,
+    "employmentRate": 59.2
+  },
+  "30140": {
+    "cbsaCode": "30140",
+    "name": "Lebanon, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72532,
+    "employmentRate": 59.9
+  },
+  "30220": {
+    "cbsaCode": "30220",
+    "name": "Levelland, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53283,
+    "employmentRate": 59.0
+  },
+  "30260": {
+    "cbsaCode": "30260",
+    "name": "Lewisburg, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64914,
+    "employmentRate": 46.4
+  },
+  "30280": {
+    "cbsaCode": "30280",
+    "name": "Lewisburg, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65325,
+    "employmentRate": 58.7
+  },
+  "30300": {
+    "cbsaCode": "30300",
+    "name": "Lewiston, ID-WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64488,
+    "employmentRate": 56.0
+  },
+  "30340": {
+    "cbsaCode": "30340",
+    "name": "Lewiston-Auburn, ME",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64500,
+    "employmentRate": 61.8
+  },
+  "30380": {
+    "cbsaCode": "30380",
+    "name": "Lewistown, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58012,
+    "employmentRate": 57.5
+  },
+  "30420": {
+    "cbsaCode": "30420",
+    "name": "Lexington, NE",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68128,
+    "employmentRate": 67.2
+  },
+  "30460": {
+    "cbsaCode": "30460",
+    "name": "Lexington-Fayette, KY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68089,
+    "employmentRate": 63.2
+  },
+  "30580": {
+    "cbsaCode": "30580",
+    "name": "Liberal, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57131,
+    "employmentRate": 68.1
+  },
+  "30620": {
+    "cbsaCode": "30620",
+    "name": "Lima, OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58976,
+    "employmentRate": 57.2
+  },
+  "30660": {
+    "cbsaCode": "30660",
+    "name": "Lincoln, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62547,
+    "employmentRate": 52.8
+  },
+  "30700": {
+    "cbsaCode": "30700",
+    "name": "Lincoln, NE",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70899,
+    "employmentRate": 68.0
+  },
+  "30780": {
+    "cbsaCode": "30780",
+    "name": "Little Rock-North Little Rock-Conway, AR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62664,
+    "employmentRate": 58.7
+  },
+  "30820": {
+    "cbsaCode": "30820",
+    "name": "Lock Haven, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59011,
+    "employmentRate": 56.4
+  },
+  "30860": {
+    "cbsaCode": "30860",
+    "name": "Logan, UT-ID",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71739,
+    "employmentRate": 67.7
+  },
+  "30900": {
+    "cbsaCode": "30900",
+    "name": "Logansport, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55862,
+    "employmentRate": 60.1
+  },
+  "30940": {
+    "cbsaCode": "30940",
+    "name": "London, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 45127,
+    "employmentRate": 46.1
+  },
+  "30980": {
+    "cbsaCode": "30980",
+    "name": "Longview, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62910,
+    "employmentRate": 56.1
+  },
+  "31020": {
+    "cbsaCode": "31020",
+    "name": "Longview, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70912,
+    "employmentRate": 53.0
+  },
+  "31060": {
+    "cbsaCode": "31060",
+    "name": "Los Alamos, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 135801,
+    "employmentRate": 65.6
+  },
+  "31080": {
+    "cbsaCode": "31080",
+    "name": "Los Angeles-Long Beach-Anaheim, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 89105,
+    "employmentRate": 60.6
+  },
+  "31140": {
+    "cbsaCode": "31140",
+    "name": "Louisville/Jefferson County, KY-IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69771,
+    "employmentRate": 62.1
+  },
+  "31180": {
+    "cbsaCode": "31180",
+    "name": "Lubbock, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61535,
+    "employmentRate": 62.3
+  },
+  "31220": {
+    "cbsaCode": "31220",
+    "name": "Ludington, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60744,
+    "employmentRate": 51.8
+  },
+  "31260": {
+    "cbsaCode": "31260",
+    "name": "Lufkin, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57055,
+    "employmentRate": 55.8
+  },
+  "31300": {
+    "cbsaCode": "31300",
+    "name": "Lumberton, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 39393,
+    "employmentRate": 47.6
+  },
+  "31340": {
+    "cbsaCode": "31340",
+    "name": "Lynchburg, VA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64307,
+    "employmentRate": 56.6
+  },
+  "31380": {
+    "cbsaCode": "31380",
+    "name": "Macomb, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48904,
+    "employmentRate": 55.6
+  },
+  "31420": {
+    "cbsaCode": "31420",
+    "name": "Macon-Bibb County, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54700,
+    "employmentRate": 53.2
+  },
+  "31460": {
+    "cbsaCode": "31460",
+    "name": "Madera, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73543,
+    "employmentRate": 50.1
+  },
+  "31500": {
+    "cbsaCode": "31500",
+    "name": "Madison, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57801,
+    "employmentRate": 55.4
+  },
+  "31540": {
+    "cbsaCode": "31540",
+    "name": "Madison, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 82996,
+    "employmentRate": 68.4
+  },
+  "31580": {
+    "cbsaCode": "31580",
+    "name": "Madisonville, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54466,
+    "employmentRate": 50.0
+  },
+  "31620": {
+    "cbsaCode": "31620",
+    "name": "Magnolia, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47441,
+    "employmentRate": 50.0
+  },
+  "31660": {
+    "cbsaCode": "31660",
+    "name": "Malone, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60270,
+    "employmentRate": 49.5
+  },
+  "31680": {
+    "cbsaCode": "31680",
+    "name": "Malvern, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50260,
+    "employmentRate": 46.8
+  },
+  "31700": {
+    "cbsaCode": "31700",
+    "name": "Manchester-Nashua, NH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 95112,
+    "employmentRate": 67.8
+  },
+  "31740": {
+    "cbsaCode": "31740",
+    "name": "Manhattan, KS",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61270,
+    "employmentRate": 57.0
+  },
+  "31820": {
+    "cbsaCode": "31820",
+    "name": "Manitowoc, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66412,
+    "employmentRate": 61.0
+  },
+  "31860": {
+    "cbsaCode": "31860",
+    "name": "Mankato, MN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73472,
+    "employmentRate": 68.6
+  },
+  "31900": {
+    "cbsaCode": "31900",
+    "name": "Mansfield, OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 56557,
+    "employmentRate": 54.0
+  },
+  "31930": {
+    "cbsaCode": "31930",
+    "name": "Marietta, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59053,
+    "employmentRate": 54.8
+  },
+  "31940": {
+    "cbsaCode": "31940",
+    "name": "Marinette, WI-MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58291,
+    "employmentRate": 54.6
+  },
+  "31980": {
+    "cbsaCode": "31980",
+    "name": "Marion, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53033,
+    "employmentRate": 54.5
+  },
+  "32000": {
+    "cbsaCode": "32000",
+    "name": "Marion, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53532,
+    "employmentRate": 50.9
+  },
+  "32020": {
+    "cbsaCode": "32020",
+    "name": "Marion, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55106,
+    "employmentRate": 51.1
+  },
+  "32100": {
+    "cbsaCode": "32100",
+    "name": "Marquette, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63115,
+    "employmentRate": 55.7
+  },
+  "32140": {
+    "cbsaCode": "32140",
+    "name": "Marshall, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68919,
+    "employmentRate": 65.2
+  },
+  "32180": {
+    "cbsaCode": "32180",
+    "name": "Marshall, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55396,
+    "employmentRate": 56.0
+  },
+  "32260": {
+    "cbsaCode": "32260",
+    "name": "Marshalltown, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70828,
+    "employmentRate": 63.1
+  },
+  "32280": {
+    "cbsaCode": "32280",
+    "name": "Martin, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47769,
+    "employmentRate": 51.2
+  },
+  "32300": {
+    "cbsaCode": "32300",
+    "name": "Martinsville, VA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 42458,
+    "employmentRate": 49.2
+  },
+  "32340": {
+    "cbsaCode": "32340",
+    "name": "Maryville, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53917,
+    "employmentRate": 55.3
+  },
+  "32380": {
+    "cbsaCode": "32380",
+    "name": "Mason City, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63785,
+    "employmentRate": 63.2
+  },
+  "32420": {
+    "cbsaCode": "32420",
+    "name": "Mayagüez, PR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 17675,
+    "employmentRate": 31.6
+  },
+  "32460": {
+    "cbsaCode": "32460",
+    "name": "Mayfield, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52526,
+    "employmentRate": 53.2
+  },
+  "32500": {
+    "cbsaCode": "32500",
+    "name": "Maysville, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48460,
+    "employmentRate": 53.7
+  },
+  "32540": {
+    "cbsaCode": "32540",
+    "name": "McAlester, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53054,
+    "employmentRate": 49.4
+  },
+  "32580": {
+    "cbsaCode": "32580",
+    "name": "McAllen-Edinburg-Mission, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 49371,
+    "employmentRate": 54.2
+  },
+  "32620": {
+    "cbsaCode": "32620",
+    "name": "McComb, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 40131,
+    "employmentRate": 48.1
+  },
+  "32660": {
+    "cbsaCode": "32660",
+    "name": "McMinnville, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52948,
+    "employmentRate": 54.1
+  },
+  "32700": {
+    "cbsaCode": "32700",
+    "name": "McPherson, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 71250,
+    "employmentRate": 63.9
+  },
+  "32740": {
+    "cbsaCode": "32740",
+    "name": "Meadville, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58734,
+    "employmentRate": 52.5
+  },
+  "32780": {
+    "cbsaCode": "32780",
+    "name": "Medford, OR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67690,
+    "employmentRate": 54.4
+  },
+  "32820": {
+    "cbsaCode": "32820",
+    "name": "Memphis, TN-MS-AR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62178,
+    "employmentRate": 59.4
+  },
+  "32860": {
+    "cbsaCode": "32860",
+    "name": "Menomonie, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 69721,
+    "employmentRate": 64.8
+  },
+  "32900": {
+    "cbsaCode": "32900",
+    "name": "Merced, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64772,
+    "employmentRate": 52.8
+  },
+  "32940": {
+    "cbsaCode": "32940",
+    "name": "Meridian, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 45386,
+    "employmentRate": 49.8
+  },
+  "33020": {
+    "cbsaCode": "33020",
+    "name": "Mexico, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51745,
+    "employmentRate": 55.6
+  },
+  "33060": {
+    "cbsaCode": "33060",
+    "name": "Miami, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46186,
+    "employmentRate": 52.1
+  },
+  "33100": {
+    "cbsaCode": "33100",
+    "name": "Miami-Fort Lauderdale-Pompano Beach, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69085,
+    "employmentRate": 60.1
+  },
+  "33140": {
+    "cbsaCode": "33140",
+    "name": "Michigan City-La Porte, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66854,
+    "employmentRate": 54.9
+  },
+  "33180": {
+    "cbsaCode": "33180",
+    "name": "Middlesborough, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 33658,
+    "employmentRate": 36.9
+  },
+  "33220": {
+    "cbsaCode": "33220",
+    "name": "Midland, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73643,
+    "employmentRate": 56.1
+  },
+  "33260": {
+    "cbsaCode": "33260",
+    "name": "Midland, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 89345,
+    "employmentRate": 68.2
+  },
+  "33300": {
+    "cbsaCode": "33300",
+    "name": "Milledgeville, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51988,
+    "employmentRate": 43.9
+  },
+  "33340": {
+    "cbsaCode": "33340",
+    "name": "Milwaukee-Waukesha, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72937,
+    "employmentRate": 63.3
+  },
+  "33380": {
+    "cbsaCode": "33380",
+    "name": "Minden, LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 34263,
+    "employmentRate": 44.1
+  },
+  "33420": {
+    "cbsaCode": "33420",
+    "name": "Mineral Wells, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65242,
+    "employmentRate": 54.2
+  },
+  "33460": {
+    "cbsaCode": "33460",
+    "name": "Minneapolis-St. Paul-Bloomington, MN-WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 94673,
+    "employmentRate": 68.1
+  },
+  "33500": {
+    "cbsaCode": "33500",
+    "name": "Minot, ND",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 78112,
+    "employmentRate": 62.4
+  },
+  "33540": {
+    "cbsaCode": "33540",
+    "name": "Missoula, MT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66840,
+    "employmentRate": 66.7
+  },
+  "33580": {
+    "cbsaCode": "33580",
+    "name": "Mitchell, SD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57432,
+    "employmentRate": 67.6
+  },
+  "33620": {
+    "cbsaCode": "33620",
+    "name": "Moberly, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51480,
+    "employmentRate": 53.8
+  },
+  "33660": {
+    "cbsaCode": "33660",
+    "name": "Mobile, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55247,
+    "employmentRate": 53.3
+  },
+  "33700": {
+    "cbsaCode": "33700",
+    "name": "Modesto, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 74872,
+    "employmentRate": 56.3
+  },
+  "33740": {
+    "cbsaCode": "33740",
+    "name": "Monroe, LA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 47351,
+    "employmentRate": 53.0
+  },
+  "33780": {
+    "cbsaCode": "33780",
+    "name": "Monroe, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72573,
+    "employmentRate": 56.3
+  },
+  "33860": {
+    "cbsaCode": "33860",
+    "name": "Montgomery, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60849,
+    "employmentRate": 54.7
+  },
+  "33940": {
+    "cbsaCode": "33940",
+    "name": "Montrose, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65033,
+    "employmentRate": 52.5
+  },
+  "33980": {
+    "cbsaCode": "33980",
+    "name": "Morehead City, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66965,
+    "employmentRate": 51.6
+  },
+  "34020": {
+    "cbsaCode": "34020",
+    "name": "Morgan City, LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47322,
+    "employmentRate": 50.1
+  },
+  "34060": {
+    "cbsaCode": "34060",
+    "name": "Morgantown, WV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60670,
+    "employmentRate": 56.6
+  },
+  "34100": {
+    "cbsaCode": "34100",
+    "name": "Morristown, TN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 52913,
+    "employmentRate": 53.0
+  },
+  "34140": {
+    "cbsaCode": "34140",
+    "name": "Moscow, ID",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62258,
+    "employmentRate": 58.0
+  },
+  "34180": {
+    "cbsaCode": "34180",
+    "name": "Moses Lake, WA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66387,
+    "employmentRate": 58.9
+  },
+  "34220": {
+    "cbsaCode": "34220",
+    "name": "Moultrie, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47235,
+    "employmentRate": 54.6
+  },
+  "34260": {
+    "cbsaCode": "34260",
+    "name": "Mountain Home, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47403,
+    "employmentRate": 43.4
+  },
+  "34300": {
+    "cbsaCode": "34300",
+    "name": "Mountain Home, ID",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55000,
+    "employmentRate": 45.1
+  },
+  "34340": {
+    "cbsaCode": "34340",
+    "name": "Mount Airy, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52743,
+    "employmentRate": 54.6
+  },
+  "34350": {
+    "cbsaCode": "34350",
+    "name": "Mount Gay-Shamrock, WV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 42194,
+    "employmentRate": 35.8
+  },
+  "34380": {
+    "cbsaCode": "34380",
+    "name": "Mount Pleasant, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52638,
+    "employmentRate": 57.4
+  },
+  "34420": {
+    "cbsaCode": "34420",
+    "name": "Mount Pleasant, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56096,
+    "employmentRate": 56.5
+  },
+  "34460": {
+    "cbsaCode": "34460",
+    "name": "Mount Sterling, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51889,
+    "employmentRate": 49.8
+  },
+  "34500": {
+    "cbsaCode": "34500",
+    "name": "Mount Vernon, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58384,
+    "employmentRate": 54.9
+  },
+  "34540": {
+    "cbsaCode": "34540",
+    "name": "Mount Vernon, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 71246,
+    "employmentRate": 57.9
+  },
+  "34580": {
+    "cbsaCode": "34580",
+    "name": "Mount Vernon-Anacortes, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 82029,
+    "employmentRate": 54.9
+  },
+  "34620": {
+    "cbsaCode": "34620",
+    "name": "Muncie, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53377,
+    "employmentRate": 56.1
+  },
+  "34660": {
+    "cbsaCode": "34660",
+    "name": "Murray, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48276,
+    "employmentRate": 55.3
+  },
+  "34700": {
+    "cbsaCode": "34700",
+    "name": "Muscatine, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67427,
+    "employmentRate": 62.7
+  },
+  "34740": {
+    "cbsaCode": "34740",
+    "name": "Muskegon, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61347,
+    "employmentRate": 54.7
+  },
+  "34780": {
+    "cbsaCode": "34780",
+    "name": "Muskogee, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50289,
+    "employmentRate": 50.4
+  },
+  "34820": {
+    "cbsaCode": "34820",
+    "name": "Myrtle Beach-Conway-North Myrtle Beach, SC-NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 63296,
+    "employmentRate": 49.8
+  },
+  "34860": {
+    "cbsaCode": "34860",
+    "name": "Nacogdoches, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51153,
+    "employmentRate": 55.7
+  },
+  "34900": {
+    "cbsaCode": "34900",
+    "name": "Napa, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 105809,
+    "employmentRate": 60.1
+  },
+  "34940": {
+    "cbsaCode": "34940",
+    "name": "Naples-Marco Island, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 82011,
+    "employmentRate": 49.9
+  },
+  "34980": {
+    "cbsaCode": "34980",
+    "name": "Nashville-Davidson--Murfreesboro--Franklin, TN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 79020,
+    "employmentRate": 65.9
+  },
+  "35020": {
+    "cbsaCode": "35020",
+    "name": "Natchez, MS-LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 37726,
+    "employmentRate": 40.8
+  },
+  "35060": {
+    "cbsaCode": "35060",
+    "name": "Natchitoches, LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 41310,
+    "employmentRate": 47.2
+  },
+  "35100": {
+    "cbsaCode": "35100",
+    "name": "New Bern, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60258,
+    "employmentRate": 48.5
+  },
+  "35140": {
+    "cbsaCode": "35140",
+    "name": "Newberry, SC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56706,
+    "employmentRate": 55.2
+  },
+  "35220": {
+    "cbsaCode": "35220",
+    "name": "New Castle, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57632,
+    "employmentRate": 51.4
+  },
+  "35260": {
+    "cbsaCode": "35260",
+    "name": "New Castle, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57585,
+    "employmentRate": 54.7
+  },
+  "35300": {
+    "cbsaCode": "35300",
+    "name": "New Haven-Milford, CT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 81544,
+    "employmentRate": 60.8
+  },
+  "35380": {
+    "cbsaCode": "35380",
+    "name": "New Orleans-Metairie, LA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62748,
+    "employmentRate": 57.7
+  },
+  "35420": {
+    "cbsaCode": "35420",
+    "name": "New Philadelphia-Dover, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61953,
+    "employmentRate": 58.3
+  },
+  "35440": {
+    "cbsaCode": "35440",
+    "name": "Newport, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57794,
+    "employmentRate": 46.5
+  },
+  "35460": {
+    "cbsaCode": "35460",
+    "name": "Newport, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 45110,
+    "employmentRate": 49.4
+  },
+  "35580": {
+    "cbsaCode": "35580",
+    "name": "New Ulm, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67038,
+    "employmentRate": 64.5
+  },
+  "35620": {
+    "cbsaCode": "35620",
+    "name": "New York-Newark-Jersey City, NY-NJ-PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 93610,
+    "employmentRate": 60.5
+  },
+  "35660": {
+    "cbsaCode": "35660",
+    "name": "Niles, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60379,
+    "employmentRate": 57.1
+  },
+  "35700": {
+    "cbsaCode": "35700",
+    "name": "Nogales, AZ",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51885,
+    "employmentRate": 51.5
+  },
+  "35740": {
+    "cbsaCode": "35740",
+    "name": "Norfolk, NE",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63350,
+    "employmentRate": 66.2
+  },
+  "35820": {
+    "cbsaCode": "35820",
+    "name": "North Platte, NE",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63119,
+    "employmentRate": 61.6
+  },
+  "35840": {
+    "cbsaCode": "35840",
+    "name": "North Port-Sarasota-Bradenton, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 74469,
+    "employmentRate": 49.1
+  },
+  "35860": {
+    "cbsaCode": "35860",
+    "name": "North Vernon, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66892,
+    "employmentRate": 59.5
+  },
+  "35900": {
+    "cbsaCode": "35900",
+    "name": "North Wilkesboro, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49119,
+    "employmentRate": 52.5
+  },
+  "35940": {
+    "cbsaCode": "35940",
+    "name": "Norwalk, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64144,
+    "employmentRate": 59.2
+  },
+  "35980": {
+    "cbsaCode": "35980",
+    "name": "Norwich-New London, CT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 84755,
+    "employmentRate": 59.2
+  },
+  "36020": {
+    "cbsaCode": "36020",
+    "name": "Oak Harbor, WA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 82850,
+    "employmentRate": 44.8
+  },
+  "36100": {
+    "cbsaCode": "36100",
+    "name": "Ocala, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 55265,
+    "employmentRate": 45.0
+  },
+  "36140": {
+    "cbsaCode": "36140",
+    "name": "Ocean City, NJ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 83870,
+    "employmentRate": 52.2
+  },
+  "36220": {
+    "cbsaCode": "36220",
+    "name": "Odessa, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70566,
+    "employmentRate": 63.3
+  },
+  "36260": {
+    "cbsaCode": "36260",
+    "name": "Ogden-Clearfield, UT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 91022,
+    "employmentRate": 66.9
+  },
+  "36300": {
+    "cbsaCode": "36300",
+    "name": "Ogdensburg-Massena, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58339,
+    "employmentRate": 49.8
+  },
+  "36340": {
+    "cbsaCode": "36340",
+    "name": "Oil City, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59278,
+    "employmentRate": 51.5
+  },
+  "36380": {
+    "cbsaCode": "36380",
+    "name": "Okeechobee, FL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50476,
+    "employmentRate": 47.3
+  },
+  "36420": {
+    "cbsaCode": "36420",
+    "name": "Oklahoma City, OK",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67963,
+    "employmentRate": 61.5
+  },
+  "36460": {
+    "cbsaCode": "36460",
+    "name": "Olean, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56889,
+    "employmentRate": 53.5
+  },
+  "36500": {
+    "cbsaCode": "36500",
+    "name": "Olympia-Lacey-Tumwater, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 88895,
+    "employmentRate": 56.2
+  },
+  "36540": {
+    "cbsaCode": "36540",
+    "name": "Omaha-Council Bluffs, NE-IA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 79634,
+    "employmentRate": 67.0
+  },
+  "36580": {
+    "cbsaCode": "36580",
+    "name": "Oneonta, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65778,
+    "employmentRate": 53.0
+  },
+  "36620": {
+    "cbsaCode": "36620",
+    "name": "Ontario, OR-ID",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55155,
+    "employmentRate": 50.9
+  },
+  "36660": {
+    "cbsaCode": "36660",
+    "name": "Opelousas, LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 44478,
+    "employmentRate": 48.6
+  },
+  "36700": {
+    "cbsaCode": "36700",
+    "name": "Orangeburg, SC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 41020,
+    "employmentRate": 48.1
+  },
+  "36740": {
+    "cbsaCode": "36740",
+    "name": "Orlando-Kissimmee-Sanford, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71551,
+    "employmentRate": 61.3
+  },
+  "36780": {
+    "cbsaCode": "36780",
+    "name": "Oshkosh-Neenah, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70041,
+    "employmentRate": 64.5
+  },
+  "36820": {
+    "cbsaCode": "36820",
+    "name": "Oskaloosa, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65200,
+    "employmentRate": 63.6
+  },
+  "36830": {
+    "cbsaCode": "36830",
+    "name": "Othello, WA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63105,
+    "employmentRate": 58.4
+  },
+  "36837": {
+    "cbsaCode": "36837",
+    "name": "Ottawa, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67181,
+    "employmentRate": 59.1
+  },
+  "36840": {
+    "cbsaCode": "36840",
+    "name": "Ottawa, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68217,
+    "employmentRate": 63.3
+  },
+  "36900": {
+    "cbsaCode": "36900",
+    "name": "Ottumwa, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56209,
+    "employmentRate": 58.8
+  },
+  "36940": {
+    "cbsaCode": "36940",
+    "name": "Owatonna, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 79722,
+    "employmentRate": 65.5
+  },
+  "36980": {
+    "cbsaCode": "36980",
+    "name": "Owensboro, KY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64366,
+    "employmentRate": 58.2
+  },
+  "37060": {
+    "cbsaCode": "37060",
+    "name": "Oxford, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59748,
+    "employmentRate": 54.3
+  },
+  "37100": {
+    "cbsaCode": "37100",
+    "name": "Oxnard-Thousand Oaks-Ventura, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 102141,
+    "employmentRate": 60.5
+  },
+  "37120": {
+    "cbsaCode": "37120",
+    "name": "Ozark, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52813,
+    "employmentRate": 46.2
+  },
+  "37140": {
+    "cbsaCode": "37140",
+    "name": "Paducah, KY-IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57960,
+    "employmentRate": 53.6
+  },
+  "37220": {
+    "cbsaCode": "37220",
+    "name": "Pahrump, NV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53602,
+    "employmentRate": 37.9
+  },
+  "37260": {
+    "cbsaCode": "37260",
+    "name": "Palatka, FL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 44852,
+    "employmentRate": 43.5
+  },
+  "37300": {
+    "cbsaCode": "37300",
+    "name": "Palestine, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57445,
+    "employmentRate": 41.3
+  },
+  "37340": {
+    "cbsaCode": "37340",
+    "name": "Palm Bay-Melbourne-Titusville, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71308,
+    "employmentRate": 53.0
+  },
+  "37420": {
+    "cbsaCode": "37420",
+    "name": "Pampa, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54852,
+    "employmentRate": 54.9
+  },
+  "37460": {
+    "cbsaCode": "37460",
+    "name": "Panama City, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 65999,
+    "employmentRate": 57.5
+  },
+  "37500": {
+    "cbsaCode": "37500",
+    "name": "Paragould, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54879,
+    "employmentRate": 54.9
+  },
+  "37540": {
+    "cbsaCode": "37540",
+    "name": "Paris, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48025,
+    "employmentRate": 48.4
+  },
+  "37580": {
+    "cbsaCode": "37580",
+    "name": "Paris, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58246,
+    "employmentRate": 58.0
+  },
+  "37620": {
+    "cbsaCode": "37620",
+    "name": "Parkersburg-Vienna, WV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54175,
+    "employmentRate": 51.9
+  },
+  "37660": {
+    "cbsaCode": "37660",
+    "name": "Parsons, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56143,
+    "employmentRate": 58.3
+  },
+  "37740": {
+    "cbsaCode": "37740",
+    "name": "Payson, AZ",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55242,
+    "employmentRate": 42.3
+  },
+  "37770": {
+    "cbsaCode": "37770",
+    "name": "Pearsall, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56042,
+    "employmentRate": 47.7
+  },
+  "37780": {
+    "cbsaCode": "37780",
+    "name": "Pecos, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57329,
+    "employmentRate": 56.8
+  },
+  "37800": {
+    "cbsaCode": "37800",
+    "name": "Pella, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 74193,
+    "employmentRate": 63.2
+  },
+  "37860": {
+    "cbsaCode": "37860",
+    "name": "Pensacola-Ferry Pass-Brent, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69374,
+    "employmentRate": 53.3
+  },
+  "37900": {
+    "cbsaCode": "37900",
+    "name": "Peoria, IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67718,
+    "employmentRate": 57.7
+  },
+  "37940": {
+    "cbsaCode": "37940",
+    "name": "Peru, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59551,
+    "employmentRate": 52.6
+  },
+  "37980": {
+    "cbsaCode": "37980",
+    "name": "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 85555,
+    "employmentRate": 61.6
+  },
+  "38060": {
+    "cbsaCode": "38060",
+    "name": "Phoenix-Mesa-Chandler, AZ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 79935,
+    "employmentRate": 60.6
+  },
+  "38100": {
+    "cbsaCode": "38100",
+    "name": "Picayune, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54220,
+    "employmentRate": 51.5
+  },
+  "38180": {
+    "cbsaCode": "38180",
+    "name": "Pierre, SD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 83641,
+    "employmentRate": 67.1
+  },
+  "38220": {
+    "cbsaCode": "38220",
+    "name": "Pine Bluff, AR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 47559,
+    "employmentRate": 44.4
+  },
+  "38240": {
+    "cbsaCode": "38240",
+    "name": "Pinehurst-Southern Pines, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 77981,
+    "employmentRate": 51.0
+  },
+  "38260": {
+    "cbsaCode": "38260",
+    "name": "Pittsburg, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49779,
+    "employmentRate": 62.1
+  },
+  "38300": {
+    "cbsaCode": "38300",
+    "name": "Pittsburgh, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71283,
+    "employmentRate": 59.5
+  },
+  "38340": {
+    "cbsaCode": "38340",
+    "name": "Pittsfield, MA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69744,
+    "employmentRate": 58.1
+  },
+  "38380": {
+    "cbsaCode": "38380",
+    "name": "Plainview, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50721,
+    "employmentRate": 56.5
+  },
+  "38420": {
+    "cbsaCode": "38420",
+    "name": "Platteville, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63497,
+    "employmentRate": 62.0
+  },
+  "38460": {
+    "cbsaCode": "38460",
+    "name": "Plattsburgh, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67097,
+    "employmentRate": 53.5
+  },
+  "38500": {
+    "cbsaCode": "38500",
+    "name": "Plymouth, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66016,
+    "employmentRate": 60.0
+  },
+  "38540": {
+    "cbsaCode": "38540",
+    "name": "Pocatello, ID",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60704,
+    "employmentRate": 58.7
+  },
+  "38580": {
+    "cbsaCode": "38580",
+    "name": "Point Pleasant, WV-OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54605,
+    "employmentRate": 48.0
+  },
+  "38620": {
+    "cbsaCode": "38620",
+    "name": "Ponca City, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53746,
+    "employmentRate": 55.1
+  },
+  "38660": {
+    "cbsaCode": "38660",
+    "name": "Ponce, PR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 19867,
+    "employmentRate": 33.8
+  },
+  "38700": {
+    "cbsaCode": "38700",
+    "name": "Pontiac, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68175,
+    "employmentRate": 57.5
+  },
+  "38740": {
+    "cbsaCode": "38740",
+    "name": "Poplar Bluff, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46581,
+    "employmentRate": 51.3
+  },
+  "38780": {
+    "cbsaCode": "38780",
+    "name": "Portales, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52644,
+    "employmentRate": 57.2
+  },
+  "38820": {
+    "cbsaCode": "38820",
+    "name": "Port Angeles, WA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66108,
+    "employmentRate": 45.7
+  },
+  "38860": {
+    "cbsaCode": "38860",
+    "name": "Portland-South Portland, ME",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 84095,
+    "employmentRate": 64.4
+  },
+  "38900": {
+    "cbsaCode": "38900",
+    "name": "Portland-Vancouver-Hillsboro, OR-WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 90451,
+    "employmentRate": 63.2
+  },
+  "38920": {
+    "cbsaCode": "38920",
+    "name": "Port Lavaca, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62267,
+    "employmentRate": 60.6
+  },
+  "38940": {
+    "cbsaCode": "38940",
+    "name": "Port St. Lucie, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69429,
+    "employmentRate": 51.3
+  },
+  "39020": {
+    "cbsaCode": "39020",
+    "name": "Portsmouth, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46360,
+    "employmentRate": 44.7
+  },
+  "39060": {
+    "cbsaCode": "39060",
+    "name": "Pottsville, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63574,
+    "employmentRate": 54.5
+  },
+  "39100": {
+    "cbsaCode": "39100",
+    "name": "Poughkeepsie-Newburgh-Middletown, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 92870,
+    "employmentRate": 59.3
+  },
+  "39150": {
+    "cbsaCode": "39150",
+    "name": "Prescott Valley-Prescott, AZ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62430,
+    "employmentRate": 46.3
+  },
+  "39220": {
+    "cbsaCode": "39220",
+    "name": "Price, UT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53734,
+    "employmentRate": 52.6
+  },
+  "39260": {
+    "cbsaCode": "39260",
+    "name": "Prineville, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 74969,
+    "employmentRate": 54.9
+  },
+  "39300": {
+    "cbsaCode": "39300",
+    "name": "Providence-Warwick, RI-MA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 81136,
+    "employmentRate": 61.0
+  },
+  "39340": {
+    "cbsaCode": "39340",
+    "name": "Provo-Orem, UT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 91190,
+    "employmentRate": 68.7
+  },
+  "39380": {
+    "cbsaCode": "39380",
+    "name": "Pueblo, CO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59436,
+    "employmentRate": 52.1
+  },
+  "39420": {
+    "cbsaCode": "39420",
+    "name": "Pullman, WA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49345,
+    "employmentRate": 56.2
+  },
+  "39460": {
+    "cbsaCode": "39460",
+    "name": "Punta Gorda, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62164,
+    "employmentRate": 39.9
+  },
+  "39500": {
+    "cbsaCode": "39500",
+    "name": "Quincy, IL-MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61924,
+    "employmentRate": 62.0
+  },
+  "39540": {
+    "cbsaCode": "39540",
+    "name": "Racine, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72658,
+    "employmentRate": 61.1
+  },
+  "39580": {
+    "cbsaCode": "39580",
+    "name": "Raleigh-Cary, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 91818,
+    "employmentRate": 65.9
+  },
+  "39660": {
+    "cbsaCode": "39660",
+    "name": "Rapid City, SD",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68363,
+    "employmentRate": 61.5
+  },
+  "39700": {
+    "cbsaCode": "39700",
+    "name": "Raymondville, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 42839,
+    "employmentRate": 50.5
+  },
+  "39740": {
+    "cbsaCode": "39740",
+    "name": "Reading, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 74617,
+    "employmentRate": 61.2
+  },
+  "39780": {
+    "cbsaCode": "39780",
+    "name": "Red Bluff, CA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59029,
+    "employmentRate": 49.6
+  },
+  "39820": {
+    "cbsaCode": "39820",
+    "name": "Redding, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68347,
+    "employmentRate": 51.9
+  },
+  "39860": {
+    "cbsaCode": "39860",
+    "name": "Red Wing, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 78338,
+    "employmentRate": 62.4
+  },
+  "39900": {
+    "cbsaCode": "39900",
+    "name": "Reno, NV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 81576,
+    "employmentRate": 62.5
+  },
+  "39940": {
+    "cbsaCode": "39940",
+    "name": "Rexburg, ID",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56594,
+    "employmentRate": 60.3
+  },
+  "39980": {
+    "cbsaCode": "39980",
+    "name": "Richmond, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54854,
+    "employmentRate": 57.2
+  },
+  "40060": {
+    "cbsaCode": "40060",
+    "name": "Richmond, VA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 80877,
+    "employmentRate": 62.8
+  },
+  "40080": {
+    "cbsaCode": "40080",
+    "name": "Richmond-Berea, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57096,
+    "employmentRate": 57.4
+  },
+  "40100": {
+    "cbsaCode": "40100",
+    "name": "Rio Grande City-Roma, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 35979,
+    "employmentRate": 51.5
+  },
+  "40140": {
+    "cbsaCode": "40140",
+    "name": "Riverside-San Bernardino-Ontario, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 81041,
+    "employmentRate": 56.6
+  },
+  "40180": {
+    "cbsaCode": "40180",
+    "name": "Riverton, WY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60030,
+    "employmentRate": 56.2
+  },
+  "40220": {
+    "cbsaCode": "40220",
+    "name": "Roanoke, VA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 65687,
+    "employmentRate": 57.7
+  },
+  "40260": {
+    "cbsaCode": "40260",
+    "name": "Roanoke Rapids, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 42846,
+    "employmentRate": 46.1
+  },
+  "40300": {
+    "cbsaCode": "40300",
+    "name": "Rochelle, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 75782,
+    "employmentRate": 59.8
+  },
+  "40340": {
+    "cbsaCode": "40340",
+    "name": "Rochester, MN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 86788,
+    "employmentRate": 67.6
+  },
+  "40380": {
+    "cbsaCode": "40380",
+    "name": "Rochester, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71349,
+    "employmentRate": 59.3
+  },
+  "40420": {
+    "cbsaCode": "40420",
+    "name": "Rockford, IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 63834,
+    "employmentRate": 58.1
+  },
+  "40460": {
+    "cbsaCode": "40460",
+    "name": "Rockingham, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 42354,
+    "employmentRate": 51.9
+  },
+  "40530": {
+    "cbsaCode": "40530",
+    "name": "Rockport, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58168,
+    "employmentRate": 45.8
+  },
+  "40540": {
+    "cbsaCode": "40540",
+    "name": "Rock Springs, WY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 79375,
+    "employmentRate": 64.3
+  },
+  "40580": {
+    "cbsaCode": "40580",
+    "name": "Rocky Mount, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53553,
+    "employmentRate": 54.7
+  },
+  "40620": {
+    "cbsaCode": "40620",
+    "name": "Rolla, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53242,
+    "employmentRate": 52.4
+  },
+  "40660": {
+    "cbsaCode": "40660",
+    "name": "Rome, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 57868,
+    "employmentRate": 55.3
+  },
+  "40700": {
+    "cbsaCode": "40700",
+    "name": "Roseburg, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56440,
+    "employmentRate": 47.1
+  },
+  "40740": {
+    "cbsaCode": "40740",
+    "name": "Roswell, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49673,
+    "employmentRate": 53.1
+  },
+  "40760": {
+    "cbsaCode": "40760",
+    "name": "Ruidoso, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47919,
+    "employmentRate": 48.7
+  },
+  "40780": {
+    "cbsaCode": "40780",
+    "name": "Russellville, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52259,
+    "employmentRate": 53.9
+  },
+  "40820": {
+    "cbsaCode": "40820",
+    "name": "Ruston, LA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 37001,
+    "employmentRate": 53.0
+  },
+  "40860": {
+    "cbsaCode": "40860",
+    "name": "Rutland, VT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62641,
+    "employmentRate": 57.0
+  },
+  "40900": {
+    "cbsaCode": "40900",
+    "name": "Sacramento-Roseville-Folsom, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 89227,
+    "employmentRate": 58.6
+  },
+  "40940": {
+    "cbsaCode": "40940",
+    "name": "Safford, AZ",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64089,
+    "employmentRate": 47.6
+  },
+  "40980": {
+    "cbsaCode": "40980",
+    "name": "Saginaw, MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 56579,
+    "employmentRate": 52.8
+  },
+  "41060": {
+    "cbsaCode": "41060",
+    "name": "St. Cloud, MN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72564,
+    "employmentRate": 67.7
+  },
+  "41100": {
+    "cbsaCode": "41100",
+    "name": "St. George, UT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71976,
+    "employmentRate": 54.7
+  },
+  "41140": {
+    "cbsaCode": "41140",
+    "name": "St. Joseph, MO-KS",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61030,
+    "employmentRate": 56.2
+  },
+  "41180": {
+    "cbsaCode": "41180",
+    "name": "St. Louis, MO-IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 75316,
+    "employmentRate": 62.1
+  },
+  "41220": {
+    "cbsaCode": "41220",
+    "name": "St. Marys, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68104,
+    "employmentRate": 50.8
+  },
+  "41260": {
+    "cbsaCode": "41260",
+    "name": "St. Marys, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61672,
+    "employmentRate": 58.2
+  },
+  "41400": {
+    "cbsaCode": "41400",
+    "name": "Salem, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55473,
+    "employmentRate": 55.2
+  },
+  "41420": {
+    "cbsaCode": "41420",
+    "name": "Salem, OR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72154,
+    "employmentRate": 57.9
+  },
+  "41460": {
+    "cbsaCode": "41460",
+    "name": "Salina, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60896,
+    "employmentRate": 64.0
+  },
+  "41500": {
+    "cbsaCode": "41500",
+    "name": "Salinas, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 91043,
+    "employmentRate": 55.7
+  },
+  "41540": {
+    "cbsaCode": "41540",
+    "name": "Salisbury, MD-DE",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72964,
+    "employmentRate": 53.8
+  },
+  "41620": {
+    "cbsaCode": "41620",
+    "name": "Salt Lake City, UT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 90277,
+    "employmentRate": 69.3
+  },
+  "41660": {
+    "cbsaCode": "41660",
+    "name": "San Angelo, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66832,
+    "employmentRate": 59.4
+  },
+  "41700": {
+    "cbsaCode": "41700",
+    "name": "San Antonio-New Braunfels, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70910,
+    "employmentRate": 60.5
+  },
+  "41740": {
+    "cbsaCode": "41740",
+    "name": "San Diego-Chula Vista-Carlsbad, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 96974,
+    "employmentRate": 59.0
+  },
+  "41760": {
+    "cbsaCode": "41760",
+    "name": "Sandpoint, ID",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61816,
+    "employmentRate": 50.3
+  },
+  "41780": {
+    "cbsaCode": "41780",
+    "name": "Sandusky, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65171,
+    "employmentRate": 57.7
+  },
+  "41820": {
+    "cbsaCode": "41820",
+    "name": "Sanford, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60941,
+    "employmentRate": 56.8
+  },
+  "41860": {
+    "cbsaCode": "41860",
+    "name": "San Francisco-Oakland-Berkeley, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 129315,
+    "employmentRate": 63.5
+  },
+  "41900": {
+    "cbsaCode": "41900",
+    "name": "San Germán, PR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 19871,
+    "employmentRate": 34.0
+  },
+  "41940": {
+    "cbsaCode": "41940",
+    "name": "San Jose-Sunnyvale-Santa Clara, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 151713,
+    "employmentRate": 64.3
+  },
+  "41980": {
+    "cbsaCode": "41980",
+    "name": "San Juan-Bayamón-Caguas, PR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 26853,
+    "employmentRate": 41.5
+  },
+  "42020": {
+    "cbsaCode": "42020",
+    "name": "San Luis Obispo-Paso Robles, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 90158,
+    "employmentRate": 55.1
+  },
+  "42100": {
+    "cbsaCode": "42100",
+    "name": "Santa Cruz-Watsonville, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 104409,
+    "employmentRate": 59.7
+  },
+  "42140": {
+    "cbsaCode": "42140",
+    "name": "Santa Fe, NM",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70522,
+    "employmentRate": 54.4
+  },
+  "42180": {
+    "cbsaCode": "42180",
+    "name": "Santa Isabel, PR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 22680,
+    "employmentRate": 42.8
+  },
+  "42200": {
+    "cbsaCode": "42200",
+    "name": "Santa Maria-Santa Barbara, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 92332,
+    "employmentRate": 58.3
+  },
+  "42220": {
+    "cbsaCode": "42220",
+    "name": "Santa Rosa-Petaluma, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 99266,
+    "employmentRate": 61.0
+  },
+  "42300": {
+    "cbsaCode": "42300",
+    "name": "Sault Ste. Marie, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58408,
+    "employmentRate": 50.9
+  },
+  "42340": {
+    "cbsaCode": "42340",
+    "name": "Savannah, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70705,
+    "employmentRate": 59.7
+  },
+  "42380": {
+    "cbsaCode": "42380",
+    "name": "Sayre, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60650,
+    "employmentRate": 53.3
+  },
+  "42420": {
+    "cbsaCode": "42420",
+    "name": "Scottsbluff, NE",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59842,
+    "employmentRate": 61.6
+  },
+  "42460": {
+    "cbsaCode": "42460",
+    "name": "Scottsboro, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46748,
+    "employmentRate": 47.4
+  },
+  "42500": {
+    "cbsaCode": "42500",
+    "name": "Scottsburg, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49343,
+    "employmentRate": 55.7
+  },
+  "42540": {
+    "cbsaCode": "42540",
+    "name": "Scranton--Wilkes-Barre, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62318,
+    "employmentRate": 57.4
+  },
+  "42620": {
+    "cbsaCode": "42620",
+    "name": "Searcy, AR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 51144,
+    "employmentRate": 52.4
+  },
+  "42660": {
+    "cbsaCode": "42660",
+    "name": "Seattle-Tacoma-Bellevue, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 107206,
+    "employmentRate": 64.7
+  },
+  "42680": {
+    "cbsaCode": "42680",
+    "name": "Sebastian-Vero Beach, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67543,
+    "employmentRate": 45.3
+  },
+  "42700": {
+    "cbsaCode": "42700",
+    "name": "Sebring-Avon Park, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53679,
+    "employmentRate": 40.5
+  },
+  "42740": {
+    "cbsaCode": "42740",
+    "name": "Sedalia, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57581,
+    "employmentRate": 60.1
+  },
+  "42780": {
+    "cbsaCode": "42780",
+    "name": "Selinsgrove, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65914,
+    "employmentRate": 59.5
+  },
+  "42820": {
+    "cbsaCode": "42820",
+    "name": "Selma, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 37180,
+    "employmentRate": 47.3
+  },
+  "42860": {
+    "cbsaCode": "42860",
+    "name": "Seneca, SC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56710,
+    "employmentRate": 49.0
+  },
+  "42900": {
+    "cbsaCode": "42900",
+    "name": "Seneca Falls, NY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64050,
+    "employmentRate": 54.1
+  },
+  "42940": {
+    "cbsaCode": "42940",
+    "name": "Sevierville, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60103,
+    "employmentRate": 58.2
+  },
+  "42980": {
+    "cbsaCode": "42980",
+    "name": "Seymour, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65609,
+    "employmentRate": 61.4
+  },
+  "43020": {
+    "cbsaCode": "43020",
+    "name": "Shawano, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 65222,
+    "employmentRate": 58.3
+  },
+  "43060": {
+    "cbsaCode": "43060",
+    "name": "Shawnee, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58270,
+    "employmentRate": 51.2
+  },
+  "43100": {
+    "cbsaCode": "43100",
+    "name": "Sheboygan, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68969,
+    "employmentRate": 64.1
+  },
+  "43140": {
+    "cbsaCode": "43140",
+    "name": "Shelby, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50723,
+    "employmentRate": 54.0
+  },
+  "43180": {
+    "cbsaCode": "43180",
+    "name": "Shelbyville, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59955,
+    "employmentRate": 59.2
+  },
+  "43220": {
+    "cbsaCode": "43220",
+    "name": "Shelton, WA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 74388,
+    "employmentRate": 47.7
+  },
+  "43260": {
+    "cbsaCode": "43260",
+    "name": "Sheridan, WY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68898,
+    "employmentRate": 61.8
+  },
+  "43300": {
+    "cbsaCode": "43300",
+    "name": "Sherman-Denison, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66608,
+    "employmentRate": 59.8
+  },
+  "43320": {
+    "cbsaCode": "43320",
+    "name": "Show Low, AZ",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50335,
+    "employmentRate": 41.3
+  },
+  "43340": {
+    "cbsaCode": "43340",
+    "name": "Shreveport-Bossier City, LA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53053,
+    "employmentRate": 52.1
+  },
+  "43380": {
+    "cbsaCode": "43380",
+    "name": "Sidney, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 73502,
+    "employmentRate": 63.7
+  },
+  "43420": {
+    "cbsaCode": "43420",
+    "name": "Sierra Vista-Douglas, AZ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58421,
+    "employmentRate": 43.3
+  },
+  "43460": {
+    "cbsaCode": "43460",
+    "name": "Sikeston, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54621,
+    "employmentRate": 58.2
+  },
+  "43500": {
+    "cbsaCode": "43500",
+    "name": "Silver City, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 44895,
+    "employmentRate": 41.9
+  },
+  "43580": {
+    "cbsaCode": "43580",
+    "name": "Sioux City, IA-NE-SD",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69065,
+    "employmentRate": 65.4
+  },
+  "43620": {
+    "cbsaCode": "43620",
+    "name": "Sioux Falls, SD",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 78552,
+    "employmentRate": 72.6
+  },
+  "43660": {
+    "cbsaCode": "43660",
+    "name": "Snyder, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58932,
+    "employmentRate": 52.5
+  },
+  "43700": {
+    "cbsaCode": "43700",
+    "name": "Somerset, KY",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48768,
+    "employmentRate": 51.9
+  },
+  "43740": {
+    "cbsaCode": "43740",
+    "name": "Somerset, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57357,
+    "employmentRate": 52.8
+  },
+  "43760": {
+    "cbsaCode": "43760",
+    "name": "Sonora, CA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70432,
+    "employmentRate": 44.7
+  },
+  "43780": {
+    "cbsaCode": "43780",
+    "name": "South Bend-Mishawaka, IN-MI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62448,
+    "employmentRate": 60.0
+  },
+  "43900": {
+    "cbsaCode": "43900",
+    "name": "Spartanburg, SC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61955,
+    "employmentRate": 58.8
+  },
+  "43940": {
+    "cbsaCode": "43940",
+    "name": "Spearfish, SD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62977,
+    "employmentRate": 64.1
+  },
+  "43980": {
+    "cbsaCode": "43980",
+    "name": "Spencer, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61756,
+    "employmentRate": 64.6
+  },
+  "44020": {
+    "cbsaCode": "44020",
+    "name": "Spirit Lake, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 72446,
+    "employmentRate": 63.5
+  },
+  "44060": {
+    "cbsaCode": "44060",
+    "name": "Spokane-Spokane Valley, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69752,
+    "employmentRate": 56.5
+  },
+  "44100": {
+    "cbsaCode": "44100",
+    "name": "Springfield, IL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 72445,
+    "employmentRate": 58.7
+  },
+  "44140": {
+    "cbsaCode": "44140",
+    "name": "Springfield, MA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70547,
+    "employmentRate": 57.1
+  },
+  "44180": {
+    "cbsaCode": "44180",
+    "name": "Springfield, MO",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58291,
+    "employmentRate": 58.9
+  },
+  "44220": {
+    "cbsaCode": "44220",
+    "name": "Springfield, OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58954,
+    "employmentRate": 55.4
+  },
+  "44260": {
+    "cbsaCode": "44260",
+    "name": "Starkville, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 45358,
+    "employmentRate": 52.5
+  },
+  "44300": {
+    "cbsaCode": "44300",
+    "name": "State College, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70087,
+    "employmentRate": 54.1
+  },
+  "44340": {
+    "cbsaCode": "44340",
+    "name": "Statesboro, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 53675,
+    "employmentRate": 55.0
+  },
+  "44420": {
+    "cbsaCode": "44420",
+    "name": "Staunton, VA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67711,
+    "employmentRate": 58.7
+  },
+  "44460": {
+    "cbsaCode": "44460",
+    "name": "Steamboat Springs, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 95144,
+    "employmentRate": 65.6
+  },
+  "44500": {
+    "cbsaCode": "44500",
+    "name": "Stephenville, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59654,
+    "employmentRate": 59.6
+  },
+  "44540": {
+    "cbsaCode": "44540",
+    "name": "Sterling, CO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54864,
+    "employmentRate": 59.2
+  },
+  "44580": {
+    "cbsaCode": "44580",
+    "name": "Sterling, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62828,
+    "employmentRate": 59.2
+  },
+  "44620": {
+    "cbsaCode": "44620",
+    "name": "Stevens Point, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 71301,
+    "employmentRate": 64.4
+  },
+  "44660": {
+    "cbsaCode": "44660",
+    "name": "Stillwater, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46658,
+    "employmentRate": 54.1
+  },
+  "44700": {
+    "cbsaCode": "44700",
+    "name": "Stockton, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 82837,
+    "employmentRate": 56.8
+  },
+  "44740": {
+    "cbsaCode": "44740",
+    "name": "Storm Lake, IA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62662,
+    "employmentRate": 64.9
+  },
+  "44780": {
+    "cbsaCode": "44780",
+    "name": "Sturgis, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62281,
+    "employmentRate": 58.5
+  },
+  "44860": {
+    "cbsaCode": "44860",
+    "name": "Sulphur Springs, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63766,
+    "employmentRate": 58.8
+  },
+  "44900": {
+    "cbsaCode": "44900",
+    "name": "Summerville, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 43556,
+    "employmentRate": 46.2
+  },
+  "44940": {
+    "cbsaCode": "44940",
+    "name": "Sumter, SC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 52942,
+    "employmentRate": 48.7
+  },
+  "44980": {
+    "cbsaCode": "44980",
+    "name": "Sunbury, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55952,
+    "employmentRate": 54.8
+  },
+  "45000": {
+    "cbsaCode": "45000",
+    "name": "Susanville, CA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59515,
+    "employmentRate": 33.5
+  },
+  "45020": {
+    "cbsaCode": "45020",
+    "name": "Sweetwater, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47437,
+    "employmentRate": 55.5
+  },
+  "45060": {
+    "cbsaCode": "45060",
+    "name": "Syracuse, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70096,
+    "employmentRate": 58.0
+  },
+  "45140": {
+    "cbsaCode": "45140",
+    "name": "Tahlequah, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52410,
+    "employmentRate": 53.4
+  },
+  "45180": {
+    "cbsaCode": "45180",
+    "name": "Talladega-Sylacauga, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52457,
+    "employmentRate": 48.4
+  },
+  "45220": {
+    "cbsaCode": "45220",
+    "name": "Tallahassee, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59757,
+    "employmentRate": 58.7
+  },
+  "45300": {
+    "cbsaCode": "45300",
+    "name": "Tampa-St. Petersburg-Clearwater, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 67197,
+    "employmentRate": 57.3
+  },
+  "45340": {
+    "cbsaCode": "45340",
+    "name": "Taos, NM",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55145,
+    "employmentRate": 47.9
+  },
+  "45380": {
+    "cbsaCode": "45380",
+    "name": "Taylorville, IL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56933,
+    "employmentRate": 53.1
+  },
+  "45460": {
+    "cbsaCode": "45460",
+    "name": "Terre Haute, IN",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 56449,
+    "employmentRate": 54.8
+  },
+  "45500": {
+    "cbsaCode": "45500",
+    "name": "Texarkana, TX-AR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 53628,
+    "employmentRate": 50.9
+  },
+  "45520": {
+    "cbsaCode": "45520",
+    "name": "The Dalles, OR",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61316,
+    "employmentRate": 55.3
+  },
+  "45540": {
+    "cbsaCode": "45540",
+    "name": "The Villages, FL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70105,
+    "employmentRate": 23.2
+  },
+  "45580": {
+    "cbsaCode": "45580",
+    "name": "Thomaston, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 48740,
+    "employmentRate": 51.2
+  },
+  "45620": {
+    "cbsaCode": "45620",
+    "name": "Thomasville, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55958,
+    "employmentRate": 58.6
+  },
+  "45660": {
+    "cbsaCode": "45660",
+    "name": "Tiffin, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62476,
+    "employmentRate": 59.9
+  },
+  "45700": {
+    "cbsaCode": "45700",
+    "name": "Tifton, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52561,
+    "employmentRate": 55.5
+  },
+  "45740": {
+    "cbsaCode": "45740",
+    "name": "Toccoa, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 52901,
+    "employmentRate": 52.1
+  },
+  "45780": {
+    "cbsaCode": "45780",
+    "name": "Toledo, OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 61620,
+    "employmentRate": 59.7
+  },
+  "45820": {
+    "cbsaCode": "45820",
+    "name": "Topeka, KS",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 65665,
+    "employmentRate": 59.9
+  },
+  "45860": {
+    "cbsaCode": "45860",
+    "name": "Torrington, CT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 89394,
+    "employmentRate": 62.1
+  },
+  "45900": {
+    "cbsaCode": "45900",
+    "name": "Traverse City, MI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 73845,
+    "employmentRate": 57.7
+  },
+  "45940": {
+    "cbsaCode": "45940",
+    "name": "Trenton-Princeton, NJ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 92697,
+    "employmentRate": 59.9
+  },
+  "45980": {
+    "cbsaCode": "45980",
+    "name": "Troy, AL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 42616,
+    "employmentRate": 50.1
+  },
+  "46020": {
+    "cbsaCode": "46020",
+    "name": "Truckee-Grass Valley, CA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 79395,
+    "employmentRate": 51.8
+  },
+  "46060": {
+    "cbsaCode": "46060",
+    "name": "Tucson, AZ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64323,
+    "employmentRate": 54.1
+  },
+  "46100": {
+    "cbsaCode": "46100",
+    "name": "Tullahoma-Manchester, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58259,
+    "employmentRate": 55.7
+  },
+  "46140": {
+    "cbsaCode": "46140",
+    "name": "Tulsa, OK",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 65784,
+    "employmentRate": 60.3
+  },
+  "46180": {
+    "cbsaCode": "46180",
+    "name": "Tupelo, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 59860,
+    "employmentRate": 57.2
+  },
+  "46220": {
+    "cbsaCode": "46220",
+    "name": "Tuscaloosa, AL",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 58132,
+    "employmentRate": 56.0
+  },
+  "46300": {
+    "cbsaCode": "46300",
+    "name": "Twin Falls, ID",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62912,
+    "employmentRate": 61.7
+  },
+  "46340": {
+    "cbsaCode": "46340",
+    "name": "Tyler, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 69053,
+    "employmentRate": 59.3
+  },
+  "46380": {
+    "cbsaCode": "46380",
+    "name": "Ukiah, CA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 61335,
+    "employmentRate": 51.3
+  },
+  "46420": {
+    "cbsaCode": "46420",
+    "name": "Union, SC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 42305,
+    "employmentRate": 49.6
+  },
+  "46460": {
+    "cbsaCode": "46460",
+    "name": "Union City, TN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50638,
+    "employmentRate": 54.1
+  },
+  "46500": {
+    "cbsaCode": "46500",
+    "name": "Urbana, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70486,
+    "employmentRate": 60.1
+  },
+  "46520": {
+    "cbsaCode": "46520",
+    "name": "Urban Honolulu, HI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 99816,
+    "employmentRate": 57.0
+  },
+  "46540": {
+    "cbsaCode": "46540",
+    "name": "Utica-Rome, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66823,
+    "employmentRate": 55.3
+  },
+  "46620": {
+    "cbsaCode": "46620",
+    "name": "Uvalde, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55000,
+    "employmentRate": 52.0
+  },
+  "46660": {
+    "cbsaCode": "46660",
+    "name": "Valdosta, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 51216,
+    "employmentRate": 52.9
+  },
+  "46700": {
+    "cbsaCode": "46700",
+    "name": "Vallejo, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 97037,
+    "employmentRate": 58.4
+  },
+  "46780": {
+    "cbsaCode": "46780",
+    "name": "Van Wert, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64841,
+    "employmentRate": 61.6
+  },
+  "46820": {
+    "cbsaCode": "46820",
+    "name": "Vermillion, SD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55963,
+    "employmentRate": 61.8
+  },
+  "46860": {
+    "cbsaCode": "46860",
+    "name": "Vernal, UT",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67983,
+    "employmentRate": 56.6
+  },
+  "46900": {
+    "cbsaCode": "46900",
+    "name": "Vernon, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 50769,
+    "employmentRate": 52.8
+  },
+  "46980": {
+    "cbsaCode": "46980",
+    "name": "Vicksburg, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 54117,
+    "employmentRate": 54.8
+  },
+  "47020": {
+    "cbsaCode": "47020",
+    "name": "Victoria, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66105,
+    "employmentRate": 58.3
+  },
+  "47080": {
+    "cbsaCode": "47080",
+    "name": "Vidalia, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 47430,
+    "employmentRate": 49.0
+  },
+  "47180": {
+    "cbsaCode": "47180",
+    "name": "Vincennes, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58173,
+    "employmentRate": 61.3
+  },
+  "47220": {
+    "cbsaCode": "47220",
+    "name": "Vineland-Bridgeton, NJ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62310,
+    "employmentRate": 52.3
+  },
+  "47240": {
+    "cbsaCode": "47240",
+    "name": "Vineyard Haven, MA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 93225,
+    "employmentRate": 60.3
+  },
+  "47260": {
+    "cbsaCode": "47260",
+    "name": "Virginia Beach-Norfolk-Newport News, VA-NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 77082,
+    "employmentRate": 57.6
+  },
+  "47300": {
+    "cbsaCode": "47300",
+    "name": "Visalia, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64474,
+    "employmentRate": 55.1
+  },
+  "47340": {
+    "cbsaCode": "47340",
+    "name": "Wabash, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66194,
+    "employmentRate": 57.1
+  },
+  "47380": {
+    "cbsaCode": "47380",
+    "name": "Waco, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 59193,
+    "employmentRate": 57.7
+  },
+  "47420": {
+    "cbsaCode": "47420",
+    "name": "Wahpeton, ND-MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67099,
+    "employmentRate": 63.3
+  },
+  "47460": {
+    "cbsaCode": "47460",
+    "name": "Walla Walla, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66635,
+    "employmentRate": 54.0
+  },
+  "47540": {
+    "cbsaCode": "47540",
+    "name": "Wapakoneta, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 75231,
+    "employmentRate": 65.4
+  },
+  "47580": {
+    "cbsaCode": "47580",
+    "name": "Warner Robins, GA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 73788,
+    "employmentRate": 57.9
+  },
+  "47620": {
+    "cbsaCode": "47620",
+    "name": "Warren, PA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 57925,
+    "employmentRate": 54.4
+  },
+  "47660": {
+    "cbsaCode": "47660",
+    "name": "Warrensburg, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62503,
+    "employmentRate": 55.2
+  },
+  "47700": {
+    "cbsaCode": "47700",
+    "name": "Warsaw, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70945,
+    "employmentRate": 63.6
+  },
+  "47780": {
+    "cbsaCode": "47780",
+    "name": "Washington, IN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64113,
+    "employmentRate": 61.6
+  },
+  "47820": {
+    "cbsaCode": "47820",
+    "name": "Washington, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56081,
+    "employmentRate": 52.2
+  },
+  "47900": {
+    "cbsaCode": "47900",
+    "name": "Washington-Arlington-Alexandria, DC-VA-MD-WV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 119803,
+    "employmentRate": 66.8
+  },
+  "47920": {
+    "cbsaCode": "47920",
+    "name": "Washington Court House, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56773,
+    "employmentRate": 56.3
+  },
+  "47940": {
+    "cbsaCode": "47940",
+    "name": "Waterloo-Cedar Falls, IA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66732,
+    "employmentRate": 63.3
+  },
+  "47980": {
+    "cbsaCode": "47980",
+    "name": "Watertown, SD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 67993,
+    "employmentRate": 67.8
+  },
+  "48020": {
+    "cbsaCode": "48020",
+    "name": "Watertown-Fort Atkinson, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 77018,
+    "employmentRate": 66.4
+  },
+  "48060": {
+    "cbsaCode": "48060",
+    "name": "Watertown-Fort Drum, NY",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 62782,
+    "employmentRate": 47.8
+  },
+  "48100": {
+    "cbsaCode": "48100",
+    "name": "Wauchula, FL",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 44665,
+    "employmentRate": 45.6
+  },
+  "48140": {
+    "cbsaCode": "48140",
+    "name": "Wausau-Weston, WI",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 71675,
+    "employmentRate": 63.3
+  },
+  "48180": {
+    "cbsaCode": "48180",
+    "name": "Waycross, GA",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49055,
+    "employmentRate": 49.8
+  },
+  "48220": {
+    "cbsaCode": "48220",
+    "name": "Weatherford, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 58669,
+    "employmentRate": 64.6
+  },
+  "48260": {
+    "cbsaCode": "48260",
+    "name": "Weirton-Steubenville, WV-OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54142,
+    "employmentRate": 51.5
+  },
+  "48300": {
+    "cbsaCode": "48300",
+    "name": "Wenatchee, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 75185,
+    "employmentRate": 60.0
+  },
+  "48460": {
+    "cbsaCode": "48460",
+    "name": "West Plains, MO",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 46401,
+    "employmentRate": 50.5
+  },
+  "48500": {
+    "cbsaCode": "48500",
+    "name": "West Point, MS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 37412,
+    "employmentRate": 47.6
+  },
+  "48540": {
+    "cbsaCode": "48540",
+    "name": "Wheeling, WV-OH",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 56691,
+    "employmentRate": 51.9
+  },
+  "48580": {
+    "cbsaCode": "48580",
+    "name": "Whitewater, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 75172,
+    "employmentRate": 64.0
+  },
+  "48620": {
+    "cbsaCode": "48620",
+    "name": "Wichita, KS",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 66643,
+    "employmentRate": 61.5
+  },
+  "48660": {
+    "cbsaCode": "48660",
+    "name": "Wichita Falls, TX",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60641,
+    "employmentRate": 56.0
+  },
+  "48700": {
+    "cbsaCode": "48700",
+    "name": "Williamsport, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 63437,
+    "employmentRate": 56.1
+  },
+  "48780": {
+    "cbsaCode": "48780",
+    "name": "Williston, ND",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 86139,
+    "employmentRate": 72.1
+  },
+  "48820": {
+    "cbsaCode": "48820",
+    "name": "Willmar, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 73285,
+    "employmentRate": 64.8
+  },
+  "48900": {
+    "cbsaCode": "48900",
+    "name": "Wilmington, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 68845,
+    "employmentRate": 60.0
+  },
+  "48940": {
+    "cbsaCode": "48940",
+    "name": "Wilmington, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 64210,
+    "employmentRate": 60.0
+  },
+  "48980": {
+    "cbsaCode": "48980",
+    "name": "Wilson, NC",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 49827,
+    "employmentRate": 54.7
+  },
+  "49020": {
+    "cbsaCode": "49020",
+    "name": "Winchester, VA-WV",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 79416,
+    "employmentRate": 58.8
+  },
+  "49060": {
+    "cbsaCode": "49060",
+    "name": "Winfield, KS",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 55726,
+    "employmentRate": 55.6
+  },
+  "49080": {
+    "cbsaCode": "49080",
+    "name": "Winnemucca, NV",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 75574,
+    "employmentRate": 62.8
+  },
+  "49100": {
+    "cbsaCode": "49100",
+    "name": "Winona, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 66162,
+    "employmentRate": 66.1
+  },
+  "49180": {
+    "cbsaCode": "49180",
+    "name": "Winston-Salem, NC",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 60145,
+    "employmentRate": 56.9
+  },
+  "49220": {
+    "cbsaCode": "49220",
+    "name": "Wisconsin Rapids-Marshfield, WI",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 63273,
+    "employmentRate": 59.8
+  },
+  "49260": {
+    "cbsaCode": "49260",
+    "name": "Woodward, OK",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 60873,
+    "employmentRate": 57.6
+  },
+  "49300": {
+    "cbsaCode": "49300",
+    "name": "Wooster, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 70320,
+    "employmentRate": 60.1
+  },
+  "49340": {
+    "cbsaCode": "49340",
+    "name": "Worcester, MA-CT",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 86708,
+    "employmentRate": 62.4
+  },
+  "49380": {
+    "cbsaCode": "49380",
+    "name": "Worthington, MN",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 62973,
+    "employmentRate": 64.2
+  },
+  "49420": {
+    "cbsaCode": "49420",
+    "name": "Yakima, WA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 64910,
+    "employmentRate": 57.6
+  },
+  "49460": {
+    "cbsaCode": "49460",
+    "name": "Yankton, SD",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 68847,
+    "employmentRate": 62.7
+  },
+  "49500": {
+    "cbsaCode": "49500",
+    "name": "Yauco, PR",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 19166,
+    "employmentRate": 32.0
+  },
+  "49620": {
+    "cbsaCode": "49620",
+    "name": "York-Hanover, PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 79183,
+    "employmentRate": 62.4
+  },
+  "49660": {
+    "cbsaCode": "49660",
+    "name": "Youngstown-Warren-Boardman, OH-PA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 54650,
+    "employmentRate": 53.4
+  },
+  "49700": {
+    "cbsaCode": "49700",
+    "name": "Yuba City, CA",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 70176,
+    "employmentRate": 53.4
+  },
+  "49740": {
+    "cbsaCode": "49740",
+    "name": "Yuma, AZ",
+    "type": "Metropolitan Statistical Area",
+    "medianIncome": 56439,
+    "employmentRate": 47.1
+  },
+  "49780": {
+    "cbsaCode": "49780",
+    "name": "Zanesville, OH",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 56810,
+    "employmentRate": 57.4
+  },
+  "49820": {
+    "cbsaCode": "49820",
+    "name": "Zapata, TX",
+    "type": "Micropolitan Statistical Area",
+    "medianIncome": 35061,
+    "employmentRate": 49.4
+  }
+}

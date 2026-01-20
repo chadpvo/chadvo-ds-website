@@ -256,6 +256,46 @@
             margin-top: 0;
             padding-top: 30px;
         }
+
+        .form-range {
+            width: 100%;
+            height: 6px;
+            background: #dee2e6;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .form-range::-webkit-slider-thumb {
+            width: 18px;
+            height: 18px;
+            background: #0d6efd;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .form-range::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #0d6efd;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .form-range {
+            background: #404040;
+        }
+
+        body.dark-mode .form-range::-webkit-slider-thumb {
+            background: #4a9eff;
+        }
+
+        body.dark-mode .form-range::-moz-range-thumb {
+            background: #4a9eff;
+        }
     </style>
 </head>
 
@@ -319,7 +359,46 @@
                             <option value="employmentRate">Employment Rate (%)</option>
                         </select>
                     </div>
-                    
+
+                    <!-- Choropleth Color Settings (shown only when metric is selected) -->
+                    <div id="choropleth-settings" style="display: none;">
+                        <div class="section-title">CHOROPLETH COLORS</div>
+                        <div class="mb-3">
+                            <label class="form-label">Low Value Color</label>
+                            <div class="color-input-group">
+                                <input type="color" id="choro-low-color" class="form-control-color" value="#eff3ff">
+                                <input type="text" id="choro-low-hex" class="form-control form-control-sm" value="#EFF3FF">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">High Value Color</label>
+                            <div class="color-input-group">
+                                <input type="color" id="choro-high-color" class="form-control-color" value="#08519c">
+                                <input type="text" id="choro-high-hex" class="form-control form-control-sm" value="#08519C">
+                            </div>
+                        </div>
+                        
+                        <!-- Opacity Control -->
+                        <div class="mb-3">
+                            <label class="form-label">Shading Opacity: <span id="opacity-value">100</span>%</label>
+                            <input type="range" class="form-range" id="choro-opacity" min="0" max="100" value="100" step="5">
+                        </div>
+                        
+                        <!-- Label Visibility Control -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="enhance-labels" checked>
+                                <label class="form-check-label" for="enhance-labels">
+                                    Enhanced Label Visibility
+                                </label>
+                            </div>
+                            <small class="text-muted" style="font-size: 11px; display: block; margin-top: 4px;">
+                                Adds white outline to map labels for better readability
+                            </small>
+                        </div>
+                    </div>
+
                     <div class="section-title">COLOR SETTINGS</div>
                     <div class="mb-3">
                         <label class="form-label">Border Color</label>
@@ -370,6 +449,17 @@
                     </div>
                     <div id="map"></div>
                     <div class="map-tooltip" id="mapTooltip"></div>
+
+                        <!-- ADD THIS LEGEND -->
+                    <div id="map-legend" style="display: none; position: absolute; bottom: 20px; left: 20px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid #dee2e6; border-radius: 8px; padding: 16px; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <p style="font-size: 13px; font-weight: 600; margin: 0 0 8px 0; color: #495057;" id="legend-title">Median Household Income</p>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 11px; color: #6c757d;">Low</span>
+                            <div id="legend-gradient" style="width: 120px; height: 16px; border-radius: 4px; background: linear-gradient(to right, #eff3ff, #08519c);"></div>
+                            <span style="font-size: 11px; color: #6c757d;">High</span>
+                        </div>
+                    </div>
+
                     <div class="zoom-controls">
                         <button class="zoom-btn" id="zoom-in">+</button>
                         <button class="zoom-btn" id="zoom-out">−</button>
@@ -421,8 +511,56 @@
             selected: '#627BC1',
             dimmed: '#CCCCCC',
             selectedNoShade: false,
-            dimmedNoShade: false
+            dimmedNoShade: false,
+            choroLow: '#eff3ff',
+            choroHigh: '#08519c',
+            choroOpacity: 1.0,        // NEW
+            enhanceLabels: true       // NEW
         };
+
+
+        // Helper function to interpolate between two hex colors
+        function interpolateColor(color1, color2, factor) {
+            const c1 = parseInt(color1.slice(1), 16);
+            const c2 = parseInt(color2.slice(1), 16);
+            
+            const r1 = (c1 >> 16) & 0xff;
+            const g1 = (c1 >> 8) & 0xff;
+            const b1 = c1 & 0xff;
+            
+            const r2 = (c2 >> 16) & 0xff;
+            const g2 = (c2 >> 8) & 0xff;
+            const b2 = c2 & 0xff;
+            
+            const r = Math.round(r1 + factor * (r2 - r1));
+            const g = Math.round(g1 + factor * (g2 - g1));
+            const b = Math.round(b1 + factor * (b2 - b1));
+            
+            return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+        }
+
+
+        // Enhance label visibility
+        function enhanceLabels() {
+            if (!map || !map.getStyle()) return;
+            
+            const layers = map.getStyle().layers;
+            
+            layers.forEach(layer => {
+                if (layer.type === 'symbol' && layer.layout && layer.layout['text-field']) {
+                    if (colorSettings.enhanceLabels) {
+                        // Add white halo for better visibility
+                        map.setPaintProperty(layer.id, 'text-halo-color', '#ffffff');
+                        map.setPaintProperty(layer.id, 'text-halo-width', 2);
+                        map.setPaintProperty(layer.id, 'text-halo-blur', 1);
+                    } else {
+                        // Remove halo
+                        map.setPaintProperty(layer.id, 'text-halo-width', 0);
+                    }
+                }
+            });
+        }
+
         // State FIPS to abbreviation mapping
         const stateFipsToAbbr = {
             1: 'AL', 2: 'AK', 4: 'AZ', 5: 'AR', 6: 'CA', 8: 'CO', 9: 'CT', 10: 'DE', 11: 'DC', 12: 'FL',
@@ -511,21 +649,22 @@
 
         // Add boundaries as Mapbox layers
         function addBoundariesToMap() {
+            // Find the first label layer in the current style
+            const layers = map.getStyle().layers;
+            let firstLabelLayerId;
+            for (const layer of layers) {
+                if (layer.type === 'symbol' && layer.layout['text-field']) {
+                    firstLabelLayerId = layer.id;
+                    break;
+                }
+            }
+            
             map.addSource('states', {
                 type: 'geojson',
                 data: topojson.feature(usData, usData.objects.states)
             });
             
-            map.addLayer({
-                id: 'states-layer',
-                type: 'line',
-                source: 'states',
-                paint: {
-                    'line-color': colorSettings.border,
-                    'line-width': 0.3
-                }
-            });
-            
+            // Add fill layer first, before labels
             map.addLayer({
                 id: 'states-fill',
                 type: 'fill',
@@ -544,22 +683,22 @@
                         0
                     ]
                 }
-            }, 'states-layer');
+            }, firstLabelLayerId); // Insert before labels
+            
+            // Add border layer on top of fill but still before labels
+            map.addLayer({
+                id: 'states-layer',
+                type: 'line',
+                source: 'states',
+                paint: {
+                    'line-color': colorSettings.border,
+                    'line-width': 0.3
+                }
+            }, firstLabelLayerId); // Insert before labels
             
             map.addSource('counties', {
                 type: 'geojson',
                 data: topojson.feature(countiesData, countiesData.objects.counties)
-            });
-            
-            map.addLayer({
-                id: 'counties-layer',
-                type: 'line',
-                source: 'counties',
-                paint: {
-                    'line-color': colorSettings.border,
-                    'line-width': 0.3,
-                    'line-opacity': 0
-                }
             });
             
             map.addLayer({
@@ -580,24 +719,24 @@
                         0
                     ]
                 }
-            }, 'counties-layer');
+            }, firstLabelLayerId); // Insert before labels
+            
+            map.addLayer({
+                id: 'counties-layer',
+                type: 'line',
+                source: 'counties',
+                paint: {
+                    'line-color': colorSettings.border,
+                    'line-width': 0.3,
+                    'line-opacity': 0
+                }
+            }, firstLabelLayerId); // Insert before labels
             
             if (cbsaData) {
                 map.addSource('cbsas', {
                     type: 'geojson',
                     data: cbsaData,
                     promoteId: 'GEOID'
-                });
-                
-                map.addLayer({
-                    id: 'cbsas-layer',
-                    type: 'line',
-                    source: 'cbsas',
-                    paint: {
-                        'line-color': colorSettings.border,
-                        'line-width': 0.4,
-                        'line-opacity': 0
-                    }
                 });
                 
                 map.addLayer({
@@ -618,7 +757,18 @@
                             0
                         ]
                     }
-                }, 'cbsas-layer');
+                }, firstLabelLayerId); // Insert before labels
+                
+                map.addLayer({
+                    id: 'cbsas-layer',
+                    type: 'line',
+                    source: 'cbsas',
+                    paint: {
+                        'line-color': colorSettings.border,
+                        'line-width': 0.4,
+                        'line-opacity': 0
+                    }
+                }, firstLabelLayerId); // Insert before labels
             }
         }
 
@@ -746,9 +896,9 @@
             return coords;
         }
 
-        // Color scale for choropleth
+        // Color scale for choropleth - Linear gradient from min to max
         function getColorForValue(value, metric) {
-            if (!value) return colorSettings.dimmed;
+            if (value === null || value === undefined) return colorSettings.dimmed;
             
             // Get all values for the current metric to determine scale
             const values = Object.values(economicData)
@@ -757,23 +907,28 @@
             
             if (values.length === 0) return colorSettings.dimmed;
             
-            // Calculate quantiles (5 bins)
-            values.sort((a, b) => a - b);
-            const q1 = values[Math.floor(values.length * 0.2)];
-            const q2 = values[Math.floor(values.length * 0.4)];
-            const q3 = values[Math.floor(values.length * 0.6)];
-            const q4 = values[Math.floor(values.length * 0.8)];
+            // Find min and max
+            const sortedValues = [...values].sort((a, b) => a - b);
+            const min = sortedValues[0];
+            const max = sortedValues[sortedValues.length - 1];
             
-            // Color scale (light to dark blue)
-            if (value <= q1) return '#eff3ff';
-            if (value <= q2) return '#bdd7e7';
-            if (value <= q3) return '#6baed6';
-            if (value <= q4) return '#3182bd';
-            return '#08519c';
+            // Handle edge case where all values are the same
+            if (max === min) return interpolateColor(colorSettings.choroLow, colorSettings.choroHigh, 0.5);
+            
+            // Normalize value between 0 and 1
+            const normalized = (value - min) / (max - min);
+            
+            // Interpolate between low and high colors
+            return interpolateColor(colorSettings.choroLow, colorSettings.choroHigh, normalized);
         }
 
         // Apply choropleth shading
         function applyChoropleth() {
+            const choroplethSettings = document.getElementById('choropleth-settings');
+            if (choroplethSettings) {
+                choroplethSettings.style.display = currentMetric !== 'none' ? 'block' : 'none';
+            }
+
             if (currentMetric === 'none') {
                 // Reset to normal manual selection mode
                 allRegions.forEach(region => {
@@ -813,24 +968,60 @@
             });
             
             // Build color expression based on FIPS codes
-            const colorExpression = ['match', ['to-string', ['id']]]; // Convert ID to string for matching
-            
+            const colorExpression = ['match', ['id']]; // Use numeric ID, not string
+            const allValues = Object.values(economicData)
+                .map(d => d[currentMetric])
+                .filter(v => v !== null && v !== undefined);
+
+            console.log('All values for', currentMetric, ':', allValues); // DEBUG
             // Add each state's color based on its data
             Object.keys(economicData).forEach(fips => {
                 const stateData = economicData[fips];
                 const value = stateData ? stateData[currentMetric] : null;
                 const color = getColorForValue(value, currentMetric);
                 
-                // Add to expression: FIPS code (as string) -> color
-                colorExpression.push(fips, color);
+                // Convert FIPS to number for matching (removes leading zeros)
+                const numericFips = parseInt(fips, 10);
+                colorExpression.push(numericFips, color);
             });
-            
+
             // Default color for any unmatched states
             colorExpression.push(colorSettings.dimmed);
-            
+            console.log('Color expression:', colorExpression); // DEBUG
+
             // Apply the color expression to the map
             map.setPaintProperty('states-fill', 'fill-color', colorExpression);
-            map.setPaintProperty('states-fill', 'fill-opacity', 0.7);
+            map.setPaintProperty('states-fill', 'fill-opacity', colorSettings.choroOpacity);
+
+            updateLegend(); 
+
+        }
+
+        // Update legend visibility and colors
+        function updateLegend() {
+            const legend = document.getElementById('map-legend');
+            const legendTitle = document.getElementById('legend-title');
+            const legendGradient = document.getElementById('legend-gradient');
+            
+            if (!legend || !legendTitle || !legendGradient) return;
+            
+            if (currentMetric !== 'none' && currentLevel === 'states') {
+                // Show legend
+                legend.style.display = 'block';
+                
+                // Update title
+                if (currentMetric === 'medianIncome') {
+                    legendTitle.textContent = 'Median Household Income';
+                } else if (currentMetric === 'employmentRate') {
+                    legendTitle.textContent = 'Employment Rate (%)';
+                }
+                
+                // Update gradient colors
+                legendGradient.style.background = `linear-gradient(to right, ${colorSettings.choroLow}, ${colorSettings.choroHigh})`;
+            } else {
+                // Hide legend
+                legend.style.display = 'none';
+            }
         }
 
         // Search functionality
@@ -885,11 +1076,21 @@
             }
             
             populateRegionList();
+            setupHoverTooltip(); // Re-setup tooltip for new geography level
+            if (currentMetric !== 'none' && currentLevel === 'states') {
+                applyChoropleth();
+            }
         });
 
         // Metric selector
         document.getElementById('metric-selector').addEventListener('change', (e) => {
             currentMetric = e.target.value;
+            
+            // Toggle choropleth settings visibility
+            const choroplethSettings = document.getElementById('choropleth-settings');
+            if (choroplethSettings) {
+                choroplethSettings.style.display = currentMetric !== 'none' ? 'block' : 'none';
+            }
             
             if (currentLevel !== 'states') {
                 alert('Data visualization is only available for States view. Switching to States...');
@@ -898,13 +1099,16 @@
             }
             
             applyChoropleth();
+            updateLegend(); 
         });
+
         // Map load event
         map.on('load', async () => {
             map.fitBounds(usBounds, { padding: 20 });
             await loadGeoData();
             await loadEconomicData();
-            
+            // Apply initial label enhancement
+            enhanceLabels();
             // Setup hover tooltip AFTER everything is loaded
             setTimeout(() => {
                 setupHoverTooltip();
@@ -992,6 +1196,80 @@
                     updateMapColors();
                 });
             }
+            
+            // Choropleth color controls
+            const choroLowColor = document.getElementById('choro-low-color');
+            const choroLowHex = document.getElementById('choro-low-hex');
+            
+            if (choroLowColor && choroLowHex) {
+                choroLowColor.addEventListener('input', (e) => {
+                    colorSettings.choroLow = e.target.value;
+                    choroLowHex.value = e.target.value.toUpperCase();
+                    if (currentMetric !== 'none') {
+                        applyChoropleth();
+                    }
+                });
+                
+                choroLowHex.addEventListener('input', (e) => {
+                    const hex = e.target.value;
+                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                        colorSettings.choroLow = hex;
+                        choroLowColor.value = hex;
+                        if (currentMetric !== 'none') {
+                            applyChoropleth();
+                        }
+                    }
+                });
+            }
+            
+            const choroHighColor = document.getElementById('choro-high-color');
+            const choroHighHex = document.getElementById('choro-high-hex');
+            
+            if (choroHighColor && choroHighHex) {
+                choroHighColor.addEventListener('input', (e) => {
+                    colorSettings.choroHigh = e.target.value;
+                    choroHighHex.value = e.target.value.toUpperCase();
+                    if (currentMetric !== 'none') {
+                        applyChoropleth();
+                    }
+                });
+                
+                choroHighHex.addEventListener('input', (e) => {
+                    const hex = e.target.value;
+                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                        colorSettings.choroHigh = hex;
+                        choroHighColor.value = hex;
+                        if (currentMetric !== 'none') {
+                            applyChoropleth();
+                        }
+                    }
+                });
+            }
+
+            // Opacity slider
+            const opacitySlider = document.getElementById('choro-opacity');
+            const opacityValue = document.getElementById('opacity-value');
+            
+            if (opacitySlider && opacityValue) {
+                opacitySlider.addEventListener('input', (e) => {
+                    const value = parseInt(e.target.value);
+                    opacityValue.textContent = value;
+                    colorSettings.choroOpacity = value / 100;
+                    if (currentMetric !== 'none') {
+                        applyChoropleth();
+                    }
+                });
+            }
+            
+            // Label enhancement toggle
+            const enhanceLabelsCheckbox = document.getElementById('enhance-labels');
+            
+            if (enhanceLabelsCheckbox) {
+                enhanceLabelsCheckbox.addEventListener('change', (e) => {
+                    colorSettings.enhanceLabels = e.target.checked;
+                    enhanceLabels();
+                });
+            }
         }
 
         // Update map colors
@@ -1027,50 +1305,86 @@
             });
         }
 
-        // Setup hover tooltip
+        // Get feature name based on geography level
+        function getFeatureName(feature, geoLevel) {
+            if (geoLevel === 'states') {
+                return feature.properties.name || 'Unknown State';
+            } else if (geoLevel === 'counties') {
+                const countyName = feature.properties.name || 'Unknown County';
+                const countyFipsStr = String(feature.id).padStart(5, '0');
+                const stateFips = parseInt(countyFipsStr.substring(0, 2));
+                const stateAbbr = stateFipsToAbbr[stateFips];
+                
+                if (stateAbbr) {
+                    return `${countyName}, ${stateAbbr}`;
+                }
+                return countyName;
+            } else if (geoLevel === 'cbsas') {
+                return feature.properties.NAME || feature.properties.name || 'Unknown CBSA';
+            }
+            return 'Unknown';
+        }
+
+        // Setup hover tooltip - FIXED to query only current geo level
         function setupHoverTooltip() {
             const tooltip = document.getElementById('mapTooltip');
-            const layers = ['states-fill', 'counties-fill', 'cbsas-fill'];
-            
-            layers.forEach(layer => {
-                if (!map.getLayer(layer)) return;
+            if (!tooltip) return;
+
+            // Remove any existing listeners to avoid duplicates
+            map.off('mousemove');
+            map.off('mouseleave');
+
+            const handleMouseMove = (e) => {
+                // Query only the CURRENT geography level's fill layer
+                const fillLayerId = `${currentLevel}-fill`;
                 
-                map.on('mousemove', layer, (e) => {
-                    if (e.features.length > 0) {
-                        const feature = e.features[0];
-                        const name = feature.properties.name || feature.properties.NAME || 'Unknown';
+                if (!map.getLayer(fillLayerId)) return;
+
+                const features = map.queryRenderedFeatures(e.point, { 
+                    layers: [fillLayerId] 
+                });
+
+                if (features.length > 0) {
+                    const feature = features[0];
+                    
+                    // Get the correct name based on current geography level
+                    const name = getFeatureName(feature, currentLevel);
+                    
+                    let tooltipText = name;
+                    
+                    // Always show ALL metrics for states (if data is available)
+                    if (currentLevel === 'states') {
+                        const featureId = String(feature.id).padStart(2, '0');
+                        const stateData = economicData[featureId];
                         
-                        let tooltipText = name;
-                        
-                        // Add metric data if in choropleth mode and viewing states
-                        if (currentMetric !== 'none' && currentLevel === 'states') {
-                            // Convert feature ID to string with leading zero padding
-                            const featureId = String(feature.id).padStart(2, '0');
-                            const stateData = economicData[featureId];
-                            
-                            if (stateData && stateData[currentMetric]) {
-                                const value = stateData[currentMetric];
-                                if (currentMetric === 'medianIncome') {
-                                    tooltipText += `<br>Median Income: $${value.toLocaleString()}`;
-                                } else if (currentMetric === 'employmentRate') {
-                                    tooltipText += `<br>Employment Rate: ${value}%`;
-                                }
+                        if (stateData) {
+                            if (stateData.medianIncome) {
+                                tooltipText += `<br>Median Income: $${stateData.medianIncome.toLocaleString()}`;
+                            }
+                            if (stateData.employmentRate) {
+                                tooltipText += `<br>Employment Rate: ${stateData.employmentRate}%`;
                             }
                         }
-                        
-                        tooltip.innerHTML = tooltipText;
-                        tooltip.style.left = e.point.x + 10 + 'px';
-                        tooltip.style.top = e.point.y + 10 + 'px';
-                        tooltip.classList.add('show');
-                        map.getCanvas().style.cursor = 'pointer';
                     }
-                });
-                
-                map.on('mouseleave', layer, () => {
+                    
+                    tooltip.innerHTML = tooltipText;
+                    tooltip.style.left = e.point.x + 10 + 'px';
+                    tooltip.style.top = e.point.y + 10 + 'px';
+                    tooltip.classList.add('show');
+                    map.getCanvas().style.cursor = 'pointer';
+                } else {
                     tooltip.classList.remove('show');
                     map.getCanvas().style.cursor = '';
-                });
-            });
+                }
+            };
+
+            const handleMouseLeave = () => {
+                tooltip.classList.remove('show');
+                map.getCanvas().style.cursor = '';
+            };
+
+            map.on('mousemove', handleMouseMove);
+            map.on('mouseleave', handleMouseLeave);
         }
 
         // Theme toggle
@@ -1091,6 +1405,7 @@
                 map.setProjection('mercator');
                 if (usData && countiesData) {
                     addBoundariesToMap();
+                    enhanceLabels();
                     setTimeout(() => {
                         document.getElementById('geo-level').dispatchEvent(new Event('change'));
                     }, 100);
