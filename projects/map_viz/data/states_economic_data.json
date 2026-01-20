@@ -1,0 +1,308 @@
+{
+  "01": {
+    "fips": "01",
+    "name": "Alabama",
+    "medianIncome": 59609,
+    "employmentRate": 54.6
+  },
+  "02": {
+    "fips": "02",
+    "name": "Alaska",
+    "medianIncome": 86370,
+    "employmentRate": 59.1
+  },
+  "04": {
+    "fips": "04",
+    "name": "Arizona",
+    "medianIncome": 72581,
+    "employmentRate": 56.9
+  },
+  "05": {
+    "fips": "05",
+    "name": "Arkansas",
+    "medianIncome": 56335,
+    "employmentRate": 54.9
+  },
+  "06": {
+    "fips": "06",
+    "name": "California",
+    "medianIncome": 91905,
+    "employmentRate": 59.3
+  },
+  "08": {
+    "fips": "08",
+    "name": "Colorado",
+    "medianIncome": 87598,
+    "employmentRate": 64.6
+  },
+  "09": {
+    "fips": "09",
+    "name": "Connecticut",
+    "medianIncome": 90213,
+    "employmentRate": 61.9
+  },
+  "10": {
+    "fips": "10",
+    "name": "Delaware",
+    "medianIncome": 79325,
+    "employmentRate": 58.5
+  },
+  "11": {
+    "fips": "11",
+    "name": "District of Columbia",
+    "medianIncome": 101722,
+    "employmentRate": 66.3
+  },
+  "12": {
+    "fips": "12",
+    "name": "Florida",
+    "medianIncome": 67917,
+    "employmentRate": 56.0
+  },
+  "13": {
+    "fips": "13",
+    "name": "Georgia",
+    "medianIncome": 71355,
+    "employmentRate": 59.6
+  },
+  "15": {
+    "fips": "15",
+    "name": "Hawaii",
+    "medianIncome": 94814,
+    "employmentRate": 57.4
+  },
+  "16": {
+    "fips": "16",
+    "name": "Idaho",
+    "medianIncome": 70214,
+    "employmentRate": 60.2
+  },
+  "17": {
+    "fips": "17",
+    "name": "Illinois",
+    "medianIncome": 78433,
+    "employmentRate": 61.1
+  },
+  "18": {
+    "fips": "18",
+    "name": "Indiana",
+    "medianIncome": 67173,
+    "employmentRate": 61.0
+  },
+  "19": {
+    "fips": "19",
+    "name": "Iowa",
+    "medianIncome": 70571,
+    "employmentRate": 64.0
+  },
+  "20": {
+    "fips": "20",
+    "name": "Kansas",
+    "medianIncome": 69747,
+    "employmentRate": 62.7
+  },
+  "21": {
+    "fips": "21",
+    "name": "Kentucky",
+    "medianIncome": 60183,
+    "employmentRate": 56.1
+  },
+  "22": {
+    "fips": "22",
+    "name": "Louisiana",
+    "medianIncome": 57852,
+    "employmentRate": 54.9
+  },
+  "23": {
+    "fips": "23",
+    "name": "Maine",
+    "medianIncome": 68251,
+    "employmentRate": 59.5
+  },
+  "24": {
+    "fips": "24",
+    "name": "Maryland",
+    "medianIncome": 98461,
+    "employmentRate": 63.2
+  },
+  "25": {
+    "fips": "25",
+    "name": "Massachusetts",
+    "medianIncome": 96505,
+    "employmentRate": 63.5
+  },
+  "26": {
+    "fips": "26",
+    "name": "Michigan",
+    "medianIncome": 68505,
+    "employmentRate": 57.7
+  },
+  "27": {
+    "fips": "27",
+    "name": "Minnesota",
+    "medianIncome": 84313,
+    "employmentRate": 65.9
+  },
+  "28": {
+    "fips": "28",
+    "name": "Mississippi",
+    "medianIncome": 52985,
+    "employmentRate": 53.0
+  },
+  "29": {
+    "fips": "29",
+    "name": "Missouri",
+    "medianIncome": 65920,
+    "employmentRate": 59.8
+  },
+  "30": {
+    "fips": "30",
+    "name": "Montana",
+    "medianIncome": 66341,
+    "employmentRate": 60.2
+  },
+  "31": {
+    "fips": "31",
+    "name": "Nebraska",
+    "medianIncome": 71722,
+    "employmentRate": 66.3
+  },
+  "32": {
+    "fips": "32",
+    "name": "Nevada",
+    "medianIncome": 71646,
+    "employmentRate": 58.4
+  },
+  "33": {
+    "fips": "33",
+    "name": "New Hampshire",
+    "medianIncome": 90845,
+    "employmentRate": 64.1
+  },
+  "34": {
+    "fips": "34",
+    "name": "New Jersey",
+    "medianIncome": 97126,
+    "employmentRate": 61.8
+  },
+  "35": {
+    "fips": "35",
+    "name": "New Mexico",
+    "medianIncome": 58722,
+    "employmentRate": 53.2
+  },
+  "36": {
+    "fips": "36",
+    "name": "New York",
+    "medianIncome": 81386,
+    "employmentRate": 58.8
+  },
+  "37": {
+    "fips": "37",
+    "name": "North Carolina",
+    "medianIncome": 66186,
+    "employmentRate": 58.3
+  },
+  "38": {
+    "fips": "38",
+    "name": "North Dakota",
+    "medianIncome": 73959,
+    "employmentRate": 66.0
+  },
+  "39": {
+    "fips": "39",
+    "name": "Ohio",
+    "medianIncome": 66990,
+    "employmentRate": 59.9
+  },
+  "40": {
+    "fips": "40",
+    "name": "Oklahoma",
+    "medianIncome": 61364,
+    "employmentRate": 57.6
+  },
+  "41": {
+    "fips": "41",
+    "name": "Oregon",
+    "medianIncome": 76632,
+    "employmentRate": 58.9
+  },
+  "42": {
+    "fips": "42",
+    "name": "Pennsylvania",
+    "medianIncome": 73170,
+    "employmentRate": 59.4
+  },
+  "44": {
+    "fips": "44",
+    "name": "Rhode Island",
+    "medianIncome": 81370,
+    "employmentRate": 60.7
+  },
+  "45": {
+    "fips": "45",
+    "name": "South Carolina",
+    "medianIncome": 63623,
+    "employmentRate": 56.4
+  },
+  "46": {
+    "fips": "46",
+    "name": "South Dakota",
+    "medianIncome": 69457,
+    "employmentRate": 65.0
+  },
+  "47": {
+    "fips": "47",
+    "name": "Tennessee",
+    "medianIncome": 64035,
+    "employmentRate": 58.4
+  },
+  "48": {
+    "fips": "48",
+    "name": "Texas",
+    "medianIncome": 73035,
+    "employmentRate": 61.3
+  },
+  "49": {
+    "fips": "49",
+    "name": "Utah",
+    "medianIncome": 86833,
+    "employmentRate": 66.8
+  },
+  "50": {
+    "fips": "50",
+    "name": "Vermont",
+    "medianIncome": 74014,
+    "employmentRate": 62.2
+  },
+  "51": {
+    "fips": "51",
+    "name": "Virginia",
+    "medianIncome": 87249,
+    "employmentRate": 61.0
+  },
+  "53": {
+    "fips": "53",
+    "name": "Washington",
+    "medianIncome": 90325,
+    "employmentRate": 60.4
+  },
+  "54": {
+    "fips": "54",
+    "name": "West Virginia",
+    "medianIncome": 55217,
+    "employmentRate": 49.9
+  },
+  "55": {
+    "fips": "55",
+    "name": "Wisconsin",
+    "medianIncome": 72458,
+    "employmentRate": 63.4
+  },
+  "56": {
+    "fips": "56",
+    "name": "Wyoming",
+    "medianIncome": 72495,
+    "employmentRate": 62.5
+  }
+}
