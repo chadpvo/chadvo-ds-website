@@ -296,6 +296,27 @@
         body.dark-mode .form-range::-moz-range-thumb {
             background: #4a9eff;
         }
+
+        .metric-help {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        body.dark-mode #data-year-badge {
+            background: rgba(30, 30, 30, 0.95);
+            border-color: #404040;
+            color: #ccc;
+        }
+
+        body.dark-mode #data-year-badge i {
+            color: #999;
+        }
+
+        body.dark-mode #data-year-display {
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -355,9 +376,26 @@
                         <label class="form-label">Metric to Display</label>
                         <select id="metric-selector" class="form-select">
                             <option value="none">None (Manual Selection)</option>
-                            <option value="medianIncome">Median Household Income</option>
-                            <option value="employmentRate">Employment Rate (%)</option>
+                            
+                            <optgroup label="Economic Indicators">
+                                <option value="medianIncome">Median Household Income</option>
+                                <option value="employmentRate">Employment Rate (%)</option>
+                                <option value="gdpTotal">GDP Total (Millions)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Housing Metrics">
+                                <option value="medianHomeValue">Median Home Value</option>
+                                <option value="medianRent">Median Gross Rent</option>
+                                <option value="homeownershipRate">Homeownership Rate (%)</option>
+                                <option value="vacancyRate">Vacancy Rate (%)</option>
+                            </optgroup>
                         </select>
+                        <div class="metric-help" id="metric-help"></div>
+                        <div class="metric-source-info">
+                            <small style="font-size: 10px; color: #999;">
+                                ACS = American Community Survey | BEA = Bureau of Economic Analysis
+                            </small>
+                        </div>
                     </div>
 
                     <!-- Choropleth Color Settings (shown only when metric is selected) -->
@@ -460,6 +498,26 @@
                         </div>
                     </div>
 
+                    <!-- Data Year Badge -->
+                    <div id="data-year-badge" style="
+                        position: absolute; 
+                        top: 2rem; 
+                        left: 20px; 
+                        background: rgba(255, 255, 255, 0.95); 
+                        backdrop-filter: blur(10px);
+                        border: 1px solid #dee2e6; 
+                        border-radius: 6px; 
+                        padding: 8px 14px; 
+                        z-index: 1000; 
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        font-size: 12px;
+                        color: #495057;
+                        font-weight: 500;
+                    ">
+                        <i class="fas fa-calendar-alt" style="margin-right: 6px; color: #6c757d;"></i>
+                        Latest Data Year: <strong id="data-year-display">Loading...</strong>
+                    </div>
+
                     <div class="zoom-controls">
                         <button class="zoom-btn" id="zoom-in">+</button>
                         <button class="zoom-btn" id="zoom-out">−</button>
@@ -517,6 +575,29 @@
             choroOpacity: 1.0,        // NEW
             enhanceLabels: true       // NEW
         };
+
+                // Helper function to format metric values for display
+        function formatMetricValue(metric, value) {
+            if (value === null || value === undefined) return 'N/A';
+            
+            switch(metric) {
+                case 'medianIncome':
+                case 'medianHomeValue':
+                case 'medianRent':
+                    return `$${value.toLocaleString()}`;
+                
+                case 'gdpTotal':
+                    return `$${value.toLocaleString()}M`;
+                
+                case 'employmentRate':
+                case 'homeownershipRate':
+                case 'vacancyRate':
+                    return `${value}%`;
+                
+                default:
+                    return value.toLocaleString();
+            }
+        }
 
 
         // Helper function to interpolate between two hex colors
@@ -582,25 +663,85 @@
         // Load economic data
         async function loadEconomicData() {
             try {
-                const [statesData, countiesData, cbsasData] = await Promise.all([
+                const [statesResponse, countiesResponse, cbsasResponse] = await Promise.all([
                     fetch('/projects/map_viz/data/states_economic_data.json').then(r => r.json()),
                     fetch('/projects/map_viz/data/counties_economic_data.json').then(r => r.json()),
                     fetch('/projects/map_viz/data/cbsas_economic_data.json').then(r => r.json())
                 ]);
                 
-                economicData.states = statesData;
-                economicData.counties = countiesData;
-                economicData.cbsas = cbsasData;
+                // Extract data and metadata
+                economicData.states = statesResponse.data || statesResponse;
+                economicData.counties = countiesResponse.data || countiesResponse;
+                economicData.cbsas = cbsasResponse.data || cbsasResponse;
                 
+                // Extract the most recent year from actual data across all datasets
+                const allYears = [];
+
+                // Collect years from states
+                Object.values(economicData.states).forEach(state => {
+                    if (state.years) {
+                        allYears.push(...Object.values(state.years));
+                    }
+                });
+
+                // Collect years from counties
+                Object.values(economicData.counties).forEach(county => {
+                    if (county.years) {
+                        allYears.push(...Object.values(county.years));
+                    }
+                });
+
+                // Collect years from CBSAs
+                Object.values(economicData.cbsas).forEach(cbsa => {
+                    if (cbsa.years) {
+                        allYears.push(...Object.values(cbsa.years));
+                    }
+                });
+
+                // Use the most recent year found
+                DATA_YEAR = allYears.length > 0 ? Math.max(...allYears) : 2024;
+                // Update UI with detected year
+                const yearDisplay = document.getElementById('data-year-display');
+                if (yearDisplay) {
+                    yearDisplay.textContent = DATA_YEAR;
+                }
                 console.log('✓ Economic data loaded:', {
                     states: Object.keys(economicData.states).length,
                     counties: Object.keys(economicData.counties).length,
-                    cbsas: Object.keys(economicData.cbsas).length
+                    cbsas: Object.keys(economicData.cbsas).length,
+                    dataYear: DATA_YEAR
                 });
+                
+                // Update metric descriptions after year is detected
+                updateMetricDescriptions();
+                
             } catch (error) {
                 console.error('Error loading economic data:', error);
             }
         }
+
+        // Update metric descriptions with detected year
+        function updateMetricDescriptions() {
+            const metricDescriptions = {
+                'medianIncome': `Average household income in the area (${DATA_YEAR} ACS 5-Year)`,
+                'employmentRate': `Percentage of population 16+ that is employed (${DATA_YEAR} ACS 5-Year)`,
+                'gdpTotal': `Total economic output in millions of current dollars (${DATA_YEAR} BEA)`,
+                'medianHomeValue': `Median value of owner-occupied housing units (${DATA_YEAR} ACS 5-Year)`,
+                'medianRent': `Median monthly gross rent for renter-occupied units (${DATA_YEAR} ACS 5-Year)`,
+                'homeownershipRate': `Percentage of occupied housing units that are owner-occupied (${DATA_YEAR} ACS 5-Year)`,
+                'vacancyRate': `Percentage of all housing units that are vacant (${DATA_YEAR} ACS 5-Year)`
+            };
+            
+            // Store globally so metric selector can access it
+            window.metricDescriptions = metricDescriptions;
+            
+            // Update help text if a metric is already selected
+            const helpEl = document.getElementById('metric-help');
+            if (helpEl && currentMetric !== 'none') {
+                helpEl.textContent = metricDescriptions[currentMetric] || '';
+            }
+        }
+
         // Mapbox setup
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhZHZvIiwiYSI6ImNtZWdhcjUwMDEycm8ybm9lOTRqeHZqdjAifQ.ol7GJKQKjRAQZ33trNvWWA';
 
@@ -1049,12 +1190,18 @@
                 // Show legend
                 legend.style.display = 'block';
                 
-                // Update title
-                if (currentMetric === 'medianIncome') {
-                    legendTitle.textContent = 'Median Household Income';
-                } else if (currentMetric === 'employmentRate') {
-                    legendTitle.textContent = 'Employment Rate (%)';
-                }
+                // Update title based on metric
+                const metricTitles = {
+                    'medianIncome': 'Median Household Income',
+                    'employmentRate': 'Employment Rate (%)',
+                    'gdpTotal': 'GDP Total (Millions)',
+                    'medianHomeValue': 'Median Home Value',
+                    'medianRent': 'Median Gross Rent',
+                    'homeownershipRate': 'Homeownership Rate (%)',
+                    'vacancyRate': 'Vacancy Rate (%)'
+                };
+                
+                legendTitle.textContent = metricTitles[currentMetric] || currentMetric;
                 
                 // Update gradient colors
                 legendGradient.style.background = `linear-gradient(to right, ${colorSettings.choroLow}, ${colorSettings.choroHigh})`;
@@ -1132,14 +1279,14 @@
                 choroplethSettings.style.display = currentMetric !== 'none' ? 'block' : 'none';
             }
             
-            // if (currentLevel !== 'states') {
-            //     alert('Data visualization is only available for States view. Switching to States...');
-            //     document.getElementById('geo-level').value = 'states';
-            //     document.getElementById('geo-level').dispatchEvent(new Event('change'));
-            // }
+            // Update metric help text (use globally stored descriptions)
+            const helpEl = document.getElementById('metric-help');
+            if (helpEl) {
+                helpEl.textContent = (window.metricDescriptions && window.metricDescriptions[currentMetric]) || '';
+            }
             
             applyChoropleth();
-            updateLegend(); 
+            updateLegend();
         });
 
         // Map load event
@@ -1405,11 +1552,31 @@
                     }
 
                     if (regionData) {
+                        const years = regionData.years || {};
+                        
+                        // Economic Indicators
                         if (regionData.medianIncome) {
-                            tooltipText += `<br>Median Income: $${regionData.medianIncome.toLocaleString()}`;
+                            tooltipText += `<br>Median Income: $${regionData.medianIncome.toLocaleString()} (${years.incomeYear || 'N/A'})`;
                         }
                         if (regionData.employmentRate) {
-                            tooltipText += `<br>Employment Rate: ${regionData.employmentRate}%`;
+                            tooltipText += `<br>Employment Rate: ${regionData.employmentRate}% (${years.employmentYear || 'N/A'})`;
+                        }
+                        if (regionData.gdpTotal) {
+                            tooltipText += `<br>GDP: $${regionData.gdpTotal.toLocaleString()}M (${years.gdpYear || 'N/A'})`;
+                        }
+                        
+                        // Housing Metrics
+                        if (regionData.medianHomeValue) {
+                            tooltipText += `<br>Median Home Value: $${regionData.medianHomeValue.toLocaleString()} (${years.housingYear || 'N/A'})`;
+                        }
+                        if (regionData.medianRent) {
+                            tooltipText += `<br>Median Rent: $${regionData.medianRent.toLocaleString()} (${years.housingYear || 'N/A'})`;
+                        }
+                        if (regionData.homeownershipRate) {
+                            tooltipText += `<br>Homeownership: ${regionData.homeownershipRate}% (${years.housingYear || 'N/A'})`;
+                        }
+                        if (regionData.vacancyRate) {
+                            tooltipText += `<br>Vacancy: ${regionData.vacancyRate}% (${years.housingYear || 'N/A'})`;
                         }
                     }
                     

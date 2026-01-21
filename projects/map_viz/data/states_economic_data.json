@@ -1,563 +1,883 @@
 {
-  "01": {
-    "fips": "01",
-    "name": "Alabama",
-    "medianIncome": 59609,
-    "employmentRate": 54.6,
-    "medianHomeValue": 179400,
-    "medianRent": 925,
-    "homeownershipRate": 69.7,
-    "vacancyRate": 15.8,
-    "gdpTotal": 286873
+  "metadata": {
+    "baseYear": 2023,
+    "actualYearsUsed": {
+      "incomeYear": 2023,
+      "employmentYear": 2023,
+      "housingYear": 2023,
+      "gdpYear": 2024
+    },
+    "source": "US Census Bureau ACS & BEA",
+    "fetchDate": "2026-01-21T08:56:22.128311",
+    "recordCount": 51
   },
-  "02": {
-    "fips": "02",
-    "name": "Alaska",
-    "medianIncome": 86370,
-    "employmentRate": 59.1,
-    "medianHomeValue": 318000,
-    "medianRent": 1345,
-    "homeownershipRate": 66.3,
-    "vacancyRate": 18.9,
-    "gdpTotal": 65682
-  },
-  "04": {
-    "fips": "04",
-    "name": "Arizona",
-    "medianIncome": 72581,
-    "employmentRate": 56.9,
-    "medianHomeValue": 321400,
-    "medianRent": 1308,
-    "homeownershipRate": 66.3,
-    "vacancyRate": 11.6,
-    "gdpTotal": 488722
-  },
-  "05": {
-    "fips": "05",
-    "name": "Arkansas",
-    "medianIncome": 56335,
-    "employmentRate": 54.9,
-    "medianHomeValue": 162400,
-    "medianRent": 868,
-    "homeownershipRate": 66.2,
-    "vacancyRate": 14.6,
-    "gdpTotal": 167863
-  },
-  "06": {
-    "fips": "06",
-    "name": "California",
-    "medianIncome": 91905,
-    "employmentRate": 59.3,
-    "medianHomeValue": 659300,
-    "medianRent": 1856,
-    "homeownershipRate": 55.6,
-    "vacancyRate": 7.7,
-    "gdpTotal": 3618289
-  },
-  "08": {
-    "fips": "08",
-    "name": "Colorado",
-    "medianIncome": 87598,
-    "employmentRate": 64.6,
-    "medianHomeValue": 465900,
-    "medianRent": 1594,
-    "homeownershipRate": 66.2,
-    "vacancyRate": 8.9,
-    "gdpTotal": 499197
-  },
-  "09": {
-    "fips": "09",
-    "name": "Connecticut",
-    "medianIncome": 90213,
-    "employmentRate": 61.9,
-    "medianHomeValue": 323700,
-    "medianRent": 1374,
-    "homeownershipRate": 66.2,
-    "vacancyRate": 7.9,
-    "gdpTotal": 321625
-  },
-  "10": {
-    "fips": "10",
-    "name": "Delaware",
-    "medianIncome": 79325,
-    "employmentRate": 58.5,
-    "medianHomeValue": 305200,
-    "medianRent": 1286,
-    "homeownershipRate": 72.0,
-    "vacancyRate": 13.9,
-    "gdpTotal": 97030
-  },
-  "11": {
-    "fips": "11",
-    "name": "District of Columbia",
-    "medianIncome": 101722,
-    "employmentRate": 66.3,
-    "medianHomeValue": 705000,
-    "medianRent": 1817,
-    "homeownershipRate": 41.4,
-    "vacancyRate": 9.9,
-    "gdpTotal": 165106
-  },
-  "12": {
-    "fips": "12",
-    "name": "Florida",
-    "medianIncome": 67917,
-    "employmentRate": 56.0,
-    "medianHomeValue": 292200,
-    "medianRent": 1444,
-    "homeownershipRate": 66.9,
-    "vacancyRate": 15.8,
-    "gdpTotal": 1473688
-  },
-  "13": {
-    "fips": "13",
-    "name": "Georgia",
-    "medianIncome": 71355,
-    "employmentRate": 59.6,
-    "medianHomeValue": 245900,
-    "medianRent": 1221,
-    "homeownershipRate": 65.0,
-    "vacancyRate": 10.8,
-    "gdpTotal": 785922
-  },
-  "15": {
-    "fips": "15",
-    "name": "Hawaii",
-    "medianIncome": 94814,
-    "employmentRate": 57.4,
-    "medianHomeValue": 764800,
-    "medianRent": 1868,
-    "homeownershipRate": 61.8,
-    "vacancyRate": 13.7,
-    "gdpTotal": 103954
-  },
-  "16": {
-    "fips": "16",
-    "name": "Idaho",
-    "medianIncome": 70214,
-    "employmentRate": 60.2,
-    "medianHomeValue": 331600,
-    "medianRent": 1061,
-    "homeownershipRate": 72.0,
-    "vacancyRate": 11.0,
-    "gdpTotal": 112609
-  },
-  "17": {
-    "fips": "17",
-    "name": "Illinois",
-    "medianIncome": 78433,
-    "employmentRate": 61.1,
-    "medianHomeValue": 239100,
-    "medianRent": 1179,
-    "homeownershipRate": 66.7,
-    "vacancyRate": 8.4,
-    "gdpTotal": 1037735
-  },
-  "18": {
-    "fips": "18",
-    "name": "Indiana",
-    "medianIncome": 67173,
-    "employmentRate": 61.0,
-    "medianHomeValue": 183600,
-    "medianRent": 967,
-    "homeownershipRate": 70.1,
-    "vacancyRate": 9.5,
-    "gdpTotal": 467679
-  },
-  "19": {
-    "fips": "19",
-    "name": "Iowa",
-    "medianIncome": 70571,
-    "employmentRate": 64.0,
-    "medianHomeValue": 181600,
-    "medianRent": 914,
-    "homeownershipRate": 71.5,
-    "vacancyRate": 9.0,
-    "gdpTotal": 244156
-  },
-  "20": {
-    "fips": "20",
-    "name": "Kansas",
-    "medianIncome": 69747,
-    "employmentRate": 62.7,
-    "medianHomeValue": 189300,
-    "medianRent": 986,
-    "homeownershipRate": 66.9,
-    "vacancyRate": 10.2,
-    "gdpTotal": 213368
-  },
-  "21": {
-    "fips": "21",
-    "name": "Kentucky",
-    "medianIncome": 60183,
-    "employmentRate": 56.1,
-    "medianHomeValue": 177000,
-    "medianRent": 902,
-    "homeownershipRate": 68.1,
-    "vacancyRate": 11.5,
-    "gdpTotal": 262586
-  },
-  "22": {
-    "fips": "22",
-    "name": "Louisiana",
-    "medianIncome": 57852,
-    "employmentRate": 54.9,
-    "medianHomeValue": 198300,
-    "medianRent": 996,
-    "homeownershipRate": 67.2,
-    "vacancyRate": 15.1,
-    "gdpTotal": 304299
-  },
-  "23": {
-    "fips": "23",
-    "name": "Maine",
-    "medianIncome": 68251,
-    "employmentRate": 59.5,
-    "medianHomeValue": 244800,
-    "medianRent": 1009,
-    "homeownershipRate": 73.5,
-    "vacancyRate": 21.8,
-    "gdpTotal": 86310
-  },
-  "24": {
-    "fips": "24",
-    "name": "Maryland",
-    "medianIncome": 98461,
-    "employmentRate": 63.2,
-    "medianHomeValue": 380500,
-    "medianRent": 1598,
-    "homeownershipRate": 67.5,
-    "vacancyRate": 8.4,
-    "gdpTotal": 481861
-  },
-  "25": {
-    "fips": "25",
-    "name": "Massachusetts",
-    "medianIncome": 96505,
-    "employmentRate": 63.5,
-    "medianHomeValue": 483900,
-    "medianRent": 1588,
-    "homeownershipRate": 62.4,
-    "vacancyRate": 8.6,
-    "gdpTotal": 696323
-  },
-  "26": {
-    "fips": "26",
-    "name": "Michigan",
-    "medianIncome": 68505,
-    "employmentRate": 57.7,
-    "medianHomeValue": 201100,
-    "medianRent": 1037,
-    "homeownershipRate": 72.5,
-    "vacancyRate": 12.5,
-    "gdpTotal": 624173
-  },
-  "27": {
-    "fips": "27",
-    "name": "Minnesota",
-    "medianIncome": 84313,
-    "employmentRate": 65.9,
-    "medianHomeValue": 286800,
-    "medianRent": 1178,
-    "homeownershipRate": 72.3,
-    "vacancyRate": 9.5,
-    "gdpTotal": 457393
-  },
-  "28": {
-    "fips": "28",
-    "name": "Mississippi",
-    "medianIncome": 52985,
-    "employmentRate": 53.0,
-    "medianHomeValue": 151000,
-    "medianRent": 896,
-    "homeownershipRate": 69.2,
-    "vacancyRate": 15.4,
-    "gdpTotal": 141724
-  },
-  "29": {
-    "fips": "29",
-    "name": "Missouri",
-    "medianIncome": 65920,
-    "employmentRate": 59.8,
-    "medianHomeValue": 199400,
-    "medianRent": 957,
-    "homeownershipRate": 67.6,
-    "vacancyRate": 12.0,
-    "gdpTotal": 397536
-  },
-  "30": {
-    "fips": "30",
-    "name": "Montana",
-    "medianIncome": 66341,
-    "employmentRate": 60.2,
-    "medianHomeValue": 305700,
-    "medianRent": 974,
-    "homeownershipRate": 69.0,
-    "vacancyRate": 14.2,
-    "gdpTotal": 69087
-  },
-  "31": {
-    "fips": "31",
-    "name": "Nebraska",
-    "medianIncome": 71722,
-    "employmentRate": 66.3,
-    "medianHomeValue": 205600,
-    "medianRent": 987,
-    "homeownershipRate": 66.5,
-    "vacancyRate": 8.4,
-    "gdpTotal": 167840
-  },
-  "32": {
-    "fips": "32",
-    "name": "Nevada",
-    "medianIncome": 71646,
-    "employmentRate": 58.4,
-    "medianHomeValue": 373800,
-    "medianRent": 1382,
-    "homeownershipRate": 58.4,
-    "vacancyRate": 9.7,
-    "gdpTotal": 232437
-  },
-  "33": {
-    "fips": "33",
-    "name": "New Hampshire",
-    "medianIncome": 90845,
-    "employmentRate": 64.1,
-    "medianHomeValue": 337100,
-    "medianRent": 1336,
-    "homeownershipRate": 72.3,
-    "vacancyRate": 14.9,
-    "gdpTotal": 106824
-  },
-  "34": {
-    "fips": "34",
-    "name": "New Jersey",
-    "medianIncome": 97126,
-    "employmentRate": 61.8,
-    "medianHomeValue": 401400,
-    "medianRent": 1577,
-    "homeownershipRate": 63.9,
-    "vacancyRate": 8.5,
-    "gdpTotal": 756465
-  },
-  "35": {
-    "fips": "35",
-    "name": "New Mexico",
-    "medianIncome": 58722,
-    "employmentRate": 53.2,
-    "medianHomeValue": 216000,
-    "medianRent": 966,
-    "homeownershipRate": 68.7,
-    "vacancyRate": 13.8,
-    "gdpTotal": 129469
-  },
-  "36": {
-    "fips": "36",
-    "name": "New York",
-    "medianIncome": 81386,
-    "employmentRate": 58.8,
-    "medianHomeValue": 384100,
-    "medianRent": 1507,
-    "homeownershipRate": 54.3,
-    "vacancyRate": 10.5,
-    "gdpTotal": 2071075
-  },
-  "37": {
-    "fips": "37",
-    "name": "North Carolina",
-    "medianIncome": 66186,
-    "employmentRate": 58.3,
-    "medianHomeValue": 234900,
-    "medianRent": 1093,
-    "homeownershipRate": 66.2,
-    "vacancyRate": 13.4,
-    "gdpTotal": 729761
-  },
-  "38": {
-    "fips": "38",
-    "name": "North Dakota",
-    "medianIncome": 73959,
-    "employmentRate": 66.0,
-    "medianHomeValue": 232500,
-    "medianRent": 912,
-    "homeownershipRate": 63.2,
-    "vacancyRate": 14.1,
-    "gdpTotal": 75052
-  },
-  "39": {
-    "fips": "39",
-    "name": "Ohio",
-    "medianIncome": 66990,
-    "employmentRate": 59.9,
-    "medianHomeValue": 183300,
-    "medianRent": 945,
-    "homeownershipRate": 66.8,
-    "vacancyRate": 8.8,
-    "gdpTotal": 830498
-  },
-  "40": {
-    "fips": "40",
-    "name": "Oklahoma",
-    "medianIncome": 61364,
-    "employmentRate": 57.6,
-    "medianHomeValue": 170500,
-    "medianRent": 934,
-    "homeownershipRate": 65.9,
-    "vacancyRate": 13.1,
-    "gdpTotal": 247541
-  },
-  "41": {
-    "fips": "41",
-    "name": "Oregon",
-    "medianIncome": 76632,
-    "employmentRate": 58.9,
-    "medianHomeValue": 423100,
-    "medianRent": 1373,
-    "homeownershipRate": 63.2,
-    "vacancyRate": 7.6,
-    "gdpTotal": 297084
-  },
-  "42": {
-    "fips": "42",
-    "name": "Pennsylvania",
-    "medianIncome": 73170,
-    "employmentRate": 59.4,
-    "medianHomeValue": 226200,
-    "medianRent": 1110,
-    "homeownershipRate": 69.2,
-    "vacancyRate": 9.7,
-    "gdpTotal": 916861
-  },
-  "44": {
-    "fips": "44",
-    "name": "Rhode Island",
-    "medianIncome": 81370,
-    "employmentRate": 60.7,
-    "medianHomeValue": 343100,
-    "medianRent": 1195,
-    "homeownershipRate": 62.7,
-    "vacancyRate": 10.5,
-    "gdpTotal": 71978
-  },
-  "45": {
-    "fips": "45",
-    "name": "South Carolina",
-    "medianIncome": 63623,
-    "employmentRate": 56.4,
-    "medianHomeValue": 216200,
-    "medianRent": 1065,
-    "homeownershipRate": 70.9,
-    "vacancyRate": 14.4,
-    "gdpTotal": 305070
-  },
-  "46": {
-    "fips": "46",
-    "name": "South Dakota",
-    "medianIncome": 69457,
-    "employmentRate": 65.0,
-    "medianHomeValue": 219500,
-    "medianRent": 878,
-    "homeownershipRate": 68.4,
-    "vacancyRate": 11.5,
-    "gdpTotal": 69425
-  },
-  "47": {
-    "fips": "47",
-    "name": "Tennessee",
-    "medianIncome": 64035,
-    "employmentRate": 58.4,
-    "medianHomeValue": 232100,
-    "medianRent": 1047,
-    "homeownershipRate": 67.1,
-    "vacancyRate": 11.1,
-    "gdpTotal": 490587
-  },
-  "48": {
-    "fips": "48",
-    "name": "Texas",
-    "medianIncome": 73035,
-    "employmentRate": 61.3,
-    "medianHomeValue": 238000,
-    "medianRent": 1251,
-    "homeownershipRate": 62.4,
-    "vacancyRate": 10.0,
-    "gdpTotal": 2476903
-  },
-  "49": {
-    "fips": "49",
-    "name": "Utah",
-    "medianIncome": 86833,
-    "employmentRate": 66.8,
-    "medianHomeValue": 408500,
-    "medianRent": 1302,
-    "homeownershipRate": 70.7,
-    "vacancyRate": 8.6,
-    "gdpTotal": 261548
-  },
-  "50": {
-    "fips": "50",
-    "name": "Vermont",
-    "medianIncome": 74014,
-    "employmentRate": 62.2,
-    "medianHomeValue": 272400,
-    "medianRent": 1149,
-    "homeownershipRate": 72.7,
-    "vacancyRate": 20.7,
-    "gdpTotal": 41211
-  },
-  "51": {
-    "fips": "51",
-    "name": "Virginia",
-    "medianIncome": 87249,
-    "employmentRate": 61.0,
-    "medianHomeValue": 339800,
-    "medianRent": 1440,
-    "homeownershipRate": 66.9,
-    "vacancyRate": 9.3,
-    "gdpTotal": 665624
-  },
-  "53": {
-    "fips": "53",
-    "name": "Washington",
-    "medianIncome": 90325,
-    "employmentRate": 60.4,
-    "medianHomeValue": 473400,
-    "medianRent": 1592,
-    "homeownershipRate": 63.8,
-    "vacancyRate": 7.4,
-    "gdpTotal": 741002
-  },
-  "54": {
-    "fips": "54",
-    "name": "West Virginia",
-    "medianIncome": 55217,
-    "employmentRate": 49.9,
-    "medianHomeValue": 145800,
-    "medianRent": 831,
-    "homeownershipRate": 74.2,
-    "vacancyRate": 16.7,
-    "gdpTotal": 98824
-  },
-  "55": {
-    "fips": "55",
-    "name": "Wisconsin",
-    "medianIncome": 72458,
-    "employmentRate": 63.4,
-    "medianHomeValue": 231400,
-    "medianRent": 992,
-    "homeownershipRate": 67.7,
-    "vacancyRate": 11.3,
-    "gdpTotal": 403570
-  },
-  "56": {
-    "fips": "56",
-    "name": "Wyoming",
-    "medianIncome": 72495,
-    "employmentRate": 62.5,
-    "medianHomeValue": 269900,
-    "medianRent": 933,
-    "homeownershipRate": 71.9,
-    "vacancyRate": 14.3,
-    "gdpTotal": 49570
+  "data": {
+    "01": {
+      "fips": "01",
+      "name": "Alabama",
+      "medianIncome": 62027,
+      "employmentRate": 55.0,
+      "medianHomeValue": 195100,
+      "medianRent": 963,
+      "homeownershipRate": 69.9,
+      "vacancyRate": 15.0,
+      "gdpTotal": 325345,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "02": {
+      "fips": "02",
+      "name": "Alaska",
+      "medianIncome": 89336,
+      "employmentRate": 58.9,
+      "medianHomeValue": 333300,
+      "medianRent": 1388,
+      "homeownershipRate": 66.6,
+      "vacancyRate": 18.2,
+      "gdpTotal": 71567,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "04": {
+      "fips": "04",
+      "name": "Arizona",
+      "medianIncome": 76872,
+      "employmentRate": 57.0,
+      "medianHomeValue": 358900,
+      "medianRent": 1431,
+      "homeownershipRate": 67.0,
+      "vacancyRate": 11.0,
+      "gdpTotal": 570088,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "05": {
+      "fips": "05",
+      "name": "Arkansas",
+      "medianIncome": 58773,
+      "employmentRate": 55.1,
+      "medianHomeValue": 175300,
+      "medianRent": 914,
+      "homeownershipRate": 66.1,
+      "vacancyRate": 14.0,
+      "gdpTotal": 188339,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "06": {
+      "fips": "06",
+      "name": "California",
+      "medianIncome": 96334,
+      "employmentRate": 59.3,
+      "medianHomeValue": 695400,
+      "medianRent": 1956,
+      "homeownershipRate": 55.8,
+      "vacancyRate": 7.6,
+      "gdpTotal": 4048108,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "08": {
+      "fips": "08",
+      "name": "Colorado",
+      "medianIncome": 92470,
+      "employmentRate": 64.7,
+      "medianHomeValue": 502200,
+      "medianRent": 1693,
+      "homeownershipRate": 66.3,
+      "vacancyRate": 8.6,
+      "gdpTotal": 557633,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "09": {
+      "fips": "09",
+      "name": "Connecticut",
+      "medianIncome": 93760,
+      "employmentRate": 62.1,
+      "medianHomeValue": 343200,
+      "medianRent": 1431,
+      "homeownershipRate": 66.2,
+      "vacancyRate": 7.5,
+      "gdpTotal": 356834,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "10": {
+      "fips": "10",
+      "name": "Delaware",
+      "medianIncome": 82855,
+      "employmentRate": 58.7,
+      "medianHomeValue": 326800,
+      "medianRent": 1341,
+      "homeownershipRate": 72.3,
+      "vacancyRate": 13.5,
+      "gdpTotal": 110971,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "11": {
+      "fips": "11",
+      "name": "District of Columbia",
+      "medianIncome": 106287,
+      "employmentRate": 66.7,
+      "medianHomeValue": 724600,
+      "medianRent": 1900,
+      "homeownershipRate": 41.1,
+      "vacancyRate": 9.7,
+      "gdpTotal": 184297,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "12": {
+      "fips": "12",
+      "name": "Florida",
+      "medianIncome": 71711,
+      "employmentRate": 56.3,
+      "medianHomeValue": 325000,
+      "medianRent": 1564,
+      "homeownershipRate": 67.3,
+      "vacancyRate": 15.2,
+      "gdpTotal": 1726709,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "13": {
+      "fips": "13",
+      "name": "Georgia",
+      "medianIncome": 74664,
+      "employmentRate": 59.8,
+      "medianHomeValue": 272900,
+      "medianRent": 1306,
+      "homeownershipRate": 65.4,
+      "vacancyRate": 10.6,
+      "gdpTotal": 881508,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "15": {
+      "fips": "15",
+      "name": "Hawaii",
+      "medianIncome": 98317,
+      "employmentRate": 56.8,
+      "medianHomeValue": 808200,
+      "medianRent": 1938,
+      "homeownershipRate": 62.6,
+      "vacancyRate": 13.4,
+      "gdpTotal": 117627,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "16": {
+      "fips": "16",
+      "name": "Idaho",
+      "medianIncome": 74636,
+      "employmentRate": 60.4,
+      "medianHomeValue": 376000,
+      "medianRent": 1150,
+      "homeownershipRate": 72.4,
+      "vacancyRate": 10.7,
+      "gdpTotal": 129018,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "17": {
+      "fips": "17",
+      "name": "Illinois",
+      "medianIncome": 81702,
+      "employmentRate": 61.2,
+      "medianHomeValue": 250500,
+      "medianRent": 1227,
+      "homeownershipRate": 66.8,
+      "vacancyRate": 8.1,
+      "gdpTotal": 1148106,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "18": {
+      "fips": "18",
+      "name": "Indiana",
+      "medianIncome": 70051,
+      "employmentRate": 61.1,
+      "medianHomeValue": 201600,
+      "medianRent": 1020,
+      "homeownershipRate": 70.4,
+      "vacancyRate": 9.2,
+      "gdpTotal": 519516,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "19": {
+      "fips": "19",
+      "name": "Iowa",
+      "medianIncome": 73147,
+      "employmentRate": 64.0,
+      "medianHomeValue": 195900,
+      "medianRent": 949,
+      "homeownershipRate": 71.5,
+      "vacancyRate": 8.6,
+      "gdpTotal": 265794,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "20": {
+      "fips": "20",
+      "name": "Kansas",
+      "medianIncome": 72639,
+      "employmentRate": 62.8,
+      "medianHomeValue": 203400,
+      "medianRent": 1029,
+      "homeownershipRate": 66.9,
+      "vacancyRate": 9.7,
+      "gdpTotal": 230522,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "21": {
+      "fips": "21",
+      "name": "Kentucky",
+      "medianIncome": 62417,
+      "employmentRate": 56.4,
+      "medianHomeValue": 192300,
+      "medianRent": 933,
+      "homeownershipRate": 68.3,
+      "vacancyRate": 10.9,
+      "gdpTotal": 295375,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "22": {
+      "fips": "22",
+      "name": "Louisiana",
+      "medianIncome": 60023,
+      "employmentRate": 55.1,
+      "medianHomeValue": 208700,
+      "medianRent": 1038,
+      "homeownershipRate": 67.3,
+      "vacancyRate": 14.8,
+      "gdpTotal": 329172,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "23": {
+      "fips": "23",
+      "name": "Maine",
+      "medianIncome": 71773,
+      "employmentRate": 59.5,
+      "medianHomeValue": 266400,
+      "medianRent": 1084,
+      "homeownershipRate": 74.0,
+      "vacancyRate": 21.1,
+      "gdpTotal": 99174,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "24": {
+      "fips": "24",
+      "name": "Maryland",
+      "medianIncome": 101652,
+      "employmentRate": 63.2,
+      "medianHomeValue": 397700,
+      "medianRent": 1662,
+      "homeownershipRate": 67.5,
+      "vacancyRate": 8.1,
+      "gdpTotal": 546028,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "25": {
+      "fips": "25",
+      "name": "Massachusetts",
+      "medianIncome": 101341,
+      "employmentRate": 63.7,
+      "medianHomeValue": 525800,
+      "medianRent": 1687,
+      "homeownershipRate": 62.6,
+      "vacancyRate": 8.4,
+      "gdpTotal": 778523,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "26": {
+      "fips": "26",
+      "name": "Michigan",
+      "medianIncome": 71149,
+      "employmentRate": 57.8,
+      "medianHomeValue": 217600,
+      "medianRent": 1084,
+      "homeownershipRate": 72.9,
+      "vacancyRate": 12.2,
+      "gdpTotal": 702466,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "27": {
+      "fips": "27",
+      "name": "Minnesota",
+      "medianIncome": 87556,
+      "employmentRate": 65.7,
+      "medianHomeValue": 305500,
+      "medianRent": 1235,
+      "homeownershipRate": 72.4,
+      "vacancyRate": 9.4,
+      "gdpTotal": 507687,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "28": {
+      "fips": "28",
+      "name": "Mississippi",
+      "medianIncome": 54915,
+      "employmentRate": 53.2,
+      "medianHomeValue": 161400,
+      "medianRent": 923,
+      "homeownershipRate": 69.5,
+      "vacancyRate": 15.1,
+      "gdpTotal": 158192,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "29": {
+      "fips": "29",
+      "name": "Missouri",
+      "medianIncome": 68920,
+      "employmentRate": 60.1,
+      "medianHomeValue": 215600,
+      "medianRent": 996,
+      "homeownershipRate": 67.9,
+      "vacancyRate": 11.6,
+      "gdpTotal": 448713,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "30": {
+      "fips": "30",
+      "name": "Montana",
+      "medianIncome": 69922,
+      "employmentRate": 60.0,
+      "medianHomeValue": 338100,
+      "medianRent": 1031,
+      "homeownershipRate": 69.4,
+      "vacancyRate": 13.4,
+      "gdpTotal": 78441,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "31": {
+      "fips": "31",
+      "name": "Nebraska",
+      "medianIncome": 74985,
+      "employmentRate": 66.3,
+      "medianHomeValue": 223800,
+      "medianRent": 1035,
+      "homeownershipRate": 66.5,
+      "vacancyRate": 8.0,
+      "gdpTotal": 189242,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "32": {
+      "fips": "32",
+      "name": "Nevada",
+      "medianIncome": 75561,
+      "employmentRate": 58.3,
+      "medianHomeValue": 406100,
+      "medianRent": 1489,
+      "homeownershipRate": 59.3,
+      "vacancyRate": 9.5,
+      "gdpTotal": 269010,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "33": {
+      "fips": "33",
+      "name": "New Hampshire",
+      "medianIncome": 95628,
+      "employmentRate": 64.0,
+      "medianHomeValue": 367200,
+      "medianRent": 1423,
+      "homeownershipRate": 72.5,
+      "vacancyRate": 14.4,
+      "gdpTotal": 119336,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "34": {
+      "fips": "34",
+      "name": "New Jersey",
+      "medianIncome": 101050,
+      "employmentRate": 62.1,
+      "medianHomeValue": 427600,
+      "medianRent": 1653,
+      "homeownershipRate": 63.7,
+      "vacancyRate": 7.9,
+      "gdpTotal": 846000,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "35": {
+      "fips": "35",
+      "name": "New Mexico",
+      "medianIncome": 62125,
+      "employmentRate": 53.5,
+      "medianHomeValue": 232200,
+      "medianRent": 1021,
+      "homeownershipRate": 69.3,
+      "vacancyRate": 13.1,
+      "gdpTotal": 147084,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "36": {
+      "fips": "36",
+      "name": "New York",
+      "medianIncome": 84578,
+      "employmentRate": 58.9,
+      "medianHomeValue": 403000,
+      "medianRent": 1576,
+      "homeownershipRate": 54.3,
+      "vacancyRate": 10.2,
+      "gdpTotal": 2322138,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "37": {
+      "fips": "37",
+      "name": "North Carolina",
+      "medianIncome": 69904,
+      "employmentRate": 58.5,
+      "medianHomeValue": 259400,
+      "medianRent": 1162,
+      "homeownershipRate": 66.4,
+      "vacancyRate": 13.0,
+      "gdpTotal": 844209,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "38": {
+      "fips": "38",
+      "name": "North Dakota",
+      "medianIncome": 75949,
+      "employmentRate": 65.9,
+      "medianHomeValue": 241100,
+      "medianRent": 934,
+      "homeownershipRate": 63.4,
+      "vacancyRate": 13.3,
+      "gdpTotal": 80058,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "39": {
+      "fips": "39",
+      "name": "Ohio",
+      "medianIncome": 69680,
+      "employmentRate": 60.1,
+      "medianHomeValue": 199200,
+      "medianRent": 988,
+      "homeownershipRate": 67.0,
+      "vacancyRate": 8.4,
+      "gdpTotal": 923140,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "40": {
+      "fips": "40",
+      "name": "Oklahoma",
+      "medianIncome": 63603,
+      "employmentRate": 57.5,
+      "medianHomeValue": 185900,
+      "medianRent": 980,
+      "homeownershipRate": 65.8,
+      "vacancyRate": 12.5,
+      "gdpTotal": 263695,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "41": {
+      "fips": "41",
+      "name": "Oregon",
+      "medianIncome": 80426,
+      "employmentRate": 58.9,
+      "medianHomeValue": 454200,
+      "medianRent": 1450,
+      "homeownershipRate": 63.4,
+      "vacancyRate": 7.5,
+      "gdpTotal": 330250,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "42": {
+      "fips": "42",
+      "name": "Pennsylvania",
+      "medianIncome": 76081,
+      "employmentRate": 59.4,
+      "medianHomeValue": 240500,
+      "medianRent": 1162,
+      "homeownershipRate": 69.3,
+      "vacancyRate": 9.4,
+      "gdpTotal": 1007873,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "44": {
+      "fips": "44",
+      "name": "Rhode Island",
+      "medianIncome": 86372,
+      "employmentRate": 60.9,
+      "medianHomeValue": 368800,
+      "medianRent": 1273,
+      "homeownershipRate": 63.3,
+      "vacancyRate": 9.8,
+      "gdpTotal": 80381,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "45": {
+      "fips": "45",
+      "name": "South Carolina",
+      "medianIncome": 66818,
+      "employmentRate": 56.6,
+      "medianHomeValue": 236700,
+      "medianRent": 1126,
+      "homeownershipRate": 71.4,
+      "vacancyRate": 13.8,
+      "gdpTotal": 357074,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "46": {
+      "fips": "46",
+      "name": "South Dakota",
+      "medianIncome": 72421,
+      "employmentRate": 64.9,
+      "medianHomeValue": 236800,
+      "medianRent": 912,
+      "homeownershipRate": 68.6,
+      "vacancyRate": 10.9,
+      "gdpTotal": 76795,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "47": {
+      "fips": "47",
+      "name": "Tennessee",
+      "medianIncome": 67097,
+      "employmentRate": 58.8,
+      "medianHomeValue": 256800,
+      "medianRent": 1122,
+      "homeownershipRate": 67.0,
+      "vacancyRate": 10.6,
+      "gdpTotal": 561201,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "48": {
+      "fips": "48",
+      "name": "Texas",
+      "medianIncome": 76292,
+      "employmentRate": 61.4,
+      "medianHomeValue": 260400,
+      "medianRent": 1339,
+      "homeownershipRate": 62.6,
+      "vacancyRate": 9.6,
+      "gdpTotal": 2769766,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "49": {
+      "fips": "49",
+      "name": "Utah",
+      "medianIncome": 91750,
+      "employmentRate": 67.0,
+      "medianHomeValue": 455000,
+      "medianRent": 1405,
+      "homeownershipRate": 70.6,
+      "vacancyRate": 8.2,
+      "gdpTotal": 299471,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "50": {
+      "fips": "50",
+      "name": "Vermont",
+      "medianIncome": 78024,
+      "employmentRate": 62.1,
+      "medianHomeValue": 290500,
+      "medianRent": 1193,
+      "homeownershipRate": 72.8,
+      "vacancyRate": 20.1,
+      "gdpTotal": 46276,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "51": {
+      "fips": "51",
+      "name": "Virginia",
+      "medianIncome": 90974,
+      "employmentRate": 61.0,
+      "medianHomeValue": 360700,
+      "medianRent": 1514,
+      "homeownershipRate": 67.2,
+      "vacancyRate": 9.0,
+      "gdpTotal": 761733,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "53": {
+      "fips": "53",
+      "name": "Washington",
+      "medianIncome": 94952,
+      "employmentRate": 60.5,
+      "medianHomeValue": 519800,
+      "medianRent": 1682,
+      "homeownershipRate": 63.9,
+      "vacancyRate": 7.4,
+      "gdpTotal": 856013,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "54": {
+      "fips": "54",
+      "name": "West Virginia",
+      "medianIncome": 57917,
+      "employmentRate": 50.4,
+      "medianHomeValue": 155600,
+      "medianRent": 850,
+      "homeownershipRate": 74.3,
+      "vacancyRate": 16.1,
+      "gdpTotal": 106475,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "55": {
+      "fips": "55",
+      "name": "Wisconsin",
+      "medianIncome": 75670,
+      "employmentRate": 63.3,
+      "medianHomeValue": 247400,
+      "medianRent": 1045,
+      "homeownershipRate": 67.9,
+      "vacancyRate": 11.1,
+      "gdpTotal": 453298,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    },
+    "56": {
+      "fips": "56",
+      "name": "Wyoming",
+      "medianIncome": 74815,
+      "employmentRate": 61.9,
+      "medianHomeValue": 285100,
+      "medianRent": 968,
+      "homeownershipRate": 71.9,
+      "vacancyRate": 13.4,
+      "gdpTotal": 51498,
+      "years": {
+        "incomeYear": 2023,
+        "employmentYear": 2023,
+        "housingYear": 2023,
+        "gdpYear": 2024
+      }
+    }
   }
 }
