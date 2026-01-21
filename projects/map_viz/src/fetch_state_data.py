@@ -184,8 +184,8 @@ def fetch_housing_metrics():
 
 
 def fetch_bea_gdp():
-    """Fetch GDP per Capita from BEA"""
-    print('Fetching GDP data from BEA...')
+    """Fetch GDP data from BEA Regional dataset"""
+    print('Fetching GDP data from BEA Regional dataset...')
     
     if BEA_API_KEY == 'YOUR_BEA_API_KEY':
         print('⚠ BEA API key not set - skipping GDP data')
@@ -195,9 +195,19 @@ def fetch_bea_gdp():
     session = create_session_with_retries()
     
     try:
-        # Using CAGDP2 (GDP by state) instead of SQGDP2 for better coverage
-        # TableName=CAGDP2, LineCode=1 (GDP in current dollars, all industry total)
-        url = f'https://apps.bea.gov/api/data/?UserID={BEA_API_KEY}&method=GetData&datasetname=Regional&TableName=CAGDP2&LineCode=1&Year=2022&GeoFips=STATE&ResultFormat=JSON'
+        # Use Regional dataset, SAGDP2 table (Current-dollar GDP by state), LineCode 1
+        # This gives us GDP in millions of current dollars
+        url = (
+            f'https://apps.bea.gov/api/data/'
+            f'?UserID={BEA_API_KEY}'
+            f'&method=GetData'
+            f'&datasetname=Regional'
+            f'&TableName=SAGDP2'
+            f'&LineCode=1'
+            f'&Year=2022'
+            f'&GeoFips=STATE'
+            f'&ResultFormat=JSON'
+        )
         
         response = session.get(url, timeout=30)
         response.raise_for_status()
@@ -205,44 +215,39 @@ def fetch_bea_gdp():
         
         result = {}
         
-        # Debug: Print what BEA returns
-        print('  DEBUG: Checking BEA response structure...')
-        
         if 'BEAAPI' in data and 'Results' in data['BEAAPI']:
             if 'Data' in data['BEAAPI']['Results']:
                 bea_data = data['BEAAPI']['Results']['Data']
-                print(f'  DEBUG: BEA returned {len(bea_data)} records')
-                
-                # Print first few records to see structure
-                if len(bea_data) > 0:
-                    print(f'  DEBUG: Sample record: {bea_data[0]}')
+                print(f'  ✓ BEA returned {len(bea_data)} records')
                 
                 for item in bea_data:
                     geo_fips = item.get('GeoFips', '')
                     geo_name = item.get('GeoName', '')
                     data_value = item.get('DataValue')
                     
-                    # BEA uses 2-digit FIPS codes with leading zeros
+                    # GeoFips is 5 digits for states (e.g., "01000" for Alabama)
+                    # We need the first 2 digits to match our STATE_FIPS keys
                     if geo_fips and len(geo_fips) >= 2:
-                        state_fips = geo_fips.zfill(2)  # Pad with leading zero if needed
+                        state_fips = geo_fips[:2]  # Take first 2 characters
                         
-                        # Only process state-level data (not US total)
-                        if state_fips in STATE_FIPS and data_value:
+                        # Only process if it's a valid state FIPS (not "00000" = US total)
+                        if state_fips in STATE_FIPS and state_fips != '00' and data_value:
                             try:
-                                # GDP is in millions, we want total GDP
-                                gdp_millions = float(data_value.replace(',', ''))
+                                # Remove commas and convert to float, then to int
+                                # GDP is in millions of current dollars
+                                gdp_millions = int(float(data_value.replace(',', '')))
                                 
-                                # We'll calculate per capita in merge_data using population
-                                # For now, just store the total GDP
                                 result[state_fips] = {
-                                    'gdpTotal': int(gdp_millions)
+                                    'gdpTotal': gdp_millions  # Store as millions
                                 }
                             except Exception as e:
-                                print(f'  DEBUG: Error parsing GDP for {geo_name}: {e}')
+                                print(f'  ⚠ Error parsing GDP for {geo_name}: {e}')
             else:
-                print('  DEBUG: No "Data" field in BEA response')
                 if 'Error' in data['BEAAPI']['Results']:
-                    print(f'  BEA Error: {data["BEAAPI"]["Results"]["Error"]}')
+                    error = data['BEAAPI']['Results']['Error']
+                    print(f'  ❌ BEA Error: {error.get("APIErrorDescription")}')
+                    if 'ErrorDetail' in error:
+                        print(f'     Detail: {error.get("ErrorDetail")}')
         
         print(f'✓ Fetched GDP for {len(result)} states')
         

@@ -8,7 +8,7 @@
     "medianRent": 925,
     "homeownershipRate": 69.7,
     "vacancyRate": 15.8,
-    "gdpTotal": null
+    "gdpTotal": 286873
   },
   "02": {
     "fips": "02",
@@ -19,7 +19,7 @@
     "medianRent": 1345,
     "homeownershipRate": 66.3,
     "vacancyRate": 18.9,
-    "gdpTotal": null
+    "gdpTotal": 65682
   },
   "04": {
     "fips": "04",
@@ -30,7 +30,7 @@
     "medianRent": 1308,
     "homeownershipRate": 66.3,
     "vacancyRate": 11.6,
-    "gdpTotal": null
+    "gdpTotal": 488722
   },
   "05": {
     "fips": "05",
@@ -41,7 +41,7 @@
     "medianRent": 868,
     "homeownershipRate": 66.2,
     "vacancyRate": 14.6,
-    "gdpTotal": null
+    "gdpTotal": 167863
   },
   "06": {
     "fips": "06",
@@ -52,7 +52,7 @@
     "medianRent": 1856,
     "homeownershipRate": 55.6,
     "vacancyRate": 7.7,
-    "gdpTotal": null
+    "gdpTotal": 3618289
   },
   "08": {
     "fips": "08",
@@ -63,7 +63,7 @@
     "medianRent": 1594,
     "homeownershipRate": 66.2,
     "vacancyRate": 8.9,
-    "gdpTotal": null
+    "gdpTotal": 499197
   },
   "09": {
     "fips": "09",
@@ -74,7 +74,7 @@
     "medianRent": 1374,
     "homeownershipRate": 66.2,
     "vacancyRate": 7.9,
-    "gdpTotal": null
+    "gdpTotal": 321625
   },
   "10": {
     "fips": "10",
@@ -85,7 +85,7 @@
     "medianRent": 1286,
     "homeownershipRate": 72.0,
     "vacancyRate": 13.9,
-    "gdpTotal": null
+    "gdpTotal": 97030
   },
   "11": {
     "fips": "11",
@@ -96,7 +96,7 @@
     "medianRent": 1817,
     "homeownershipRate": 41.4,
     "vacancyRate": 9.9,
-    "gdpTotal": null
+    "gdpTotal": 165106
   },
   "12": {
     "fips": "12",
@@ -107,7 +107,7 @@
     "medianRent": 1444,
     "homeownershipRate": 66.9,
     "vacancyRate": 15.8,
-    "gdpTotal": null
+    "gdpTotal": 1473688
   },
   "13": {
     "fips": "13",
@@ -118,7 +118,7 @@
     "medianRent": 1221,
     "homeownershipRate": 65.0,
     "vacancyRate": 10.8,
-    "gdpTotal": null
+    "gdpTotal": 785922
   },
   "15": {
     "fips": "15",
@@ -129,7 +129,7 @@
     "medianRent": 1868,
     "homeownershipRate": 61.8,
     "vacancyRate": 13.7,
-    "gdpTotal": null
+    "gdpTotal": 103954
   },
   "16": {
     "fips": "16",
@@ -140,7 +140,7 @@
     "medianRent": 1061,
     "homeownershipRate": 72.0,
     "vacancyRate": 11.0,
-    "gdpTotal": null
+    "gdpTotal": 112609
   },
   "17": {
     "fips": "17",
@@ -151,7 +151,7 @@
     "medianRent": 1179,
     "homeownershipRate": 66.7,
     "vacancyRate": 8.4,
-    "gdpTotal": null
+    "gdpTotal": 1037735
   },
   "18": {
     "fips": "18",
@@ -162,7 +162,7 @@
     "medianRent": 967,
     "homeownershipRate": 70.1,
     "vacancyRate": 9.5,
-    "gdpTotal": null
+    "gdpTotal": 467679
   },
   "19": {
     "fips": "19",
@@ -173,7 +173,7 @@
     "medianRent": 914,
     "homeownershipRate": 71.5,
     "vacancyRate": 9.0,
-    "gdpTotal": null
+    "gdpTotal": 244156
   },
   "20": {
     "fips": "20",
@@ -184,7 +184,7 @@
     "medianRent": 986,
     "homeownershipRate": 66.9,
     "vacancyRate": 10.2,
-    "gdpTotal": null
+    "gdpTotal": 213368
   },
   "21": {
     "fips": "21",
@@ -195,7 +195,7 @@
     "medianRent": 902,
     "homeownershipRate": 68.1,
     "vacancyRate": 11.5,
-    "gdpTotal": null
+    "gdpTotal": 262586
   },
   "22": {
     "fips": "22",
@@ -206,7 +206,7 @@
     "medianRent": 996,
     "homeownershipRate": 67.2,
     "vacancyRate": 15.1,
-    "gdpTotal": null
+    "gdpTotal": 304299
   },
   "23": {
     "fips": "23",
@@ -217,7 +217,7 @@
     "medianRent": 1009,
     "homeownershipRate": 73.5,
     "vacancyRate": 21.8,
-    "gdpTotal": null
+    "gdpTotal": 86310
   },
   "24": {
     "fips": "24",
@@ -228,7 +228,7 @@
     "medianRent": 1598,
     "homeownershipRate": 67.5,
     "vacancyRate": 8.4,
-    "gdpTotal": null
+    "gdpTotal": 481861
   },
   "25": {
     "fips": "25",
@@ -239,7 +239,7 @@
     "medianRent": 1588,
     "homeownershipRate": 62.4,
     "vacancyRate": 8.6,
-    "gdpTotal": null
+    "gdpTotal": 696323
   },
   "26": {
     "fips": "26",
@@ -250,7 +250,7 @@
     "medianRent": 1037,
     "homeownershipRate": 72.5,
     "vacancyRate": 12.5,
-    "gdpTotal": null
+    "gdpTotal": 624173
   },
   "27": {
     "fips": "27",
@@ -261,7 +261,7 @@
     "medianRent": 1178,
     "homeownershipRate": 72.3,
     "vacancyRate": 9.5,
-    "gdpTotal": null
+    "gdpTotal": 457393
   },
   "28": {
     "fips": "28",
@@ -272,7 +272,7 @@
     "medianRent": 896,
     "homeownershipRate": 69.2,
     "vacancyRate": 15.4,
-    "gdpTotal": null
+    "gdpTotal": 141724
   },
   "29": {
     "fips": "29",
@@ -283,7 +283,7 @@
     "medianRent": 957,
     "homeownershipRate": 67.6,
     "vacancyRate": 12.0,
-    "gdpTotal": null
+    "gdpTotal": 397536
   },
   "30": {
     "fips": "30",
@@ -294,7 +294,7 @@
     "medianRent": 974,
     "homeownershipRate": 69.0,
     "vacancyRate": 14.2,
-    "gdpTotal": null
+    "gdpTotal": 69087
   },
   "31": {
     "fips": "31",
@@ -305,7 +305,7 @@
     "medianRent": 987,
     "homeownershipRate": 66.5,
     "vacancyRate": 8.4,
-    "gdpTotal": null
+    "gdpTotal": 167840
   },
   "32": {
     "fips": "32",
@@ -316,7 +316,7 @@
     "medianRent": 1382,
     "homeownershipRate": 58.4,
     "vacancyRate": 9.7,
-    "gdpTotal": null
+    "gdpTotal": 232437
   },
   "33": {
     "fips": "33",
@@ -327,7 +327,7 @@
     "medianRent": 1336,
     "homeownershipRate": 72.3,
     "vacancyRate": 14.9,
-    "gdpTotal": null
+    "gdpTotal": 106824
   },
   "34": {
     "fips": "34",
@@ -338,7 +338,7 @@
     "medianRent": 1577,
     "homeownershipRate": 63.9,
     "vacancyRate": 8.5,
-    "gdpTotal": null
+    "gdpTotal": 756465
   },
   "35": {
     "fips": "35",
@@ -349,7 +349,7 @@
     "medianRent": 966,
     "homeownershipRate": 68.7,
     "vacancyRate": 13.8,
-    "gdpTotal": null
+    "gdpTotal": 129469
   },
   "36": {
     "fips": "36",
@@ -360,7 +360,7 @@
     "medianRent": 1507,
     "homeownershipRate": 54.3,
     "vacancyRate": 10.5,
-    "gdpTotal": null
+    "gdpTotal": 2071075
   },
   "37": {
     "fips": "37",
@@ -371,7 +371,7 @@
     "medianRent": 1093,
     "homeownershipRate": 66.2,
     "vacancyRate": 13.4,
-    "gdpTotal": null
+    "gdpTotal": 729761
   },
   "38": {
     "fips": "38",
@@ -382,7 +382,7 @@
     "medianRent": 912,
     "homeownershipRate": 63.2,
     "vacancyRate": 14.1,
-    "gdpTotal": null
+    "gdpTotal": 75052
   },
   "39": {
     "fips": "39",
@@ -393,7 +393,7 @@
     "medianRent": 945,
     "homeownershipRate": 66.8,
     "vacancyRate": 8.8,
-    "gdpTotal": null
+    "gdpTotal": 830498
   },
   "40": {
     "fips": "40",
@@ -404,7 +404,7 @@
     "medianRent": 934,
     "homeownershipRate": 65.9,
     "vacancyRate": 13.1,
-    "gdpTotal": null
+    "gdpTotal": 247541
   },
   "41": {
     "fips": "41",
@@ -415,7 +415,7 @@
     "medianRent": 1373,
     "homeownershipRate": 63.2,
     "vacancyRate": 7.6,
-    "gdpTotal": null
+    "gdpTotal": 297084
   },
   "42": {
     "fips": "42",
@@ -426,7 +426,7 @@
     "medianRent": 1110,
     "homeownershipRate": 69.2,
     "vacancyRate": 9.7,
-    "gdpTotal": null
+    "gdpTotal": 916861
   },
   "44": {
     "fips": "44",
@@ -437,7 +437,7 @@
     "medianRent": 1195,
     "homeownershipRate": 62.7,
     "vacancyRate": 10.5,
-    "gdpTotal": null
+    "gdpTotal": 71978
   },
   "45": {
     "fips": "45",
@@ -448,7 +448,7 @@
     "medianRent": 1065,
     "homeownershipRate": 70.9,
     "vacancyRate": 14.4,
-    "gdpTotal": null
+    "gdpTotal": 305070
   },
   "46": {
     "fips": "46",
@@ -459,7 +459,7 @@
     "medianRent": 878,
     "homeownershipRate": 68.4,
     "vacancyRate": 11.5,
-    "gdpTotal": null
+    "gdpTotal": 69425
   },
   "47": {
     "fips": "47",
@@ -470,7 +470,7 @@
     "medianRent": 1047,
     "homeownershipRate": 67.1,
     "vacancyRate": 11.1,
-    "gdpTotal": null
+    "gdpTotal": 490587
   },
   "48": {
     "fips": "48",
@@ -481,7 +481,7 @@
     "medianRent": 1251,
     "homeownershipRate": 62.4,
     "vacancyRate": 10.0,
-    "gdpTotal": null
+    "gdpTotal": 2476903
   },
   "49": {
     "fips": "49",
@@ -492,7 +492,7 @@
     "medianRent": 1302,
     "homeownershipRate": 70.7,
     "vacancyRate": 8.6,
-    "gdpTotal": null
+    "gdpTotal": 261548
   },
   "50": {
     "fips": "50",
@@ -503,7 +503,7 @@
     "medianRent": 1149,
     "homeownershipRate": 72.7,
     "vacancyRate": 20.7,
-    "gdpTotal": null
+    "gdpTotal": 41211
   },
   "51": {
     "fips": "51",
@@ -514,7 +514,7 @@
     "medianRent": 1440,
     "homeownershipRate": 66.9,
     "vacancyRate": 9.3,
-    "gdpTotal": null
+    "gdpTotal": 665624
   },
   "53": {
     "fips": "53",
@@ -525,7 +525,7 @@
     "medianRent": 1592,
     "homeownershipRate": 63.8,
     "vacancyRate": 7.4,
-    "gdpTotal": null
+    "gdpTotal": 741002
   },
   "54": {
     "fips": "54",
@@ -536,7 +536,7 @@
     "medianRent": 831,
     "homeownershipRate": 74.2,
     "vacancyRate": 16.7,
-    "gdpTotal": null
+    "gdpTotal": 98824
   },
   "55": {
     "fips": "55",
@@ -547,7 +547,7 @@
     "medianRent": 992,
     "homeownershipRate": 67.7,
     "vacancyRate": 11.3,
-    "gdpTotal": null
+    "gdpTotal": 403570
   },
   "56": {
     "fips": "56",
@@ -558,6 +558,6 @@
     "medianRent": 933,
     "homeownershipRate": 71.9,
     "vacancyRate": 14.3,
-    "gdpTotal": null
+    "gdpTotal": 49570
   }
 }
