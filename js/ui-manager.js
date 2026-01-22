@@ -7,7 +7,6 @@ class UIManager {
     constructor(config) {
         this.config = config;
     }
-
     // WIDGET 1: NAVIGATION BAR
     renderNavbar(containerId) {
         const container = document.getElementById(containerId);
@@ -23,9 +22,10 @@ class UIManager {
             <div class="container py-4">
                 <div class="d-flex justify-content-between align-items-center">
                     
-                    <a href="${this.config.navLinks.find(l => l.name === 'Home')?.url || '../../index.html'}">
+                    <a href="${this.config.homeUrl}">
                         <img src="${this.config.logoPath}" alt="${this.config.author.name}" class="site-logo">                    
                     </a>    
+
                     <div class="d-flex align-items-center">
                         <button id="themeToggle" class="theme-toggle me-3 bg-transparent border-0 p-2" aria-label="Toggle dark mode" style="color: inherit;">
                             <i class="fas fa-moon"></i>
@@ -35,7 +35,7 @@ class UIManager {
                             ${linksHtml}
                         </nav>
                         
-                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -57,7 +57,6 @@ class UIManager {
         ).join('');
 
         // 2. Build the Footer HTML
-        // Note: We inject the .container div inside the section
         container.innerHTML = `
             <div class="container">
                 <h4 class="fw-bold mb-4">Let's Work Together!</h4>
@@ -107,7 +106,6 @@ class UIManager {
 }
 
 // AUTO-INITIALIZATION
-// This runs automatically when the script is loaded on any page
 document.addEventListener('DOMContentLoaded', () => {
     // Ensure SITE_CONFIG is loaded first
     if (typeof SITE_CONFIG === 'undefined') {
