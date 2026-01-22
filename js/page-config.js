@@ -7,7 +7,7 @@ const pathPrefix = isGitHubPages ? repoName : '';
 
 const SITE_CONFIG = {
   domain: 'https://chadpvo.github.io/chadvo-ds-website/',
-  
+  homeUrl: `${pathPrefix}/index.html`,
   // DYNAMIC LOGO PATH (Fixes the broken image!)
   logoPath: `${pathPrefix}/assets/img/logo.png`, 
   
