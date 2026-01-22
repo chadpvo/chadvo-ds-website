@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7REHTK4CJ8"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-7REHTK4CJ8');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map Shading Tool</title>
@@ -176,21 +185,118 @@
             cursor: pointer;
         }
         
+        /* Metabase-Style Dark Tooltip */
         .map-tooltip {
             position: absolute;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
+            background-color: #222b35; 
+            color: #ffffff;
+            padding: 16px;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
             font-size: 13px;
-            pointer-events: none;
+            line-height: 1.5;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             z-index: 1000;
             display: none;
-            white-space: nowrap;
+            
+            /* Layout & Size Controls */
+            width: auto;
+            min-width: 300px;
+            max-width: 450px;
+            
+            /* CRITICAL FIX: Limit height relative to viewport and enable scrolling */
+            max-height: 80vh; /* Never taller than 80% of screen height */
+            overflow-y: auto; /* Scrollbar if content overflows */
+            
+            pointer-events: none;
+            transition: opacity 0.1s ease-in-out;
+            border: 1px solid #3a424a;
         }
         
+        /* Custom Scrollbar for Webkit (Chrome/Safari/Edge) to look nicer */
+        .map-tooltip::-webkit-scrollbar {
+            width: 6px;
+        }
+        .map-tooltip::-webkit-scrollbar-track {
+            background: #222b35;
+        }
+        .map-tooltip::-webkit-scrollbar-thumb {
+            background-color: #3a424a;
+            border-radius: 3px;
+        }
+
         .map-tooltip.show {
             display: block;
+        }
+
+        /* Locked State */
+        .map-tooltip.locked {
+            pointer-events: auto !important;
+            z-index: 2000;
+            border-color: #509ee3; /* Blue highlight border */
+            background-color: #222b35; /* Keep dark background */
+        }
+
+        /* Grid Layout - Prevents weird wrapping */
+        .tooltip-grid {
+            display: grid;
+            /* max-content ensures the label is as wide as the text needs to be */
+            grid-template-columns: max-content 1fr; 
+            column-gap: 20px;
+            row-gap: 6px;
+            align-items: baseline; /* Aligns text perfectly */
+        }
+
+        .tooltip-label {
+            color: #949a9e; /* Muted gray labels */
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .tooltip-value {
+            color: #ffffff; /* Bright white values */
+            font-weight: 600;
+            text-align: left;
+        }
+
+        /* Header */
+        .tooltip-header {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #3a424a;
+            color: #ffffff;
+            padding-right: 24px; /* Space for close button */
+        }
+
+        /* Close Button */
+        .tooltip-close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            color: #949a9e;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .tooltip-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .map-tooltip.locked .tooltip-close-btn {
+            display: flex;
         }
         
         body.dark-mode .sidebar {
@@ -317,6 +423,51 @@
         body.dark-mode #data-year-display {
             color: #fff;
         }
+
+        /* Notification Toast Styles */
+        .notification-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px); /* Start hidden above */
+            background-color: #fff3cd; /* Light yellow warning background */
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.27);
+            pointer-events: none; /* Let clicks pass through when hidden */
+            opacity: 0;
+        }
+
+        .notification-toast.show {
+            transform: translateX(-50%) translateY(0);
+            pointer-events: all;
+            opacity: 1;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: #856404;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+        
     </style>
 </head>
 
@@ -378,22 +529,46 @@
                             <option value="none">None (Manual Selection)</option>
                             
                             <optgroup label="Economic Indicators">
-                                <option value="medianIncome">Median Household Income</option>
-                                <option value="employmentRate">Employment Rate (%)</option>
+                                <option value="medianHouseholdIncome">Median Household Income (Census)</option>
+                                <option value="povertyRate">Poverty Rate (%)</option>
                                 <option value="gdpTotal">GDP Total (Millions)</option>
                             </optgroup>
+
+                            <optgroup label="Employment & Demographics">
+                                <option value="employmentRate">Employment Rate (%)</option>
+                                <option value="unemploymentRate">Unemployment Rate (%)</option>
+                                <option value="totalPopulation">Total Population</option>
+                                <option value="medianAge">Median Age</option>
+                            </optgroup>
                             
-                            <optgroup label="Housing Metrics">
+                            <optgroup label="Housing Market">
                                 <option value="medianHomeValue">Median Home Value</option>
-                                <option value="medianRent">Median Gross Rent</option>
+                                <option value="medianGrossRent">Median Gross Rent</option>
+                                <option value="medianOwnerCostsWithMortgage">Monthly Owner Costs (Mortgage)</option>
+                                <option value="medianOwnerCostsNoMortgage">Monthly Owner Costs (No Mortgage)</option>
+                            </optgroup>
+
+                            <optgroup label="Housing Characteristics">
                                 <option value="homeownershipRate">Homeownership Rate (%)</option>
                                 <option value="vacancyRate">Vacancy Rate (%)</option>
+                                <option value="medianYearBuilt">Median Year Built</option>
+                                <option value="totalHousingUnits">Total Housing Units</option>
+                            </optgroup>
+
+                            <optgroup label="HUD Fair Market Rents (2025/26)">
+                                <option value="fmr0Bedroom">Studio/Efficiency FMR</option>
+                                <option value="fmr1Bedroom">1-Bedroom FMR</option>
+                                <option value="fmr2Bedroom">2-Bedroom FMR</option>
+                                <option value="fmr3Bedroom">3-Bedroom FMR</option>
+                                <option value="fmr4Bedroom">4-Bedroom FMR</option>
                             </optgroup>
                         </select>
-                        <div class="metric-help" id="metric-help"></div>
-                        <div class="metric-source-info">
+                        
+                        <div class="metric-help" id="metric-help" style="font-size: 0.85rem; color: #666; margin-top: 5px; min-height: 20px;"></div>
+                        
+                        <div class="metric-source-info" style="margin-top: 5px;">
                             <small style="font-size: 10px; color: #999;">
-                                ACS = American Community Survey | BEA = Bureau of Economic Analysis
+                                Sources: Census ACS (5-Year), BEA Regional, HUD User Data
                             </small>
                         </div>
                     </div>
@@ -515,7 +690,7 @@
                         font-weight: 500;
                     ">
                         <i class="fas fa-calendar-alt" style="margin-right: 6px; color: #6c757d;"></i>
-                        Latest Data Year: <strong id="data-year-display">Loading...</strong>
+                        LatestData Year: <strong id="data-year-display">Loading...</strong>
                     </div>
 
                     <div class="zoom-controls">
@@ -542,18 +717,30 @@
             </p>
         </div>
     </section>
+    
+    <!-- Notification on No Data -->
+    <div id="data-notification" class="notification-toast">
+        <div class="notification-content">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="notification-message">Data not available</span>
+        </div>
+        <button onclick="closeNotification()" class="notification-close">&times;</button>
+    </div>    
 
     <script>
         // Set current year in footer
-        document.getElementById("year").textContent = new Date().getFullYear();
+        const yearEl = document.getElementById("year");
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
 
         // Sticky Header scroll effect
         window.addEventListener('scroll', () => {
             const stickyHeader = document.getElementById('stickyHeader');
-            if (window.scrollY > 50) {
-                stickyHeader.classList.add('floating');
-            } else {
-                stickyHeader.classList.remove('floating');
+            if (stickyHeader) {
+                if (window.scrollY > 50) {
+                    stickyHeader.classList.add('floating');
+                } else {
+                    stickyHeader.classList.remove('floating');
+                }
             }
         });
 
@@ -562,6 +749,9 @@
         let currentLevel = 'states';
         let allRegions = [];
         let highlightedRegions = new Set();
+        
+        // NEW: Global Year Metadata to store the specific years for each data source
+        let globalYearMetadata = {};
 
         // Color settings
         let colorSettings = {
@@ -572,33 +762,107 @@
             dimmedNoShade: false,
             choroLow: '#eff3ff',
             choroHigh: '#08519c',
-            choroOpacity: 1.0,        // NEW
-            enhanceLabels: true       // NEW
+            choroOpacity: 1.0,
+            enhanceLabels: true
         };
 
-                // Helper function to format metric values for display
+        // Helper: Map specific metric keys to their source group in the JSON 'years' object
+        const metricYearMap = {
+            'medianHouseholdIncome': 'householdEconomics',
+            'povertyRate': 'householdEconomics',
+            'medianHomeValue': 'housingValues',
+            'medianGrossRent': 'housingValues',
+            'medianOwnerCostsWithMortgage': 'housingValues',
+            'medianOwnerCostsNoMortgage': 'housingValues',
+            'totalHousingUnits': 'housingCharacteristics',
+            'homeownershipRate': 'housingCharacteristics',
+            'vacancyRate': 'housingCharacteristics',
+            'medianYearBuilt': 'housingCharacteristics',
+            'totalPopulation': 'demographics',
+            'medianAge': 'demographics',
+            'employmentRate': 'demographics',
+            'unemploymentRate': 'demographics',
+            'gdpTotal': 'gdp',
+            'fmr0Bedroom': 'hudFMR',
+            'fmr1Bedroom': 'hudFMR',
+            'fmr2Bedroom': 'hudFMR',
+            'fmr3Bedroom': 'hudFMR',
+            'fmr4Bedroom': 'hudFMR',
+            'medianFamilyIncome': 'hudIncomeLimits'
+        };
+
+        // NEW: Map metric keys to readable labels for the Tooltip
+    // This controls the ORDER and TEXT of the tooltip items
+        const metricLabels = {
+            // Economics
+            'medianHouseholdIncome': 'Median Household Income',
+            'medianFamilyIncome': 'HUD Median Family Income',
+            'povertyRate': 'Poverty Rate',
+            'gdpTotal': 'Total GDP',
+            
+            // Employment & Demographics
+            'totalPopulation': 'Total Population',
+            'medianAge': 'Median Age',
+            'employmentRate': 'Employment Rate',
+            'unemploymentRate': 'Unemployment Rate',
+            
+            // Housing Values
+            'medianHomeValue': 'Median Home Value',
+            'medianGrossRent': 'Median Gross Rent',
+            'medianOwnerCostsWithMortgage': 'Owner Costs (Mortgage)',
+            'medianOwnerCostsNoMortgage': 'Owner Costs (No Mortgage)',
+            
+            // Housing Characteristics
+            'totalHousingUnits': 'Total Housing Units',
+            'occupiedUnits': 'Occupied Units',
+            'vacantUnits': 'Vacant Units',
+            'homeownershipRate': 'Homeownership Rate',
+            'vacancyRate': 'Vacancy Rate',
+            'medianYearBuilt': 'Median Year Built',
+            
+            // HUD FMR
+            'fmr0Bedroom': 'Studio FMR',
+            'fmr1Bedroom': '1-Bed FMR',
+            'fmr2Bedroom': '2-Bed FMR',
+            'fmr3Bedroom': '3-Bed FMR',
+            'fmr4Bedroom': '4-Bed FMR'
+        };
+        // Helper function to format metric values for display
         function formatMetricValue(metric, value) {
             if (value === null || value === undefined) return 'N/A';
             
             switch(metric) {
-                case 'medianIncome':
+                case 'medianHouseholdIncome':
                 case 'medianHomeValue':
-                case 'medianRent':
+                case 'medianGrossRent':
+                case 'medianFamilyIncome':
+                case 'medianOwnerCostsWithMortgage':
+                case 'medianOwnerCostsNoMortgage':
+                case 'fmr0Bedroom':
+                case 'fmr1Bedroom':
+                case 'fmr2Bedroom':
+                case 'fmr3Bedroom':
+                case 'fmr4Bedroom':
                     return `$${value.toLocaleString()}`;
                 
                 case 'gdpTotal':
                     return `$${value.toLocaleString()}M`;
                 
                 case 'employmentRate':
+                case 'unemploymentRate':
                 case 'homeownershipRate':
                 case 'vacancyRate':
+                case 'povertyRate':
                     return `${value}%`;
                 
+                case 'totalPopulation':
+                case 'totalHousingUnits':
+                    return value.toLocaleString();
+
                 default:
                     return value.toLocaleString();
             }
         }
-
 
         // Helper function to interpolate between two hex colors
         function interpolateColor(color1, color2, factor) {
@@ -620,22 +884,41 @@
             return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
         }
 
+        // Notification Logic
+        let notificationTimeout;
+
+        function showNotification(message) {
+            const toast = document.getElementById('data-notification');
+            const msgEl = document.getElementById('notification-message');
+            
+            if (toast && msgEl) {
+                msgEl.innerHTML = message;
+                toast.classList.add('show');
+                
+                // Auto-hide after 4 seconds
+                clearTimeout(notificationTimeout);
+                notificationTimeout = setTimeout(() => {
+                    closeNotification();
+                }, 4000);
+            }
+        }
+
+        function closeNotification() {
+            const toast = document.getElementById('data-notification');
+            if (toast) toast.classList.remove('show');
+        }
 
         // Enhance label visibility
         function enhanceLabels() {
             if (!map || !map.getStyle()) return;
-            
             const layers = map.getStyle().layers;
-            
             layers.forEach(layer => {
                 if (layer.type === 'symbol' && layer.layout && layer.layout['text-field']) {
                     if (colorSettings.enhanceLabels) {
-                        // Add white halo for better visibility
                         map.setPaintProperty(layer.id, 'text-halo-color', '#ffffff');
                         map.setPaintProperty(layer.id, 'text-halo-width', 2);
                         map.setPaintProperty(layer.id, 'text-halo-blur', 1);
                     } else {
-                        // Remove halo
                         map.setPaintProperty(layer.id, 'text-halo-width', 0);
                     }
                 }
@@ -669,67 +952,65 @@
                     fetch('/projects/map_viz/data/cbsas_economic_data.json').then(r => r.json())
                 ]);
                 
-                // Extract data and metadata
+                // Handle new JSON structure (metadata + data)
                 economicData.states = statesResponse.data || statesResponse;
                 economicData.counties = countiesResponse.data || countiesResponse;
                 economicData.cbsas = cbsasResponse.data || cbsasResponse;
                 
-                // Extract the most recent year from actual data across all datasets
-                const allYears = [];
-
-                // Collect years from states
-                Object.values(economicData.states).forEach(state => {
-                    if (state.years) {
-                        allYears.push(...Object.values(state.years));
-                    }
+                // --- Rate Calculation Logic ---
+                // Your new Python scripts provide raw counts (e.g. vacantUnits) but the map needs rates.
+                // We calculate them here to ensure the choropleth works.
+                [economicData.states, economicData.counties, economicData.cbsas].forEach(dataset => {
+                    Object.values(dataset).forEach(item => {
+                        // Calculate Vacancy Rate if missing
+                        if (item.vacancyRate === undefined && item.vacantUnits && item.totalHousingUnits) {
+                            item.vacancyRate = parseFloat(((item.vacantUnits / item.totalHousingUnits) * 100).toFixed(1));
+                        }
+                        // Calculate Homeownership Rate if missing
+                        if (item.homeownershipRate === undefined && item.ownerOccupied && item.occupiedUnits) {
+                            item.homeownershipRate = parseFloat(((item.ownerOccupied / item.occupiedUnits) * 100).toFixed(1));
+                        }
+                    });
                 });
 
-                // Collect years from counties
-                Object.values(economicData.counties).forEach(county => {
-                    if (county.years) {
-                        allYears.push(...Object.values(county.years));
-                    }
-                });
-
-                // Collect years from CBSAs
-                Object.values(economicData.cbsas).forEach(cbsa => {
-                    if (cbsa.years) {
-                        allYears.push(...Object.values(cbsa.years));
-                    }
-                });
-
-                // Use the most recent year found
-                DATA_YEAR = allYears.length > 0 ? Math.max(...allYears) : 2024;
-                // Update UI with detected year
-                const yearDisplay = document.getElementById('data-year-display');
-                if (yearDisplay) {
-                    yearDisplay.textContent = DATA_YEAR;
+                // Store metadata years from the States file for global display
+                if (statesResponse.metadata && statesResponse.metadata.yearsUsed) {
+                    globalYearMetadata = statesResponse.metadata.yearsUsed;
                 }
-                console.log('✓ Economic data loaded:', {
-                    states: Object.keys(economicData.states).length,
-                    counties: Object.keys(economicData.counties).length,
-                    cbsas: Object.keys(economicData.cbsas).length,
-                    dataYear: DATA_YEAR
-                });
+
+                // Calculate a general "Data Year" for the UI (max of all available years)
+                const allYears = Object.values(globalYearMetadata).filter(y => typeof y === 'number');
+                const maxYear = allYears.length > 0 ? Math.max(...allYears) : new Date().getFullYear();
                 
-                // Update metric descriptions after year is detected
+                const yearDisplay = document.getElementById('data-year-display');
+                if (yearDisplay) yearDisplay.textContent = maxYear;
+
+                console.log('✓ Economic data loaded and rates calculated');
                 updateMetricDescriptions();
                 
             } catch (error) {
                 console.error('Error loading economic data:', error);
+                const overlay = document.getElementById('loadingOverlay');
+                if(overlay) overlay.innerHTML = '<div class="text-danger">Error loading data.</div>';
             }
         }
 
         // Update metric descriptions with detected year
         function updateMetricDescriptions() {
+            const getYear = (key) => globalYearMetadata[metricYearMap[key]] || 'Latest';
+
             const metricDescriptions = {
-                'medianIncome': `Average household income in the area (${DATA_YEAR} ACS 5-Year)`,
-                'employmentRate': `Percentage of population 16+ that is employed (${DATA_YEAR} ACS 5-Year)`,
-                'gdpTotal': `Total economic output in millions of current dollars (${DATA_YEAR} BEA)`,
-                'medianHomeValue': `Median value of owner-occupied housing units (${DATA_YEAR} ACS 5-Year)`,
-                'medianRent': `Median monthly gross rent for renter-occupied units (${DATA_YEAR} ACS 5-Year)`,
-                'homeownershipRate': `Percentage of occupied housing units that are owner-occupied (${DATA_YEAR} ACS 5-Year)`,
-                'vacancyRate': `Percentage of all housing units that are vacant (${DATA_YEAR} ACS 5-Year)`
+                'medianHouseholdIncome': `Average household income (${getYear('medianHouseholdIncome')} ACS)`,
+                'medianFamilyIncome': `HUD Median Family Income (${getYear('medianFamilyIncome')} HUD)`,
+                'employmentRate': `Employed / Labor Force (${getYear('employmentRate')} ACS)`,
+                'unemploymentRate': `Unemployed / Labor Force (${getYear('unemploymentRate')} ACS)`,
+                'gdpTotal': `Total economic output (${getYear('gdpTotal')} BEA)`,
+                'medianHomeValue': `Median owner-occupied value (${getYear('medianHomeValue')} ACS)`,
+                'medianGrossRent': `Median gross rent (${getYear('medianGrossRent')} ACS)`,
+                'homeownershipRate': `Owner-occupied / Total occupied (${getYear('homeownershipRate')} ACS)`,
+                'vacancyRate': `Vacant units / Total units (${getYear('vacancyRate')} ACS)`,
+                'fmr2Bedroom': `HUD Fair Market Rent (2-Bed) (${getYear('fmr2Bedroom')})`,
+                'povertyRate': `Percentage below poverty line (${getYear('povertyRate')} ACS)`
             };
             
             // Store globally so metric selector can access it
@@ -792,21 +1073,21 @@
                 addBoundariesToMap();
                 populateRegionList();
                 setupColorControls();
-                // DON'T call setupHoverTooltip here
-                document.getElementById('loadingOverlay').classList.add('hidden');
                 
-                // Return a resolved promise
+                const overlay = document.getElementById('loadingOverlay');
+                if(overlay) overlay.classList.add('hidden');
+                
                 return Promise.resolve();
             } catch (error) {
                 console.error('Error:', error);
-                document.getElementById('loadingOverlay').innerHTML = '<div class="text-danger">Error loading data.</div>';
+                const overlay = document.getElementById('loadingOverlay');
+                if(overlay) overlay.innerHTML = '<div class="text-danger">Error loading data.</div>';
                 return Promise.reject(error);
             }
         }
 
         // Add boundaries as Mapbox layers
         function addBoundariesToMap() {
-            // Find the first label layer in the current style
             const layers = map.getStyle().layers;
             let firstLabelLayerId;
             for (const layer of layers) {
@@ -816,132 +1097,31 @@
                 }
             }
             
-            map.addSource('states', {
-                type: 'geojson',
-                data: topojson.feature(usData, usData.objects.states)
-            });
+            map.addSource('states', { type: 'geojson', data: topojson.feature(usData, usData.objects.states) });
+            map.addLayer({ id: 'states-fill', type: 'fill', source: 'states', paint: { 'fill-color': colorSettings.dimmed, 'fill-opacity': 0 } }, firstLabelLayerId);
+            map.addLayer({ id: 'states-layer', type: 'line', source: 'states', paint: { 'line-color': colorSettings.border, 'line-width': 0.3 } }, firstLabelLayerId);
             
-            // Add fill layer first, before labels
-            map.addLayer({
-                id: 'states-fill',
-                type: 'fill',
-                source: 'states',
-                paint: {
-                    'fill-color': ['case',
-                        ['boolean', ['feature-state', 'highlighted'], false],
-                        colorSettings.selected,
-                        colorSettings.dimmed
-                    ],
-                    'fill-opacity': ['case',
-                        ['boolean', ['feature-state', 'highlighted'], false],
-                        colorSettings.selectedNoShade ? 0 : 0.6,
-                        ['boolean', ['feature-state', 'dimmed'], false],
-                        colorSettings.dimmedNoShade ? 0 : 0.15,
-                        0
-                    ]
-                }
-            }, firstLabelLayerId); // Insert before labels
-            
-            // Add border layer on top of fill but still before labels
-            map.addLayer({
-                id: 'states-layer',
-                type: 'line',
-                source: 'states',
-                paint: {
-                    'line-color': colorSettings.border,
-                    'line-width': 0.3
-                }
-            }, firstLabelLayerId); // Insert before labels
-            
-            map.addSource('counties', {
-                type: 'geojson',
-                data: topojson.feature(countiesData, countiesData.objects.counties)
-            });
-            
-            map.addLayer({
-                id: 'counties-fill',
-                type: 'fill',
-                source: 'counties',
-                paint: {
-                    'fill-color': ['case',
-                        ['boolean', ['feature-state', 'highlighted'], false],
-                        colorSettings.selected,
-                        colorSettings.dimmed
-                    ],
-                    'fill-opacity': ['case',
-                        ['boolean', ['feature-state', 'highlighted'], false],
-                        colorSettings.selectedNoShade ? 0 : 0.6,
-                        ['boolean', ['feature-state', 'dimmed'], false],
-                        colorSettings.dimmedNoShade ? 0 : 0.15,
-                        0
-                    ]
-                }
-            }, firstLabelLayerId); // Insert before labels
-            
-            map.addLayer({
-                id: 'counties-layer',
-                type: 'line',
-                source: 'counties',
-                paint: {
-                    'line-color': colorSettings.border,
-                    'line-width': 0.3,
-                    'line-opacity': 0
-                }
-            }, firstLabelLayerId); // Insert before labels
+            map.addSource('counties', { type: 'geojson', data: topojson.feature(countiesData, countiesData.objects.counties) });
+            map.addLayer({ id: 'counties-fill', type: 'fill', source: 'counties', paint: { 'fill-color': colorSettings.dimmed, 'fill-opacity': 0 } }, firstLabelLayerId);
+            map.addLayer({ id: 'counties-layer', type: 'line', source: 'counties', paint: { 'line-color': colorSettings.border, 'line-width': 0.3, 'line-opacity': 0 } }, firstLabelLayerId);
             
             if (cbsaData) {
-                map.addSource('cbsas', {
-                    type: 'geojson',
-                    data: cbsaData,
-                    promoteId: 'GEOID'
-                });
-                
-                map.addLayer({
-                    id: 'cbsas-fill',
-                    type: 'fill',
-                    source: 'cbsas',
-                    paint: {
-                        'fill-color': ['case',
-                            ['boolean', ['feature-state', 'highlighted'], false],
-                            colorSettings.selected,
-                            colorSettings.dimmed
-                        ],
-                        'fill-opacity': ['case',
-                            ['boolean', ['feature-state', 'highlighted'], false],
-                            colorSettings.selectedNoShade ? 0 : 0.6,
-                            ['boolean', ['feature-state', 'dimmed'], false],
-                            colorSettings.dimmedNoShade ? 0 : 0.15,
-                            0
-                        ]
-                    }
-                }, firstLabelLayerId); // Insert before labels
-                
-                map.addLayer({
-                    id: 'cbsas-layer',
-                    type: 'line',
-                    source: 'cbsas',
-                    paint: {
-                        'line-color': colorSettings.border,
-                        'line-width': 0.4,
-                        'line-opacity': 0
-                    }
-                }, firstLabelLayerId); // Insert before labels
+                map.addSource('cbsas', { type: 'geojson', data: cbsaData, promoteId: 'GEOID' });
+                map.addLayer({ id: 'cbsas-fill', type: 'fill', source: 'cbsas', paint: { 'fill-color': colorSettings.dimmed, 'fill-opacity': 0 } }, firstLabelLayerId);
+                map.addLayer({ id: 'cbsas-layer', type: 'line', source: 'cbsas', paint: { 'line-color': colorSettings.border, 'line-width': 0.4, 'line-opacity': 0 } }, firstLabelLayerId);
             }
         }
 
         // Populate region list
         function populateRegionList() {
             const container = document.getElementById('region-checkboxes');
+            if (!container) return;
             container.innerHTML = '';
             
             let features = [];
-            if (currentLevel === 'states') {
-                features = topojson.feature(usData, usData.objects.states).features;
-            } else if (currentLevel === 'counties') {
-                features = topojson.feature(countiesData, countiesData.objects.counties).features;
-            } else if (currentLevel === 'cbsas') {
-                features = cbsaData.features;
-            }
+            if (currentLevel === 'states') features = topojson.feature(usData, usData.objects.states).features;
+            else if (currentLevel === 'counties') features = topojson.feature(countiesData, countiesData.objects.counties).features;
+            else if (currentLevel === 'cbsas') features = cbsaData.features;
             
             allRegions = features.map(f => {
                 let id, name;
@@ -951,20 +1131,10 @@
                 } else if (currentLevel === 'counties') {
                     id = f.id;
                     name = f.properties.name;
-                    
-                    // Extract state FIPS code (first 2 digits of 5-digit county FIPS)
-                    const countyFipsStr = id.toString().padStart(5, '0');
+                    const countyFipsStr = String(id).padStart(5, '0');
                     const stateFips = parseInt(countyFipsStr.substring(0, 2));
-                    
-                    // Find the state name - try both number and string comparison
-                    const stateFeature = topojson.feature(usData, usData.objects.states).features.find(s => {
-                        return s.id === stateFips || s.id === stateFips.toString() || parseInt(s.id) === stateFips;
-                    });
-                    
                     const stateAbbr = stateFipsToAbbr[stateFips];
-                    if (stateAbbr) {
-                        name = `${name}, ${stateAbbr}`;
-                    }
+                    if (stateAbbr) name = `${name}, ${stateAbbr}`;
                 } else if (currentLevel === 'cbsas') {
                     id = f.properties.GEOID || f.properties.CBSAFP || f.properties.AFFGEOID;
                     name = f.properties.NAME || f.properties.name || 'Unknown';
@@ -976,54 +1146,37 @@
                 const div = document.createElement('div');
                 div.className = 'checkbox-item';
                 div.dataset.regionName = region.name.toLowerCase();
-                div.innerHTML = `
-                    <input type="checkbox" id="region-${region.id}" data-region-id="${region.id}">
-                    <label for="region-${region.id}">${region.name}</label>
-                `;
+                div.innerHTML = `<input type="checkbox" id="region-${region.id}" data-region-id="${region.id}"><label for="region-${region.id}">${region.name}</label>`;
                 container.appendChild(div);
             });
             
-            container.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', handleRegionCheckbox);
-            });
+            container.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', handleRegionCheckbox));
         }
 
         // Handle checkbox changes
         function handleRegionCheckbox(e) {
             const regionId = e.target.dataset.regionId;
-            if (e.target.checked) {
-                highlightedRegions.add(regionId);
-            } else {
-                highlightedRegions.delete(regionId);
-            }
+            if (e.target.checked) highlightedRegions.add(regionId);
+            else highlightedRegions.delete(regionId);
             updateHighlights();
         }
 
         // Update map highlights
         function updateHighlights() {
             const sourceId = currentLevel === 'states' ? 'states' : 
-                        currentLevel === 'counties' ? 'counties' : 'cbsas';
+                            currentLevel === 'counties' ? 'counties' : 'cbsas';
             
             allRegions.forEach(region => {
-                map.setFeatureState(
-                    { source: sourceId, id: region.id },
-                    { highlighted: false, dimmed: false }
-                );
+                map.setFeatureState({ source: sourceId, id: region.id }, { highlighted: false, dimmed: false });
             });
             
             if (highlightedRegions.size > 0) {
                 allRegions.forEach(region => {
-                    map.setFeatureState(
-                        { source: sourceId, id: region.id },
-                        { dimmed: true }
-                    );
+                    map.setFeatureState({ source: sourceId, id: region.id }, { dimmed: true });
                 });
                 
                 highlightedRegions.forEach(regionId => {
-                    map.setFeatureState(
-                        { source: sourceId, id: regionId },
-                        { highlighted: true, dimmed: false }
-                    );
+                    map.setFeatureState({ source: sourceId, id: regionId }, { highlighted: true, dimmed: false });
                 });
                 
                 const bounds = new mapboxgl.LngLatBounds();
@@ -1042,28 +1195,19 @@
         function getFeatureCoordinates(feature) {
             const coords = [];
             const geometry = feature.geometry;
-            
-            if (geometry.type === 'Polygon') {
-                geometry.coordinates[0].forEach(coord => coords.push(coord));
-            } else if (geometry.type === 'MultiPolygon') {
-                geometry.coordinates.forEach(polygon => {
-                    polygon[0].forEach(coord => coords.push(coord));
-                });
-            }
+            if (geometry.type === 'Polygon') geometry.coordinates[0].forEach(coord => coords.push(coord));
+            else if (geometry.type === 'MultiPolygon') geometry.coordinates.forEach(poly => poly[0].forEach(coord => coords.push(coord)));
             return coords;
         }
 
-        // Color scale for choropleth - Linear gradient from min to max
+        // Color scale for choropleth
         function getColorForValue(value, metric, allValues) {
             if (value === null || value === undefined) return colorSettings.dimmed;
             if (allValues.length === 0) return colorSettings.dimmed;
-            
             const sortedValues = [...allValues].sort((a, b) => a - b);
             const min = sortedValues[0];
             const max = sortedValues[sortedValues.length - 1];
-            
             if (max === min) return interpolateColor(colorSettings.choroLow, colorSettings.choroHigh, 0.5);
-            
             const normalized = (value - min) / (max - min);
             return interpolateColor(colorSettings.choroLow, colorSettings.choroHigh, normalized);
         }
@@ -1071,110 +1215,60 @@
         // Apply choropleth shading
         function applyChoropleth() {
             const choroplethSettings = document.getElementById('choropleth-settings');
-            if (choroplethSettings) {
-                choroplethSettings.style.display = currentMetric !== 'none' ? 'block' : 'none';
-            }
+            if (choroplethSettings) choroplethSettings.style.display = currentMetric !== 'none' ? 'block' : 'none';
 
             if (currentMetric === 'none') {
-                // Reset to normal manual selection mode
-                allRegions.forEach(region => {
-                    map.setFeatureState(
-                        { source: 'states', id: region.id },
-                        { highlighted: false, dimmed: false, choropleth: false }
-                    );
-                });
-                
-                // Reset fill color to default
-                map.setPaintProperty('states-fill', 'fill-color', ['case',
-                    ['boolean', ['feature-state', 'highlighted'], false],
-                    colorSettings.selected,
-                    colorSettings.dimmed
-                ]);
-                
-                // Reset opacity
-                map.setPaintProperty('states-fill', 'fill-opacity', ['case',
-                    ['boolean', ['feature-state', 'highlighted'], false],
-                    colorSettings.selectedNoShade ? 0 : 0.6,
-                    ['boolean', ['feature-state', 'dimmed'], false],
-                    colorSettings.dimmedNoShade ? 0 : 0.15,
-                    0
-                ]);
-                
+                const layerFill = `${currentLevel}-fill`;
+                if (map.getLayer(layerFill)) {
+                    map.setPaintProperty(layerFill, 'fill-color', ['case', ['boolean', ['feature-state', 'highlighted'], false], colorSettings.selected, colorSettings.dimmed]);
+                    map.setPaintProperty(layerFill, 'fill-opacity', ['case', ['boolean', ['feature-state', 'highlighted'], false], colorSettings.selectedNoShade ? 0 : 0.6, ['boolean', ['feature-state', 'dimmed'], false], colorSettings.dimmedNoShade ? 0 : 0.15, 0]);
+                }
                 highlightedRegions.clear();
-                document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(cb => {
-                    cb.checked = false;
-                });
+                document.querySelectorAll('.checkbox-item input').forEach(cb => cb.checked = false);
                 return;
             }
 
-            // Determine which dataset and layer to use
-            let dataset, layerId, idField;
-            
-            if (currentLevel === 'states') {
-                dataset = economicData.states;
-                layerId = 'states-fill';
-                idField = 'id'; // Numeric state FIPS
-            } else if (currentLevel === 'counties') {
-                dataset = economicData.counties;
-                layerId = 'counties-fill';
-                idField = 'id'; // Numeric 5-digit county FIPS
-            } else if (currentLevel === 'cbsas') {
-                dataset = economicData.cbsas;
-                layerId = 'cbsas-fill';
-                idField = 'properties.GEOID'; // String CBSA code
-            }
+            let dataset, layerId;
+            if (currentLevel === 'states') { dataset = economicData.states; layerId = 'states-fill'; }
+            else if (currentLevel === 'counties') { dataset = economicData.counties; layerId = 'counties-fill'; }
+            else if (currentLevel === 'cbsas') { dataset = economicData.cbsas; layerId = 'cbsas-fill'; }
             
             // Clear manual selections
             highlightedRegions.clear();
-            document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(cb => {
-                cb.checked = false;
-            });
+            document.querySelectorAll('.checkbox-item input').forEach(cb => cb.checked = false);
             
-            // Build color expression based on FIPS codes
-            let colorExpression;
-            if (currentLevel === 'cbsas') {
-                colorExpression = ['match', ['get', 'GEOID']]; // CBSAs use GEOID property
-            } else {
-                colorExpression = ['match', ['id']]; // States/counties use numeric ID
-            }
+            // Build color expression
+            let colorExpression = (currentLevel === 'cbsas') ? ['match', ['get', 'GEOID']] : ['match', ['id']];
+            
             const allValues = Object.values(dataset)
                 .map(d => d[currentMetric])
                 .filter(v => v !== null && v !== undefined);
-            // const colorExpression = ['match', ['id']]; // Use numeric ID, not string
-            // const allValues = Object.values(economicData)
-            //     .map(d => d[currentMetric])
-            //     .filter(v => v !== null && v !== undefined);
 
-            console.log('All values for', currentMetric, ':', allValues); // DEBUG
-            // Add each state's color based on its data
-            // Object.keys(economicData).forEach(fips => {
-            //     const stateData = economicData[fips];
-            //     const value = stateData ? stateData[currentMetric] : null;
-            //     const color = getColorForValue(value, currentMetric);
+            // Check if data is missing for this metric at this level
+            if (allValues.length === 0 && currentMetric !== 'none') {
+                // Get readable name of the metric
+                const selector = document.getElementById('metric-selector');
+                const metricName = selector.options[selector.selectedIndex].text;
                 
-            //     // Convert FIPS to number for matching (removes leading zeros)
-            //     const numericFips = parseInt(fips, 10);
-            //     colorExpression.push(numericFips, color);
-            // });
+                // Trigger the popup
+                showNotification(`<b>${metricName}</b> data is not available for <b>${currentLevel}</b>.`);
+            } else {
+                // Hide notification if data exists
+                closeNotification();
+            }
+            // ----------------------    
 
             Object.keys(dataset).forEach(key => {
                 const data = dataset[key];
                 const value = data ? data[currentMetric] : null;
                 const color = getColorForValue(value, currentMetric, allValues);
-                
-                // For counties/states: convert to number, for CBSAs: keep as string
                 const matchKey = (currentLevel === 'cbsas') ? key : parseInt(key, 10);
                 colorExpression.push(matchKey, color);
             });
 
-            // Default color for any unmatched states
             colorExpression.push(colorSettings.dimmed);
-            console.log('Color expression:', colorExpression); // DEBUG
-
-            // Apply the color expression to the map
             map.setPaintProperty(layerId, 'fill-color', colorExpression);
             map.setPaintProperty(layerId, 'fill-opacity', colorSettings.choroOpacity);
-
             updateLegend(); 
         }
 
@@ -1183,120 +1277,69 @@
             const legend = document.getElementById('map-legend');
             const legendTitle = document.getElementById('legend-title');
             const legendGradient = document.getElementById('legend-gradient');
-            
             if (!legend || !legendTitle || !legendGradient) return;
             
             if (currentMetric !== 'none') {
-                // Show legend
                 legend.style.display = 'block';
-                
-                // Update title based on metric
-                const metricTitles = {
-                    'medianIncome': 'Median Household Income',
-                    'employmentRate': 'Employment Rate (%)',
-                    'gdpTotal': 'GDP Total (Millions)',
-                    'medianHomeValue': 'Median Home Value',
-                    'medianRent': 'Median Gross Rent',
-                    'homeownershipRate': 'Homeownership Rate (%)',
-                    'vacancyRate': 'Vacancy Rate (%)'
-                };
-                
-                legendTitle.textContent = metricTitles[currentMetric] || currentMetric;
-                
-                // Update gradient colors
+                const selector = document.getElementById('metric-selector');
+                const selectedOption = selector.options[selector.selectedIndex];
+                legendTitle.textContent = selectedOption ? selectedOption.text : currentMetric;
                 legendGradient.style.background = `linear-gradient(to right, ${colorSettings.choroLow}, ${colorSettings.choroHigh})`;
             } else {
-                // Hide legend
                 legend.style.display = 'none';
             }
         }
 
         // Search functionality
         const searchInput = document.getElementById('search-input');
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            document.querySelectorAll('.checkbox-item').forEach(item => {
-                const regionName = item.dataset.regionName;
-                if (query === '' || regionName.includes(query)) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                document.querySelectorAll('.checkbox-item').forEach(item => {
+                    if (query === '' || item.dataset.regionName.includes(query)) item.classList.remove('hidden');
+                    else item.classList.add('hidden');
+                });
             });
-        });
+        }
 
         // Geography level selector
-        document.getElementById('geo-level').addEventListener('change', (e) => {
-            currentLevel = e.target.value;
-            highlightedRegions.clear();
-            
-            map.setPaintProperty('states-layer', 'line-opacity', 0);
-            map.setPaintProperty('states-fill', 'fill-opacity', 0);
-            map.setPaintProperty('counties-layer', 'line-opacity', 0);
-            map.setPaintProperty('counties-fill', 'fill-opacity', 0);
-            if (map.getLayer('cbsas-layer')) {
-                map.setPaintProperty('cbsas-layer', 'line-opacity', 0);
-                map.setPaintProperty('cbsas-fill', 'fill-opacity', 0);
-            }
-            
-            if (currentLevel === 'states') {
-                map.setPaintProperty('states-layer', 'line-opacity', 1);
-                map.setPaintProperty('states-fill', 'fill-opacity', ['case',
-                    ['boolean', ['feature-state', 'highlighted'], false], 
-                    colorSettings.selectedNoShade ? 0 : 0.6,
-                    ['boolean', ['feature-state', 'dimmed'], false], 
-                    colorSettings.dimmedNoShade ? 0 : 0.15, 0]);
-            } else if (currentLevel === 'counties') {
-                map.setPaintProperty('counties-layer', 'line-opacity', 1);
-                map.setPaintProperty('counties-fill', 'fill-opacity', ['case',
-                    ['boolean', ['feature-state', 'highlighted'], false], 
-                    colorSettings.selectedNoShade ? 0 : 0.6,
-                    ['boolean', ['feature-state', 'dimmed'], false], 
-                    colorSettings.dimmedNoShade ? 0 : 0.15, 0]);
-            } else if (currentLevel === 'cbsas' && map.getLayer('cbsas-layer')) {
-                map.setPaintProperty('cbsas-layer', 'line-opacity', 1);
-                map.setPaintProperty('cbsas-fill', 'fill-opacity', ['case',
-                    ['boolean', ['feature-state', 'highlighted'], false], 
-                    colorSettings.selectedNoShade ? 0 : 0.6,
-                    ['boolean', ['feature-state', 'dimmed'], false], 
-                    colorSettings.dimmedNoShade ? 0 : 0.15, 0]);
-            }
-            
-            populateRegionList();
-            setupHoverTooltip(); // Re-setup tooltip for new geography level
-            if (currentMetric !== 'none') {
-                applyChoropleth();
-            }
-        });
+        const geoLevelSelect = document.getElementById('geo-level');
+        if (geoLevelSelect) {
+            geoLevelSelect.addEventListener('change', (e) => {
+                currentLevel = e.target.value;
+                highlightedRegions.clear();
+                
+                ['states', 'counties', 'cbsas'].forEach(lvl => {
+                    if (map.getLayer(`${lvl}-layer`)) map.setPaintProperty(`${lvl}-layer`, 'line-opacity', 0);
+                    if (map.getLayer(`${lvl}-fill`)) map.setPaintProperty(`${lvl}-fill`, 'fill-opacity', 0);
+                });
+                
+                if (map.getLayer(`${currentLevel}-layer`)) map.setPaintProperty(`${currentLevel}-layer`, 'line-opacity', 1);
+                if (map.getLayer(`${currentLevel}-fill`)) map.setPaintProperty(`${currentLevel}-fill`, 'fill-opacity', ['case', ['boolean', ['feature-state', 'highlighted'], false], colorSettings.selectedNoShade ? 0 : 0.6, ['boolean', ['feature-state', 'dimmed'], false], colorSettings.dimmedNoShade ? 0 : 0.15, 0]);
+                
+                populateRegionList();
+                setupHoverTooltip();
+                if (currentMetric !== 'none') applyChoropleth();
+            });
+        }
 
         // Metric selector
-        document.getElementById('metric-selector').addEventListener('change', (e) => {
-            currentMetric = e.target.value;
-            
-            // Toggle choropleth settings visibility
-            const choroplethSettings = document.getElementById('choropleth-settings');
-            if (choroplethSettings) {
-                choroplethSettings.style.display = currentMetric !== 'none' ? 'block' : 'none';
-            }
-            
-            // Update metric help text (use globally stored descriptions)
-            const helpEl = document.getElementById('metric-help');
-            if (helpEl) {
-                helpEl.textContent = (window.metricDescriptions && window.metricDescriptions[currentMetric]) || '';
-            }
-            
-            applyChoropleth();
-            updateLegend();
-        });
+        const metricSelector = document.getElementById('metric-selector');
+        if (metricSelector) {
+            metricSelector.addEventListener('change', (e) => {
+                currentMetric = e.target.value;
+                updateMetricDescriptions();
+                applyChoropleth();
+                updateLegend();
+            });
+        }
 
         // Map load event
         map.on('load', async () => {
             map.fitBounds(usBounds, { padding: 20 });
             await loadGeoData();
             await loadEconomicData();
-            // Apply initial label enhancement
             enhanceLabels();
-            // Setup hover tooltip AFTER everything is loaded
             setTimeout(() => {
                 setupHoverTooltip();
                 console.log('Tooltip setup complete');
@@ -1304,315 +1347,281 @@
         });
 
         // Zoom controls
-        document.getElementById('zoom-in').addEventListener('click', () => map.zoomIn());
-        document.getElementById('zoom-out').addEventListener('click', () => map.zoomOut());
-        document.getElementById('zoom-reset').addEventListener('click', () => {
-            map.fitBounds(usBounds, { padding: 20, duration: 1000 });
-        });
+        const btnZoomIn = document.getElementById('zoom-in');
+        const btnZoomOut = document.getElementById('zoom-out');
+        const btnZoomReset = document.getElementById('zoom-reset');
+        
+        if (btnZoomIn) btnZoomIn.addEventListener('click', () => map.zoomIn());
+        if (btnZoomOut) btnZoomOut.addEventListener('click', () => map.zoomOut());
+        if (btnZoomReset) btnZoomReset.addEventListener('click', () => map.fitBounds(usBounds, { padding: 20, duration: 1000 }));
 
         // Setup color controls
         function setupColorControls() {
-            const borderColor = document.getElementById('border-color');
-            const borderColorHex = document.getElementById('border-color-hex');
-            
-            if (borderColor && borderColorHex) {
-                borderColor.addEventListener('input', (e) => {
-                    colorSettings.border = e.target.value;
-                    borderColorHex.value = e.target.value.toUpperCase();
-                    updateMapColors();
-                });
-                
-                borderColorHex.addEventListener('input', (e) => {
-                    const hex = e.target.value;
-                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
-                        colorSettings.border = hex;
-                        borderColor.value = hex;
-                        updateMapColors();
-                    }
-                });
-            }
-            
-            const selectedColor = document.getElementById('selected-color');
-            const selectedColorHex = document.getElementById('selected-color-hex');
-            const selectedNoShade = document.getElementById('selected-no-shade');
-            
-            if (selectedColor && selectedColorHex && selectedNoShade) {
-                selectedColor.addEventListener('input', (e) => {
-                    colorSettings.selected = e.target.value;
-                    selectedColorHex.value = e.target.value.toUpperCase();
-                    updateMapColors();
-                });
-                
-                selectedColorHex.addEventListener('input', (e) => {
-                    const hex = e.target.value;
-                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
-                        colorSettings.selected = hex;
-                        selectedColor.value = hex;
-                        updateMapColors();
-                    }
-                });
-                
-                selectedNoShade.addEventListener('change', (e) => {
-                    colorSettings.selectedNoShade = e.target.checked;
-                    updateMapColors();
-                });
-            }
-            
-            const dimmedColor = document.getElementById('dimmed-color');
-            const dimmedColorHex = document.getElementById('dimmed-color-hex');
-            const dimmedNoShade = document.getElementById('dimmed-no-shade');
-            
-            if (dimmedColor && dimmedColorHex && dimmedNoShade) {
-                dimmedColor.addEventListener('input', (e) => {
-                    colorSettings.dimmed = e.target.value;
-                    dimmedColorHex.value = e.target.value.toUpperCase();
-                    updateMapColors();
-                });
-                
-                dimmedColorHex.addEventListener('input', (e) => {
-                    const hex = e.target.value;
-                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
-                        colorSettings.dimmed = hex;
-                        dimmedColor.value = hex;
-                        updateMapColors();
-                    }
-                });
-                
-                dimmedNoShade.addEventListener('change', (e) => {
-                    colorSettings.dimmedNoShade = e.target.checked;
-                    updateMapColors();
-                });
-            }
-            
-            // Choropleth color controls
-            const choroLowColor = document.getElementById('choro-low-color');
-            const choroLowHex = document.getElementById('choro-low-hex');
-            
-            if (choroLowColor && choroLowHex) {
-                choroLowColor.addEventListener('input', (e) => {
-                    colorSettings.choroLow = e.target.value;
-                    choroLowHex.value = e.target.value.toUpperCase();
-                    if (currentMetric !== 'none') {
-                        applyChoropleth();
-                    }
-                });
-                
-                choroLowHex.addEventListener('input', (e) => {
-                    const hex = e.target.value;
-                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
-                        colorSettings.choroLow = hex;
-                        choroLowColor.value = hex;
-                        if (currentMetric !== 'none') {
-                            applyChoropleth();
-                        }
-                    }
-                });
-            }
-            
-            const choroHighColor = document.getElementById('choro-high-color');
-            const choroHighHex = document.getElementById('choro-high-hex');
-            
-            if (choroHighColor && choroHighHex) {
-                choroHighColor.addEventListener('input', (e) => {
-                    colorSettings.choroHigh = e.target.value;
-                    choroHighHex.value = e.target.value.toUpperCase();
-                    if (currentMetric !== 'none') {
-                        applyChoropleth();
-                    }
-                });
-                
-                choroHighHex.addEventListener('input', (e) => {
-                    const hex = e.target.value;
-                    if (/^#[0-9A-F]{6}$/i.test(hex)) {
-                        colorSettings.choroHigh = hex;
-                        choroHighColor.value = hex;
-                        if (currentMetric !== 'none') {
-                            applyChoropleth();
-                        }
-                    }
-                });
-            }
+            const updateColor = (key, hex) => {
+                colorSettings[key] = hex;
+                updateMapColors();
+                if (currentMetric !== 'none' && (key === 'choroLow' || key === 'choroHigh')) applyChoropleth();
+            };
 
-            // Opacity slider
+            ['border', 'selected', 'dimmed', 'choro-low', 'choro-high'].forEach(type => {
+                const input = document.getElementById(`${type}-color`);
+                const hex = document.getElementById(`${type}${type.includes('color')?'':'-color'}-hex`) || document.getElementById(`${type}-hex`);
+                
+                if (input && hex) {
+                    input.addEventListener('input', e => {
+                        const key = type.replace(/-([a-z])/g, g => g[1].toUpperCase()).replace('Color', '');
+                        hex.value = e.target.value.toUpperCase();
+                        updateColor(key, e.target.value);
+                    });
+                    hex.addEventListener('input', e => {
+                        if (/^#[0-9A-F]{6}$/i.test(e.target.value)) {
+                            const key = type.replace(/-([a-z])/g, g => g[1].toUpperCase()).replace('Color', '');
+                            input.value = e.target.value;
+                            updateColor(key, e.target.value);
+                        }
+                    });
+                }
+            });
+
             const opacitySlider = document.getElementById('choro-opacity');
-            const opacityValue = document.getElementById('opacity-value');
-            
-            if (opacitySlider && opacityValue) {
-                opacitySlider.addEventListener('input', (e) => {
-                    const value = parseInt(e.target.value);
-                    opacityValue.textContent = value;
-                    colorSettings.choroOpacity = value / 100;
-                    if (currentMetric !== 'none') {
-                        applyChoropleth();
-                    }
-                });
-            }
-            
-            // Label enhancement toggle
-            const enhanceLabelsCheckbox = document.getElementById('enhance-labels');
-            
-            if (enhanceLabelsCheckbox) {
-                enhanceLabelsCheckbox.addEventListener('change', (e) => {
-                    colorSettings.enhanceLabels = e.target.checked;
-                    enhanceLabels();
-                });
-            }
+            if (opacitySlider) opacitySlider.addEventListener('input', e => {
+                const valSpan = document.getElementById('opacity-value');
+                if (valSpan) valSpan.textContent = e.target.value;
+                colorSettings.choroOpacity = e.target.value / 100;
+                if (currentMetric !== 'none') applyChoropleth();
+            });
+
+            const enhanceCheck = document.getElementById('enhance-labels');
+            if (enhanceCheck) enhanceCheck.addEventListener('change', e => {
+                colorSettings.enhanceLabels = e.target.checked;
+                enhanceLabels();
+            });
         }
 
         // Update map colors
         function updateMapColors() {
             if (!map || !map.getLayer('states-layer')) return;
-            
-            const layers = ['states', 'counties', 'cbsas'];
-            
-            layers.forEach(layer => {
+            ['states', 'counties', 'cbsas'].forEach(layer => {
                 try {
-                    if (map.getLayer(`${layer}-layer`)) {
-                        map.setPaintProperty(`${layer}-layer`, 'line-color', colorSettings.border);
+                    if (map.getLayer(`${layer}-layer`)) map.setPaintProperty(`${layer}-layer`, 'line-color', colorSettings.border);
+                    if (map.getLayer(`${layer}-fill`) && currentMetric === 'none') {
+                        map.setPaintProperty(`${layer}-fill`, 'fill-color', ['case', ['boolean', ['feature-state', 'highlighted'], false], colorSettings.selected, colorSettings.dimmed]);
                     }
-                    
-                    if (map.getLayer(`${layer}-fill`)) {
-                        map.setPaintProperty(`${layer}-fill`, 'fill-color', ['case',
-                            ['boolean', ['feature-state', 'highlighted'], false],
-                            colorSettings.selected,
-                            colorSettings.dimmed
-                        ]);
-                        
-                        map.setPaintProperty(`${layer}-fill`, 'fill-opacity', ['case',
-                            ['boolean', ['feature-state', 'highlighted'], false],
-                            colorSettings.selectedNoShade ? 0 : 0.6,
-                            ['boolean', ['feature-state', 'dimmed'], false],
-                            colorSettings.dimmedNoShade ? 0 : 0.15,
-                            0
-                        ]);
-                    }
-                } catch (e) {
-                    console.warn(`Could not update ${layer} colors`);
-                }
+                } catch(e) {}
             });
         }
 
         // Get feature name based on geography level
         function getFeatureName(feature, geoLevel) {
-            if (geoLevel === 'states') {
-                return feature.properties.name || 'Unknown State';
-            } else if (geoLevel === 'counties') {
-                const countyName = feature.properties.name || 'Unknown County';
-                const countyFipsStr = String(feature.id).padStart(5, '0');
-                const stateFips = parseInt(countyFipsStr.substring(0, 2));
-                const stateAbbr = stateFipsToAbbr[stateFips];
-                
-                if (stateAbbr) {
-                    return `${countyName}, ${stateAbbr}`;
-                }
-                return countyName;
-            } else if (geoLevel === 'cbsas') {
-                return feature.properties.NAME || feature.properties.name || 'Unknown CBSA';
-            }
-            return 'Unknown';
+            if (geoLevel === 'states') return feature.properties.name || 'Unknown State';
+            if (geoLevel === 'cbsas') return feature.properties.NAME || feature.properties.name || 'Unknown CBSA';
+            
+            const countyName = feature.properties.name || 'Unknown County';
+            const countyFipsStr = String(feature.id).padStart(5, '0');
+            const stateFips = parseInt(countyFipsStr.substring(0, 2));
+            const stateAbbr = stateFipsToAbbr[stateFips];
+            return stateAbbr ? `${countyName}, ${stateAbbr}` : countyName;
         }
+
+
+
+        // Global lock state
+        let isTooltipLocked = false;
+
+        // Global helper to close tooltip (MUST be global for onclick="...")
+        window.closeTooltip = function(event) {
+            if (event) event.stopPropagation(); // Stop click from passing to map
+            isTooltipLocked = false;
+            
+            const tooltip = document.getElementById('mapTooltip');
+            if (tooltip) {
+                tooltip.classList.remove('locked');
+                tooltip.classList.remove('show');
+            }
+            
+            if (typeof map !== 'undefined') map.getCanvas().style.cursor = '';
+        };
+
+        // ... (Keep existing global variables and helpers) ...
 
         function setupHoverTooltip() {
             const tooltip = document.getElementById('mapTooltip');
             if (!tooltip) return;
 
-            // Remove any existing listeners to avoid duplicates
-            map.off('mousemove');
-            map.off('mouseleave');
+            // Clean up listeners
+            map.off('mousemove', onMouseMove);
+            map.off('mouseleave', onMouseLeave);
+            map.off('click', onMapClick);
 
-            const handleMouseMove = (e) => {
-                // Query only the CURRENT geography level's fill layer
-                const fillLayerId = `${currentLevel}-fill`;
+            // --- 1. Helper to render content (Metabase Style) ---
+            // --- Helper to render content (Metabase Style) ---
+            function updateTooltipContent(feature) {
+                const name = getFeatureName(feature, currentLevel);
                 
+                // Header
+                let tooltipHtml = `
+                    <div class="tooltip-header">
+                        ${name}
+                        <button class="tooltip-close-btn" onclick="window.closeTooltip(event)">×</button>
+                    </div>`;
+                
+                let regionData;
+                if (currentLevel === 'states') regionData = economicData.states[String(feature.id).padStart(2, '0')];
+                else if (currentLevel === 'counties') regionData = economicData.counties[String(feature.id).padStart(5, '0')];
+                else if (currentLevel === 'cbsas') regionData = economicData.cbsas[feature.properties.GEOID];
+
+                if (regionData) {
+                    const years = regionData.years || {};
+                    const y = (key) => years[metricYearMap[key]] || '';
+
+                    // Start Grid
+                    tooltipHtml += '<div class="tooltip-grid">';
+
+                    Object.entries(metricLabels).forEach(([key, label]) => {
+                        const value = regionData[key];
+                        
+                        if (value !== undefined && value !== null) {
+                            const formattedValue = formatMetricValue(key, value);
+                            const yearStr = y(key);
+                            
+                            // Highlight Logic
+                            const isSelected = key === currentMetric;
+                            // For the selected metric, we make the label Blue (#509ee3) and value brighter
+                            const labelStyle = isSelected ? 'color: #509ee3; font-weight:700;' : ''; 
+                            const valueStyle = isSelected ? 'color: #ffffff; font-weight:700;' : '';
+
+                            tooltipHtml += `
+                                <div class="tooltip-label" style="${labelStyle}">${label}</div>
+                                <div class="tooltip-value" style="${valueStyle}">
+                                    ${formattedValue} 
+                                    <span style="opacity:0.5; font-size:10px; margin-left:6px; color:#ffffff; font-weight:400;">${yearStr}</span>
+                                </div>
+                            `;
+                        }
+                    });
+                    
+                    tooltipHtml += '</div>'; // End Grid
+                } else {
+                    tooltipHtml += '<div style="color:#949a9e; font-style:italic; padding:10px;">No data available</div>';
+                }
+                
+                tooltip.innerHTML = tooltipHtml;
+            }
+
+            // --- 2. Positioning Helper (Smart Clamping) ---
+            function positionTooltip(x, y) {
+                const tooltipEl = document.getElementById('mapTooltip');
+                if (!tooltipEl) return;
+
+                // Dimensions
+                const tooltipWidth = tooltipEl.offsetWidth; 
+                const tooltipHeight = tooltipEl.offsetHeight; 
+                const mapWidth = map.getCanvas().width;
+                const mapHeight = map.getCanvas().height;
+                
+                // Standard offset from mouse
+                const offset = 20;
+
+                // 1. Calculate Horizontal Position (Left/Right)
+                let left = x + offset;
+                // If it goes off the right edge, flip to left of cursor
+                if (left + tooltipWidth > mapWidth) {
+                    left = x - tooltipWidth - offset;
+                }
+                // If flipping left makes it go off left edge, just pin to left edge
+                if (left < 0) {
+                    left = 10; // Padding from edge
+                }
+
+                // 2. Calculate Vertical Position (Top/Bottom)
+                let top = y + offset;
+                
+                // Logic: Try to place it below cursor. 
+                // If it hits bottom, push it UP until it fits.
+                if (top + tooltipHeight > mapHeight) {
+                    top = mapHeight - tooltipHeight - 10; // Pin to bottom edge with padding
+                }
+                
+                // If pushing it up makes it go off the top, pin it to the top
+                if (top < 10) {
+                    top = 10;
+                }
+
+                // Apply calculated positions
+                tooltipEl.style.left = left + 'px';
+                tooltipEl.style.top = top + 'px';
+                tooltipEl.classList.add('show');
+            }
+
+            // --- 3. Event Handlers ---
+            function onMouseMove(e) {
+                if (isTooltipLocked) return; 
+
+                const fillLayerId = `${currentLevel}-fill`;
                 if (!map.getLayer(fillLayerId)) return;
 
-                const features = map.queryRenderedFeatures(e.point, { 
-                    layers: [fillLayerId] 
-                });
+                const features = map.queryRenderedFeatures(e.point, { layers: [fillLayerId] });
 
                 if (features.length > 0) {
-                    const feature = features[0];
-                    
-                    // Get the correct name based on current geography level
-                    const name = getFeatureName(feature, currentLevel);
-                    
-                    let tooltipText = name;
-                    
-                    // Get data based on current level
-                    let regionData;
-                    if (currentLevel === 'states') {
-                        const featureId = String(feature.id).padStart(2, '0');
-                        regionData = economicData.states[featureId];
-                    } else if (currentLevel === 'counties') {
-                        const featureId = String(feature.id).padStart(5, '0');
-                        regionData = economicData.counties[featureId];
-                    } else if (currentLevel === 'cbsas') {
-                        const featureId = feature.properties.GEOID;
-                        regionData = economicData.cbsas[featureId];
-                    }
-
-                    if (regionData) {
-                        const years = regionData.years || {};
-                        
-                        // Economic Indicators
-                        if (regionData.medianIncome) {
-                            tooltipText += `<br>Median Income: $${regionData.medianIncome.toLocaleString()} (${years.incomeYear || 'N/A'})`;
-                        }
-                        if (regionData.employmentRate) {
-                            tooltipText += `<br>Employment Rate: ${regionData.employmentRate}% (${years.employmentYear || 'N/A'})`;
-                        }
-                        if (regionData.gdpTotal) {
-                            tooltipText += `<br>GDP: $${regionData.gdpTotal.toLocaleString()}M (${years.gdpYear || 'N/A'})`;
-                        }
-                        
-                        // Housing Metrics
-                        if (regionData.medianHomeValue) {
-                            tooltipText += `<br>Median Home Value: $${regionData.medianHomeValue.toLocaleString()} (${years.housingYear || 'N/A'})`;
-                        }
-                        if (regionData.medianRent) {
-                            tooltipText += `<br>Median Rent: $${regionData.medianRent.toLocaleString()} (${years.housingYear || 'N/A'})`;
-                        }
-                        if (regionData.homeownershipRate) {
-                            tooltipText += `<br>Homeownership: ${regionData.homeownershipRate}% (${years.housingYear || 'N/A'})`;
-                        }
-                        if (regionData.vacancyRate) {
-                            tooltipText += `<br>Vacancy: ${regionData.vacancyRate}% (${years.housingYear || 'N/A'})`;
-                        }
-                    }
-                    
-                    tooltip.innerHTML = tooltipText;
-                    tooltip.style.left = e.point.x + 10 + 'px';
-                    tooltip.style.top = e.point.y + 10 + 'px';
-                    tooltip.classList.add('show');
                     map.getCanvas().style.cursor = 'pointer';
+                    updateTooltipContent(features[0]);
+                    positionTooltip(e.point.x, e.point.y);
                 } else {
-                    tooltip.classList.remove('show');
                     map.getCanvas().style.cursor = '';
+                    tooltip.classList.remove('show');
                 }
-            };
+            }
 
-            const handleMouseLeave = () => {
+            function onMouseLeave() {
+                if (isTooltipLocked) return;
                 tooltip.classList.remove('show');
                 map.getCanvas().style.cursor = '';
-            };
+            }
 
-            map.on('mousemove', handleMouseMove);
-            map.on('mouseleave', handleMouseLeave);
+            function onMapClick(e) {
+                const fillLayerId = `${currentLevel}-fill`;
+                let features = [];
+                if (map.getLayer(fillLayerId)) {
+                    features = map.queryRenderedFeatures(e.point, { layers: [fillLayerId] });
+                }
+
+                if (features.length > 0) {
+                    isTooltipLocked = true;
+                    tooltip.classList.add('locked');
+                    updateTooltipContent(features[0]);
+                    positionTooltip(e.point.x, e.point.y);
+                } else {
+                    window.closeTooltip();
+                }
+            }
+
+            map.on('mousemove', onMouseMove);
+            map.on('mouseleave', onMouseLeave);
+            map.on('click', onMapClick);
         }
+
+        // Global helper to close tooltip (called by the 'x' button or map click)
+        window.closeTooltip = function(event) {
+            if (event) event.stopPropagation(); // Stop click from propagating to map
+            isTooltipLocked = false;
+            const tooltip = document.getElementById('mapTooltip');
+            if (tooltip) {
+                tooltip.classList.remove('locked');
+                tooltip.classList.remove('show');
+            }
+        };
+
 
         // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
+        const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
 
         function setTheme(mode) {
             document.body.classList.toggle('dark-mode', mode === 'dark');
-            themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            if (themeIcon) themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             localStorage.setItem('theme', mode);
             
-            map.setStyle(mode === 'dark' 
-                ? 'mapbox://styles/mapbox/dark-v11' 
-                : 'mapbox://styles/mapbox/light-v11'
-            );
+            map.setStyle(mode === 'dark' ? 'mapbox://styles/mapbox/dark-v11' : 'mapbox://styles/mapbox/light-v11');
             
             map.once('style.load', () => {
                 map.setProjection('mercator');
@@ -1620,7 +1629,8 @@
                     addBoundariesToMap();
                     enhanceLabels();
                     setTimeout(() => {
-                        document.getElementById('geo-level').dispatchEvent(new Event('change'));
+                        const geoSelect = document.getElementById('geo-level');
+                        if (geoSelect) geoSelect.dispatchEvent(new Event('change'));
                     }, 100);
                 }
             });
@@ -1629,10 +1639,12 @@
         const savedTheme = localStorage.getItem('theme') || 'light';
         setTheme(savedTheme);
 
-        themeToggle.addEventListener('click', () => {
-            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+                setTheme(newTheme);
+            });
+        }
     </script>
 </body>
 </html>
