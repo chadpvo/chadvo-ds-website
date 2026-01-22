@@ -12,8 +12,8 @@
     --color-text-muted: #6c757d;
     --color-text-strong: #222;
     --color-accent: #0077b5;
-    --color-bg-white: #ffffff;
-    --color-bg-light-grey: #f8f9fa;
+    --color-bg-white: #FAFAFA;    
+    --color-bg-light-grey: #e9ecef;
     --color-bg-light-blue: #dbeafe;
     --color-border-muted: #ccc;
 
@@ -149,7 +149,7 @@ body.dark-mode td {
 }
 
 .sticky-header.floating {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(252, 251, 251, 0.912);
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     animation: slideDown 0.4s ease-out;
@@ -753,12 +753,12 @@ body.dark-mode .filter-bar {
 
 .tech-stack-section::before {
     left: 0;
-    background: linear-gradient(to right, #f8f9fa, transparent);
+    background: linear-gradient(to right, #e9ecef, transparent);
 }
 
 .tech-stack-section::after {
     right: 0;
-    background: linear-gradient(to left, #f8f9fa, transparent);
+    background: linear-gradient(to left, #e9ecef, transparent);
 }
 
 /* Dark mode gradients */
