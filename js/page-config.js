@@ -1,100 +1,83 @@
-// ============================================
-// Central Configuration for All Pages
-// ============================================
+// Automatically detects if we are on GitHub Pages or Localhost
+const isGitHubPages = window.location.hostname.includes('github.io');
+const repoName = '/chadvo-ds-website'; // Your repository name
+
+// If on GitHub, use repo name. If local, use root (empty string)
+const pathPrefix = isGitHubPages ? repoName : ''; 
 
 const SITE_CONFIG = {
-  domain: 'https://chadpvo.github.io/chadvo-ds-website/index.html#', // UPDATE THIS WITH YOUR ACTUAL DOMAIN
+  domain: 'https://chadpvo.github.io/chadvo-ds-website/',
+  
+  // DYNAMIC LOGO PATH (Fixes the broken image!)
+  logoPath: `${pathPrefix}/assets/img/logo.png`, 
+  
   author: {
     name: 'Chad Vo',
     jobTitle: 'Data Scientist',
     linkedin: 'https://linkedin.com/in/chadvo',
     github: 'https://github.com/chadpvo',
     email: 'chadpvo@gmail.com'
-  }
+  },
+
+  // Dynamic Navigation Links (Fixes broken menu links locally)
+  navLinks: [
+    { name: "About", url: `${pathPrefix}/index.html#about` },
+    { name: "Contact", url: `${pathPrefix}/index.html#contact` }
+  ],
+
+  // Footer Social Links
+  socialLinks: [
+    { icon: "fab fa-linkedin", url: "https://linkedin.com/in/chadvo" },
+    { icon: "fab fa-github", url: "https://github.com/chadpvo" },
+    { icon: "fas fa-envelope", url: "mailto:chadpvo@gmail.com" }
+  ],
+
+  copyrightYear: new Date().getFullYear()
 };
 
 // ============================================
-// Page-Specific Metadata
+// 3. PAGE METADATA
 // ============================================
 
 const PAGE_METADATA = {
-  // Homepage
   'home': {
     title: 'Chad Vo - Data Scientist',
-    description: 'Data Scientist specializing in real estate analytics, machine learning, and data platforms.',
-    keywords: 'data science, machine learning, real estate analytics, python, data engineering',
-    image: '/assets/img/og-home.jpg',
+    description: 'Data Scientist specializing in real estate analytics.',
+    keywords: 'data science, machine learning, python',
+    image: `${pathPrefix}/assets/img/og-home.jpg`,
     type: 'website',
     path: '/'
   },
-
-  // Flight Delay Project
+  
   'flight_delay': {
-    title: 'Flight Delay Predictions | Chad Vo - Data Scientist',
-    description: 'Machine learning pipeline predicting airline delays at scale using Apache Spark, XGBoost, and FT-Transformer on 30M flight records and weather data.',
-    keywords: 'machine learning, Apache Spark, flight delay prediction, data engineering, XGBoost, PyTorch, distributed computing, time-series analysis',
-    image: '/projects/flight_delay/assets/flight_delay_cover.jpg',
+    title: 'Flight Delay Predictions',
+    description: 'Machine learning pipeline predicting airline delays.',
+    image: `${pathPrefix}/projects/flight_delay/assets/flight_delay_cover.jpg`,
     type: 'article',
-    path: '/projects/flight_delay/index.html',
-    datePublished: '2026-1-12',
-    articleSection: 'Data Science Projects',
-    about: [
-      'Machine Learning',
-      'Data Engineering',
-      'Apache Spark',
-      'Distributed Computing',
-      'Time Series Analysis'
-    ]
+    path: '/projects/flight_delay/index.html'
   },
 
-  // Drone Flight Route Visualizer Project
+  'map_building_tool': {
+    title: 'Economic Map Tool',
+    description: 'Interactive map visualizing US Economic data.',
+    image: `${pathPrefix}/projects/map_viz/assets/map_cover.jpg`,
+    type: 'application',
+    path: '/projects/map_viz/index.html'
+  },
+  
   'drone_flight_route_visualizer': {
-    title: 'Drone Flight Route Visualizer | Chad Vo - Data Scientist',
-    description: 'Drone Flight Route Visualizer: An interactive web app using D3.js to map and analyze drone flight paths with elevation profiles and geospatial data overlays.',
-    keywords: 'visualization, D3.js, drone flight paths, geospatial data, elevation profiles, interactive web app',
-    image: '/projects/drone_flight_route_visualizer/assets/drone_flight_route_visualizer_cover.jpg',
+    title: 'Drone Flight Route Visualizer',
+    description: 'Interactive web app using D3.js to map drone paths.',
+    image: `${pathPrefix}/projects/drone_flight_route_visualizer/assets/drone_flight_route_visualizer_cover.jpg`,
     type: 'article',
-    path: 'projects/drone_flight_route_visualization/index.html',
-    datePublished: '2026-1-17',
-    articleSection: 'Data Visualization Projects',
-    about: [
-      'Data Visualization',
-      'D3.js',
-      'Geospatial Analysis',
-      'Web Development',
-      'Interactive Applications',
-      'Data Visualization'
-    ]
+    path: 'projects/drone_flight_route_visualization/index.html'
   },
-    // Hotel Cancellation Prediction Project
+
   'hotel_booking_cancellation_prediction': {
-    title: 'Hotel Booking Cancellation Prediction | Chad Vo - Data Scientist',
-    description: 'Hotel Booking Cancellation Prediction: A machine learning project predicting hotel booking cancellations using various algorithms and data preprocessing techniques.',
-    keywords: 'machine learning, hotel booking cancellation, prediction, data preprocessing, algorithms',
-    image: '/projects/hotel_booking_cancellation/assets/hotel_cancellation_cover.jpg',
+    title: 'Hotel Booking Cancellation Prediction',
+    description: 'Predicting hotel booking cancellations using ML.',
+    image: `${pathPrefix}/projects/hotel_booking_cancellation/assets/hotel_cancellation_cover.jpg`,
     type: 'article',
-    path: 'projects/hotel_booking_cancellation/index.html',
-    datePublished: '2026-1-19',
-    articleSection: 'Data Science Projects',
-    about: [
-      'Machine Learning', 
-      'Data Engineering',
-      'Distributed Computing',
-      'Time Series Analysis',
-      'Feature Engineering',
-      'TensorFlow'
-    ]
-  },
-  // Template for adding new projects
-  'project_template': {
-    title: 'Project Name | Chad Vo - Data Scientist',
-    description: 'Brief description of the project (140-160 characters)',
-    keywords: 'keyword1, keyword2, keyword3',
-    image: '/projects/project_name/assets/cover.jpg',
-    type: 'article',
-    path: '/projects/project_name/index.html',
-    datePublished: '2025-01-01',
-    articleSection: 'Data Science Projects',
-    about: ['Topic 1', 'Topic 2', 'Topic 3']
+    path: 'projects/hotel_booking_cancellation/index.html'
   }
 };

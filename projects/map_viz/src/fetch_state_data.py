@@ -230,25 +230,35 @@ def fetch_demographics(year):
     print(f'Fetching demographics (ACS {year})...')
     session = create_session_with_retries()
     
-    variables = ['NAME', 'B01003_001E', 'B01002_001E', 'B23025_003E', 'B23025_004E', 'B23025_005E']
-    url = f'https://api.census.gov/data/{year}/acs/acs5?get={",".join(variables)}&for=state:*&key={CENSUS_API_KEY}'
+    # Get total population and median age from base tables
+    variables_base = ['NAME', 'B01003_001E', 'B01002_001E']
+    url_base = f'https://api.census.gov/data/{year}/acs/acs5?get={",".join(variables_base)}&for=state:*&key={CENSUS_API_KEY}'
+    
+    # Get employment/unemployment rates from Subject Table S2301 (pre-calculated by Census)
+    # S2301_C03_001E = Employment Rate (% of population 16+ that is employed)
+    # S2301_C04_001E = Unemployment Rate (% of labor force that is unemployed)
+    variables_subject = ['NAME', 'S2301_C03_001E', 'S2301_C04_001E']
+    url_subject = f'https://api.census.gov/data/{year}/acs/acs5/subject?get={",".join(variables_subject)}&for=state:*&key={CENSUS_API_KEY}'
     
     try:
-        data = session.get(url, timeout=30).json()
         result = {}
         
-        for row in data[1:]:
+        # Fetch base demographics
+        base_data = session.get(url_base, timeout=30).json()
+        for row in base_data[1:]:
             fips = row[-1]
-            employed = int(row[3]) if row[3] not in ['-666666666', 'null'] else None
-            unemployed = int(row[4]) if row[4] not in ['-666666666', 'null'] else None
-            labor_force = (employed + unemployed) if employed and unemployed else None
-            
             result[fips] = {
-                'totalPopulation': int(row[1]) if row[1] not in ['-666666666', 'null'] else None,
-                'medianAge': float(row[2]) if row[2] not in ['-666666666', 'null'] else None,
-                'employmentRate': round((employed / labor_force) * 100, 1) if labor_force and employed else None,
-                'unemploymentRate': round((unemployed / labor_force) * 100, 1) if labor_force and unemployed else None
+                'totalPopulation': int(row[1]) if row[1] not in ['-666666666', 'null', None] else None,
+                'medianAge': float(row[2]) if row[2] not in ['-666666666', 'null', None] else None
             }
+        
+        # Fetch employment rates (pre-calculated by Census)
+        subject_data = session.get(url_subject, timeout=30).json()
+        for row in subject_data[1:]:
+            fips = row[-1]
+            if fips in result:
+                result[fips]['employmentRate'] = float(row[1]) if row[1] not in ['-666666666', 'null', None, ''] else None
+                result[fips]['unemploymentRate'] = float(row[2]) if row[2] not in ['-666666666', 'null', None, ''] else None
         
         print(f'✓ Fetched demographics for {len(result)} states')
         return result
