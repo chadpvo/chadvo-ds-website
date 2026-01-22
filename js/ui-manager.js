@@ -24,9 +24,8 @@ class UIManager {
                 <div class="d-flex justify-content-between align-items-center">
                     
                     <a href="${this.config.navLinks.find(l => l.name === 'Home')?.url || '../../index.html'}">
-                        <img src="${this.config.logoPath}" alt="${this.config.author.name}" class="site-logo" style="max-height: 40px; width: auto;">
+                        <img src="${this.config.logoPath}" alt="${this.config.author.name}" class="site-logo">                    
                     </a>    
-
                     <div class="d-flex align-items-center">
                         <button id="themeToggle" class="theme-toggle me-3 bg-transparent border-0 p-2" aria-label="Toggle dark mode" style="color: inherit;">
                             <i class="fas fa-moon"></i>

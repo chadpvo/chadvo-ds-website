@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7REHTK4CJ8"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -22,6 +21,9 @@
     <link rel="stylesheet" href="../../css/style.css">
 
     <style>
+        /* FIX: Push content down so it doesn't hide behind the fixed header */
+        body { padding-top: 90px; }
+
         /* Interactive Chart Styles */
         .chart-wrapper {
             background: white;
@@ -169,47 +171,21 @@
         }
 
         /* Dark Mode Overrides */
-        .dark-mode .chart-wrapper { background: #1a1a1a; }
-        .dark-mode .chart-title, .dark-mode .dataset-label { color: #e8e8e8; }
-        .dark-mode .chart-subtitle { color: #999; }
+        body.dark-mode .chart-wrapper { background: #1a1a1a; }
+        body.dark-mode .chart-title, body.dark-mode .dataset-label { color: #e8e8e8; }
+        body.dark-mode .chart-subtitle { color: #999; }
         
         /* Winner Highlight */
         .winner-row {
             background-color: #d1e7dd !important; 
             border-left: 4px solid #198754;
         }
-        .dark-mode .winner-row {
+        body.dark-mode .winner-row {
             background-color: #0f5132 !important;
             color: #fff;
         }
 
-        /* Add inside your <style> tag */
-        #caption {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            text-align: center;
-            color: #ccc;
-            padding: 10px 0;
-            height: 150px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
-            animation-name: zoom;
-            animation-duration: 0.6s;
-        }
-
-        /* Ensure the caption text shrinks on smaller screens */
-        @media only screen and (max-width: 700px){
-            #caption {
-                width: 100%;
-                font-size: 14px;
-            }
-        }
-
-        /* REPLACE the previous #imageModal CSS with this: */
-
-        /* 1. Default state: Must be HIDDEN */
+        /* Image Modal Styles */
         #imageModal {
             display: none; 
             position: fixed;
@@ -221,15 +197,13 @@
             background-color: rgba(0,0,0,0.9);
         }
 
-        /* 2. Active state: NOW we use Flex to stack them */
         #imageModal.active {
-            display: flex !important;    /* Becomes visible only when class is added */
-            flex-direction: column;      /* Stacks Image top, Caption bottom */
-            justify-content: center;     /* Centers vertically */
-            align-items: center;         /* Centers horizontally */
+            display: flex !important;    
+            flex-direction: column;      
+            justify-content: center;     
+            align-items: center;         
         }
 
-        /* 3. Keep the close button stuck to the corner */
         .image-modal-close {
             position: absolute;
             top: 20px;
@@ -237,19 +211,16 @@
             z-index: 1001; 
         }
 
-        /* Find and replace this block */
         .image-modal-content {
-            /* Changed from 'auto' to specific spacing */
             margin: 0 auto 15px auto;  
             display: block;
             max-width: 90%;
             max-height: 80vh;
         }
 
-        /* Find and replace this block */
         #caption {
-            margin: 0 auto;       /* Remove vertical pushing */
-            height: auto;         /* Remove fixed height so it fits the text tight */
+            margin: 0 auto;       
+            height: auto;         
             display: block;
             width: 80%;
             max-width: 700px;
@@ -265,24 +236,7 @@
 </head>
 <body data-page="hotel_booking_cancellation_prediction">
 
-    <header id="stickyHeader" class="sticky-header">
-        <div class="container py-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <a href="../../index.html">
-                    <img src="../../assets/img/logo.png" alt="Chad Vo Data Scientist Logo" class="site-logo">
-                </a>   
-
-                <button id="themeToggle" class="theme-toggle ms-2" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-
-                <nav class="top-nav">
-                    <a href="../../index.html#about" class="text-decoration-none text-dark ms-4">About</a>
-                    <a href="../../index.html#contact" class="text-decoration-none text-dark ms-4">Contact</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <header id="stickyHeader" class="sticky-header"></header>
 
     <section class="container text-center mt-4 mb-5">
         <h1 class="display-4 fw-bold hero-name">Predicting Hotel Booking Cancellations with Machine Learning</h1>
@@ -503,10 +457,6 @@
             </table>
             <p class="text-muted small"><em>Table 2: Performance metrics on the Test Set. XGBoost performed best across F1-score and ROC AUC.</em></p>
 
-            <div class="article-visual">
-                <img src="assets/hotel_cancellation_dashboard.png" alt="Hotel Cancellation Prediction" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
-                <p class="mt-3"><em>Snapshot of the interactive cancellation risk dashboard</em></p>
-            </div>
 
             <h2 class="mt-5">5. Conclusion</h2>
             <p>
@@ -605,25 +555,10 @@
                 <p>Distribution of Logs</p>
             </div>
             
-            <!-- Add more cards as needed -->
-        </div>
-    </section>
-
-
-    <section class="bg-light-blue py-5 text-center footer-section" id="contact">
-        <div class="container">
-            <h4 class="fw-bold mb-4">Let's Work Together!</h4>
-            
-            <div class="d-flex justify-content-center social-icons mb-4">
-                <a href="https://linkedin.com/in/chadvo" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/chadpvo" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="mailto:chadpvo@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p class="footer-text small mb-1">
-                &copy; Copyright <span id="year"></span> All rights reserved | Developed by Chad Vo
-            </p>
-        </div>
     </section>
+
+    <section class="bg-light-blue py-5 text-center footer-section" id="contact"></section>
 
     <div id="imageModal" class="image-modal">
         <span class="image-modal-close">&times;</span>
@@ -638,30 +573,25 @@
 
     <script src="../../js/page-config.js"></script>
     <script src="../../js/seo-injector.js"></script>
+    <script src="../../js/ui-manager.js"></script>
 
     <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-
-        // Sticky Header Logic
-        window.addEventListener('DOMContentLoaded', () => {
+        // Sticky Header Scroll Effect
+        window.addEventListener('scroll', () => {
             const stickyHeader = document.getElementById('stickyHeader');
-            const headerHeight = stickyHeader.offsetHeight;
-            document.body.style.paddingTop = headerHeight + 'px';
-            
-            window.addEventListener('scroll', () => {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop > headerHeight) {
+            if (stickyHeader) {
+                if (window.scrollY > 50) {
                     stickyHeader.classList.add('floating');
                 } else {
                     stickyHeader.classList.remove('floating');
                 }
-            });
+            }
         });
 
         // Image Zoom Logic
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
-        const captionText = document.getElementById("caption"); // <--- THIS LINE WAS MISSING
+        const captionText = document.getElementById("caption");
         const closeBtn = document.querySelector('.image-modal-close');
         const zoomableImages = document.querySelectorAll('.zoomable-image');
 
@@ -704,38 +634,22 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-
-        function setTheme(mode) {
-            document.body.classList.toggle('dark-mode', mode === 'dark');
-            themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-            localStorage.setItem('theme', mode);
-        }
-
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        setTheme(savedTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-
         // Meta Data Logic
         const meta = document.querySelector('.article-meta');
-        const published = new Date(meta.dataset.published);
-        document.getElementById('publishDate').textContent =
-            published.toLocaleDateString(undefined, {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+        if (meta) {
+            const published = new Date(meta.dataset.published);
+            document.getElementById('publishDate').textContent =
+                published.toLocaleDateString(undefined, {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
 
-        const articleText = document.querySelector('.article-body').innerText;
-        const words = articleText.trim().split(/\s+/).length;
-        const minutes = Math.ceil(words / 225);
-        document.getElementById('readingTime').textContent = `${minutes} min read`;
+            const articleText = document.querySelector('.article-body').innerText;
+            const words = articleText.trim().split(/\s+/).length;
+            const minutes = Math.ceil(words / 225);
+            document.getElementById('readingTime').textContent = `${minutes} min read`;
+        }
 
         // ==========================================
         //  Dynamic Chart Logic (Cancellation by Month)
@@ -842,11 +756,11 @@
         // Initialize chart on load
         window.addEventListener('DOMContentLoaded', createCancellationChart);
         
-        // Scrolling EDA Section (if needed)
+        // Scrolling EDA Section
         function scrollEDA(dir) {
             const el = document.getElementById('edaScroll');
             el.scrollBy({ left: dir === 'left' ? -220 : 220, behavior: 'smooth' });
-            }
+        }
     </script>
 
 </body>

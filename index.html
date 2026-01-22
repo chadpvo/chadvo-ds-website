@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7REHTK4CJ8"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,62 +12,42 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Title and SEO meta tags will be injected by seo-injector.js -->
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/chadvo-ds-website/assets/img/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/chadvo-ds-website/assets/img/favicon.png">
 
     <link rel="stylesheet" href="css/style.css">
 
     <script src="https://unpkg.com/simple-icons@latest/icons.js"></script>
+
+    <style>
+        body {
+            padding-top: 90px; /* Adjusts for the height of the sticky header */
+        }
+        
+        /* Optional: Ensure hero section has enough breathing room */
+        .hero-name {
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 
 <body data-page="home">
 
-    <!-- Sticky Header -->
-    <header id="stickyHeader" class="sticky-header">
-        <div class="container py-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <a href="#">
-                    <img src="assets/img/logo.png" alt="Chad Vo Data Scientist Logo" class="site-logo">
-                </a>   
+    <header id="stickyHeader" class="sticky-header"></header>
 
-                <button id="themeToggle" class="theme-toggle ms-2" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-
-                <nav class="top-nav">
-                    <a href="#about" class="text-decoration-none text-dark ms-4">About</a>
-                    <a href="#contact" class="text-decoration-none text-dark ms-4">Contact</a>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <section class="container text-center mt-4 mb-5">
+    <section class="container text-center mb-5">
         <h1 class="display-4 fw-bold hero-name">Chad Vo</h1>
         <div class="decorative-separator mx-auto"></div>
         <p class="lead text-muted hero-bio mx-auto" style="max-width: 700px;">
             Hello there! Welcome to my playground. A collection of my experiments, explorations, and late-night coding sessions.
         </p>
     </section>
-
-    <!-- <div class="filter-bar-container mb-5">
-        <div class="container">
-            <div class="d-flex justify-content-center gap-5 filter-menu">
-                <a href="#" class="filter-btn active" data-filter="all">All Categories</a>
-                <a href="#" class="filter-btn" data-filter="visualization">Data Visualization</a>
-                <a href="#" class="filter-btn" data-filter="data-science">Data Science</a>
-            </div>
-        </div>
-    </div> -->
     
     <div class="filter-container">
         <nav class="filter-bar">
@@ -81,7 +60,6 @@
 
     <section class="container mb-5">
         <div class="portfolio-grid">
-            <!-- Data Science Project -->
             <a href="projects/flight_delay/index.html" class="portfolio-item" data-category="data-science" rel="noopener noreferrer">
                 <img src="assets/img/flight_delay_thumb.jpg" alt="Flight Delay Predictions">
                 <div class="overlay">
@@ -92,7 +70,6 @@
                 </div>
             </a>
 
-            <!-- Data Visualization Project -->
             <a href="projects/drone_flight_route_visualization/index.html" class="portfolio-item" data-category="visualization" rel="noopener noreferrer">
                 <img src="assets/img/drone_flight_thumbnail.png" alt="Drone Route Visualization">
                 <div class="overlay">
@@ -103,7 +80,6 @@
                 </div>
             </a>
 
-            <!-- Data Science Project -->
             <a href="projects/hotel_booking_cancellation/index.html" class="portfolio-item" data-category="data-science" rel="noopener noreferrer">
                 <img src="assets/img/hotel_cancellation_thumbnail.jpg" alt="Hotel Booking Cancellation Prediction">
                 <div class="overlay">
@@ -113,7 +89,7 @@
                     </div>
                 </div>
             </a>
-            <!-- Data Tools Project -->
+            
             <a href="projects/map_viz/" class="portfolio-item" data-category="data-tools" rel="noopener noreferrer">
                 <img src="assets/img/map_viz_thumbnail.png" alt="Data Mapping Tool for Real Estate Investment Professionals">
                 <div class="overlay">
@@ -146,11 +122,9 @@
                 </div>
             </div>
 
-            <!-- Tech Stack Title -->
             <div class="text-center mt-4 pt-4">
                 <h3 class="fw-light" style="font-weight: 500; font-size: 2.25rem; color: #474e53;">My Tech Stack</h3>
             </div>
-            <!-- Tech Stack Carousel -->
             <div class="tech-stack-section mt-5">
                 <div class="tech-carousel">
                     <div class="carousel-row">
@@ -163,7 +137,6 @@
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS">
-                            <!-- Duplicate for seamless loop -->
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
@@ -184,7 +157,6 @@
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code">
                             <img src="https://img.icons8.com/color/512/microsoft-excel-2019.png" alt="Excel">
-                            <!-- Duplicate for seamless loop -->
                             <img src="https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg" alt="Power BI">
                             <img src="https://www.vectorlogo.zone/logos/snowflake/snowflake-icon.svg" alt="Snowflake">
                             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachespark/apachespark-original.svg" alt="Apache Spark">
@@ -201,22 +173,8 @@
         
     </section>
 
-    <section class="bg-light-blue py-5 text-center footer-section" id="contact">
-        <div class="container">
-            <h4 class="fw-bold mb-4">Let's Work Together!</h4>
-            
-            <div class="d-flex justify-content-center social-icons mb-4">
-                <a href="https://linkedin.com/in/chadvo" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/chadpvo" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="mailto:chadpvo@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p class="footer-text small mb-1">
-                &copy; Copyright <span id="year"></span> All rights reserved | Developed by Chad Vo
-            </p>
-        </div>
-    </section>
+    <section class="bg-light-blue py-5 text-center footer-section" id="contact"></section>
 
-    <!-- Image Zoom Modal -->
     <div id="imageModal" class="image-modal">
         <span class="image-modal-close">&times;</span>
         <img class="image-modal-content" id="modalImage">
@@ -226,14 +184,12 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- SEO Injection Scripts -->
     <script src="js/page-config.js"></script>
     <script src="js/seo-injector.js"></script>
+    <script src="js/ui-manager.js"></script>
 
     <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-
-        // Image zoom functionality
+        // --- Image zoom functionality ---
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
         const closeBtn = document.querySelector('.image-modal-close');
@@ -263,7 +219,7 @@
             if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
         });
 
-        // Scroll to Top
+        // --- Scroll to Top ---
         const scrollBtn = document.getElementById('scrollToTop');
         window.addEventListener('scroll', () => {
             scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
@@ -272,45 +228,20 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Dark / Light Mode
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-
-        function setTheme(mode) {
-            document.body.classList.toggle('dark-mode', mode === 'dark');
-            themeIcon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-            localStorage.setItem('theme', mode);
-        }
-
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        setTheme(savedTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-
-        // Sticky Header on Scroll - Only float when header leaves viewport
-        window.addEventListener('DOMContentLoaded', () => {
+        // --- Sticky Header Scroll Effect ---
+        // (UI Manager builds the HTML, this handles the visual "float")
+        window.addEventListener('scroll', () => {
             const stickyHeader = document.getElementById('stickyHeader');
-            const headerHeight = stickyHeader.offsetHeight;
-            
-            // Add padding to body to prevent header overlap
-            document.body.style.paddingTop = headerHeight + 'px';
-            
-            // Scroll listener for floating effect
-            window.addEventListener('scroll', () => {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (scrollTop > headerHeight) {
+            if (stickyHeader) {
+                if (window.scrollY > 50) {
                     stickyHeader.classList.add('floating');
                 } else {
                     stickyHeader.classList.remove('floating');
                 }
-            });
+            }
         });
 
-        // Portfolio Filter System
+        // --- Portfolio Filter System ---
         const filterButtons = document.querySelectorAll('.filter-btn');
         const portfolioItems = document.querySelectorAll('.portfolio-item');
 
@@ -344,6 +275,5 @@
             });
         });
     </script>
-
 </body>
 </html>
