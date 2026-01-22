@@ -1,15 +1,29 @@
+"""
+Complete State-Level Data Fetcher
+Fetches Census ACS, BEA GDP, and HUD (FMR + Income Limits) data for all US states
+Automatically uses the latest available year for each dataset
+"""
+
 import requests
 import json
 from pathlib import Path
 import time
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from datetime import datetime
 
-# API Keys
+# ============================================================
+# API KEYS
+# ============================================================
 CENSUS_API_KEY = '7e9febefb3835ac0c2796d2e00df516e60c3e406'
 BEA_API_KEY = '13B14004-10BE-45AF-BC61-3B7A3F127435'
+HUD_API_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI2IiwianRpIjoiYTgzZjE4NWRlODZhOWYwODYwZDZiOGU5ZDRmMGMxZTZlZmU1OWZkZjlkMmI2YmQzNGQ1YjUyODQwZTg2Y2Y1YjlhZTZhOWU1YmMzYWVmMjUiLCJpYXQiOjE3NjkwMjYwNjkuMjExNTI3LCJuYmYiOjE3NjkwMjYwNjkuMjExNTMsImV4cCI6MjA4NDU1ODg2OS4xOTc3NzksInN1YiI6IjExNzg3MiIsInNjb3BlcyI6W119.I3mmAjvo-3Tgm9Y42YAfc86TZO-nPbmEx_JXvJaMwZqMKVzbsg81TnBM5At-NX_xVeWCRv8ddrezx3C2ox8p7w"
 
-# State FIPS codes
+# API Base URLs
+HUD_FMR_BASE = "https://www.huduser.gov/hudapi/public/fmr"
+HUD_IL_BASE = "https://www.huduser.gov/hudapi/public/il"
+
+# State FIPS to Code Mapping
 STATE_FIPS = {
     '01': 'Alabama', '02': 'Alaska', '04': 'Arizona', '05': 'Arkansas',
     '06': 'California', '08': 'Colorado', '09': 'Connecticut', '10': 'Delaware',
@@ -26,12 +40,22 @@ STATE_FIPS = {
     '54': 'West Virginia', '55': 'Wisconsin', '56': 'Wyoming'
 }
 
+STATE_FIPS_TO_CODE = {
+    '01': 'AL', '02': 'AK', '04': 'AZ', '05': 'AR', '06': 'CA', '08': 'CO',
+    '09': 'CT', '10': 'DE', '11': 'DC', '12': 'FL', '13': 'GA', '15': 'HI',
+    '16': 'ID', '17': 'IL', '18': 'IN', '19': 'IA', '20': 'KS', '21': 'KY',
+    '22': 'LA', '23': 'ME', '24': 'MD', '25': 'MA', '26': 'MI', '27': 'MN',
+    '28': 'MS', '29': 'MO', '30': 'MT', '31': 'NE', '32': 'NV', '33': 'NH',
+    '34': 'NJ', '35': 'NM', '36': 'NY', '37': 'NC', '38': 'ND', '39': 'OH',
+    '40': 'OK', '41': 'OR', '42': 'PA', '44': 'RI', '45': 'SC', '46': 'SD',
+    '47': 'TN', '48': 'TX', '49': 'UT', '50': 'VT', '51': 'VA', '53': 'WA',
+    '54': 'WV', '55': 'WI', '56': 'WY'
+}
+
 def create_session_with_retries():
-    """Create a requests session with automatic retry logic"""
     session = requests.Session()
     retry_strategy = Retry(
-        total=5,
-        backoff_factor=2,
+        total=5, backoff_factor=2,
         status_forcelist=[429, 500, 502, 503, 504],
         allowed_methods=["GET"]
     )
@@ -40,253 +64,387 @@ def create_session_with_retries():
     session.mount("https://", adapter)
     return session
 
-# --- NEW HELPER FUNCTION ---
 def fetch_with_year_fallback(fetch_func, start_year, max_retries=3):
-    """
-    Tries to fetch data for a specific year. If it fails (empty result),
-    it tries the previous year, up to max_retries.
-    """
     current_year = start_year
     for i in range(max_retries + 1):
         data = fetch_func(current_year)
-        
-        # If we got data (dictionary is not empty), return it
         if data:
             if current_year != start_year:
-                print(f'   ↳ SUCCESS: Fallback to {current_year} worked!')
+                print(f'   ↳ Fallback to {current_year} worked!')
             return data, current_year
-            
-        # If data is empty, decrement year and try again
         if i < max_retries:
             print(f'   ⚠ No data for {current_year}, trying {current_year - 1}...')
             current_year -= 1
-        
-    print(f'   ❌ Failed to fetch data after checking back to {current_year}')
+    print(f'   ❌ Failed after checking back to {current_year}')
     return {}, start_year
 
 def detect_latest_census_year():
-    print('Detecting latest available Census ACS dataset...')
+    print('Detecting latest Census ACS dataset...')
     session = create_session_with_retries()
-    current_year = 2025
-    for year in range(current_year, 2010, -1):
-        test_url = f'https://api.census.gov/data/{year}/acs/acs5'
+    for year in range(2025, 2015, -1):
         try:
-            response = session.get(test_url, timeout=10)
-            if response.status_code == 200:
-                print(f'✓ Latest available ACS dataset: {year}')
+            if session.get(f'https://api.census.gov/data/{year}/acs/acs5', timeout=10).status_code == 200:
+                print(f'✓ Latest ACS: {year}')
                 return year
-        except:
-            continue
-    print('⚠ Could not detect latest year, defaulting to 2023')
+        except: continue
     return 2023
 
 def detect_latest_bea_year():
-    print('Detecting latest available BEA dataset...')
-    if BEA_API_KEY == 'YOUR_BEA_API_KEY': return 2023
-    
+    print('Detecting latest BEA dataset...')
     session = create_session_with_retries()
     try:
-        url = (f'https://apps.bea.gov/api/data/?UserID={BEA_API_KEY}&method=GetParameterValues'
-               f'&datasetname=Regional&ParameterName=Year&TableName=SAGDP2&ResultFormat=JSON')
-        response = session.get(url, timeout=30)
-        data = response.json()
-        if 'BEAAPI' in data and 'Results' in data['BEAAPI'] and 'ParamValue' in data['BEAAPI']['Results']:
-            years = [int(item['Key']) for item in data['BEAAPI']['Results']['ParamValue'] if item['Key'].isdigit()]
+        url = f'https://apps.bea.gov/api/data/?UserID={BEA_API_KEY}&method=GetParameterValues&datasetname=Regional&ParameterName=Year&TableName=SAGDP2&ResultFormat=JSON'
+        data = session.get(url, timeout=30).json()
+        if 'BEAAPI' in data and 'Results' in data['BEAAPI']:
+            years = [int(i['Key']) for i in data['BEAAPI']['Results']['ParamValue'] if i['Key'].isdigit()]
             if years:
-                latest = max(years)
-                print(f'✓ Latest available BEA dataset: {latest}')
-                return latest
-    except Exception as e:
-        print(f'⚠ Error detecting BEA year: {e}')
+                print(f'✓ Latest BEA: {max(years)}')
+                return max(years)
+    except: pass
     return 2023
 
-def fetch_median_income(year):
-    print(f'Fetching median household income from Census ACS {year}...')
-    session = create_session_with_retries() # <--- FIXED MISSING SESSION
-    url = f'https://api.census.gov/data/{year}/acs/acs5?get=NAME,B19013_001E&for=state:*&key={CENSUS_API_KEY}'
+def detect_latest_hud_years():
+    """Detect latest available HUD FMR and Income Limits years"""
+    print('Detecting latest HUD datasets...')
+    session = create_session_with_retries()
+    headers = {"Authorization": f"Bearer {HUD_API_TOKEN}"}
+    
+    fmr_year, il_year = None, None
+    
+    # Test FMR
+    for year in range(2026, 2015, -1):
+        try:
+            resp = session.get(f"{HUD_FMR_BASE}/statedata/CA", headers=headers, params={'year': year}, timeout=10)
+            if resp.status_code == 200 and resp.json().get('data'):
+                fmr_year = year
+                break
+        except: continue
+    
+    # Test Income Limits
+    for year in range(2025, 2015, -1):
+        try:
+            resp = session.get(f"{HUD_IL_BASE}/statedata/CA", headers=headers, params={'year': year}, timeout=10)
+            if resp.status_code == 200 and resp.json().get('data'):
+                il_year = year
+                break
+        except: continue
+    
+    print(f'✓ Latest HUD FMR: {fmr_year}, Income Limits: {il_year}')
+    return fmr_year or 2024, il_year or 2024
+
+# ==================== CENSUS DATA FETCHERS ====================
+
+def fetch_housing_characteristics(year):
+    print(f'Fetching housing characteristics (ACS {year})...')
+    session = create_session_with_retries()
+    
+    variables = [
+        'NAME', 'B25001_001E', 'B25002_001E', 'B25002_002E', 'B25002_003E',
+        'B25003_001E', 'B25003_002E', 'B25003_003E', 'B25024_002E',
+        'B25024_003E', 'B25035_001E'
+    ]
+    
+    url = f'https://api.census.gov/data/{year}/acs/acs5?get={",".join(variables)}&for=state:*&key={CENSUS_API_KEY}'
     
     try:
-        response = session.get(url, timeout=30)
-        response.raise_for_status()
-        data = response.json()
+        data = session.get(url, timeout=30).json()
         result = {}
+        
         for row in data[1:]:
-            state_fips = row[2]
-            income = int(row[1]) if row[1] and row[1] != '-666666666' else None
-            result[state_fips] = {'name': row[0], 'medianIncome': income}
-        print(f'✓ Fetched median income for {len(result)} states')
-        return result
-    except Exception as e:
-        print(f'⚠ Error fetching median income: {e}')
-        return {}
-
-def fetch_employment_rate(year):
-    print(f'Fetching employment rate from Census ACS {year}...')
-    session = create_session_with_retries()
-    url = f'https://api.census.gov/data/{year}/acs/acs5/subject?get=NAME,S2301_C03_001E&for=state:*&key={CENSUS_API_KEY}'    
-    try:
-        response = session.get(url, timeout=30)
-        response.raise_for_status()
-        data = response.json()
-        result = {}
-        for row in data[1:]:
-            state_fips = row[2]
-            emp_rate = float(row[1]) if row[1] and row[1] != 'null' else None
-            result[state_fips] = {'employmentRate': emp_rate}
-        print(f'✓ Fetched employment rate for {len(result)} states')
-        return result
-    except Exception as e:
-        # Note: We print error but return empty dict so fallback can trigger
-        print(f'⚠ Error fetching employment rate: {e}') 
-        return {}
-
-def fetch_housing_metrics(year):
-    print(f'Fetching housing metrics from Census ACS {year}...')
-    session = create_session_with_retries()
-    url = f'https://api.census.gov/data/{year}/acs/acs5?get=NAME,B25077_001E,B25064_001E,B25003_002E,B25003_001E,B25002_001E,B25002_003E&for=state:*&key={CENSUS_API_KEY}'
-    
-    try:
-        response = session.get(url, timeout=30)
-        response.raise_for_status()
-        data = response.json()
-        result = {}
-        for row in data[1:]:
-            state_fips = row[7]
-            med_home = int(row[1]) if row[1] and row[1] not in ['-666666666', 'null'] else None
-            med_rent = int(row[2]) if row[2] and row[2] not in ['-666666666', 'null'] else None
-            owner_occ = int(row[3]) if row[3] and row[3] != 'null' else None
-            total_occ = int(row[4]) if row[4] and row[4] != 'null' else None
-            total_units = int(row[5]) if row[5] and row[5] != 'null' else None
-            vacant = int(row[6]) if row[6] and row[6] != 'null' else None
+            fips = row[-1]
+            total = int(row[1]) if row[1] not in ['-666666666', 'null'] else None
+            occupied = int(row[3]) if row[3] not in ['-666666666', 'null'] else None
+            vacant = int(row[4]) if row[4] not in ['-666666666', 'null'] else None
+            owner = int(row[6]) if row[6] not in ['-666666666', 'null'] else None
+            renter = int(row[7]) if row[7] not in ['-666666666', 'null'] else None
             
-            home_rate = round((owner_occ / total_occ) * 100, 1) if owner_occ and total_occ else None
-            vac_rate = round((vacant / total_units) * 100, 1) if vacant and total_units else None
-            
-            result[state_fips] = {
-                'medianHomeValue': med_home, 'medianRent': med_rent,
-                'homeownershipRate': home_rate, 'vacancyRate': vac_rate
+            result[fips] = {
+                'totalHousingUnits': total,
+                'occupiedUnits': occupied,
+                'vacantUnits': vacant,
+                'ownerOccupied': owner,
+                'renterOccupied': renter,
+                'medianYearBuilt': int(row[10]) if row[10] not in ['-666666666', 'null'] else None
             }
-        print(f'✓ Fetched housing metrics for {len(result)} states')
+        
+        print(f'✓ Fetched housing characteristics for {len(result)} states')
         return result
     except Exception as e:
-        print(f'⚠ Error fetching housing metrics: {e}')
+        print(f'⚠ Error: {e}')
+        return {}
+
+def fetch_housing_values_costs(year):
+    print(f'Fetching housing values & costs (ACS {year})...')
+    session = create_session_with_retries()
+    
+    variables = ['NAME', 'B25077_001E', 'B25064_001E', 'B25088_002E', 'B25088_003E']
+    url = f'https://api.census.gov/data/{year}/acs/acs5?get={",".join(variables)}&for=state:*&key={CENSUS_API_KEY}'
+    
+    try:
+        data = session.get(url, timeout=30).json()
+        result = {}
+        
+        for row in data[1:]:
+            fips = row[-1]
+            result[fips] = {
+                'medianHomeValue': int(row[1]) if row[1] not in ['-666666666', 'null'] else None,
+                'medianGrossRent': int(row[2]) if row[2] not in ['-666666666', 'null'] else None,
+                'medianOwnerCostsWithMortgage': int(row[3]) if row[3] not in ['-666666666', 'null'] else None,
+                'medianOwnerCostsNoMortgage': int(row[4]) if row[4] not in ['-666666666', 'null'] else None
+            }
+        
+        print(f'✓ Fetched housing values for {len(result)} states')
+        return result
+    except Exception as e:
+        print(f'⚠ Error: {e}')
+        return {}
+
+def fetch_household_economics(year):
+    print(f'Fetching household economics (ACS {year})...')
+    session = create_session_with_retries()
+    
+    variables = ['NAME', 'B19013_001E', 'B17001_001E', 'B17001_002E']
+    url = f'https://api.census.gov/data/{year}/acs/acs5?get={",".join(variables)}&for=state:*&key={CENSUS_API_KEY}'
+    
+    try:
+        data = session.get(url, timeout=30).json()
+        result = {}
+        
+        for row in data[1:]:
+            fips = row[-1]
+            total_pop = int(row[2]) if row[2] not in ['-666666666', 'null'] else None
+            poverty = int(row[3]) if row[3] not in ['-666666666', 'null'] else None
+            
+            result[fips] = {
+                'medianHouseholdIncome': int(row[1]) if row[1] not in ['-666666666', 'null'] else None,
+                'povertyRate': round((poverty / total_pop) * 100, 1) if total_pop and poverty else None
+            }
+        
+        print(f'✓ Fetched household economics for {len(result)} states')
+        return result
+    except Exception as e:
+        print(f'⚠ Error: {e}')
+        return {}
+
+def fetch_demographics(year):
+    print(f'Fetching demographics (ACS {year})...')
+    session = create_session_with_retries()
+    
+    variables = ['NAME', 'B01003_001E', 'B01002_001E', 'B23025_003E', 'B23025_004E', 'B23025_005E']
+    url = f'https://api.census.gov/data/{year}/acs/acs5?get={",".join(variables)}&for=state:*&key={CENSUS_API_KEY}'
+    
+    try:
+        data = session.get(url, timeout=30).json()
+        result = {}
+        
+        for row in data[1:]:
+            fips = row[-1]
+            employed = int(row[3]) if row[3] not in ['-666666666', 'null'] else None
+            unemployed = int(row[4]) if row[4] not in ['-666666666', 'null'] else None
+            labor_force = (employed + unemployed) if employed and unemployed else None
+            
+            result[fips] = {
+                'totalPopulation': int(row[1]) if row[1] not in ['-666666666', 'null'] else None,
+                'medianAge': float(row[2]) if row[2] not in ['-666666666', 'null'] else None,
+                'employmentRate': round((employed / labor_force) * 100, 1) if labor_force and employed else None,
+                'unemploymentRate': round((unemployed / labor_force) * 100, 1) if labor_force and unemployed else None
+            }
+        
+        print(f'✓ Fetched demographics for {len(result)} states')
+        return result
+    except Exception as e:
+        print(f'⚠ Error: {e}')
         return {}
 
 def fetch_bea_gdp(year):
-    print(f'Fetching GDP data from BEA Regional dataset {year}...')
-    if BEA_API_KEY == 'YOUR_BEA_API_KEY': return {}
+    print(f'Fetching GDP (BEA {year})...')
     session = create_session_with_retries()
     
     try:
-        url = (f'https://apps.bea.gov/api/data/?UserID={BEA_API_KEY}&method=GetData&datasetname=Regional'
-               f'&TableName=SAGDP2&LineCode=1&Year={year}&GeoFips=STATE&ResultFormat=JSON')
-        response = session.get(url, timeout=30)
-        response.raise_for_status()
-        data = response.json()
+        url = f'https://apps.bea.gov/api/data/?UserID={BEA_API_KEY}&method=GetData&datasetname=Regional&TableName=SAGDP2&LineCode=1&Year={year}&GeoFips=STATE&ResultFormat=JSON'
+        data = session.get(url, timeout=30).json()
         
         result = {}
         if 'BEAAPI' in data and 'Results' in data['BEAAPI'] and 'Data' in data['BEAAPI']['Results']:
-            bea_data = data['BEAAPI']['Results']['Data']
-            print(f'  ✓ BEA returned {len(bea_data)} records')
-            for item in bea_data:
-                geo_fips = item.get('GeoFips', '')
+            for item in data['BEAAPI']['Results']['Data']:
+                geo_fips = item.get('GeoFips', '')[:2]
                 val = item.get('DataValue')
-                if geo_fips and len(geo_fips) >= 2:
-                    state_fips = geo_fips[:2]
-                    if state_fips in STATE_FIPS and state_fips != '00' and val:
-                        try:
-                            result[state_fips] = {'gdpTotal': int(float(val.replace(',', '')))}
-                        except: pass
+                if geo_fips in STATE_FIPS and val:
+                    try:
+                        result[geo_fips] = {'gdpTotal': int(float(val.replace(',', '')))}
+                    except: pass
         else:
-            # Capture specific BEA error logic here so we trigger fallback
-            print("  ⚠ BEA API returned no 'Data' field (likely year not ready)")
-            return {} # Return empty to trigger fallback
-
+            return {}
+        
         print(f'✓ Fetched GDP for {len(result)} states')
         return result
     except Exception as e:
-        print(f'⚠ Error fetching BEA data: {e}')
+        print(f'⚠ Error: {e}')
         return {}
 
-def merge_data(income, employment, housing, gdp, years_meta):
+# ==================== HUD DATA FETCHERS ====================
+
+def fetch_hud_fmr_state(year):
+    """Fetch Fair Market Rents for all states"""
+    print(f'Fetching HUD FMR (year {year})...')
+    session = create_session_with_retries()
+    headers = {"Authorization": f"Bearer {HUD_API_TOKEN}"}
+    result = {}
+    
+    for fips, state_code in STATE_FIPS_TO_CODE.items():
+        try:
+            url = f"{HUD_FMR_BASE}/statedata/{state_code}"
+            resp = session.get(url, headers=headers, params={'year': year}, timeout=30)
+            
+            if resp.status_code == 200:
+                data = resp.json().get('data', {})
+                if data and 'metroareas' in data and data['metroareas']:
+                    # Calculate state-wide averages from metro areas
+                    metros = data['metroareas']
+                    avg_0br = sum(int(m.get('Efficiency', 0)) for m in metros if m.get('Efficiency')) / len([m for m in metros if m.get('Efficiency')])
+                    avg_1br = sum(int(m.get('One-Bedroom', 0)) for m in metros if m.get('One-Bedroom')) / len([m for m in metros if m.get('One-Bedroom')])
+                    avg_2br = sum(int(m.get('Two-Bedroom', 0)) for m in metros if m.get('Two-Bedroom')) / len([m for m in metros if m.get('Two-Bedroom')])
+                    avg_3br = sum(int(m.get('Three-Bedroom', 0)) for m in metros if m.get('Three-Bedroom')) / len([m for m in metros if m.get('Three-Bedroom')])
+                    avg_4br = sum(int(m.get('Four-Bedroom', 0)) for m in metros if m.get('Four-Bedroom')) / len([m for m in metros if m.get('Four-Bedroom')])
+                    
+                    result[fips] = {
+                        'fmr0Bedroom': round(avg_0br),
+                        'fmr1Bedroom': round(avg_1br),
+                        'fmr2Bedroom': round(avg_2br),
+                        'fmr3Bedroom': round(avg_3br),
+                        'fmr4Bedroom': round(avg_4br)
+                    }
+            time.sleep(0.1)
+        except: continue
+    
+    print(f'✓ Fetched FMR for {len(result)} states')
+    return result
+
+def fetch_hud_income_limits_state(year):
+    """Fetch Income Limits for all states"""
+    print(f'Fetching HUD Income Limits (year {year})...')
+    session = create_session_with_retries()
+    headers = {"Authorization": f"Bearer {HUD_API_TOKEN}"}
+    result = {}
+    
+    for fips, state_code in STATE_FIPS_TO_CODE.items():
+        try:
+            url = f"{HUD_IL_BASE}/statedata/{state_code}"
+            resp = session.get(url, headers=headers, params={'year': year}, timeout=30)
+            
+            if resp.status_code == 200:
+                data_list = resp.json().get('data', [])
+                if data_list:
+                    # Calculate state-wide averages
+                    medians = [d.get('median_income') for d in data_list if d.get('median_income')]
+                    il80_p4s = [d.get('low', {}).get('il80_p4') for d in data_list if d.get('low', {}).get('il80_p4')]
+                    
+                    if medians:
+                        result[fips] = {
+                            'medianFamilyIncome': round(sum(medians) / len(medians)),
+                            'incomeLimitLow80_4person': round(sum(il80_p4s) / len(il80_p4s)) if il80_p4s else None
+                        }
+            time.sleep(0.1)
+        except: continue
+    
+    print(f'✓ Fetched Income Limits for {len(result)} states')
+    return result
+
+# ==================== MERGE AND SAVE ====================
+
+def merge_all_data(housing_chars, housing_vals, household_econ, demographics, gdp, hud_fmr, hud_il, years_meta):
     print('Merging all data sources...')
     merged = {}
+    
     for fips, name in STATE_FIPS.items():
         merged[fips] = {
             'fips': fips,
             'name': name,
-            'medianIncome': income.get(fips, {}).get('medianIncome'),
-            'employmentRate': employment.get(fips, {}).get('employmentRate'),
-            'medianHomeValue': housing.get(fips, {}).get('medianHomeValue'),
-            'medianRent': housing.get(fips, {}).get('medianRent'),
-            'homeownershipRate': housing.get(fips, {}).get('homeownershipRate'),
-            'vacancyRate': housing.get(fips, {}).get('vacancyRate'),
+            'stateCode': STATE_FIPS_TO_CODE.get(fips, ''),
+            **housing_chars.get(fips, {}),
+            **housing_vals.get(fips, {}),
+            **household_econ.get(fips, {}),
+            **demographics.get(fips, {}),
             'gdpTotal': gdp.get(fips, {}).get('gdpTotal'),
-            # Adding metadata per state so you know which year was used
+            **hud_fmr.get(fips, {}),
+            **hud_il.get(fips, {}),
             'years': years_meta
         }
+    
     return merged
 
-def save_to_file(data, filename, base_year, years_meta):
+def save_to_file(data, filename, years_meta):
     script_dir = Path(__file__).parent
     data_dir = script_dir.parent / 'data'
     data_dir.mkdir(parents=True, exist_ok=True)
     filepath = data_dir / filename
     
-    from datetime import datetime
     output = {
         'metadata': {
-            'baseYear': base_year,
-            'actualYearsUsed': years_meta,
-            'source': 'US Census Bureau ACS & BEA',
+            'source': 'Census ACS, BEA, HUD FMR & Income Limits',
             'fetchDate': datetime.now().isoformat(),
-            'recordCount': len(data)
+            'recordCount': len(data),
+            'yearsUsed': years_meta
         },
         'data': data
     }
+    
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
-    print(f'✓ Data saved to: {filepath}')
+    print(f'✓ Saved to: {filepath}')
 
 def main():
-    print('=== Starting State Economic Data Fetch (With Fallback) ===\n')
+    print('='*70)
+    print('COMPLETE STATE DATA FETCH (Census + BEA + HUD)')
+    print('='*70 + '\n')
+    
     try:
-        census_base = detect_latest_census_year()
-        bea_base = detect_latest_bea_year()
-        print(f'\n📅 Target Base Years: Census {census_base}, BEA {bea_base}\n')
+        # Detect latest years
+        census_year = detect_latest_census_year()
+        bea_year = detect_latest_bea_year()
+        hud_fmr_year, hud_il_year = detect_latest_hud_years()
         
-        # Fetch with fallback logic
-        income_data, inc_year = fetch_with_year_fallback(fetch_median_income, census_base)
+        print(f'\n📅 Using: Census={census_year}, BEA={bea_year}, FMR={hud_fmr_year}, IL={hud_il_year}\n')
+        
+        # Fetch Census/BEA data
+        housing_chars, hc_year = fetch_with_year_fallback(fetch_housing_characteristics, census_year)
         time.sleep(1)
-        
-        employment_data, emp_year = fetch_with_year_fallback(fetch_employment_rate, census_base)
+        housing_vals, hv_year = fetch_with_year_fallback(fetch_housing_values_costs, census_year)
         time.sleep(1)
-        
-        housing_data, house_year = fetch_with_year_fallback(fetch_housing_metrics, census_base)
+        household_econ, he_year = fetch_with_year_fallback(fetch_household_economics, census_year)
         time.sleep(1)
+        demographics, demo_year = fetch_with_year_fallback(fetch_demographics, census_year)
+        time.sleep(1)
+        gdp, gdp_year = fetch_with_year_fallback(fetch_bea_gdp, bea_year)
         
-        gdp_data, gdp_year = fetch_with_year_fallback(fetch_bea_gdp, bea_base)
+        # Fetch HUD data
+        hud_fmr, fmr_year = fetch_with_year_fallback(fetch_hud_fmr_state, hud_fmr_year)
+        time.sleep(1)
+        hud_il, il_year = fetch_with_year_fallback(fetch_hud_income_limits_state, hud_il_year)
         
-        # Compile year metadata
+        # Compile metadata
         years_meta = {
-            'incomeYear': inc_year,
-            'employmentYear': emp_year,
-            'housingYear': house_year,
-            'gdpYear': gdp_year
+            'housingCharacteristics': hc_year,
+            'housingValues': hv_year,
+            'householdEconomics': he_year,
+            'demographics': demo_year,
+            'gdp': gdp_year,
+            'hudFMR': fmr_year,
+            'hudIncomeLimits': il_year
         }
         
-        merged_data = merge_data(income_data, employment_data, housing_data, gdp_data, years_meta)
-        save_to_file(merged_data, 'states_economic_data.json', census_base, years_meta)
+        # Merge and save
+        merged = merge_all_data(housing_chars, housing_vals, household_econ, demographics, gdp, hud_fmr, hud_il, years_meta)
+        save_to_file(merged, 'states_economic_data.json', years_meta)
         
-        print('\n=== Sample Data (California) ===')
-        if '06' in merged_data:
-            print(json.dumps(merged_data['06'], indent=2))
+        print('\n=== Sample (California) ===')
+        if '06' in merged:
+            print(json.dumps(merged['06'], indent=2))
         
-        print(f'\n=== Fetch Complete ===')
-        print(f"Years used: {years_meta}")
+        print(f'\n✅ Complete! Years used: {years_meta}')
         
-    except Exception as error:
-        print(f'ERROR: {error}')
+    except Exception as e:
+        print(f'\n❌ ERROR: {e}')
         import traceback
         traceback.print_exc()
 

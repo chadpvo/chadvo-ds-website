@@ -1,12 +1,7 @@
 """
-Fetch CBSA-Level Economic Data (Robust Version)
-Run with: python fetch_cbsa_data.py
-
-Fetches:
-- Median Household Income (Census ACS)
-- Employment Rate (Census ACS /subject)
-- Housing Metrics (Census ACS)
-- GDP (BEA Regional - Table CAGDP2)
+Complete CBSA-Level Data Fetcher  
+Fetches Census ACS, BEA GDP, and HUD (FMR + Income Limits) for all US CBSAs
+Automatically uses the latest available year for each dataset
 """
 
 import requests
@@ -17,235 +12,275 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from datetime import datetime
 
-# API Keys
+# ============================================================
+# API KEYS
+# ============================================================
 CENSUS_API_KEY = '7e9febefb3835ac0c2796d2e00df516e60c3e406'
 BEA_API_KEY = '13B14004-10BE-45AF-BC61-3B7A3F127435'
+HUD_API_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI2IiwianRpIjoiYTgzZjE4NWRlODZhOWYwODYwZDZiOGU5ZDRmMGMxZTZlZmU1OWZkZjlkMmI2YmQzNGQ1YjUyODQwZTg2Y2Y1YjlhZTZhOWU1YmMzYWVmMjUiLCJpYXQiOjE3NjkwMjYwNjkuMjExNTI3LCJuYmYiOjE3NjkwMjYwNjkuMjExNTMsImV4cCI6MjA4NDU1ODg2OS4xOTc3NzksInN1YiI6IjExNzg3MiIsInNjb3BlcyI6W119.I3mmAjvo-3Tgm9Y42YAfc86TZO-nPbmEx_JXvJaMwZqMKVzbsg81TnBM5At-NX_xVeWCRv8ddrezx3C2ox8p7w"
 
-# Census Geography constant for CBSA
+HUD_FMR_BASE = "https://www.huduser.gov/hudapi/public/fmr"
+HUD_IL_BASE = "https://www.huduser.gov/hudapi/public/il"
+
 CBSA_GEO = 'metropolitan%20statistical%20area/micropolitan%20statistical%20area:*'
 
 def create_session_with_retries():
-    """Create a requests session with automatic retry logic"""
     session = requests.Session()
-    retry_strategy = Retry(
-        total=5,
-        backoff_factor=2,
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=["GET"]
-    )
-    adapter = HTTPAdapter(max_retries=retry_strategy)
-    session.mount("http://", adapter)
-    session.mount("https://", adapter)
+    retry = Retry(total=5, backoff_factor=2, status_forcelist=[429, 500, 502, 503, 504], allowed_methods=["GET"])
+    session.mount("http://", HTTPAdapter(max_retries=retry))
+    session.mount("https://", HTTPAdapter(max_retries=retry))
     return session
 
 def fetch_with_year_fallback(fetch_func, start_year, max_retries=3):
-    """Tries to fetch data for a specific year, falling back to previous years on failure."""
-    current_year = start_year
-    for i in range(max_retries + 1):
-        data = fetch_func(current_year)
+    for i, year in enumerate(range(start_year, start_year - max_retries - 1, -1)):
+        data = fetch_func(year)
         if data:
-            if current_year != start_year:
-                print(f'   ↳ SUCCESS: Fallback to {current_year} worked!')
-            return data, current_year
+            if year != start_year:
+                print(f'   ↳ Fallback to {year} worked!')
+            return data, year
         if i < max_retries:
-            print(f'   ⚠ No data for {current_year}, trying {current_year - 1}...')
-            current_year -= 1
-    print(f'   ❌ Failed to fetch data after checking back to {current_year}')
+            print(f'   ⚠ No data for {year}, trying {year - 1}...')
     return {}, start_year
 
 def detect_latest_census_year():
-    print('Detecting latest available Census ACS dataset...')
+    print('Detecting latest Census ACS...')
     session = create_session_with_retries()
     for year in range(2025, 2015, -1):
         try:
             if session.get(f'https://api.census.gov/data/{year}/acs/acs5', timeout=10).status_code == 200:
-                print(f'✓ Latest available ACS dataset: {year}')
+                print(f'✓ Latest ACS: {year}')
                 return year
         except: continue
-    print('⚠ Could not detect latest year, defaulting to 2022')
-    return 2022
+    return 2023
 
 def detect_latest_bea_year():
-    print('Detecting latest available BEA dataset...')
-    if BEA_API_KEY == 'YOUR_BEA_API_KEY': return 2022
+    print('Detecting latest BEA...')
     session = create_session_with_retries()
     try:
-        # We use CAGDP2 (County/MSA) to check years, matching your working logic
-        url = (f'https://apps.bea.gov/api/data/?UserID={BEA_API_KEY}&method=GetParameterValues'
-               f'&datasetname=Regional&ParameterName=Year&TableName=CAGDP2&ResultFormat=JSON')
-        response = session.get(url, timeout=30)
-        data = response.json()
-        if 'BEAAPI' in data and 'Results' in data['BEAAPI'] and 'ParamValue' in data['BEAAPI']['Results']:
-            years = [int(i['Key']) for i in data['BEAAPI']['Results']['ParamValue'] if i['Key'].isdigit()]
-            if years:
-                latest = max(years)
-                print(f'✓ Latest available BEA dataset: {latest}')
-                return latest
+        url = f'https://apps.bea.gov/api/data/?UserID={BEA_API_KEY}&method=GetParameterValues&datasetname=Regional&ParameterName=Year&TableName=CAGDP2&ResultFormat=JSON'
+        years = [int(i['Key']) for i in session.get(url, timeout=30).json().get('BEAAPI', {}).get('Results', {}).get('ParamValue', []) if i['Key'].isdigit()]
+        if years:
+            print(f'✓ Latest BEA: {max(years)}')
+            return max(years)
     except: pass
-    return 2022
+    return 2023
 
-def fetch_median_income(year):
-    print(f'Fetching median household income (Census ACS {year})...')
+def detect_latest_hud_years():
+    print('Detecting latest HUD...')
     session = create_session_with_retries()
-    url = f'https://api.census.gov/data/{year}/acs/acs5?get=NAME,B19013_001E&for={CBSA_GEO}&key={CENSUS_API_KEY}'
+    headers = {"Authorization": f"Bearer {HUD_API_TOKEN}"}
+    
+    fmr_year, il_year = None, None
+    for year in range(2026, 2015, -1):
+        try:
+            if not fmr_year and session.get(f"{HUD_FMR_BASE}/listMetroAreas", headers=headers, params={'year': year}, timeout=10).status_code == 200:
+                fmr_year = year
+            if not il_year and session.get(f"{HUD_IL_BASE}/statedata/CA", headers=headers, params={'year': year}, timeout=10).status_code == 200:
+                il_year = year
+            if fmr_year and il_year:
+                break
+        except: continue
+    
+    print(f'✓ Latest HUD FMR: {fmr_year}, IL: {il_year}')
+    return fmr_year or 2024, il_year or 2024
+
+# ==================== CENSUS FETCHERS ====================
+
+def fetch_household_economics(year):
+    print(f'Fetching household economics (ACS {year})...')
+    session = create_session_with_retries()
+    url = f'https://api.census.gov/data/{year}/acs/acs5?get=NAME,B19013_001E,B17001_001E,B17001_002E&for={CBSA_GEO}&key={CENSUS_API_KEY}'
     
     try:
-        response = session.get(url, timeout=60)
-        response.raise_for_status()
-        data = response.json()
-        rows = data[1:]
         result = {}
-        for row in rows:
-            cbsa_code = row[2]
+        for row in session.get(url, timeout=60).json()[1:]:
+            cbsa = row[4]
             name = row[0]
             
-            # --- CUSTOM NAME PARSING ---
+            # Parse name
             if name.endswith(' Metro Area'):
                 name = name[:-11]
-                cbsa_type = 'Metropolitan Statistical Area'
+                cbsa_type = 'Metropolitan'
             elif name.endswith(' Micro Area'):
                 name = name[:-11]
-                cbsa_type = 'Micropolitan Statistical Area'
+                cbsa_type = 'Micropolitan'
             else:
                 cbsa_type = 'Statistical Area'
             
-            income = int(row[1]) if row[1] and row[1] not in ['-666666666', 'null'] else None
+            total_pop = int(row[2]) if row[2] not in ['-666666666', 'null'] else None
+            poverty = int(row[3]) if row[3] not in ['-666666666', 'null'] else None
             
-            result[cbsa_code] = {
-                'name': name, 'cbsaCode': cbsa_code, 'type': cbsa_type, 'medianIncome': income
+            result[cbsa] = {
+                'name': name,
+                'cbsaCode': cbsa,
+                'type': cbsa_type,
+                'medianHouseholdIncome': int(row[1]) if row[1] not in ['-666666666', 'null'] else None,
+                'povertyRate': round((poverty / total_pop) * 100, 1) if total_pop and poverty else None
             }
-        print(f'✓ Fetched median income for {len(result)} CBSAs')
-        return result
-    except Exception as e:
-        print(f'⚠ Error: {e}')
-        return {}
-
-def fetch_employment_rate(year):
-    print(f'Fetching employment rate (Census ACS {year})...')
-    session = create_session_with_retries()
-    # Uses /subject endpoint
-    url = f'https://api.census.gov/data/{year}/acs/acs5/subject?get=NAME,S2301_C03_001E&for={CBSA_GEO}&key={CENSUS_API_KEY}'
-    
-    try:
-        response = session.get(url, timeout=60)
-        response.raise_for_status()
-        data = response.json()
-        result = {}
-        for row in data[1:]:
-            cbsa_code = row[2]
-            val = float(row[1]) if row[1] and row[1] != 'null' else None
-            result[cbsa_code] = {'employmentRate': val}
-        print(f'✓ Fetched employment rate for {len(result)} CBSAs')
+        print(f'✓ Fetched for {len(result)} CBSAs')
         return result
     except Exception as e:
         print(f'⚠ Error: {e}')
         return {}
 
 def fetch_housing_metrics(year):
-    print(f'Fetching housing metrics (Census ACS {year})...')
+    print(f'Fetching housing metrics (ACS {year})...')
     session = create_session_with_retries()
-    url = (f'https://api.census.gov/data/{year}/acs/acs5?get=NAME,B25077_001E,B25064_001E,'
-           f'B25003_002E,B25003_001E,B25002_001E,B25002_003E&for={CBSA_GEO}&key={CENSUS_API_KEY}')
+    url = f'https://api.census.gov/data/{year}/acs/acs5?get=NAME,B25077_001E,B25064_001E,B25003_002E,B25003_001E&for={CBSA_GEO}&key={CENSUS_API_KEY}'
     
     try:
-        response = session.get(url, timeout=60)
-        response.raise_for_status()
-        data = response.json()
         result = {}
-        for row in data[1:]:
-            cbsa_code = row[7]
-            med_home = int(row[1]) if row[1] not in ['-666666666', 'null'] else None
-            med_rent = int(row[2]) if row[2] not in ['-666666666', 'null'] else None
-            owner, total_occ = (int(row[3]) if row[3] != 'null' else 0), (int(row[4]) if row[4] != 'null' else 0)
-            total_units, vacant = (int(row[5]) if row[5] != 'null' else 0), (int(row[6]) if row[6] != 'null' else 0)
+        for row in session.get(url, timeout=60).json()[1:]:
+            cbsa = row[5]
+            owner = int(row[3]) if row[3] != 'null' else None
+            total = int(row[4]) if row[4] != 'null' else None
             
-            home_rate = round((owner / total_occ) * 100, 1) if owner and total_occ else None
-            vac_rate = round((vacant / total_units) * 100, 1) if vacant and total_units else None
-            
-            result[cbsa_code] = {
-                'medianHomeValue': med_home, 'medianRent': med_rent,
-                'homeownershipRate': home_rate, 'vacancyRate': vac_rate
+            result[cbsa] = {
+                'medianHomeValue': int(row[1]) if row[1] not in ['-666666666', 'null'] else None,
+                'medianGrossRent': int(row[2]) if row[2] not in ['-666666666', 'null'] else None,
+                'homeownershipRate': round((owner / total) * 100, 1) if owner and total else None
             }
-        print(f'✓ Fetched housing metrics for {len(result)} CBSAs')
+        print(f'✓ Fetched for {len(result)} CBSAs')
         return result
     except Exception as e:
         print(f'⚠ Error: {e}')
         return {}
 
-def fetch_bea_gdp_cbsa(year):
-    """Fetch CBSA GDP data from BEA Regional dataset"""
-    print(f'Fetching GDP data from BEA (CAGDP2) {year}...')
+def fetch_demographics(year):
+    print(f'Fetching demographics (ACS {year})...')
+    session = create_session_with_retries()
+    url = f'https://api.census.gov/data/{year}/acs/acs5?get=NAME,B01003_001E,B01002_001E,B23025_003E,B23025_004E&for={CBSA_GEO}&key={CENSUS_API_KEY}'
     
-    if BEA_API_KEY == 'YOUR_BEA_API_KEY': return {}
+    try:
+        result = {}
+        for row in session.get(url, timeout=60).json()[1:]:
+            cbsa = row[5]
+            employed = int(row[3]) if row[3] != 'null' else None
+            unemployed = int(row[4]) if row[4] != 'null' else None
+            labor = (employed + unemployed) if employed and unemployed else None
+            
+            result[cbsa] = {
+                'totalPopulation': int(row[1]) if row[1] != 'null' else None,
+                'medianAge': float(row[2]) if row[2] != 'null' else None,
+                'employmentRate': round((employed / labor) * 100, 1) if labor and employed else None
+            }
+        print(f'✓ Fetched for {len(result)} CBSAs')
+        return result
+    except Exception as e:
+        print(f'⚠ Error: {e}')
+        return {}
+
+def fetch_bea_gdp(year):
+    print(f'Fetching GDP (BEA {year})...')
     session = create_session_with_retries()
     result = {}
     
-    # We fetch 'MSA' (Metropolitan) AND 'MIC' (Micropolitan) using CAGDP2 (Table used in your working script)
-    geo_types = ['MSA', 'MIC']
-    
-    for geo_type in geo_types:
+    for geo_type in ['MSA', 'MIC']:
         try:
-            # Using CAGDP2 as requested
-            url = (f'https://apps.bea.gov/api/data/?UserID={BEA_API_KEY}&method=GetData&datasetname=Regional'
-                   f'&TableName=CAGDP2&LineCode=1&Year={year}&GeoFips={geo_type}&ResultFormat=JSON')
+            url = f'https://apps.bea.gov/api/data/?UserID={BEA_API_KEY}&method=GetData&datasetname=Regional&TableName=CAGDP2&LineCode=1&Year={year}&GeoFips={geo_type}&ResultFormat=JSON'
+            data = session.get(url, timeout=60).json()
             
-            response = session.get(url, timeout=60)
-            if response.status_code != 200: continue
-            
-            data = response.json()
-            
-            if 'BEAAPI' in data and 'Results' in data['BEAAPI']:
-                # Error Logging
-                if 'Error' in data['BEAAPI']['Results']:
-                    err = data['BEAAPI']['Results']['Error']
-                    if year <= 2023: # Only print errors for likely valid years
-                         print(f"    ⚠ BEA Error ({geo_type}): {err.get('APIErrorDescription', 'Unknown')}")
-                    continue
-                
-                # Data Parsing
-                if 'Data' in data['BEAAPI']['Results']:
-                    items = data['BEAAPI']['Results']['Data']
-                    count = 0
-                    for item in items:
-                        cbsa_code = item.get('GeoFips')
-                        val = item.get('DataValue')
-                        if cbsa_code and val:
-                            try:
-                                result[cbsa_code] = {'gdpTotal': int(float(val.replace(',', '')))}
-                                count += 1
-                            except: pass
-                    if count > 0:
-                        print(f"    ✓ Found {count} records for {geo_type}")
+            if 'BEAAPI' in data and 'Results' in data['BEAAPI'] and 'Data' in data['BEAAPI']['Results']:
+                for item in data['BEAAPI']['Results']['Data']:
+                    cbsa = item.get('GeoFips')
+                    val = item.get('DataValue')
+                    if cbsa and val:
+                        try:
+                            result[cbsa] = {'gdpTotal': int(float(val.replace(',', '')))}
+                        except: pass
+        except: pass
+    
+    print(f'✓ Fetched for {len(result)} CBSAs')
+    return result if result else {}
 
-        except Exception as e:
-            print(f"    ⚠ Request failed for {geo_type}: {e}")
+# ==================== HUD FETCHERS ====================
 
-    if not result:
-        print(f"    ⚠ No data found for {year}")
+def fetch_hud_cbsa_data(year_fmr, year_il):
+    """Fetch HUD FMR and Income Limits for all CBSAs"""
+    print(f'Fetching HUD CBSA data (FMR={year_fmr}, IL={year_il})...')
+    session = create_session_with_retries()
+    headers = {"Authorization": f"Bearer {HUD_API_TOKEN}"}
+    result = {}
+    
+    # Get list of all metro areas
+    try:
+        resp = session.get(f"{HUD_FMR_BASE}/listMetroAreas", headers=headers, params={'year': year_fmr}, timeout=30)
+        if resp.status_code != 200:
+            print('⚠ Failed to get metro list')
+            return {}
+        
+        metro_data = resp.json()
+        metro_list = metro_data.get('data', []) if isinstance(metro_data, dict) else metro_data
+        
+        print(f'  Found {len(metro_list)} metro areas, fetching details...')
+        
+        for idx, metro in enumerate(metro_list):
+            cbsa_code = metro.get('cbsa_code')
+            if not cbsa_code:
+                continue
+            
+            # Fetch FMR data
+            try:
+                fmr_resp = session.get(f"{HUD_FMR_BASE}/data/{cbsa_code}", headers=headers, params={'year': year_fmr}, timeout=10)
+                if fmr_resp.status_code == 200:
+                    fmr_data = fmr_resp.json().get('data', {}).get('basicdata', {})
+                    if fmr_data:
+                        result[cbsa_code] = {
+                            'fmr0Bedroom': int(fmr_data.get('Efficiency', 0)) if fmr_data.get('Efficiency') else None,
+                            'fmr1Bedroom': int(fmr_data.get('One-Bedroom', 0)) if fmr_data.get('One-Bedroom') else None,
+                            'fmr2Bedroom': int(fmr_data.get('Two-Bedroom', 0)) if fmr_data.get('Two-Bedroom') else None,
+                            'fmr3Bedroom': int(fmr_data.get('Three-Bedroom', 0)) if fmr_data.get('Three-Bedroom') else None,
+                            'fmr4Bedroom': int(fmr_data.get('Four-Bedroom', 0)) if fmr_data.get('Four-Bedroom') else None
+                        }
+                time.sleep(0.05)
+            except: pass
+            
+            # Fetch Income Limits data
+            try:
+                il_resp = session.get(f"{HUD_IL_BASE}/data/{cbsa_code}", headers=headers, params={'year': year_il}, timeout=10)
+                if il_resp.status_code == 200:
+                    il_data = il_resp.json().get('data', {})
+                    if il_data:
+                        if cbsa_code not in result:
+                            result[cbsa_code] = {}
+                        result[cbsa_code]['medianFamilyIncome'] = il_data.get('median_income')
+                        result[cbsa_code]['incomeLimitLow80_4person'] = il_data.get('low', {}).get('il80_p4')
+                time.sleep(0.05)
+            except: pass
+            
+            if (idx + 1) % 50 == 0:
+                print(f'  Processed {idx + 1}/{len(metro_list)} metros...')
+        
+        print(f'✓ Fetched HUD data for {len(result)} CBSAs')
+        return result
+        
+    except Exception as e:
+        print(f'⚠ Error: {e}')
         return {}
 
-    print(f'✓ Fetched GDP for {len(result)} CBSAs')
-    return result
+# ==================== MERGE AND SAVE ====================
 
-def merge_data(income, employment, housing, gdp, years_meta):
-    print('Merging all data sources...')
+def merge_all_data(household_econ, housing, demographics, gdp, hud_data, years_meta):
+    print('Merging all data...')
     merged = {}
-    for code, info in income.items():
-        merged[code] = {
-            'cbsaCode': code, 'name': info['name'], 'type': info['type'],
-            'medianIncome': info.get('medianIncome'),
-            'employmentRate': employment.get(code, {}).get('employmentRate'),
-            'medianHomeValue': housing.get(code, {}).get('medianHomeValue'),
-            'medianRent': housing.get(code, {}).get('medianRent'),
-            'homeownershipRate': housing.get(code, {}).get('homeownershipRate'),
-            'vacancyRate': housing.get(code, {}).get('vacancyRate'),
-            'gdpTotal': gdp.get(code, {}).get('gdpTotal'),
+    
+    for cbsa, info in household_econ.items():
+        merged[cbsa] = {
+            'cbsaCode': cbsa,
+            'name': info['name'],
+            'type': info['type'],
+            'medianHouseholdIncome': info.get('medianHouseholdIncome'),
+            'povertyRate': info.get('povertyRate'),
+            **housing.get(cbsa, {}),
+            **demographics.get(cbsa, {}),
+            'gdpTotal': gdp.get(cbsa, {}).get('gdpTotal'),
+            **hud_data.get(cbsa, {}),
             'years': years_meta
         }
-    print(f'✓ Merged data for {len(merged)} CBSAs')
+    
     return merged
 
-def save_to_file(data, filename, base_year, years_meta):
+def save_to_file(data, filename, years_meta):
     script_dir = Path(__file__).parent
     data_dir = script_dir.parent / 'data'
     data_dir.mkdir(parents=True, exist_ok=True)
@@ -253,43 +288,65 @@ def save_to_file(data, filename, base_year, years_meta):
     
     output = {
         'metadata': {
-            'baseYear': base_year, 'actualYearsUsed': years_meta,
-            'source': 'Census ACS & BEA Regional', 'fetchDate': datetime.now().isoformat(),
-            'recordCount': len(data)
+            'source': 'Census ACS, BEA, HUD FMR & Income Limits',
+            'fetchDate': datetime.now().isoformat(),
+            'recordCount': len(data),
+            'yearsUsed': years_meta
         },
         'data': data
     }
+    
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
-    print(f'✓ Data saved to: {filepath}')
+    print(f'✓ Saved to: {filepath}')
 
 def main():
-    print('=== Starting CBSA Economic Data Fetch (Robust) ===\n')
+    print('='*70)
+    print('COMPLETE CBSA DATA FETCH (Census + BEA + HUD)')
+    print('='*70 + '\n')
+    
     try:
-        census_base = detect_latest_census_year()
-        bea_base = detect_latest_bea_year()
-        print(f'\n📅 Target Base Years: Census {census_base}, BEA {bea_base}\n')
-
-        income_data, inc_year = fetch_with_year_fallback(fetch_median_income, census_base)
-        time.sleep(1)
-        employment_data, emp_year = fetch_with_year_fallback(fetch_employment_rate, census_base)
-        time.sleep(1)
-        housing_data, house_year = fetch_with_year_fallback(fetch_housing_metrics, census_base)
-        time.sleep(1)
-        gdp_data, gdp_year = fetch_with_year_fallback(fetch_bea_gdp_cbsa, bea_base)
-
-        years_meta = {'incomeYear': inc_year, 'employmentYear': emp_year, 'housingYear': house_year, 'gdpYear': gdp_year}
-        merged_data = merge_data(income_data, employment_data, housing_data, gdp_data, years_meta)
-        save_to_file(merged_data, 'cbsas_economic_data.json', census_base, years_meta)
+        census_year = detect_latest_census_year()
+        bea_year = detect_latest_bea_year()
+        hud_fmr_year, hud_il_year = detect_latest_hud_years()
         
-        print('\n=== Sample Data (NYC Metro) ===')
-        if '35620' in merged_data: print(json.dumps(merged_data['35620'], indent=2))
-        elif len(merged_data) > 0: print(json.dumps(merged_data[list(merged_data.keys())[0]], indent=2))
-            
-        print(f'\n=== Fetch Complete ===\nYears used: {years_meta}')
+        print(f'\n📅 Using: Census={census_year}, BEA={bea_year}, FMR={hud_fmr_year}, IL={hud_il_year}\n')
         
-    except Exception as error:
-        print(f'ERROR: {error}')
+        household_econ, he_year = fetch_with_year_fallback(fetch_household_economics, census_year)
+        time.sleep(1)
+        housing, h_year = fetch_with_year_fallback(fetch_housing_metrics, census_year)
+        time.sleep(1)
+        demographics, d_year = fetch_with_year_fallback(fetch_demographics, census_year)
+        time.sleep(1)
+        gdp, g_year = fetch_with_year_fallback(fetch_bea_gdp, bea_year)
+        time.sleep(1)
+        
+        # HUD doesn't use fallback since we already detected latest
+        hud_data = fetch_hud_cbsa_data(hud_fmr_year, hud_il_year)
+        
+        years_meta = {
+            'householdEconomics': he_year,
+            'housing': h_year,
+            'demographics': d_year,
+            'gdp': g_year,
+            'hudFMR': hud_fmr_year,
+            'hudIncomeLimits': hud_il_year
+        }
+        
+        merged = merge_all_data(household_econ, housing, demographics, gdp, hud_data, years_meta)
+        save_to_file(merged, 'cbsas_economic_data.json', years_meta)
+        
+        print('\n=== Sample (NYC Metro - 35620) ===')
+        if '35620' in merged:
+            print(json.dumps(merged['35620'], indent=2))
+        elif merged:
+            first_key = list(merged.keys())[0]
+            print(json.dumps(merged[first_key], indent=2))
+        
+        print(f'\n✅ Complete! Years: {years_meta}')
+        
+    except Exception as e:
+        print(f'\n❌ ERROR: {e}')
         import traceback
         traceback.print_exc()
 

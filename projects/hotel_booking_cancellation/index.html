@@ -173,6 +173,85 @@
             background-color: #0f5132 !important;
             color: #fff;
         }
+
+        /* Add inside your <style> tag */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        /* Ensure the caption text shrinks on smaller screens */
+        @media only screen and (max-width: 700px){
+            #caption {
+                width: 100%;
+                font-size: 14px;
+            }
+        }
+
+        /* REPLACE the previous #imageModal CSS with this: */
+
+        /* 1. Default state: Must be HIDDEN */
+        #imageModal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        /* 2. Active state: NOW we use Flex to stack them */
+        #imageModal.active {
+            display: flex !important;    /* Becomes visible only when class is added */
+            flex-direction: column;      /* Stacks Image top, Caption bottom */
+            justify-content: center;     /* Centers vertically */
+            align-items: center;         /* Centers horizontally */
+        }
+
+        /* 3. Keep the close button stuck to the corner */
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            z-index: 1001; 
+        }
+
+        /* Find and replace this block */
+        .image-modal-content {
+            /* Changed from 'auto' to specific spacing */
+            margin: 0 auto 15px auto;  
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+        }
+
+        /* Find and replace this block */
+        #caption {
+            margin: 0 auto;       /* Remove vertical pushing */
+            height: auto;         /* Remove fixed height so it fits the text tight */
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 5px 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
     </style>
 </head>
 <body data-page="hotel_cancellation_prediction">
@@ -208,7 +287,7 @@
         </p>
 
         <p class="text-muted mb-3" style="font-size: 0.85rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-            <strong>Tech Stack:</strong> Python, TensorFlow, Scikit-learn, Neural Networks, XGBoost, Random Forest
+            <strong>Tech Stack:</strong> Python, TensorFlow, Scikit-learn, Neural Networks, XGBoost, Random Forest, Logistic Regression, GridSearch
         </p>
         <div class="d-flex justify-content-center gap-4 mb-4 project-actions">
             <a href="https://github.com/chadpvo/ML-hotel-cancellation-prediction/tree/project" target="_blank" rel="noopener noreferrer" title="Project Repository">
@@ -239,23 +318,23 @@
                 Hotel booking cancellations are a major challenge in the hospitality industry, leading to direct revenue loss and difficulties in resource allocation. While some cancellations are driven by impulse, others follow predictable patterns based on booking lead times, deposit types, and market segments.
             </p>
             <p>
-                The goal of this project was to move from reactive cancellation management to proactive decision-making. [cite_start]By developing machine learning models capable of analyzing large-scale reservation data, we aimed to identify high-risk bookings before they cancel, allowing hotels to implement dynamic pricing or personalized retention strategies[cite: 17, 19, 21].
+                The goal of this project was to move from reactive cancellation management to proactive decision-making. By developing machine learning models capable of analyzing large-scale reservation data, we aimed to identify high-risk bookings before they cancel, allowing hotels to implement dynamic pricing or personalized retention strategies.
             </p>
 
             <h2 class="mt-5">2. The Dataset & Engineering</h2>
             <p>
-                [cite_start]We utilized the <a href="https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand" target="_blank">Hotel Booking Demand dataset</a> from Kaggle, containing 119,390 reservations from a Portuguese hotel chain (2015–2017)[cite: 36]. [cite_start]The dataset included 32 features covering booking timing, demographics, and special requests[cite: 37].
+                We utilized the <a href="https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand" target="_blank">Hotel Booking Demand dataset</a> from Kaggle, containing 119,390 reservations from a Portuguese hotel chain (2015–2017). The dataset included 32 features covering booking timing, demographics, and special requests.
             </p>
             
             <h3 class="h5 mt-4">Exploratory Data Analysis (EDA)</h3>
             <p>
-                Before modeling, we performed extensive EDA to understand the underlying patterns of cancellations. [cite_start]We observed stable cancellation rates throughout the year, fluctuating between 30% and 40%, with slight dips during the start and end of the year[cite: 83].
+                Before diving into modeling, we performed extensive EDA to understand not only the underlying patterns of cancellations but also the features influencing those patterns.  For more comprehensive review, please check out Repository and/or EDA visualizations in the bottom carousel of this page. Per our findings, we observed stable cancellation rates throughout the year, fluctuating between 30% and 40%, with slight dips during the start and end of the year.
             </p>
 
             <div id="cancellationChart" class="chart-container mt-5"></div>
 
             <p class="mt-4">
-                We also analyzed feature correlations to identify which factors most strongly influenced cancellation likelihood. [cite_start]The heatmap data revealed distinct drivers for cancellations versus kept bookings[cite: 85].
+                Additionally, we also looked into feature correlations to identify which factors most strongly influenced cancellation likelihood, both positively and negatively. The heatmap data revealed distinct drivers for cancellations versus kept bookings.
             </p>
 
             <table class="table table-hover mt-3 mb-4 border">
@@ -270,52 +349,52 @@
                     <tr class="table-danger">
                         <td><strong>Deposit Type: Non-Refundable</strong></td>
                         <td>0.481</td>
-                        [cite_start]<td>Increases Risk (High) [cite: 98]</td>
+                        <td>Increases Risk (High)</td>
                     </tr>
                     <tr>
                         <td>Lead Time</td>
                         <td>0.290</td>
-                        [cite_start]<td>Increases Risk [cite: 98]</td>
+                        <td>Increases Risk</td>
                     </tr>
                     <tr>
                         <td>Is Reserved Room Type</td>
                         <td>0.250</td>
-                        [cite_start]<td>Increases Risk [cite: 98]</td>
+                        <td>Increases Risk</td>
                     </tr>
                     <tr>
                         <td>Market Segment: Groups</td>
                         <td>0.222</td>
-                        [cite_start]<td>Increases Risk [cite: 98]</td>
+                        <td>Increases Risk</td>
                     </tr>
                     <tr>
                         <td>Distribution Channel: TA/TO</td>
                         <td>0.176</td>
-                        [cite_start]<td>Increases Risk [cite: 98]</td>
+                        <td>Increases Risk</td>
                     </tr>
                     <tr class="table-success">
                         <td><strong>Deposit Type: No Deposit</strong></td>
                         <td>-0.478</td>
-                        [cite_start]<td>Decreases Risk (High) [cite: 95]</td>
+                        <td>Decreases Risk (High)</td>
                     </tr>
                     <tr>
                         <td>Total Special Requests</td>
                         <td>-0.230</td>
-                        [cite_start]<td>Decreases Risk [cite: 95]</td>
+                        <td>Decreases Risk</td>
                     </tr>
                     <tr>
                         <td>Required Car Parking Spaces</td>
                         <td>-0.200</td>
-                        [cite_start]<td>Decreases Risk [cite: 95]</td>
+                        <td>Decreases Risk</td>
                     </tr>
                     <tr>
                         <td>Market Segment: Direct</td>
                         <td>-0.154</td>
-                        [cite_start]<td>Decreases Risk [cite: 95]</td>
+                        <td>Decreases Risk</td>
                     </tr>
                     <tr>
                         <td>Distribution Channel: Direct</td>
                         <td>-0.152</td>
-                        [cite_start]<td>Decreases Risk [cite: 95]</td>
+                        <td>Decreases Risk</td>
                     </tr>
                 </tbody>
             </table>
@@ -323,23 +402,54 @@
 
             <h2 class="mt-5">3. Methodology & Models</h2>
             <p>
-                [cite_start]We approached this as a binary classification problem, comparing four distinct algorithms to balance precision and recall[cite: 23].
+                We approached this as a binary classification problem while comparing four distinct algorithms to balance precision and recall. 
             </p>
+            <h5 class="mt-4">
+                <strong>The Setup:</strong>
+            </h5>
             <p>
-                <strong>The Models:</strong>
+                The dataset was split into training (70%), validation (15%), and test (15%) sets, ensuring stratification to maintain cancellation ratios across splits. Key preprocessing steps included handling missing values, encoding categorical variables using one-hot encoding, and scaling numerical features.
             </p>
+
+            <h5 class="mt-4">
+                <strong>Features Engineering:</strong>
+            </h5>
+            <p>
+                To prepare the dataset for modeling, we performed extensive cleaning and transformation to address data quality and distribution issues. We handled missing values by filling nulls in the children column with zeros and generalized location data by binning countries into continent categories. We also re-coded the "company" and "agent" columns into binary variables to simply indicate their involvement in the reservation process. 
+                <br><br>To address right-skewed distributions in high-magnitude features such as the average daily rate (ADR), lead time, and days on the waiting list, we applied logarithmic transformations. Finally, we dropped five irrelevant columns, combined specific categorical variables, and encoded the remaining features, resulting in a final processed dataset of <strong>53</strong> columns.
+            </p>
+
+            <h5 class="mt-4">
+                <strong>The Models:</strong>
+            </h5>
             <ul>
-                [cite_start]<li><strong>Logistic Regression (Baseline):</strong> Provided a baseline accuracy of ~81% but struggled with non-linear relationships, resulting in low recall (60%)[cite: 122, 123].</li>
-                [cite_start]<li><strong>Random Forest:</strong> An ensemble method that improved performance by capturing non-linear interactions through majority voting, reducing the risk of overfitting[cite: 127, 129].</li>
-                <li><strong>XGBoost:</strong> A gradient boosting framework that builds trees sequentially to correct previous errors. [cite_start]We tuned it with 200 trees and a max depth of 15, handling the dataset's complexity and class imbalance effectively[cite: 134, 138, 140].</li>
-                <li><strong>Neural Network:</strong> A multi-layer perceptron with ReLU activation and dropout regularization. [cite_start]While powerful, it was computationally intensive and slightly less robust than the tree-based models for this specific structured data[cite: 145, 146, 149].</li>
+                <li><strong>Logistic Regression (Baseline):</strong> Provided a baseline accuracy of ~81% but struggled with non-linear relationships, resulting in low recall (60%).</li>
+                <li><strong>Random Forest:</strong> An ensemble method that improved performance by capturing non-linear interactions through majority voting, reducing the risk of overfitting.</li>
+                <li><strong>XGBoost:</strong> A gradient boosting framework that builds trees sequentially to correct previous errors. We tuned it with 200 trees and a max depth of 15, handling the dataset's complexity and class imbalance effectively.</li>
+                <li><strong>Neural Network:</strong> A multi-layer perceptron with ReLU activation and dropout regularization. While powerful, it was computationally intensive and slightly less robust than the tree-based models for this specific structured data.</li>
             </ul>
+
+            <h5 class="mt-4">
+                <strong>Hyperparameters Tuning:</strong>
+            </h5>
+            <p>
+                Our approach to hyperparameter tuning was adapted based on the computational demands of each algorithm. For faster algorithms, such as the Random Forest classifier, we utilized GridSearch with 5-fold cross-validation to systematically identify optimal configurations for parameters like the number of trees and maximum depth. Conversely, for computationally intensive models like SVM and Neural Networks, we leveraged RandomSearch and manual experimentation to tune parameters such as learning rates, batch sizes, and hidden layer units. 
+                <br><br>For our top-performing model, XGBoost, we used a combination of GridSearch and manual adjustments to finalize key parameters, including setting the number of trees to 200, the maximum depth to 15, and applying balanced class weights to improve sensitivity to cancellations.
+            </p>
 
             <h2 class="mt-5">4. Results & Discussion</h2>
             <p>
-                [cite_start]We evaluated models based on <strong>Precision</strong> (to avoid annoying loyal guests with false alarms) and <strong>ROC AUC</strong> (overall separability)[cite: 157, 163, 166].
+                We evaluated models based on <strong>Precision</strong> (to avoid annoying loyal guests with false alarms) and <strong>ROC AUC</strong> (overall separability).
             </p>
             
+            <p>
+                <strong>Key Findings:</strong>
+                <ul>
+                    <li><strong>XGBoost was the superior model:</strong> It achieved the highest F1-score (0.80) and ROC AUC (0.93), successfully capturing complex patterns that the baseline missed.</li>
+                    <li><strong>Feature Importance:</strong> As shown in Table 1, the "Deposit Type" (specifically non-refundable) and "Lead Time" were the strongest predictors of cancellation. Guests who made special requests were significantly less likely to cancel.</li>
+                </ul>
+            </p>
+
             <table class="table table-hover mt-4 mb-4 border">
                 <thead class="table-light">
                     <tr>
@@ -381,15 +491,7 @@
                     </tr>
                 </tbody>
             </table>
-            <p class="text-muted small"><em>Table 2: Performance metrics on the Test Set. [cite_start]XGBoost performed best across F1-score and ROC AUC[cite: 187].</em></p>
-
-            <p>
-                <strong>Key Findings:</strong>
-                <ul>
-                    [cite_start]<li><strong>XGBoost was the superior model:</strong> It achieved the highest F1-score (0.80) and ROC AUC (0.93), successfully capturing complex patterns that the baseline missed[cite: 192].</li>
-                    <li><strong>Feature Importance:</strong> As shown in Table 1, the "Deposit Type" (specifically non-refundable) and "Lead Time" were the strongest predictors of cancellation. [cite_start]Guests who made special requests were significantly less likely to cancel[cite: 112].</li>
-                </ul>
-            </p>
+            <p class="text-muted small"><em>Table 2: Performance metrics on the Test Set. XGBoost performed best across F1-score and ROC AUC.</em></p>
 
             <div class="article-visual">
                 <img src="assets/hotel_cancellation_dashboard.png" alt="Hotel Cancellation Prediction" class="img-fluid rounded shadow zoomable-image" style="max-width: 100%;">
@@ -398,7 +500,7 @@
 
             <h2 class="mt-5">5. Conclusion</h2>
             <p>
-                This study demonstrated that machine learning can effectively distinguish between reliable bookings and likely cancellations. [cite_start]While Logistic Regression provided interpretability, ensemble methods like XGBoost offered the necessary complexity to maximize precision[cite: 190, 192].
+                This study demonstrated that machine learning can effectively distinguish between reliable bookings and likely cancellations. While Logistic Regression provided interpretability, ensemble methods like XGBoost offered the necessary complexity to maximize precision.
             </p>
             
             <p class="article-note mt-5 text-center">
@@ -414,7 +516,7 @@
 
     <section class="eda-gallery">
         <div class="eda-gallery-header">
-            <h3>Miscellaneous EDA</h3>
+            <h5>Miscellaneous EDA</h5>
             <div class="eda-gallery-arrows">
             <button onclick="scrollEDA('left')" aria-label="Scroll left"><i class="fas fa-chevron-left"></i></button>
             <button onclick="scrollEDA('right')" aria-label="Scroll right"><i class="fas fa-chevron-right"></i></button>
@@ -423,20 +525,74 @@
         <div class="eda-gallery-scroll" id="edaScroll">
             <div class="eda-card">
                 <div class="eda-card-img">
-                    <img src="assets/hotel_cancellation_cover.jpg" 
-                        alt="Features Correlation Chart" 
+                    <img src="assets/ADR_Cancellations_By_Month.png" 
+                        alt="Average Daily Rate (ADR) Cancellations By Month" 
                         class="zoomable-image">
                 </div>
-                <p>Features Correlation Chart</p>
+                <p>Average Daily Rate (ADR) Cancellations By Month</p>
             </div>
             
             <div class="eda-card">
                 <div class="eda-card-img">
-                    <img src="assets/another_eda_chart.jpg" 
-                        alt="Distribution Analysis" 
+                    <img src="assets/correlation_matrix_of_numerical_features.png" 
+                        alt="Correlation Matrix of Numerical Features" 
                         class="zoomable-image">
                 </div>
-                <p>Distribution Analysis</p>
+                <p>Correlation Matrix of Numerical Features</p>
+            </div>
+
+            <div class="eda-card">
+                <div class="eda-card-img">
+                    <img src="assets/correlation_matrix_of_one_hot_features.png" 
+                        alt="Correlation Matrix of One-Hot Features" 
+                        class="zoomable-image">
+                </div>
+                <p>Correlation Matrix of One-Hot Encoding Features</p>
+            </div>
+
+            <div class="eda-card">
+                <div class="eda-card-img">
+                    <img src="assets/features_importance_rf.png" 
+                        alt="Feature Importance from Random Forest" 
+                        class="zoomable-image">
+                </div>
+                <p>Feature Importance from Random Forest</p>
+            </div>
+
+            <div class="eda-card">
+                <div class="eda-card-img">
+                    <img src="assets/summary_distributions.png" 
+                        alt="Summary of Distribution Analysis" 
+                        class="zoomable-image">
+                </div>
+                <p>Summary of Distribution Analysis</p>
+            </div>
+
+            <div class="eda-card">
+                <div class="eda-card-img">
+                    <img src="assets/train_validation_accuracy_rf.png" 
+                        alt="Train and Validation Accuracy from Random Forest" 
+                        class="zoomable-image">
+                </div>
+                <p>Train and Validation Accuracy from Random Forest</p>
+            </div>
+
+            <div class="eda-card">
+                <div class="eda-card-img">
+                    <img src="assets/train_validation_loss_rf.png" 
+                        alt="Train and Validation Loss from Random Forest" 
+                        class="zoomable-image">
+                </div>
+                <p>Train and Validation Loss from Random Forest</p>
+            </div>
+
+            <div class="eda-card">
+                <div class="eda-card-img">
+                    <img src="assets/distribution_of_logs.png" 
+                        alt="Distribution of Logs" 
+                        class="zoomable-image">
+                </div>
+                <p>Distribution of Logs</p>
             </div>
             
             <!-- Add more cards as needed -->
@@ -461,6 +617,8 @@
     <div id="imageModal" class="image-modal">
         <span class="image-modal-close">&times;</span>
         <img class="image-modal-content" id="modalImage">
+        
+        <div id="caption"></div>
     </div>
 
     <button id="scrollToTop" class="scroll-top-btn" aria-label="Scroll to top">
@@ -492,6 +650,7 @@
         // Image Zoom Logic
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
+        const captionText = document.getElementById("caption"); // <--- THIS LINE WAS MISSING
         const closeBtn = document.querySelector('.image-modal-close');
         const zoomableImages = document.querySelectorAll('.zoomable-image');
 
@@ -501,6 +660,7 @@
                 modal.classList.add('active');
                 modalImg.src = this.src;
                 modalImg.alt = this.alt;
+                captionText.innerHTML = this.alt;
                 document.body.style.overflow = 'hidden';
             });
         });
