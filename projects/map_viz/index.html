@@ -947,9 +947,9 @@
         async function loadEconomicData() {
             try {
                 const [statesResponse, countiesResponse, cbsasResponse] = await Promise.all([
-                    fetch('/projects/map_viz/data/states_economic_data.json').then(r => r.json()),
-                    fetch('/projects/map_viz/data/counties_economic_data.json').then(r => r.json()),
-                    fetch('/projects/map_viz/data/cbsas_economic_data.json').then(r => r.json())
+                    fetch('../../projects/map_viz/data/states_economic_data.json').then(r => r.json()),
+                    fetch('../../projects/map_viz/data/counties_economic_data.json').then(r => r.json()),
+                    fetch('../../projects/map_viz/data/cbsas_economic_data.json').then(r => r.json())
                 ]);
                 
                 // Handle new JSON structure (metadata + data)
