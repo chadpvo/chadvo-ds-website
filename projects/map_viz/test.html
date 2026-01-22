@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7REHTK4CJ8"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-7REHTK4CJ8');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map Shading Tool</title>
@@ -938,9 +947,9 @@
         async function loadEconomicData() {
             try {
                 const [statesResponse, countiesResponse, cbsasResponse] = await Promise.all([
-                    fetch('/projects/map_viz/data/states_economic_data.json').then(r => r.json()),
-                    fetch('/projects/map_viz/data/counties_economic_data.json').then(r => r.json()),
-                    fetch('/projects/map_viz/data/cbsas_economic_data.json').then(r => r.json())
+                    fetch('../../projects/map_viz/data/states_economic_data.json').then(r => r.json()),
+                    fetch('../../projects/map_viz/data/counties_economic_data.json').then(r => r.json()),
+                    fetch('../../projects/map_viz/data/cbsas_economic_data.json').then(r => r.json())
                 ]);
                 
                 // Handle new JSON structure (metadata + data)
