@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redfin Data Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Redfin Real Estate Data Visualizer</h1>
+            <p class="subtitle">Explore 10+ years of housing market data at the zip code level</p>
+        </header>
+
+        <div class="controls-panel">
+            <div class="control-section">
+                <h3>1. Select Visualization Type</h3>
+                <div class="viz-type-buttons">
+                    <button class="viz-btn active" data-type="line">📈 Line Chart</button>
+                    <button class="viz-btn" data-type="bar">📊 Bar Chart</button>
+                    <button class="viz-btn" data-type="scatter">🔵 Scatter Plot</button>
+                    <button class="viz-btn" data-type="pie">🥧 Pie Chart</button>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>2. Configure Data</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="state-select">State</label>
+                        <select id="state-select">
+                            <option value="">All States</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metric-select">Metric</label>
+                        <select id="metric-select">
+                            <option value="">Select metric...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="group-by-select">Group By</label>
+                        <select id="group-by-select">
+                            <option value="">Select grouping...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="start-date">Start Date</label>
+                        <input type="date" id="start-date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="end-date">End Date</label>
+                        <input type="date" id="end-date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="limit">Max Results</label>
+                        <input type="number" id="limit" value="100" min="10" max="10000">
+                    </div>
+                </div>
+
+                <button id="load-data-btn" class="primary-btn">🔍 Load Data</button>
+            </div>
+
+            <div class="control-section">
+                <h3>3. Advanced Options</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="show-average">
+                            Show Average Line
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="show-grid">
+                            Show Grid
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div id="status-message">Ready to visualize data</div>
+            <div id="data-info"></div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="main-chart"></canvas>
+        </div>
+
+        <div class="data-preview">
+            <h3>Data Preview</h3>
+            <div id="data-table"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Data source: Redfin Real Estate Data | Built with Chart.js</p>
+        <p><a href="https://github.com/yourusername/redfin-viz" target="_blank">View on GitHub</a></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
