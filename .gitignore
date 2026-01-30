@@ -5,3 +5,4 @@ bfg.jar
 .venv/
 .venv/
 projects/map_viz/data/redfin/processed/redfin_with_geocoding.json
+projects/map_viz/assets/us-zips.geojson
