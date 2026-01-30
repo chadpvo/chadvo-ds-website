@@ -1,0 +1,81 @@
+{
+  "created": "2026-01-22T19:07:44.394671",
+  "datasets": {
+    "redfin": [
+      {
+        "filename": "redfin_ca_zip_data.tsv",
+        "path": "redfin\\redfin_ca_zip_data.tsv",
+        "size_mb": 417.2436475753784,
+        "modified": "2026-01-22T18:31:47.508735"
+      },
+      {
+        "filename": "redfin_metadata.json",
+        "path": "redfin\\redfin_metadata.json",
+        "size_mb": 0.0016384124755859375,
+        "modified": "2026-01-22T18:31:47.522871"
+      },
+      {
+        "filename": "redfin_zip_all_states.tsv",
+        "path": "redfin\\redfin_zip_all_states.tsv",
+        "size_mb": 4453.258095741272,
+        "modified": "2026-01-22T19:06:16.152517"
+      },
+      {
+        "filename": "redfin_zip_sample.json",
+        "path": "redfin\\redfin_zip_sample.json",
+        "size_mb": 21.058990478515625,
+        "modified": "2026-01-22T19:07:24.361360"
+      }
+    ],
+    "zillow": [
+      {
+        "filename": "zillow_zhvi_metro.csv",
+        "path": "zillow\\zillow_zhvi_metro.csv",
+        "size_mb": 4.1393232345581055,
+        "modified": "2026-01-22T19:07:27.436201"
+      },
+      {
+        "filename": "zillow_zhvi_metro.json",
+        "path": "zillow\\zillow_zhvi_metro.json",
+        "size_mb": 10.641531944274902,
+        "modified": "2026-01-22T19:07:27.747985"
+      },
+      {
+        "filename": "zillow_zhvi_zip.csv",
+        "path": "zillow\\zillow_zhvi_zip.csv",
+        "size_mb": 114.18654537200928,
+        "modified": "2026-01-22T19:07:32.799746"
+      },
+      {
+        "filename": "zillow_zhvi_zip.json",
+        "path": "zillow\\zillow_zhvi_zip.json",
+        "size_mb": 307.22845935821533,
+        "modified": "2026-01-22T19:07:42.325338"
+      },
+      {
+        "filename": "zillow_zordi_metro.csv",
+        "path": "zillow\\zillow_zordi_metro.csv",
+        "size_mb": 0.2341451644897461,
+        "modified": "2026-01-22T19:07:44.337173"
+      },
+      {
+        "filename": "zillow_zordi_metro.json",
+        "path": "zillow\\zillow_zordi_metro.json",
+        "size_mb": 1.56304931640625,
+        "modified": "2026-01-22T19:07:44.389580"
+      },
+      {
+        "filename": "zillow_zori_metro.csv",
+        "path": "zillow\\zillow_zori_metro.csv",
+        "size_mb": 0.7210235595703125,
+        "modified": "2026-01-22T19:07:43.303381"
+      },
+      {
+        "filename": "zillow_zori_metro.json",
+        "path": "zillow\\zillow_zori_metro.json",
+        "size_mb": 2.4190073013305664,
+        "modified": "2026-01-22T19:07:43.528781"
+      }
+    ]
+  }
+}

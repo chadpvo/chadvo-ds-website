@@ -4,3 +4,4 @@ bfg.jar
 .claude/
 .venv/
 .venv/
+projects/map_viz/data/redfin/processed/redfin_with_geocoding.json
